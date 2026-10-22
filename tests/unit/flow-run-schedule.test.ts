@@ -149,3 +149,13 @@ test('listScheduledFlows：只列 expression 非空的流程', async () => {
   assert.equal(r.ok, true);
   assert.deepEqual(r.rows.map((x) => x.processIds), ['p1', 'p3']);
 });
+
+test('runLog：平台 pNodeId/pNodeName 归一化成 nodeId/nodeName', async () => {
+  const { client } = fake(() =>
+    res(200, { rows: [{ pNodeId: 'T00001', pNodeName: '查询待推送节点', currentStatus: 'end' }] }),
+  );
+  const r = await FLOW.runLog(client, 'tid-1');
+  assert.equal(r.nodes[0].nodeId, 'T00001');
+  assert.equal(r.nodes[0].nodeName, '查询待推送节点');
+  assert.equal(r.nodes[0].currentStatus, 'end');
+});

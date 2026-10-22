@@ -1911,7 +1911,15 @@ export async function runLog(
     method: 'GET', query: { transactionId },
   });
   const d: any = r.data?.data ?? r.data;
-  const nodes = Array.isArray(d) ? d : (d?.rows ?? d?.list ?? []);
+  const raw = Array.isArray(d) ? d : (d?.rows ?? d?.list ?? []);
+  // 平台返回的是 pNodeId / pNodeName（监控页字段），与其它接口的 nodeId/nodeName 不一致，
+  // 不归一化的话 `rc flow run-log` 的节点列会全部显示成 `?`。
+  const nodes = raw.map((n: any) => ({
+    ...n,
+    nodeId: n?.nodeId ?? n?.pNodeId ?? n?.nodeName ?? n?.pNodeName,
+    nodeName: n?.nodeName ?? n?.pNodeName,
+    currentStatus: n?.currentStatus ?? n?.status,
+  }));
   return { ok: r.ok, msg: r.msg, nodes };
 }
 
