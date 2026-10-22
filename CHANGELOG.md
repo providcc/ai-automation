@@ -2,6 +2,24 @@
 
 本项目遵循 [语义化版本](https://semver.org/lang/zh-CN/)。只提供非交互 CLI 入口（`rc` / `dw`），不提供 MCP。
 
+## [Unreleased]
+
+### 修复
+
+- **`rc flow run` 选错运行端点**：原实现只调 `monitor/instance/run`，部分平台版本对未产生过实例的流程
+  直接返回 500 `Service run exception`（且不创建实例）。改为先走 `POST /rest/esb/process/run`
+  （设计器/流程列表的"运行"，同步执行并返回 `transactionId`），404/网络失败/5xx 时回退监控端点；
+  4xx 业务错误不回退，避免同一流程被执行两次。
+- **运行结果被判成失败**：`/process/run` 成功时仍返回 `state:false`，真正结论在 `resultCode=1`
+  或 `msg` 的"是否成功=是"里。新增归一化，避免 CLI 把成功运行打印成 `✖` 并以非 0 退出。
+- **定时调度只有 BPM 一条路**：`/bpm/rules/*` 在部分环境整个不可达（平台自身返回
+  `{"errcode":500,"msg":"connect timed out"}`）。`rc flow schedule save` 现在会自动降级为
+  "写流程记录 `expression`/`runExpression`（`POST /rest/esb/process/save`）→ `POST /rest/esb/process/start`"，
+  建完即生效；`rc flow schedule list` 同步降级为读流程记录。成功判据为"表达式回读正确 + Quartz 任务存在"，
+  "已在运行中"视为已达成。
+- **截断输出冒充完整 JSON**：`emit` 非 `--json` 分支把大对象截断到 6000 字符后会直接打印半截 JSON，
+  重定向到文件无法解析。现在截断时明确提示"用 `--json` 取完整内容"。
+
 ## [0.5.0] - 2026-10-22
 
 重构为**双域 CLI**：`rc`（RestCloud iPaaS）+ `dw`（Apache Doris 数仓）。

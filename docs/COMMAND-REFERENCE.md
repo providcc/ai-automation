@@ -325,6 +325,20 @@ rc flow delete <pid> [--kind esb|etl] [--apply]
 坑：`processIds` 必须是**逗号分隔的字符串**（传数组会被序列化成一个元素）。
 平台的"启用"没有可用端点（`rule/start` 恒报"启动失败"），所以工具只负责建规则，并提示还需人工启用。
 
+**BPM 规则服务不可用时的降级路径**（实测 2026-10，测试环境）：
+
+- `/bpm/rules/list|save` 整个模块可能不可达，平台自己返回 `{"errcode":500,"msg":"connect timed out"}`
+  或网关直接超时。此时 `schedule save` 自动降级为：**把 `expression`/`runExpression` 写进流程记录
+  （`POST /rest/esb/process/save`，`executeServer=Task`）→ `POST /rest/esb/process/start` 启动**；
+  这条路建完即生效，不需要人工启用。`schedule list` 也会降级为读流程记录的 `expression`。
+- 判据以"流程记录 expression 正确 + Quartz 任务存在（`/rest/core/scheduler/current/run/jobs`）"为准；
+  平台对"已在运行中"的流程会拒绝再次 start，工具视为已达成并继续成功返回。
+
+**手工运行流程**：`rc flow run <pid> --apply` 先走 `POST {base}/run`（设计器/流程列表的"运行"，
+同步执行并返回 `transactionId`），端点不存在（404）/网络失败/5xx 时回退 `monitor/instance/run`；
+4xx 业务错误不回退，避免同一流程被执行两次。注意 `/run` 成功时仍可能返回 `state:false`，
+真正结论在 `resultCode=1` 或 `msg` 的"是否成功=是"里，CLI 已归一化。
+
 ### 5.5 模板
 
 ```bash
