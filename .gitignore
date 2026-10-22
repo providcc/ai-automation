@@ -1,0 +1,13 @@
+node_modules/
+dist/
+*.tsbuildinfo
+.DS_Store
+.env
+.env.*
+!.env.example
+rc.targets.json
+reports/
+.rc/
+catalog/live/
+catalog/db/
+*.log

@@ -1,0 +1,3954 @@
+{
+ "generatedAt": "2026-10-20T12:39:29.947Z",
+ "count": 208,
+ "drivers": [
+  {
+   "nodeTypeGuess": "DataFilter",
+   "kind": "esb",
+   "class": "cn/restcloud/apiflow/process/engine/drive/impl/compute/ESBDataFilterNode",
+   "shortName": "ESBDataFilterNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "esb",
+      "beanId": "esb.drive.dataFilterNode",
+      "beanName": "数据过滤节点",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "AliOSSWrite",
+   "kind": "esb",
+   "class": "cn/restcloud/apiflow/process/engine/drive/impl/ESBAliOSSWriteNode",
+   "shortName": "ESBAliOSSWriteNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "esb",
+      "beanId": "esb.drive.aliOSSWriteNode",
+      "beanName": "阿里云OSS对像传输",
+      "beanType": "Service"
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "ApiDownload",
+   "kind": "esb",
+   "class": "cn/restcloud/apiflow/process/engine/drive/impl/ESBApiDownloadNode",
+   "shortName": "ESBApiDownloadNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "esb",
+      "beanId": "esb.drive.downloadByteNode",
+      "beanName": "API文件下载节点",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "Api",
+   "kind": "esb",
+   "class": "cn/restcloud/apiflow/process/engine/drive/impl/ESBApiNode",
+   "shortName": "ESBApiNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "esb",
+      "beanId": "esb.drive.apiNode",
+      "beanName": "API接口驱动",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "ApiNode$1",
+   "kind": "esb",
+   "class": "cn/restcloud/apiflow/process/engine/drive/impl/ESBApiNode$1",
+   "shortName": "ESBApiNode$1",
+   "classAnnotations": []
+  },
+  {
+   "nodeTypeGuess": "ApiNodeCallback",
+   "kind": "esb",
+   "class": "cn/restcloud/apiflow/process/engine/drive/impl/ESBApiNodeCallback",
+   "shortName": "ESBApiNodeCallback",
+   "classAnnotations": []
+  },
+  {
+   "nodeTypeGuess": "ApiUpload",
+   "kind": "esb",
+   "class": "cn/restcloud/apiflow/process/engine/drive/impl/ESBApiUploadNode",
+   "shortName": "ESBApiUploadNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "esb",
+      "beanId": "esb.drive.uploadByteNode",
+      "beanName": "API文件上传节点",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "AsyncCallback",
+   "kind": "esb",
+   "class": "cn/restcloud/apiflow/process/engine/drive/impl/ESBAsyncCallbackNode",
+   "shortName": "ESBAsyncCallbackNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "esb",
+      "beanId": "esb.drive.asyncCallbackNode",
+      "beanName": "异步回调节点驱动",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "AsyncQueue",
+   "kind": "esb",
+   "class": "cn/restcloud/apiflow/process/engine/drive/impl/ESBAsyncQueueNode",
+   "shortName": "ESBAsyncQueueNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "esb",
+      "beanId": "esb.drive.asyncQueueNode",
+      "beanName": "异步队列节点驱动",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "CosDownload",
+   "kind": "esb",
+   "class": "cn/restcloud/apiflow/process/engine/drive/impl/ESBCosDownloadNode",
+   "shortName": "ESBCosDownloadNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "esb",
+      "beanId": "esb.drive.cosDownloadNode",
+      "beanName": "腾讯云cos对像下载",
+      "beanType": "Service"
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "CosWrite",
+   "kind": "esb",
+   "class": "cn/restcloud/apiflow/process/engine/drive/impl/ESBCosWriteNode",
+   "shortName": "ESBCosWriteNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "esb",
+      "beanId": "esb.drive.cosWriteNode",
+      "beanName": "腾讯云cos对像传输",
+      "beanType": "Service"
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "DataConnector",
+   "kind": "esb",
+   "class": "cn/restcloud/apiflow/process/engine/drive/impl/ESBDataConnectorNode",
+   "shortName": "ESBDataConnectorNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "esb",
+      "beanId": "esb.drive.dataConnectorNode",
+      "beanName": "数据连接器驱动",
+      "beanType": "Service"
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "DataMap",
+   "kind": "esb",
+   "class": "cn/restcloud/apiflow/process/engine/drive/impl/ESBDataMapNode",
+   "shortName": "ESBDataMapNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "esb",
+      "beanId": "esb.drive.dataMapNode",
+      "beanName": "JSON转换器节点",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "DataMerge",
+   "kind": "esb",
+   "class": "cn/restcloud/apiflow/process/engine/drive/impl/ESBDataMergeNode",
+   "shortName": "ESBDataMergeNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "esb",
+      "beanId": "esb.drive.dataMergeNode",
+      "beanName": "数据合并节点驱动",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "DataMergeNode_FS",
+   "kind": "esb",
+   "class": "cn/restcloud/apiflow/process/engine/drive/impl/ESBDataMergeNode_FS",
+   "shortName": "ESBDataMergeNode_FS",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "esb",
+      "beanId": "esb.drive.dataMergeNode_FS",
+      "beanName": "数据合并节点驱动",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "DataOutput",
+   "kind": "esb",
+   "class": "cn/restcloud/apiflow/process/engine/drive/impl/ESBDataOutputNode",
+   "shortName": "ESBDataOutputNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "esb",
+      "beanId": "esb.drive.dataOutputNode",
+      "beanName": "数据流调试输出节点",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "DataSplit",
+   "kind": "esb",
+   "class": "cn/restcloud/apiflow/process/engine/drive/impl/ESBDataSplitNode",
+   "shortName": "ESBDataSplitNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "esb",
+      "beanId": "esb.drive.dataSplitNode",
+      "beanName": "数据拆分节点",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "DataTransform",
+   "kind": "esb",
+   "class": "cn/restcloud/apiflow/process/engine/drive/impl/ESBDataTransformNode",
+   "shortName": "ESBDataTransformNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "esb",
+      "beanId": "esb.drive.dataTransformNode",
+      "beanName": "数据转换清洗节点",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "DataValueMap",
+   "kind": "esb",
+   "class": "cn/restcloud/apiflow/process/engine/drive/impl/ESBDataValueMapNode",
+   "shortName": "ESBDataValueMapNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "esb",
+      "beanId": "esb.drive.dataValueMapNode",
+      "beanName": "数据值转换节点",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "Ding",
+   "kind": "esb",
+   "class": "cn/restcloud/apiflow/process/engine/drive/impl/ESBDingNode",
+   "shortName": "ESBDingNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "esb",
+      "beanId": "esb.drive.dingNode",
+      "beanName": "DingDing消息节点驱动",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "Dubbo",
+   "kind": "esb",
+   "class": "cn/restcloud/apiflow/process/engine/drive/impl/ESBDubboNode",
+   "shortName": "ESBDubboNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "esb",
+      "beanId": "esb.drive.dubbo",
+      "beanName": "Dubbo接口驱动",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "End",
+   "kind": "esb",
+   "class": "cn/restcloud/apiflow/process/engine/drive/impl/ESBEndNode",
+   "shortName": "ESBEndNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "esb",
+      "beanId": "esb.drive.end",
+      "beanName": "结束节点驱动",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "Event",
+   "kind": "esb",
+   "class": "cn/restcloud/apiflow/process/engine/drive/impl/ESBEventNode",
+   "shortName": "ESBEventNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "esb",
+      "beanId": "esb.drive.eventNode",
+      "beanName": "Java脚本节点驱动器",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "Feishu",
+   "kind": "esb",
+   "class": "cn/restcloud/apiflow/process/engine/drive/impl/ESBFeishuNode",
+   "shortName": "ESBFeishuNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "esb",
+      "beanId": "esb.drive.feishuNode",
+      "beanName": "飞书消息节点驱动",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "FileDownload",
+   "kind": "esb",
+   "class": "cn/restcloud/apiflow/process/engine/drive/impl/ESBFileDownload",
+   "shortName": "ESBFileDownload",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "esb",
+      "beanId": "esb.drive.fileDownload",
+      "beanName": "文件下载",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "GateWay",
+   "kind": "esb",
+   "class": "cn/restcloud/apiflow/process/engine/drive/impl/ESBGateWayNode",
+   "shortName": "ESBGateWayNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "esb",
+      "beanId": "esb.drive.gateWay",
+      "beanName": "网关节点驱动",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "HtmlPage",
+   "kind": "esb",
+   "class": "cn/restcloud/apiflow/process/engine/drive/impl/ESBHtmlPageNode",
+   "shortName": "ESBHtmlPageNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "esb",
+      "beanId": "esb.drive.htmlPageNode",
+      "beanName": "HTML页面节点驱动",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "JavaBean",
+   "kind": "esb",
+   "class": "cn/restcloud/apiflow/process/engine/drive/impl/ESBJavaBeanNode",
+   "shortName": "ESBJavaBeanNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "esb",
+      "beanId": "esb.drive.javaBeanNode",
+      "beanName": "JavaBean节点调用",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "JavaCode",
+   "kind": "esb",
+   "class": "cn/restcloud/apiflow/process/engine/drive/impl/ESBJavaCodeNode",
+   "shortName": "ESBJavaCodeNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "esb",
+      "beanId": "esb.drive.javaCodeNode",
+      "beanName": "Java脚本节点驱动器",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "JavaScriptCode",
+   "kind": "esb",
+   "class": "cn/restcloud/apiflow/process/engine/drive/impl/ESBJavaScriptCodeNode",
+   "shortName": "ESBJavaScriptCodeNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "esb",
+      "beanId": "esb.drive.javaScriptCodeNode",
+      "beanName": "JavaScript脚本节点驱动器",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "JmsWrite",
+   "kind": "esb",
+   "class": "cn/restcloud/apiflow/process/engine/drive/impl/ESBJmsWriteNode",
+   "shortName": "ESBJmsWriteNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "esb",
+      "beanId": "esb.drive.jmsWriteNode",
+      "beanName": "JMS节点驱动器",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "Json2XmlNode2",
+   "kind": "esb",
+   "class": "cn/restcloud/apiflow/process/engine/drive/impl/ESBJson2XmlNode2",
+   "shortName": "ESBJson2XmlNode2",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "esb",
+      "beanId": "esb.drive.json2xmlNode",
+      "beanName": "JSON转XML",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "Kafka",
+   "kind": "esb",
+   "class": "cn/restcloud/apiflow/process/engine/drive/impl/ESBKafkaNode",
+   "shortName": "ESBKafkaNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "esb",
+      "beanId": "esb.drive.kafkaNode",
+      "beanName": "Kafka节点驱动器",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "ManualConfirm",
+   "kind": "esb",
+   "class": "cn/restcloud/apiflow/process/engine/drive/impl/ESBManualConfirmNode",
+   "shortName": "ESBManualConfirmNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "esb",
+      "beanId": "esb.drive.manualConfirmNode",
+      "beanName": "手动审批节点驱动",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "MappingTemplate",
+   "kind": "esb",
+   "class": "cn/restcloud/apiflow/process/engine/drive/impl/ESBMappingTemplateNode",
+   "shortName": "ESBMappingTemplateNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "esb",
+      "beanId": "esb.drive.mappingTemplateNode",
+      "beanName": "映射配置模板数据转换",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "MockResponse",
+   "kind": "esb",
+   "class": "cn/restcloud/apiflow/process/engine/drive/impl/ESBMockResponseNode",
+   "shortName": "ESBMockResponseNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "esb",
+      "beanId": "esb.drive.mockResponseNode",
+      "beanName": "模拟数据节点驱动",
+      "beanType": "Service"
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "Mqtt",
+   "kind": "esb",
+   "class": "cn/restcloud/apiflow/process/engine/drive/impl/ESBMqttNode",
+   "shortName": "ESBMqttNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "esb",
+      "beanId": "esb.drive.mqttNode",
+      "beanName": "Mqtt节点驱动器",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "Msg",
+   "kind": "esb",
+   "class": "cn/restcloud/apiflow/process/engine/drive/impl/ESBMsgNode",
+   "shortName": "ESBMsgNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "esb",
+      "beanId": "esb.drive.msgNode",
+      "beanName": "邮件提醒节点驱动",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "Process",
+   "kind": "esb",
+   "class": "cn/restcloud/apiflow/process/engine/drive/impl/ESBProcessNode",
+   "shortName": "ESBProcessNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "esb",
+      "beanId": "esb.drive.process",
+      "beanName": "流程过程节点驱动",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "Python",
+   "kind": "esb",
+   "class": "cn/restcloud/apiflow/process/engine/drive/impl/ESBPythonNode",
+   "shortName": "ESBPythonNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "esb",
+      "beanId": "esb.drive.pythonNode",
+      "beanName": "执行Python脚本",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "RabbitMQ",
+   "kind": "esb",
+   "class": "cn/restcloud/apiflow/process/engine/drive/impl/ESBRabbitMQNode",
+   "shortName": "ESBRabbitMQNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "esb",
+      "beanId": "esb.drive.rabbitMQNode",
+      "beanName": "RabbitMQ节点驱动器",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "ResponseCrop",
+   "kind": "esb",
+   "class": "cn/restcloud/apiflow/process/engine/drive/impl/ESBResponseCropNode",
+   "shortName": "ESBResponseCropNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "esb",
+      "beanId": "esb.drive.responseCropNode",
+      "beanName": "结果裁剪节点",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "ReturnData",
+   "kind": "esb",
+   "class": "cn/restcloud/apiflow/process/engine/drive/impl/ESBReturnDataNode",
+   "shortName": "ESBReturnDataNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "esb",
+      "beanId": "esb.drive.returnDataNode",
+      "beanName": "返回数据节点驱动",
+      "beanType": "Service"
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "RocketMQ",
+   "kind": "esb",
+   "class": "cn/restcloud/apiflow/process/engine/drive/impl/ESBRocketMQNode",
+   "shortName": "ESBRocketMQNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "esb",
+      "beanId": "esb.drive.rocketMQNode",
+      "beanName": "RocketMQ节点驱动器",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "Router",
+   "kind": "esb",
+   "class": "cn/restcloud/apiflow/process/engine/drive/impl/ESBRouterNode",
+   "shortName": "ESBRouterNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "esb",
+      "beanId": "esb.drive.router",
+      "beanName": "路由节点驱动",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "SFTPRead",
+   "kind": "esb",
+   "class": "cn/restcloud/apiflow/process/engine/drive/impl/ESBSFTPReadNode",
+   "shortName": "ESBSFTPReadNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "esb",
+      "beanId": "esb.drive.sftpReadNode",
+      "beanName": "SFTP读取文件",
+      "beanType": "Service"
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "SFTPUpload",
+   "kind": "esb",
+   "class": "cn/restcloud/apiflow/process/engine/drive/impl/ESBSFTPUploadNode",
+   "shortName": "ESBSFTPUploadNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "esb",
+      "beanId": "esb.drive.sftpUploadNode",
+      "beanName": "SFTP上传文件",
+      "beanType": "Service"
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "SharedVariable",
+   "kind": "esb",
+   "class": "cn/restcloud/apiflow/process/engine/drive/impl/ESBSharedVariableNode",
+   "shortName": "ESBSharedVariableNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "esb",
+      "beanId": "esb.drive.sharedVariableNode",
+      "beanName": "共享变量节点",
+      "beanType": "Service"
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "ShellExecuter",
+   "kind": "esb",
+   "class": "cn/restcloud/apiflow/process/engine/drive/impl/ESBShellExecuterNode",
+   "shortName": "ESBShellExecuterNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "esb",
+      "beanId": "esb.drive.shellNode",
+      "beanName": "执行Shell脚本",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "SQLExecuter",
+   "kind": "esb",
+   "class": "cn/restcloud/apiflow/process/engine/drive/impl/ESBSQLExecuterNode",
+   "shortName": "ESBSQLExecuterNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "esb",
+      "beanId": "esb.drive.sqlExecuterNode",
+      "beanName": "执行SQL语句",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "Start",
+   "kind": "esb",
+   "class": "cn/restcloud/apiflow/process/engine/drive/impl/ESBStartNode",
+   "shortName": "ESBStartNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "esb",
+      "beanId": "esb.drive.start",
+      "beanName": "开始节点驱动",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "SubProcess",
+   "kind": "esb",
+   "class": "cn/restcloud/apiflow/process/engine/drive/impl/ESBSubProcessNode",
+   "shortName": "ESBSubProcessNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "esb",
+      "beanId": "esb.drive.subProcessNode",
+      "beanName": "子任务节点驱动",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "TCP",
+   "kind": "esb",
+   "class": "cn/restcloud/apiflow/process/engine/drive/impl/ESBTCPNode",
+   "shortName": "ESBTCPNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "esb",
+      "beanId": "esb.drive.tcpNode",
+      "beanName": "发送TCP消息节点驱动",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "Time",
+   "kind": "esb",
+   "class": "cn/restcloud/apiflow/process/engine/drive/impl/ESBTimeNode",
+   "shortName": "ESBTimeNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "esb",
+      "beanId": "esb.drive.timeNode",
+      "beanName": "定时器节点驱动",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "Variable",
+   "kind": "esb",
+   "class": "cn/restcloud/apiflow/process/engine/drive/impl/ESBVariableNode",
+   "shortName": "ESBVariableNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "esb",
+      "beanId": "esb.drive.variableNode",
+      "beanName": "自增量设置节点驱动",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "VariableRule",
+   "kind": "esb",
+   "class": "cn/restcloud/apiflow/process/engine/drive/impl/ESBVariableRuleNode",
+   "shortName": "ESBVariableRuleNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "esb",
+      "beanId": "esb.drive.variableRuleNode",
+      "beanName": "变量设置节点",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "Velocity",
+   "kind": "esb",
+   "class": "cn/restcloud/apiflow/process/engine/drive/impl/ESBVelocityNode",
+   "shortName": "ESBVelocityNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "esb",
+      "beanId": "esb.drive.velocityNode",
+      "beanName": "模板转换节点",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "WebService",
+   "kind": "esb",
+   "class": "cn/restcloud/apiflow/process/engine/drive/impl/ESBWebServiceNode",
+   "shortName": "ESBWebServiceNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "esb",
+      "beanId": "esb.drive.webService",
+      "beanName": "WebService接口驱动",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "WeiXin",
+   "kind": "esb",
+   "class": "cn/restcloud/apiflow/process/engine/drive/impl/ESBWeiXinNode",
+   "shortName": "ESBWeiXinNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "esb",
+      "beanId": "esb.drive.weixinNode",
+      "beanName": "企业微信消息节点驱动",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "Xml2Json",
+   "kind": "esb",
+   "class": "cn/restcloud/apiflow/process/engine/drive/impl/ESBXml2JsonNode",
+   "shortName": "ESBXml2JsonNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "esb",
+      "beanId": "esb.drive.xml2jsonNode",
+      "beanName": "JSON转换器节点",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "TableRead",
+   "kind": "esb",
+   "class": "cn/restcloud/apiflow/process/engine/drive/impl/read/ESBTableReadNode",
+   "shortName": "ESBTableReadNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "esb",
+      "beanId": "esb.drive.tableReadNode",
+      "beanName": "通过SQL读取表数据",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "TransactionNodeDataCacheService",
+   "kind": "esb",
+   "class": "cn/restcloud/apiflow/process/engine/drive/impl/service/ESBTransactionNodeDataCacheService",
+   "shortName": "ESBTransactionNodeDataCacheService",
+   "classAnnotations": []
+  },
+  {
+   "nodeTypeGuess": "JdbcWrite",
+   "kind": "esb",
+   "class": "cn/restcloud/apiflow/process/engine/drive/impl/write/ESBJdbcWriteNode",
+   "shortName": "ESBJdbcWriteNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "esb",
+      "beanId": "esb.drive.jdbcWriteNode",
+      "beanName": "通过JDBC输出数据",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "JdbcDataWriteParamsEntry",
+   "kind": "esb",
+   "class": "cn/restcloud/apiflow/process/engine/drive/impl/write/impl/ESBJdbcDataWriteParamsEntry",
+   "shortName": "ESBJdbcDataWriteParamsEntry",
+   "classAnnotations": []
+  },
+  {
+   "nodeTypeGuess": "JdbcDataWriteUtil",
+   "kind": "esb",
+   "class": "cn/restcloud/apiflow/process/engine/drive/impl/write/impl/ESBJdbcDataWriteUtil",
+   "shortName": "ESBJdbcDataWriteUtil",
+   "classAnnotations": []
+  },
+  {
+   "nodeTypeGuess": "JdbcWriteNodeServiceImpl",
+   "kind": "esb",
+   "class": "cn/restcloud/apiflow/process/engine/drive/impl/write/impl/ESBJdbcWriteNodeServiceImpl",
+   "shortName": "ESBJdbcWriteNodeServiceImpl",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "esb",
+      "beanId": "ESBJdbcWriteNodeService",
+      "beanName": "通过JDBC输出数据",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "Api",
+   "kind": "esb",
+   "class": "cn/restcloud/bpm/process/engine/drive/impl/ApiNode",
+   "shortName": "ApiNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "bpm",
+      "beanId": "bpm.drive.apiNode",
+      "beanName": "API接口驱动",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "AsyncCallback",
+   "kind": "esb",
+   "class": "cn/restcloud/bpm/process/engine/drive/impl/AsyncCallbackNode",
+   "shortName": "AsyncCallbackNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "bpm",
+      "beanId": "bpm.drive.asyncCallbackNode",
+      "beanName": "异步回调节点驱动",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "BackAnyNodeAction",
+   "kind": "esb",
+   "class": "cn/restcloud/bpm/process/engine/drive/impl/BackAnyNodeAction",
+   "shortName": "BackAnyNodeAction",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "bpm",
+      "beanId": "bpm.drive.backAnyNode",
+      "beanName": "回退任意节点",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "BackFirstNodeAction",
+   "kind": "esb",
+   "class": "cn/restcloud/bpm/process/engine/drive/impl/BackFirstNodeAction",
+   "shortName": "BackFirstNodeAction",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "bpm",
+      "beanId": "bpm.drive.backFirstNode",
+      "beanName": "回退首环节",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "CountersignTask",
+   "kind": "esb",
+   "class": "cn/restcloud/bpm/process/engine/drive/impl/CountersignTaskNode",
+   "shortName": "CountersignTaskNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "bpm",
+      "beanId": "bpm.drive.countersignTaskNode",
+      "beanName": "会签节点",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "DraftTask",
+   "kind": "esb",
+   "class": "cn/restcloud/bpm/process/engine/drive/impl/DraftTaskNode",
+   "shortName": "DraftTaskNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "bpm",
+      "beanId": "bpm.drive.draftTaskNode",
+      "beanName": "申请节点",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "End",
+   "kind": "esb",
+   "class": "cn/restcloud/bpm/process/engine/drive/impl/EndNode",
+   "shortName": "EndNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "bpm",
+      "beanId": "bpm.drive.end",
+      "beanName": "结束节点驱动",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "JoinTask",
+   "kind": "esb",
+   "class": "cn/restcloud/bpm/process/engine/drive/impl/JoinTaskNode",
+   "shortName": "JoinTaskNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "bpm",
+      "beanId": "bpm.drive.joinTaskNode",
+      "beanName": "聚合任务节点",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "Process",
+   "kind": "esb",
+   "class": "cn/restcloud/bpm/process/engine/drive/impl/ProcessNode",
+   "shortName": "ProcessNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "bpm",
+      "beanId": "bpm.drive.process",
+      "beanName": "流程过程节点驱动",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "ReturnToBackUserAction",
+   "kind": "esb",
+   "class": "cn/restcloud/bpm/process/engine/drive/impl/ReturnToBackUserAction",
+   "shortName": "ReturnToBackUserAction",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "bpm",
+      "beanId": "bpm.drive.returnToBackUser",
+      "beanName": "返回给回退者",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "ReturnToPrevUserAction",
+   "kind": "esb",
+   "class": "cn/restcloud/bpm/process/engine/drive/impl/ReturnToPrevUserAction",
+   "shortName": "ReturnToPrevUserAction",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "bpm",
+      "beanId": "bpm.drive.returnToPrevUser",
+      "beanName": "返回给上一提交者",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "ReturnToTransferUserAction",
+   "kind": "esb",
+   "class": "cn/restcloud/bpm/process/engine/drive/impl/ReturnToTransferUserAction",
+   "shortName": "ReturnToTransferUserAction",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "bpm",
+      "beanId": "bpm.drive.returnToTransferUser",
+      "beanName": "转交给其他人处理",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "Router",
+   "kind": "esb",
+   "class": "cn/restcloud/bpm/process/engine/drive/impl/RouterNode",
+   "shortName": "RouterNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "bpm",
+      "beanId": "bpm.drive.router",
+      "beanName": "路由节点驱动",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "RunJavaCode",
+   "kind": "esb",
+   "class": "cn/restcloud/bpm/process/engine/drive/impl/RunJavaCodeNode",
+   "shortName": "RunJavaCodeNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "bpm",
+      "beanId": "bpm.drive.javaCodeNode",
+      "beanName": "Java脚本节点驱动器",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "SendDingDing",
+   "kind": "esb",
+   "class": "cn/restcloud/bpm/process/engine/drive/impl/SendDingDingNode",
+   "shortName": "SendDingDingNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "bpm",
+      "beanId": "bpm.drive.dingNode",
+      "beanName": "DingDing消息节点驱动",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "SendEmailMessage",
+   "kind": "esb",
+   "class": "cn/restcloud/bpm/process/engine/drive/impl/SendEmailMessageNode",
+   "shortName": "SendEmailMessageNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "bpm",
+      "beanId": "bpm.drive.msgNode",
+      "beanName": "邮件提醒节点驱动",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "SendWeiXin",
+   "kind": "esb",
+   "class": "cn/restcloud/bpm/process/engine/drive/impl/SendWeiXinNode",
+   "shortName": "SendWeiXinNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "bpm",
+      "beanId": "bpm.drive.weixinNode",
+      "beanName": "Weixin消息节点驱动",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "Start",
+   "kind": "esb",
+   "class": "cn/restcloud/bpm/process/engine/drive/impl/StartNode",
+   "shortName": "StartNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "bpm",
+      "beanId": "bpm.drive.start",
+      "beanName": "开始节点驱动",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "SubProcess",
+   "kind": "esb",
+   "class": "cn/restcloud/bpm/process/engine/drive/impl/SubProcessNode",
+   "shortName": "SubProcessNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "bpm",
+      "beanId": "bpm.drive.subProcessNode",
+      "beanName": "子流程节点",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "Todo",
+   "kind": "esb",
+   "class": "cn/restcloud/bpm/process/engine/drive/impl/TodoNode",
+   "shortName": "TodoNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "bpm",
+      "beanId": "bpm.drive.todoNode",
+      "beanName": "发送待办节点",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "TransferOtherUserAction",
+   "kind": "esb",
+   "class": "cn/restcloud/bpm/process/engine/drive/impl/TransferOtherUserAction",
+   "shortName": "TransferOtherUserAction",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "bpm",
+      "beanId": "bpm.drive.transferOtherUser",
+      "beanName": "转交给其他人处理",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "UserTask",
+   "kind": "esb",
+   "class": "cn/restcloud/bpm/process/engine/drive/impl/UserTaskNode",
+   "shortName": "UserTaskNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "bpm",
+      "beanId": "bpm.drive.userTaskNode",
+      "beanName": "任务审批节点",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "ApiDownload",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/apinode/ETLApiDownloadNode",
+   "shortName": "ETLApiDownloadNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.apiDownloadNode",
+      "beanName": "API文件下载节点",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "Api",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/apinode/ETLApiNode",
+   "shortName": "ETLApiNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.apiNode",
+      "beanName": "API接口驱动",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "ApiUpload",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/apinode/ETLApiUploadNode",
+   "shortName": "ETLApiUploadNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.apiUploadNode",
+      "beanName": "API文件上传节点",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "ApiWrite",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/apinode/ETLApiWriteNode",
+   "shortName": "ETLApiWriteNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.apiWriteNode",
+      "beanName": "API数据输出节点",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "DataConnector",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/apinode/ETLDataConnectorNode",
+   "shortName": "ETLDataConnectorNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.dataConnectorNode",
+      "beanName": "数据连接器驱动",
+      "beanType": "Service"
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "WebService",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/apinode/ETLWebServiceNode",
+   "shortName": "ETLWebServiceNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.webServiceNode",
+      "beanName": "WebService接口驱动",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "GateWay",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/common/ETLGateWayNode",
+   "shortName": "ETLGateWayNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.gateWay",
+      "beanName": "网关节点驱动",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "ManualConfirm",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/common/ETLManualConfirmNode",
+   "shortName": "ETLManualConfirmNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.manualConfirmNode",
+      "beanName": "手动审批节点驱动",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "Process",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/common/ETLProcessNode",
+   "shortName": "ETLProcessNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.process",
+      "beanName": "流程过程节点驱动",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "Router",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/common/ETLRouterNode",
+   "shortName": "ETLRouterNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.router",
+      "beanName": "路由节点驱动",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "SubProcess",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/common/ETLSubProcessNode",
+   "shortName": "ETLSubProcessNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.subProcessNode",
+      "beanName": "子任务节点驱动",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "ThreadPoolExecutor",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/common/ETLThreadPoolExecutorNode",
+   "shortName": "ETLThreadPoolExecutorNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.threadPoolExecutorNode",
+      "beanName": "多线程并发执行驱动",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "ColumnToRows",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/compute/ETLColumnToRowsNode",
+   "shortName": "ETLColumnToRowsNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.columnToRowsNode",
+      "beanName": "列拆分为多行",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "DataCrypt",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/compute/ETLDataCryptNode",
+   "shortName": "ETLDataCryptNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.dataCryptNode",
+      "beanName": "数据加解密节点",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "DataFilter",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/compute/ETLDataFilterNode",
+   "shortName": "ETLDataFilterNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.dataFilterNode",
+      "beanName": "数据过滤节点",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "DataGeneration",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/compute/ETLDataGenerationNode",
+   "shortName": "ETLDataGenerationNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.dataGenerationNode",
+      "beanName": "数据生成器节点",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "DataGroupby",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/compute/ETLDataGroupbyNode",
+   "shortName": "ETLDataGroupbyNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.dataGroupbyNode",
+      "beanName": "数据分组运算",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "DataJoin",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/compute/ETLDataJoinNode",
+   "shortName": "ETLDataJoinNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.dataJoinNode",
+      "beanName": "多表JOIN运算节点",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "DataMerge",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/compute/ETLDataMergeNode",
+   "shortName": "ETLDataMergeNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.dataMergeNode",
+      "beanName": "数据合并节点驱动",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "DataRecordTotal",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/compute/ETLDataRecordTotalNode",
+   "shortName": "ETLDataRecordTotalNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.dataRecordTotalNode",
+      "beanName": "数据总数量对比节点",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "DataSecurity",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/compute/ETLDataSecurityNode",
+   "shortName": "ETLDataSecurityNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.dataSecurityNode",
+      "beanName": "数据脱敏规则",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "DataSort",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/compute/ETLDataSortNode",
+   "shortName": "ETLDataSortNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.dataSortNode",
+      "beanName": "数据排序节点",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "DataSplit",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/compute/ETLDataSplitNode",
+   "shortName": "ETLDataSplitNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.dataSplitNode",
+      "beanName": "数据拆分节点",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "DataSummary",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/compute/ETLDataSummaryNode",
+   "shortName": "ETLDataSummaryNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.dataSummaryNode",
+      "beanName": "数据汇总运算节点",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "DataTag",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/compute/ETLDataTagNode",
+   "shortName": "ETLDataTagNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.dataTagNode",
+      "beanName": "数据标注节点",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "DataTransform",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/compute/ETLDataTransformNode",
+   "shortName": "ETLDataTransformNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.dataTransformNode",
+      "beanName": "数据清洗转换补全节点",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "DataUnionAll",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/compute/ETLDataUnionAllNode",
+   "shortName": "ETLDataUnionAllNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.dataUnionAllNode",
+      "beanName": "Union ALL运算节点",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "DataValueCompare",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/compute/ETLDataValueCompareNode",
+   "shortName": "ETLDataValueCompareNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.dataValueCompareNode",
+      "beanName": "双流数据值对比节点",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "DuplicateValue",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/compute/ETLDuplicateValueNode",
+   "shortName": "ETLDuplicateValueNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.duplicateValueNode",
+      "beanName": "数据去重合并",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "FieldMapping",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/compute/ETLFieldMappingNode",
+   "shortName": "ETLFieldMappingNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.fieldMappingNode",
+      "beanName": "字段映射节点",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "FieldToColumns",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/compute/ETLFieldToColumnsNode",
+   "shortName": "ETLFieldToColumnsNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.fieldToColumnsNode",
+      "beanName": "单列拆分为多列",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "FieldToRows",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/compute/ETLFieldToRowsNode",
+   "shortName": "ETLFieldToRowsNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.fieldToRowsNode",
+      "beanName": "单个字段值拆分为多行",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "IncrementData",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/compute/ETLIncrementDataNode",
+   "shortName": "ETLIncrementDataNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.incrementDataNode",
+      "beanName": "多流增量运算节点",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "IncrementPageData",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/compute/ETLIncrementPageDataNode",
+   "shortName": "ETLIncrementPageDataNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.incrementPageDataNode",
+      "beanName": "分批增量计算节点",
+      "beanType": "Service",
+      "autowired": 0,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "json2xml",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/compute/ETLjson2xmlNode",
+   "shortName": "ETLjson2xmlNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.json2xmlNode",
+      "beanName": "json转xml节点",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "MulRowsToOneRow",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/compute/ETLMulRowsToOneRowNode",
+   "shortName": "ETLMulRowsToOneRowNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.mulRowsToOneRowNode",
+      "beanName": "多行合并为一行",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "OneRowToMulRows",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/compute/ETLOneRowToMulRowsNode",
+   "shortName": "ETLOneRowToMulRowsNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.oneRowToMulRowsNode",
+      "beanName": "一行拆分为多行",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "RowsToColumns",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/compute/ETLRowsToColumnsNode",
+   "shortName": "ETLRowsToColumnsNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.rowsToColumnsNode",
+      "beanName": "多行合并后转为一行的多列",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "Sequence",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/compute/ETLSequenceNode",
+   "shortName": "ETLSequenceNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.sequenceNode",
+      "beanName": "序列生成节点",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "ValueCompute",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/compute/ETLValueComputeNode",
+   "shortName": "ETLValueComputeNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.valueComputeNode",
+      "beanName": "数据计算节点",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "ValueMapping",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/compute/ETLValueMappingNode",
+   "shortName": "ETLValueMappingNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.valueMappingNode",
+      "beanName": "数值映射节点",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "Xml2Json",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/compute/ETLXml2JsonNode",
+   "shortName": "ETLXml2JsonNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.xml2jsonNode",
+      "beanName": "XML转JSON节点",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "ConditionParserUtil",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/compute/impl/ConditionParserUtil",
+   "shortName": "ConditionParserUtil",
+   "classAnnotations": []
+  },
+  {
+   "nodeTypeGuess": "DataCartesianJoinComputeImpl",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/compute/impl/DataCartesianJoinComputeImpl",
+   "shortName": "DataCartesianJoinComputeImpl",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "DataCartesianJoinComputeImpl",
+      "beanName": "笛卡尔积节点运算规则",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "DataInnerJoinComputeImpl",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/compute/impl/DataInnerJoinComputeImpl",
+   "shortName": "DataInnerJoinComputeImpl",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "DataInnerJoinComputeImpl",
+      "beanName": "InnerJoin节点运算规则",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "DataLeftJoinComputeImpl",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/compute/impl/DataLeftJoinComputeImpl",
+   "shortName": "DataLeftJoinComputeImpl",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "DataLeftJoinComputeImpl",
+      "beanName": "Leftjoin节点运算规则",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "IncrementDataNodeComputeImpl",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/compute/impl/IncrementDataNodeComputeImpl",
+   "shortName": "IncrementDataNodeComputeImpl",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "IncrementDataNodeCompute",
+      "beanName": "增量节点运算规则",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "IncrementPageDataNodeComputeImpl",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/compute/impl/IncrementPageDataNodeComputeImpl",
+   "shortName": "IncrementPageDataNodeComputeImpl",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "IncrementPageDataNodeCompute",
+      "beanName": "增量节点运算规则",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "DeleteTableData",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/dbsync/ETLDeleteTableDataNode",
+   "shortName": "ETLDeleteTableDataNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.deleteTableDataNode",
+      "beanName": "根据对比源和目标表中的数据并删除",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "SgingleTableCopy",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/dbsync/ETLSgingleTableCopyNode",
+   "shortName": "ETLSgingleTableCopyNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.sgingleTableCopyNode",
+      "beanName": "单表快速插入到目标表中",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "SgingleTableUpdate",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/dbsync/ETLSgingleTableUpdateNode",
+   "shortName": "ETLSgingleTableUpdateNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.sgingleTableUpdateNode",
+      "beanName": "单表快速更新目标表数据",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "End",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/event/ETLEndNode",
+   "shortName": "ETLEndNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.end",
+      "beanName": "结束节点驱动",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "Event",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/event/ETLEventNode",
+   "shortName": "ETLEventNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.eventNode",
+      "beanName": "JAVA规则调用节点",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "JavaBean",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/event/ETLJavaBeanNode",
+   "shortName": "ETLJavaBeanNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.javaBeanNode",
+      "beanName": "ETL JavaBean节点调用",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "JavaCode",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/event/ETLJavaCodeNode",
+   "shortName": "ETLJavaCodeNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.javaCodeNode",
+      "beanName": "Java脚本节点驱动器",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "JavaScriptCode",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/event/ETLJavaScriptCodeNode",
+   "shortName": "ETLJavaScriptCodeNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.javaScriptCodeNode",
+      "beanName": "JavaScript脚本节点驱动器",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "JsonMapNode",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/event/ETLJsonMapNodeNode",
+   "shortName": "ETLJsonMapNodeNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.jsonMapNode",
+      "beanName": "JSON转换器节点",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "PlatformConfig",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/event/ETLPlatformConfigNode",
+   "shortName": "ETLPlatformConfigNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.platformConfigNode",
+      "beanName": "修改平台中的公共配置变量",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "Python",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/event/ETLPythonNode",
+   "shortName": "ETLPythonNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.pythonNode",
+      "beanName": "执行Python脚本",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "RunKettle",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/event/ETLRunKettleNode",
+   "shortName": "ETLRunKettleNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.runKettleNode",
+      "beanName": "执行Kettle任务节点",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "SetVariable",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/event/ETLSetVariableNode",
+   "shortName": "ETLSetVariableNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.variableNode",
+      "beanName": "自增量设置节点",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "ShellExecuter",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/event/ETLShellExecuterNode",
+   "shortName": "ETLShellExecuterNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.shellCmdNode",
+      "beanName": "执行Shell脚本",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "SQLExecuter",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/event/ETLSQLExecuterNode",
+   "shortName": "ETLSQLExecuterNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.sqlExecuterNode",
+      "beanName": "执行SQL语句",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "Start",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/event/ETLStartNode",
+   "shortName": "ETLStartNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.start",
+      "beanName": "开始节点驱动",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "Time",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/event/ETLTimeNode",
+   "shortName": "ETLTimeNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.timeNode",
+      "beanName": "定时器节点驱动",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "VariableRule",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/event/ETLVariableRuleNode",
+   "shortName": "ETLVariableRuleNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.variableRuleNode",
+      "beanName": "变量设置节点",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "AliOSSWrite",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/file/ETLAliOSSWriteNode",
+   "shortName": "ETLAliOSSWriteNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.aliOSSWriteNode",
+      "beanName": "阿里云OSS对像传输",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "CosDownload",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/file/ETLCosDownloadNode",
+   "shortName": "ETLCosDownloadNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.cosDownloadNode",
+      "beanName": "腾讯云cos对像下载",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "CosWrite",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/file/ETLCosWriteNode",
+   "shortName": "ETLCosWriteNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.cosWriteNode",
+      "beanName": "腾讯云cos对像传输",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "DBFFileRead",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/file/ETLDBFFileReadNode",
+   "shortName": "ETLDBFFileReadNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.dbfFileReadNode",
+      "beanName": "DBF文件读取数据",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "ExcelRead",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/file/ETLExcelReadNode",
+   "shortName": "ETLExcelReadNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.excelReadNode",
+      "beanName": "Excel读取数据",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "ExcelWrite",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/file/ETLExcelWriteNode",
+   "shortName": "ETLExcelWriteNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.excelWriteNode",
+      "beanName": "数据流输出到Excel节点",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "MonitorFile",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/file/ETLMonitorFileNode",
+   "shortName": "ETLMonitorFileNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.monitorFileNode",
+      "beanName": "监听文件目录读取目录下的所有文件",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "MoveFile",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/file/ETLMoveFileNode",
+   "shortName": "ETLMoveFileNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.moveFileNode",
+      "beanName": "移动或删除文件",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "ReadBigTxtFile",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/file/ETLReadBigTxtFileNode",
+   "shortName": "ETLReadBigTxtFileNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.readBigTxtFileNode",
+      "beanName": "分页读取大文件数据",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "ReadFilePath",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/file/ETLReadFilePathNode",
+   "shortName": "ETLReadFilePathNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.readFilePathNode",
+      "beanName": "读取文件路径数据",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "SFTPRead",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/file/ETLSFTPReadNode",
+   "shortName": "ETLSFTPReadNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.sftpReadNode",
+      "beanName": "SFTP读取文件",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "SFTPUpload",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/file/ETLSFTPUploadNode",
+   "shortName": "ETLSFTPUploadNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.sftpUploadNode",
+      "beanName": "SFTP上传文件",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "TxtFileRead",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/file/ETLTxtFileReadNode",
+   "shortName": "ETLTxtFileReadNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.txtFileReadNode",
+      "beanName": "Txt文件读取数据",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "TxtFileWrite",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/file/ETLTxtFileWriteNode",
+   "shortName": "ETLTxtFileWriteNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.txtFileWriteNode",
+      "beanName": "数据流输出到文本文件",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "UnZipFile",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/file/ETLUnZipFileNode",
+   "shortName": "ETLUnZipFileNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.unZipFileNode",
+      "beanName": "文件解压缩节点",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "ZipFile",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/file/ETLZipFileNode",
+   "shortName": "ETLZipFileNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.zipFileNode",
+      "beanName": "文件压缩节点",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "Ding",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/message/ETLDingNode",
+   "shortName": "ETLDingNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.dingNode",
+      "beanName": "钉钉消息节点驱动",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "Msg",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/message/ETLMsgNode",
+   "shortName": "ETLMsgNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.msgNode",
+      "beanName": "邮件提醒节点驱动",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "WeiXin",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/message/ETLWeiXinNode",
+   "shortName": "ETLWeiXinNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.weixinNode",
+      "beanName": "企业微信消息节点驱动",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "DistributedDataSplit",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/read/ETLDistributedDataSplitNode",
+   "shortName": "ETLDistributedDataSplitNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.distributedDataSplitNode",
+      "beanName": "数据切片器节点",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "ElasticHttpClientRead",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/read/ETLElasticHttpClientReadNode",
+   "shortName": "ETLElasticHttpClientReadNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.elasticReadNode",
+      "beanName": "ElasticSearch HttpClient读取数据",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "KafkaRead",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/read/ETLKafkaReadNode",
+   "shortName": "ETLKafkaReadNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.kafkaReadNode",
+      "beanName": "Kafka消费者节点",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "MetaDataRead",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/read/ETLMetaDataReadNode",
+   "shortName": "ETLMetaDataReadNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.metaDataReadNode",
+      "beanName": "通过SQL读取数据",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "MongoDbRead",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/read/ETLMongoDbReadNode",
+   "shortName": "ETLMongoDbReadNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.mongoDbReadNode",
+      "beanName": "MongoDB读取数据",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "Procedure",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/read/ETLProcedureNode",
+   "shortName": "ETLProcedureNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.procedureNode",
+      "beanName": "执行存储过程",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "RedisRead",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/read/ETLRedisReadNode",
+   "shortName": "ETLRedisReadNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.redisReadNode",
+      "beanName": "Redis数据读取节点",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "SqlRead",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/read/ETLSqlReadNode",
+   "shortName": "ETLSqlReadNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.sqlReadNode",
+      "beanName": "通过SQL读取数据",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "TableBatchRead",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/read/ETLTableBatchReadNode",
+   "shortName": "ETLTableBatchReadNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.tableBatchReadNode",
+      "beanName": "批量读取多个表中的数据",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "MiddleDbRead",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/read/MiddleDbReadNode",
+   "shortName": "MiddleDbReadNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.middleDbReadNode",
+      "beanName": "缓冲库读取数据",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "AsynchronousThreadPoolNodeEngine",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/service/ETLAsynchronousThreadPoolNodeEngine",
+   "shortName": "ETLAsynchronousThreadPoolNodeEngine",
+   "classAnnotations": []
+  },
+  {
+   "nodeTypeGuess": "InsNodeCountType",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/service/ETLInsNodeCountType",
+   "shortName": "ETLInsNodeCountType",
+   "classAnnotations": []
+  },
+  {
+   "nodeTypeGuess": "InsNodeCountType$Getter",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/service/ETLInsNodeCountType$Getter",
+   "shortName": "ETLInsNodeCountType$Getter",
+   "classAnnotations": []
+  },
+  {
+   "nodeTypeGuess": "InsNodeCountType$Setter",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/service/ETLInsNodeCountType$Setter",
+   "shortName": "ETLInsNodeCountType$Setter",
+   "classAnnotations": []
+  },
+  {
+   "nodeTypeGuess": "ProcessInsNodeUtil",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/service/ETLProcessInsNodeUtil",
+   "shortName": "ETLProcessInsNodeUtil",
+   "classAnnotations": []
+  },
+  {
+   "nodeTypeGuess": "TransactionNodeDataCacheService",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/service/ETLTransactionNodeDataCacheService",
+   "shortName": "ETLTransactionNodeDataCacheService",
+   "classAnnotations": []
+  },
+  {
+   "nodeTypeGuess": "CreateTable",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/write/ETLCreateTableNode",
+   "shortName": "ETLCreateTableNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.createTableNode",
+      "beanName": "创建数据库表",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "DataOutput",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/write/ETLDataOutputNode",
+   "shortName": "ETLDataOutputNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.dataOutputNode",
+      "beanName": "数据流调试输出节点",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "ElasticWrite",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/write/ETLElasticWriteNode",
+   "shortName": "ETLElasticWriteNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.elasticWriteNode",
+      "beanName": "ElasticSearch输出节点",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "GreenplumCopyWrite",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/write/ETLGreenplumCopyWriteNode",
+   "shortName": "ETLGreenplumCopyWriteNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.greenplumCopyWriteNode",
+      "beanName": "Greenplum批量输出数据",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "JdbcWrite",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/write/ETLJdbcWriteNode",
+   "shortName": "ETLJdbcWriteNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.jdbcWriteNode",
+      "beanName": "通过JDBC输出数据",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "JmsWrite",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/write/ETLJmsWriteNode",
+   "shortName": "ETLJmsWriteNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.jmsWriteNode",
+      "beanName": "JMS生产者节点",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "KafkaWrite",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/write/ETLKafkaWriteNode",
+   "shortName": "ETLKafkaWriteNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.kafkaWriteNode",
+      "beanName": "Kafka生产者节点",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "MetaDataWrite",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/write/ETLMetaDataWriteNode",
+   "shortName": "ETLMetaDataWriteNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.metaDataWriteNode",
+      "beanName": "通过元数据输出数据",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "MiddleDbWrite",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/write/ETLMiddleDbWriteNode",
+   "shortName": "ETLMiddleDbWriteNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.middleDbWriteNode",
+      "beanName": "缓冲库输出节点",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "MongoDbWrite",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/write/ETLMongoDbWriteNode",
+   "shortName": "ETLMongoDbWriteNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.mongoDbWriteNode",
+      "beanName": "MongoDB输出节点",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "RedisWrite",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/write/ETLRedisWriteNode",
+   "shortName": "ETLRedisWriteNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.redisWriteNode",
+      "beanName": "Redis数据输出节点",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "TableBatchWrite",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/write/ETLTableBatchWriteNode",
+   "shortName": "ETLTableBatchWriteNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.tableBatchWriteNode",
+      "beanName": "批量传输表数据",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "DeleteTableDataServiceImpl",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/write/impl/ETLDeleteTableDataServiceImpl",
+   "shortName": "ETLDeleteTableDataServiceImpl",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "ETLDeleteTableDataService",
+      "beanName": "通过数据流删除目标表中的数据",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "DorisLoadWrite",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/write/impl/ETLDorisLoadWriteNode",
+   "shortName": "ETLDorisLoadWriteNode",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "etl.drive.dorisLoadWriteNode",
+      "beanName": "Doris Load方式导入数据",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "JdbcDataWriteParamsEntry",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/write/impl/ETLJdbcDataWriteParamsEntry",
+   "shortName": "ETLJdbcDataWriteParamsEntry",
+   "classAnnotations": []
+  },
+  {
+   "nodeTypeGuess": "JdbcDataWriteUtil",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/write/impl/ETLJdbcDataWriteUtil",
+   "shortName": "ETLJdbcDataWriteUtil",
+   "classAnnotations": []
+  },
+  {
+   "nodeTypeGuess": "JdbcWriteNodeServiceImpl",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/write/impl/ETLJdbcWriteNodeServiceImpl",
+   "shortName": "ETLJdbcWriteNodeServiceImpl",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "ETLJdbcWriteNodeService",
+      "beanName": "通过JDBC输出数据",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "MongoWriteNodeServiceImpl",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/write/impl/ETLMongoWriteNodeServiceImpl",
+   "shortName": "ETLMongoWriteNodeServiceImpl",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "ETLMongoWriteNodeService",
+      "beanName": "MongoDB输出数据",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  },
+  {
+   "nodeTypeGuess": "TableBatchWriteNodeServiceImpl",
+   "kind": "etl",
+   "class": "cn/restcloud/etl/process/engine/drive/impl/write/impl/ETLTableBatchWriteNodeServiceImpl",
+   "shortName": "ETLTableBatchWriteNodeServiceImpl",
+   "classAnnotations": [
+    {
+     "type": "cn/restcloud/framework/core/annotation/bean/BeanConfig",
+     "values": {
+      "appId": "etl",
+      "beanId": "ETLTableBatchWriteNodeService",
+      "beanName": "接收批量接收过来的表数据并写入",
+      "beanType": "Service",
+      "autowired": 1,
+      "singleton": 1,
+      "hotMode": 1
+     }
+    }
+   ]
+  }
+ ]
+}

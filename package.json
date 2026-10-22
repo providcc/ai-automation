@@ -1,0 +1,74 @@
+{
+  "name": "ai-automation",
+  "version": "0.5.0",
+  "description": "Agent-first automation CLIs: rc for RestCloud iPaaS, dw for the Apache Doris data warehouse",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "rc": "./bin/rc.mjs",
+    "dw": "./bin/dw.mjs"
+  },
+  "files": [
+    "bin",
+    "packages",
+    "catalog",
+    "docs",
+    "skills",
+    "scripts",
+    "AGENTS.md",
+    "README.md",
+    "SECURITY.md",
+    "LICENSE",
+    "sensitive-words.example.txt"
+  ],
+  "workspaces": [
+    "packages/*"
+  ],
+  "engines": {
+    "node": ">=22.6"
+  },
+  "scripts": {
+    "typecheck": "tsc -p packages/core/tsconfig.json && tsc -p packages/cli/tsconfig.json && tsc -p packages/dw-cli/tsconfig.json && tsc -p tests/tsconfig.json",
+    "build": "npm run typecheck && tsc -p packages/core/tsconfig.build.json",
+    "test": "node --experimental-strip-types --import ./tests/unit/isolate-home.mjs --test tests/unit/*.test.ts",
+    "test:coverage": "node --experimental-strip-types --import ./tests/unit/isolate-home.mjs --test --experimental-test-coverage --test-coverage-exclude='tests/**' --test-coverage-exclude='packages/cli/**' --test-coverage-exclude='packages/dw-cli/**' --test-coverage-lines=95 --test-coverage-branches=90 --test-coverage-functions=95 tests/unit/*.test.ts",
+    "cli": "node --experimental-strip-types packages/cli/src/index.ts",
+    "dw": "node --experimental-strip-types packages/dw-cli/src/index.ts",
+    "templates": "node --experimental-strip-types scripts/gen-templates.mjs",
+    "templates:verify": "node --experimental-strip-types scripts/verify-templates-live.mjs",
+    "flow:verify": "node --experimental-strip-types scripts/verify-flow-lifecycle.mjs",
+    "api:verify": "node --experimental-strip-types scripts/verify-api-lifecycle.mjs",
+    "flow:verify:stability": "node --experimental-strip-types scripts/verify-flow-lifecycle-stability.mjs",
+    "errors:build": "node scripts/build-error-actions.mjs",
+    "expressions:build": "node scripts/build-expression-catalog.mjs",
+    "scan": "node scripts/sensitive-scan.mjs",
+    "scan:staged": "node scripts/sensitive-scan.mjs --staged",
+    "scan:history": "node scripts/sensitive-scan.mjs --history",
+    "prepare": "git config core.hooksPath .githooks 2>/dev/null || true"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/providcc/ai-automation.git"
+  },
+  "bugs": {
+    "url": "https://github.com/providcc/ai-automation/issues"
+  },
+  "homepage": "https://github.com/providcc/ai-automation#readme",
+  "keywords": [
+    "ipaas",
+    "restcloud",
+    "doris",
+    "data-warehouse",
+    "materialized-view",
+    "ai-agent",
+    "claude-code",
+    "opencode",
+    "workbuddy",
+    "automation",
+    "cli"
+  ],
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.6.0"
+  }
+}

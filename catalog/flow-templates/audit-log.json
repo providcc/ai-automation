@@ -1,0 +1,196 @@
+{
+ "id": "audit-log",
+ "name": "审计留痕",
+ "category": "可观测",
+ "desc": "调用后写审计表（请求/响应摘要）",
+ "model": {
+  "nodeDataArray": [
+   {
+    "key": "E00001",
+    "nodeType": "start",
+    "text": "开始",
+    "nodeName": "开始",
+    "name": "E00001",
+    "locLeft": 260,
+    "locTop": 265,
+    "flowType": "NewStartNode",
+    "showNodeType": "Old",
+    "titleType": "text",
+    "icon": "start-esb",
+    "systemFlag": 1,
+    "err": false,
+    "skipChecking": "0"
+   },
+   {
+    "key": "T00001",
+    "nodeType": "apiNode",
+    "text": "业务调用",
+    "nodeName": "业务调用",
+    "name": "T00001",
+    "locLeft": 510,
+    "locTop": 265,
+    "flowType": "BoxNode",
+    "showNodeType": "Old",
+    "titleType": "text",
+    "icon": "apiNode-esb",
+    "systemFlag": 1,
+    "err": false,
+    "skipChecking": "0"
+   },
+   {
+    "key": "T00002",
+    "nodeType": "dataTransformNode",
+    "text": "整理审计字段",
+    "nodeName": "整理审计字段",
+    "name": "T00002",
+    "locLeft": 760,
+    "locTop": 265,
+    "flowType": "BoxNode",
+    "showNodeType": "Old",
+    "titleType": "text",
+    "icon": "dataTransformNode-esb",
+    "systemFlag": 1,
+    "err": false,
+    "skipChecking": "0"
+   },
+   {
+    "key": "T00003",
+    "nodeType": "jdbcWriteNode",
+    "text": "写审计表",
+    "nodeName": "写审计表",
+    "name": "T00003",
+    "locLeft": 1010,
+    "locTop": 265,
+    "flowType": "BoxNode",
+    "showNodeType": "Old",
+    "titleType": "text",
+    "icon": "jdbcWriteNode-esb",
+    "systemFlag": 1,
+    "err": false,
+    "skipChecking": "0"
+   },
+   {
+    "key": "E00002",
+    "nodeType": "end",
+    "text": "结束",
+    "nodeName": "结束",
+    "name": "E00002",
+    "locLeft": 1260,
+    "locTop": 265,
+    "flowType": "NewStartNode",
+    "showNodeType": "Old",
+    "titleType": "text",
+    "icon": "end-esb",
+    "systemFlag": 1,
+    "err": false,
+    "skipChecking": "0"
+   }
+  ],
+  "linkDataArray": [
+   {
+    "routerId": "R00001",
+    "from": "E00001",
+    "to": "T00001",
+    "label": "NO_SHOW",
+    "lineType": "Curved",
+    "assertCondition": "0"
+   },
+   {
+    "routerId": "R00002",
+    "from": "T00001",
+    "to": "T00002",
+    "label": "NO_SHOW",
+    "lineType": "Curved",
+    "assertCondition": "0"
+   },
+   {
+    "routerId": "R00003",
+    "from": "T00002",
+    "to": "T00003",
+    "label": "NO_SHOW",
+    "lineType": "Curved",
+    "assertCondition": "0"
+   },
+   {
+    "routerId": "R00004",
+    "from": "T00003",
+    "to": "E00002",
+    "label": "NO_SHOW",
+    "lineType": "Curved",
+    "assertCondition": "0"
+   }
+  ],
+  "transform": 1,
+  "translate": {
+   "x": 0,
+   "y": 0
+  },
+  "detailFlag": false
+ },
+ "props": {
+  "T00001": {
+   "pNodeId": "T00001",
+   "pNodeType": "apiNode",
+   "pNodeName": "业务调用",
+   "methodType": "POST",
+   "connectTimeout": "10",
+   "retryNum": "2"
+  },
+  "T00003": {
+   "pNodeId": "T00003",
+   "pNodeType": "jdbcWriteNode",
+   "pNodeName": "写审计表",
+   "appendFlag": "1"
+  },
+  "R00001": {
+   "pNodeId": "R00001",
+   "pNodeType": "router",
+   "pNodeName": "R00001",
+   "sourceId": "E00001",
+   "targetId": "T00001",
+   "order": "1",
+   "async": "false",
+   "asyncFlag": "0",
+   "clearProcessMainData": "0",
+   "serialLock": "0"
+  },
+  "R00002": {
+   "pNodeId": "R00002",
+   "pNodeType": "router",
+   "pNodeName": "R00002",
+   "sourceId": "T00001",
+   "targetId": "T00002",
+   "order": "2",
+   "async": "false",
+   "asyncFlag": "0",
+   "clearProcessMainData": "0",
+   "serialLock": "0"
+  },
+  "R00003": {
+   "pNodeId": "R00003",
+   "pNodeType": "router",
+   "pNodeName": "R00003",
+   "sourceId": "T00002",
+   "targetId": "T00003",
+   "order": "3",
+   "async": "false",
+   "asyncFlag": "0",
+   "clearProcessMainData": "0",
+   "serialLock": "0"
+  },
+  "R00004": {
+   "pNodeId": "R00004",
+   "pNodeType": "router",
+   "pNodeName": "R00004",
+   "sourceId": "T00003",
+   "targetId": "E00002",
+   "order": "4",
+   "async": "false",
+   "asyncFlag": "0",
+   "clearProcessMainData": "0",
+   "serialLock": "0"
+  }
+ },
+ "warnings": [],
+ "issues": []
+}

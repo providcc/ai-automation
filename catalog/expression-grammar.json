@@ -1,0 +1,72 @@
+{
+ "generatedAt": "2026-10-20T14:07:08.322Z",
+ "version": 1,
+ "source": {
+  "fixtures": "ipaas-testcases/fixtures/flows/index.json",
+  "flows": 73,
+  "props": 1010,
+  "routes": 564,
+  "note": "仅提取形态与统计；样本字段已归一化，不含客户业务数据"
+ },
+ "bnf": {
+  "value": "value := \"$\" path?",
+  "path": "path := ( \".\" segment | \"[\" (index | quoted) \"]\" )*",
+  "template": "template := text (\"${\" value \"}\" text)*",
+  "ruleSet": "rule-set := \"[\" rule (\",\" rule)* \"]\"",
+  "rule": "rule := \"{\" \"fieldId\" \":\" value \",\" \"operator\" \":\" operator (\",\" \"compareValue\" \":\" json)? (\",\" \"relation\" \":\" (\"&&\"|\"||\"))? \"}\"",
+  "assertion": "assertion := \"function assert(engine,nodeDoc,nodeId,indoc) {\" statement* \"return\" (\"0\"|\"1\") \";\" \"}\"",
+  "edgeCondition": "edge-condition := \"0\" | \"10\" | condition-code"
+ },
+ "operators": {
+  "isNull": 1,
+  "notNull": 1,
+  "==": 1,
+  "!=": 1,
+  ">": 1,
+  ">=": 1,
+  "<": 1,
+  "<=": 1,
+  "length=": 1,
+  "contains": 1
+ },
+ "conditionCodes": {
+  "0": 1,
+  "1": 1,
+  "2": 1,
+  "3": 1,
+  "6": 1,
+  "7": 1,
+  "10": 1
+ },
+ "rules": {
+  "pathMustStartWithDollar": true,
+  "emptySegmentForbidden": true,
+  "ruleUnknownOperatorIsError": true,
+  "assertionMustReturn01": true,
+  "assertionBannedApis": [
+   "require",
+   "import",
+   "process",
+   "child_process",
+   "fs",
+   "net",
+   "eval",
+   "new Function",
+   "while(true)"
+  ]
+ },
+ "examples": {
+  "path": [
+   "$.data.id",
+   "$.data.list[0].id",
+   "$['data']['id']",
+   "${$.global.token}"
+  ],
+  "template": [
+   "https://api.example.com/${$.path}",
+   "select * from t where id='${$.id}'"
+  ],
+  "rules": "[{\"fieldId\":\"$.data.amount\",\"operator\":\">\",\"compareValue\":\"1000\"}]",
+  "assertion": "function assert(engine,nodeDoc,nodeId,indoc){ if(indoc.get(\"id\")==null){return 1;} return 0; }"
+ }
+}

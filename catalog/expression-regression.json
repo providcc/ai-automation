@@ -1,0 +1,747 @@
+{
+ "generatedAt": "2026-10-20T14:07:08.323Z",
+ "count": 50,
+ "cases": [
+  {
+   "id": "path-1",
+   "kind": "path",
+   "expr": "$.data",
+   "data": {
+    "data": {
+     "id": 1
+    }
+   },
+   "expected": {
+    "id": 1
+   },
+   "segments": [
+    "data"
+   ]
+  },
+  {
+   "id": "path-2",
+   "kind": "path",
+   "expr": "$.data.id",
+   "data": {
+    "data": {
+     "id": 7
+    }
+   },
+   "expected": 7,
+   "segments": [
+    "data",
+    "id"
+   ]
+  },
+  {
+   "id": "path-3",
+   "kind": "path",
+   "expr": "$.data.list.0.id",
+   "data": {
+    "data": {
+     "list": [
+      {
+       "id": "A"
+      }
+     ]
+    }
+   },
+   "expected": "A",
+   "segments": [
+    "data",
+    "list",
+    0,
+    "id"
+   ]
+  },
+  {
+   "id": "path-4",
+   "kind": "path",
+   "expr": "$.data.list[0].id",
+   "data": {
+    "data": {
+     "list": [
+      {
+       "id": "B"
+      }
+     ]
+    }
+   },
+   "expected": "B",
+   "segments": [
+    "data",
+    "list",
+    0,
+    "id"
+   ]
+  },
+  {
+   "id": "path-5",
+   "kind": "path",
+   "expr": "$['data']['id']",
+   "data": {
+    "data": {
+     "id": 8
+    }
+   },
+   "expected": 8,
+   "segments": [
+    "data",
+    "id"
+   ]
+  },
+  {
+   "id": "path-6",
+   "kind": "path",
+   "expr": "$[\"data\"].name",
+   "data": {
+    "data": {
+     "name": "n"
+    }
+   },
+   "expected": "n",
+   "segments": [
+    "data",
+    "name"
+   ]
+  },
+  {
+   "id": "path-7",
+   "kind": "path",
+   "expr": "${$.global.token}",
+   "data": {
+    "global": {
+     "token": "t"
+    }
+   },
+   "expected": "t",
+   "segments": [
+    "global",
+    "token"
+   ]
+  },
+  {
+   "id": "path-8",
+   "kind": "path",
+   "expr": "$.a.b.c",
+   "data": {
+    "a": {
+     "b": {
+      "c": 3
+     }
+    }
+   },
+   "expected": 3,
+   "segments": [
+    "a",
+    "b",
+    "c"
+   ]
+  },
+  {
+   "id": "path-9",
+   "kind": "path",
+   "expr": "$.a.0",
+   "data": {
+    "a": [
+     "x"
+    ]
+   },
+   "expected": "x",
+   "segments": [
+    "a",
+    0
+   ]
+  },
+  {
+   "id": "path-10",
+   "kind": "path",
+   "expr": "$.a[1].b",
+   "data": {
+    "a": [
+     {},
+     {
+      "b": 2
+     }
+    ]
+   },
+   "expected": 2,
+   "segments": [
+    "a",
+    1,
+    "b"
+   ]
+  },
+  {
+   "id": "path-11",
+   "kind": "path",
+   "expr": "$",
+   "data": {
+    "any": true
+   },
+   "expected": {
+    "any": true
+   },
+   "segments": []
+  },
+  {
+   "id": "path-12",
+   "kind": "path",
+   "expr": "$.items[2]",
+   "data": {
+    "items": [
+     1,
+     2,
+     3
+    ]
+   },
+   "expected": 3,
+   "segments": [
+    "items",
+    2
+   ]
+  },
+  {
+   "id": "path-13",
+   "kind": "path",
+   "expr": "$.map['key.with.dot']",
+   "data": {
+    "map": {
+     "key.with.dot": "v"
+    }
+   },
+   "expected": "v",
+   "segments": [
+    "map",
+    "key.with.dot"
+   ]
+  },
+  {
+   "id": "path-14",
+   "kind": "path",
+   "expr": "$.data.recordInfoList.oIdDepartment",
+   "data": {
+    "data": {
+     "recordInfoList": {
+      "oIdDepartment": "D1"
+     }
+    }
+   },
+   "expected": "D1",
+   "segments": [
+    "data",
+    "recordInfoList",
+    "oIdDepartment"
+   ]
+  },
+  {
+   "id": "path-15",
+   "kind": "path",
+   "expr": "$.user.0.username",
+   "data": {
+    "user": [
+     {
+      "username": "u1"
+     }
+    ]
+   },
+   "expected": "u1",
+   "segments": [
+    "user",
+    0,
+    "username"
+   ]
+  },
+  {
+   "id": "path-16",
+   "kind": "path",
+   "expr": "$.engine.last2Friday",
+   "data": {
+    "engine": {
+     "last2Friday": "2026-10-16"
+    }
+   },
+   "expected": "2026-10-16",
+   "segments": [
+    "engine",
+    "last2Friday"
+   ]
+  },
+  {
+   "id": "path-17",
+   "kind": "path",
+   "expr": "$.result.token",
+   "data": {
+    "result": {
+     "token": "tk"
+    }
+   },
+   "expected": "tk",
+   "segments": [
+    "result",
+    "token"
+   ]
+  },
+  {
+   "id": "path-18",
+   "kind": "path",
+   "expr": "$.global.pageNo",
+   "data": {
+    "global": {
+     "pageNo": 3
+    }
+   },
+   "expected": 3,
+   "segments": [
+    "global",
+    "pageNo"
+   ]
+  },
+  {
+   "id": "path-19",
+   "kind": "path",
+   "expr": "$.response.data[0].code",
+   "data": {
+    "response": {
+     "data": [
+      {
+       "code": "OK"
+      }
+     ]
+    }
+   },
+   "expected": "OK",
+   "segments": [
+    "response",
+    "data",
+    0,
+    "code"
+   ]
+  },
+  {
+   "id": "path-20",
+   "kind": "path",
+   "expr": "$.indoc.oIds",
+   "data": {
+    "indoc": {
+     "oIds": [
+      "1",
+      "2"
+     ]
+    }
+   },
+   "expected": [
+    "1",
+    "2"
+   ],
+   "segments": [
+    "indoc",
+    "oIds"
+   ]
+  },
+  {
+   "id": "template-21",
+   "kind": "template",
+   "expr": "https://api.example.com/${$.path}",
+   "data": {
+    "path": "orders"
+   },
+   "expected": "https://api.example.com/orders"
+  },
+  {
+   "id": "template-22",
+   "kind": "template",
+   "expr": "/rest/${$.module}/${$.id}",
+   "data": {
+    "module": "core",
+    "id": "42"
+   },
+   "expected": "/rest/core/42"
+  },
+  {
+   "id": "template-23",
+   "kind": "template",
+   "expr": "${$.user.0.username}",
+   "data": {
+    "user": [
+     {
+      "username": "alice"
+     }
+    ]
+   },
+   "expected": "alice"
+  },
+  {
+   "id": "template-24",
+   "kind": "template",
+   "expr": "select * from t where id='${$.id}'",
+   "data": {
+    "id": "A1"
+   },
+   "expected": "select * from t where id='A1'"
+  },
+  {
+   "id": "template-25",
+   "kind": "template",
+   "expr": "{\"name\":\"${$.name}\"}",
+   "data": {
+    "name": "n"
+   },
+   "expected": "{\"name\":\"n\"}"
+  },
+  {
+   "id": "template-26",
+   "kind": "template",
+   "expr": "${$.a}-${$.b}",
+   "data": {
+    "a": 1,
+    "b": 2
+   },
+   "expected": "1-2"
+  },
+  {
+   "id": "template-27",
+   "kind": "template",
+   "expr": "token=${$.global.token}",
+   "data": {
+    "global": {
+     "token": "t"
+    }
+   },
+   "expected": "token=t"
+  },
+  {
+   "id": "template-28",
+   "kind": "template",
+   "expr": "pageNo=${$.page.no}&pageSize=${$.page.size}",
+   "data": {
+    "page": {
+     "no": 1,
+     "size": 20
+    }
+   },
+   "expected": "pageNo=1&pageSize=20"
+  },
+  {
+   "id": "template-29",
+   "kind": "template",
+   "expr": "prefix-${$.code}-suffix",
+   "data": {
+    "code": "X"
+   },
+   "expected": "prefix-X-suffix"
+  },
+  {
+   "id": "template-30",
+   "kind": "template",
+   "expr": "${$.missing}",
+   "data": {},
+   "expected": ""
+  },
+  {
+   "id": "template-31",
+   "kind": "template",
+   "expr": "${$.a.0.name}",
+   "data": {
+    "a": [
+     {
+      "name": "n0"
+     }
+    ]
+   },
+   "expected": "n0"
+  },
+  {
+   "id": "template-32",
+   "kind": "template",
+   "expr": "${$.obj}",
+   "data": {
+    "obj": {
+     "k": 1
+    }
+   },
+   "expected": "{\"k\":1}"
+  },
+  {
+   "id": "template-33",
+   "kind": "template",
+   "expr": "${$.bool}",
+   "data": {
+    "bool": true
+   },
+   "expected": "true"
+  },
+  {
+   "id": "template-34",
+   "kind": "template",
+   "expr": "${$.num}",
+   "data": {
+    "num": 0
+   },
+   "expected": "0"
+  },
+  {
+   "id": "template-35",
+   "kind": "template",
+   "expr": "${$.nested.deep.value}",
+   "data": {
+    "nested": {
+     "deep": {
+      "value": "v"
+     }
+    }
+   },
+   "expected": "v"
+  },
+  {
+   "id": "rules-36",
+   "kind": "rules",
+   "expr": "[{\"fieldId\":\"$.data.id\",\"operator\":\"isNull\"}]",
+   "data": {
+    "data": {
+     "id": null
+    }
+   },
+   "expected": true,
+   "rules": [
+    {
+     "fieldId": "$.data.id",
+     "operator": "isNull"
+    }
+   ]
+  },
+  {
+   "id": "rules-37",
+   "kind": "rules",
+   "expr": "[{\"fieldId\":\"$.data.id\",\"operator\":\"notNull\"}]",
+   "data": {
+    "data": {
+     "id": 1
+    }
+   },
+   "expected": true,
+   "rules": [
+    {
+     "fieldId": "$.data.id",
+     "operator": "notNull"
+    }
+   ]
+  },
+  {
+   "id": "rules-38",
+   "kind": "rules",
+   "expr": "[{\"fieldId\":\"$.data.amount\",\"operator\":\">\",\"compareValue\":\"1000\"}]",
+   "data": {
+    "data": {
+     "amount": 1200
+    }
+   },
+   "expected": true,
+   "rules": [
+    {
+     "fieldId": "$.data.amount",
+     "operator": ">",
+     "compareValue": "1000"
+    }
+   ]
+  },
+  {
+   "id": "rules-39",
+   "kind": "rules",
+   "expr": "[{\"fieldId\":\"$.data.amount\",\"operator\":\"<=\",\"compareValue\":\"1000\"}]",
+   "data": {
+    "data": {
+     "amount": 1000
+    }
+   },
+   "expected": true,
+   "rules": [
+    {
+     "fieldId": "$.data.amount",
+     "operator": "<=",
+     "compareValue": "1000"
+    }
+   ]
+  },
+  {
+   "id": "rules-40",
+   "kind": "rules",
+   "expr": "[{\"fieldId\":\"$.data.name\",\"operator\":\"contains\",\"compareValue\":\"abc\"}]",
+   "data": {
+    "data": {
+     "name": "xabcx"
+    }
+   },
+   "expected": true,
+   "rules": [
+    {
+     "fieldId": "$.data.name",
+     "operator": "contains",
+     "compareValue": "abc"
+    }
+   ]
+  },
+  {
+   "id": "rules-41",
+   "kind": "rules",
+   "expr": "[{\"fieldId\":\"$.data.status\",\"operator\":\"in\",\"compareValue\":\"A,B\"}]",
+   "data": {
+    "data": {
+     "status": "B"
+    }
+   },
+   "expected": true,
+   "rules": [
+    {
+     "fieldId": "$.data.status",
+     "operator": "in",
+     "compareValue": "A,B"
+    }
+   ]
+  },
+  {
+   "id": "rules-42",
+   "kind": "rules",
+   "expr": "[{\"fieldId\":\"$.data.code\",\"operator\":\"startsWith\",\"compareValue\":\"RC\"}]",
+   "data": {
+    "data": {
+     "code": "RC-1"
+    }
+   },
+   "expected": true,
+   "rules": [
+    {
+     "fieldId": "$.data.code",
+     "operator": "startsWith",
+     "compareValue": "RC"
+    }
+   ]
+  },
+  {
+   "id": "rules-43",
+   "kind": "rules",
+   "expr": "[{\"fieldId\":\"$.data.list\",\"operator\":\"length=\",\"compareValue\":\"2\"}]",
+   "data": {
+    "data": {
+     "list": [
+      1,
+      2
+     ]
+    }
+   },
+   "expected": true,
+   "rules": [
+    {
+     "fieldId": "$.data.list",
+     "operator": "length=",
+     "compareValue": "2"
+    }
+   ]
+  },
+  {
+   "id": "rules-44",
+   "kind": "rules",
+   "expr": "[{\"fieldId\":\"$.data.enabled\",\"operator\":\"isTrue\"}]",
+   "data": {
+    "data": {
+     "enabled": true
+    }
+   },
+   "expected": true,
+   "rules": [
+    {
+     "fieldId": "$.data.enabled",
+     "operator": "isTrue"
+    }
+   ]
+  },
+  {
+   "id": "rules-45",
+   "kind": "rules",
+   "expr": "[{\"fieldId\":\"$.a\",\"operator\":\"==\",\"compareValue\":\"1\"},{\"fieldId\":\"$.b\",\"operator\":\"==\",\"compareValue\":\"2\",\"relation\":\"||\"}]",
+   "data": {
+    "a": 0,
+    "b": 2
+   },
+   "expected": true,
+   "rules": [
+    {
+     "fieldId": "$.a",
+     "operator": "==",
+     "compareValue": "1"
+    },
+    {
+     "fieldId": "$.b",
+     "operator": "==",
+     "compareValue": "2",
+     "relation": "||"
+    }
+   ]
+  },
+  {
+   "id": "script-46",
+   "kind": "script",
+   "expr": "function assert(engine,nodeDoc,nodeId,indoc){ if(indoc.get(\"id\")==null){return 1;} return 0; }",
+   "expectedOk": true,
+   "reads": {
+    "engine": [],
+    "indoc": [
+     "id"
+    ]
+   },
+   "issues": []
+  },
+  {
+   "id": "script-47",
+   "kind": "script",
+   "expr": "function assert(engine,nodeDoc,nodeId,indoc){ if(indoc.get(\"amount\")>1000){return 1;} return 0; }",
+   "expectedOk": true,
+   "reads": {
+    "engine": [],
+    "indoc": [
+     "amount"
+    ]
+   },
+   "issues": []
+  },
+  {
+   "id": "script-48",
+   "kind": "script",
+   "expr": "function assert(engine,nodeDoc,nodeId,indoc){ var ok=indoc.get(\"status\")==\"A\"; return ok?1:0; }",
+   "expectedOk": true,
+   "reads": {
+    "engine": [],
+    "indoc": [
+     "status"
+    ]
+   },
+   "issues": []
+  },
+  {
+   "id": "script-49",
+   "kind": "script",
+   "expr": "function assert(engine,nodeDoc,nodeId,indoc){ if(engine.get(\"global\").get(\"token\")!=null){return 1;} return 0; }",
+   "expectedOk": true,
+   "reads": {
+    "engine": [
+     "global"
+    ],
+    "indoc": []
+   },
+   "issues": []
+  },
+  {
+   "id": "script-50",
+   "kind": "script",
+   "expr": "function assert(engine,nodeDoc,nodeId,indoc){ if(indoc.get(\"list\").size()>0){return 1;} return 0; }",
+   "expectedOk": true,
+   "reads": {
+    "engine": [],
+    "indoc": [
+     "list"
+    ]
+   },
+   "issues": []
+  }
+ ]
+}

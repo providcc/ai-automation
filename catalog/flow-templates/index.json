@@ -1,0 +1,267 @@
+{
+ "generatedAt": "2026-10-22T06:42:06.451Z",
+ "count": 29,
+ "templates": [
+  {
+   "id": "sync-api",
+   "name": "同步 API 编排",
+   "category": "API 集成",
+   "desc": "取数 → 字段映射 → 返回：最常见的同步接口编排",
+   "nodes": 5,
+   "edges": 4,
+   "ok": true
+  },
+  {
+   "id": "async-callback",
+   "name": "异步回调编排",
+   "category": "异步",
+   "desc": "提交下游 → 等待回执 → 成功/超时转人工",
+   "nodes": 5,
+   "edges": 5,
+   "ok": true
+  },
+  {
+   "id": "split-call-api",
+   "name": "拆分循环调 API",
+   "category": "数据同步",
+   "desc": "按单据拆分 → 逐条调用网关注册的 API（最常见的同步场景；apiUrl/apiId/requestBody 写法见 docs/FLOW-JSON-SPEC.md）",
+   "nodes": 5,
+   "edges": 4,
+   "ok": true
+  },
+  {
+   "id": "split-call-api-writeback",
+   "name": "拆分调用 API 回写",
+   "category": "数据同步",
+   "desc": "按单据拆分 → 先把当前行存进全局变量 → 调网关注册的 API → 回写结果（apiNode 会替换当前数据流，变量引用写法见 docs/FLOW-JSON-SPEC.md）",
+   "nodes": 6,
+   "edges": 5,
+   "ok": true
+  },
+  {
+   "id": "batch-sync",
+   "name": "批量同步",
+   "category": "数据同步",
+   "desc": "增量读取 → 按单据拆分 → 子流程处理 → 批量落库",
+   "nodes": 6,
+   "edges": 5,
+   "ok": true
+  },
+  {
+   "id": "event-driven",
+   "name": "事件驱动",
+   "category": "消息",
+   "desc": "Kafka 消费 → 清洗 → 异步入账",
+   "nodes": 5,
+   "edges": 4,
+   "ok": true
+  },
+  {
+   "id": "rule-routing",
+   "name": "规则路由",
+   "category": "规则",
+   "desc": "读规则 → 按规则分流到不同子流程",
+   "nodes": 5,
+   "edges": 5,
+   "ok": true
+  },
+  {
+   "id": "api-to-db",
+   "name": "API 落库",
+   "category": "API 集成",
+   "desc": "调用 API → 字段映射 → 写入数据库",
+   "nodes": 5,
+   "edges": 4,
+   "ok": true
+  },
+  {
+   "id": "db-to-api",
+   "name": "数据库推送 API",
+   "category": "API 集成",
+   "desc": "SQL 查询 → 数据清洗 → 推送 API",
+   "nodes": 5,
+   "edges": 4,
+   "ok": true
+  },
+  {
+   "id": "file-to-db",
+   "name": "文件入库",
+   "category": "文件",
+   "desc": "读取 SFTP 文件 → 解析 → 写入数据库",
+   "nodes": 5,
+   "edges": 4,
+   "ok": true
+  },
+  {
+   "id": "db-to-file",
+   "name": "数据库导出文件",
+   "category": "文件",
+   "desc": "查询数据库 → 生成文件 → 上传 SFTP",
+   "nodes": 5,
+   "edges": 4,
+   "ok": true
+  },
+  {
+   "id": "fanout-aggregate",
+   "name": "并行扇出/聚合",
+   "category": "并行",
+   "desc": "并行调用两个下游 → 聚合网关汇合 → 返回",
+   "nodes": 7,
+   "edges": 7,
+   "ok": true
+  },
+  {
+   "id": "retry-compensate",
+   "name": "重试与补偿",
+   "category": "可靠性",
+   "desc": "外部调用重试 → 失败补偿标记 → 落库",
+   "nodes": 5,
+   "edges": 4,
+   "ok": true
+  },
+  {
+   "id": "scheduled-sync",
+   "name": "定时同步",
+   "category": "调度",
+   "desc": "每天定时读取 → 写入目标表",
+   "nodes": 5,
+   "edges": 4,
+   "ok": true
+  },
+  {
+   "id": "message-queue",
+   "name": "消息队列消费",
+   "category": "消息",
+   "desc": "RocketMQ 消费 → 过滤 → 入库",
+   "nodes": 5,
+   "edges": 4,
+   "ok": true
+  },
+  {
+   "id": "webhook-receiver",
+   "name": "Webhook 接收",
+   "category": "API 集成",
+   "desc": "接收外部 Webhook → 映射 → 落库",
+   "nodes": 5,
+   "edges": 4,
+   "ok": true
+  },
+  {
+   "id": "subprocess-orchestration",
+   "name": "子流程编排",
+   "category": "编排",
+   "desc": "主流程串联两个子流程",
+   "nodes": 4,
+   "edges": 3,
+   "ok": true
+  },
+  {
+   "id": "data-mapping",
+   "name": "格式转换",
+   "category": "数据处理",
+   "desc": "XML → JSON → 字段映射 → XML",
+   "nodes": 6,
+   "edges": 5,
+   "ok": true
+  },
+  {
+   "id": "error-handler",
+   "name": "错误分支处理",
+   "category": "可靠性",
+   "desc": "主调用成功走结束，失败发消息告警",
+   "nodes": 4,
+   "edges": 4,
+   "ok": true
+  },
+  {
+   "id": "idempotent-upsert",
+   "name": "幂等 Upsert",
+   "category": "可靠性",
+   "desc": "外部调用 → 过滤重复 → 幂等写入",
+   "nodes": 5,
+   "edges": 4,
+   "ok": true
+  },
+  {
+   "id": "multi-source-merge",
+   "name": "多源合并",
+   "category": "数据处理",
+   "desc": "并行读取两个数据源 → 聚合 → 合并落库",
+   "nodes": 8,
+   "edges": 8,
+   "ok": true
+  },
+  {
+   "id": "approval-flow",
+   "name": "人工审批",
+   "category": "人工",
+   "desc": "提交审批 → 人工确认 → 通过/驳回分支",
+   "nodes": 5,
+   "edges": 5,
+   "ok": true
+  },
+  {
+   "id": "cache-refresh",
+   "name": "缓存刷新",
+   "category": "调度",
+   "desc": "定时拉取配置 → 映射 → 刷新缓存",
+   "nodes": 6,
+   "edges": 5,
+   "ok": true
+  },
+  {
+   "id": "audit-log",
+   "name": "审计留痕",
+   "category": "可观测",
+   "desc": "调用后写审计表（请求/响应摘要）",
+   "nodes": 5,
+   "edges": 4,
+   "ok": true
+  },
+  {
+   "id": "pagination-sync",
+   "name": "分页同步",
+   "category": "数据同步",
+   "desc": "分页读取大表 → 批量写入",
+   "nodes": 4,
+   "edges": 3,
+   "ok": true
+  },
+  {
+   "id": "dead-letter",
+   "name": "死信处理",
+   "category": "消息",
+   "desc": "消费消息 → 成功入库 / 失败转死信队列",
+   "nodes": 5,
+   "edges": 5,
+   "ok": true
+  },
+  {
+   "id": "sftp-to-api",
+   "name": "文件转 API",
+   "category": "文件",
+   "desc": "读取 SFTP 文件 → 映射 → 调用 API",
+   "nodes": 5,
+   "edges": 4,
+   "ok": true
+  },
+  {
+   "id": "api-to-file",
+   "name": "API 转文件",
+   "category": "文件",
+   "desc": "调用 API → 映射 → 上传 SFTP",
+   "nodes": 5,
+   "edges": 4,
+   "ok": true
+  },
+  {
+   "id": "compensate-notify",
+   "name": "补偿通知",
+   "category": "可靠性",
+   "desc": "读取待补偿记录 → 通知责任人 → 标记处理",
+   "nodes": 5,
+   "edges": 4,
+   "ok": true
+  }
+ ]
+}

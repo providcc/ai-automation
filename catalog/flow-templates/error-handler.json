@@ -1,0 +1,196 @@
+{
+ "id": "error-handler",
+ "name": "错误分支处理",
+ "category": "可靠性",
+ "desc": "主调用成功走结束，失败发消息告警",
+ "model": {
+  "nodeDataArray": [
+   {
+    "key": "E00001",
+    "nodeType": "start",
+    "text": "开始",
+    "nodeName": "开始",
+    "name": "E00001",
+    "locLeft": 260,
+    "locTop": 265,
+    "flowType": "NewStartNode",
+    "showNodeType": "Old",
+    "titleType": "text",
+    "icon": "start-esb",
+    "systemFlag": 1,
+    "err": false,
+    "skipChecking": "0"
+   },
+   {
+    "key": "T00001",
+    "nodeType": "apiNode",
+    "text": "调用外部系统",
+    "nodeName": "调用外部系统",
+    "name": "T00001",
+    "locLeft": 510,
+    "locTop": 265,
+    "flowType": "BoxNode",
+    "showNodeType": "Old",
+    "titleType": "text",
+    "icon": "apiNode-esb",
+    "systemFlag": 1,
+    "err": false,
+    "skipChecking": "0"
+   },
+   {
+    "key": "E00002",
+    "nodeType": "msgNode",
+    "text": "发送告警",
+    "nodeName": "发送告警",
+    "name": "E00002",
+    "locLeft": 760,
+    "locTop": 265,
+    "flowType": "BoxNode",
+    "showNodeType": "Old",
+    "titleType": "text",
+    "icon": "msgNode-esb",
+    "systemFlag": 1,
+    "err": false,
+    "skipChecking": "0"
+   },
+   {
+    "key": "E00003",
+    "nodeType": "end",
+    "text": "结束",
+    "nodeName": "结束",
+    "name": "E00003",
+    "locLeft": 1010,
+    "locTop": 265,
+    "flowType": "NewStartNode",
+    "showNodeType": "Old",
+    "titleType": "text",
+    "icon": "end-esb",
+    "systemFlag": 1,
+    "err": false,
+    "skipChecking": "0"
+   }
+  ],
+  "linkDataArray": [
+   {
+    "routerId": "R00001",
+    "from": "E00001",
+    "to": "T00001",
+    "label": "NO_SHOW",
+    "lineType": "Curved",
+    "assertCondition": "0"
+   },
+   {
+    "routerId": "R00002",
+    "from": "T00001",
+    "to": "E00002",
+    "label": "失败",
+    "lineType": "Curved",
+    "assertCondition": "3"
+   },
+   {
+    "routerId": "R00003",
+    "from": "T00001",
+    "to": "E00003",
+    "label": "成功/默认",
+    "lineType": "Curved",
+    "assertCondition": "6"
+   },
+   {
+    "routerId": "R00004",
+    "from": "E00002",
+    "to": "E00003",
+    "label": "NO_SHOW",
+    "lineType": "Curved",
+    "assertCondition": "0"
+   }
+  ],
+  "transform": 1,
+  "translate": {
+   "x": 0,
+   "y": 0
+  },
+  "detailFlag": false
+ },
+ "props": {
+  "T00001": {
+   "pNodeId": "T00001",
+   "pNodeType": "apiNode",
+   "pNodeName": "调用外部系统",
+   "methodType": "POST",
+   "connectTimeout": "10",
+   "retryNum": "2"
+  },
+  "E00002": {
+   "pNodeId": "E00002",
+   "pNodeType": "msgNode",
+   "pNodeName": "发送告警",
+   "msgType": "1"
+  },
+  "R00001": {
+   "pNodeId": "R00001",
+   "pNodeType": "router",
+   "pNodeName": "R00001",
+   "sourceId": "E00001",
+   "targetId": "T00001",
+   "order": "1",
+   "async": "false",
+   "asyncFlag": "0",
+   "clearProcessMainData": "0",
+   "serialLock": "0"
+  },
+  "R00002": {
+   "pNodeId": "R00002",
+   "pNodeType": "router",
+   "pNodeName": "R00002",
+   "sourceId": "T00001",
+   "targetId": "E00002",
+   "order": "2",
+   "async": "false",
+   "asyncFlag": "0",
+   "clearProcessMainData": "0",
+   "serialLock": "0",
+   "assertCondition": "3",
+   "assertionCodeType": "0",
+   "assertionCondition": "[{\"id\":\"rc_code_\",\"group\":false,\"fieldId\":\"$.indoc.code\",\"operator\":\"!=\",\"compareValue\":\"200\"}]",
+   "condition": "function assert(engine,nodeDoc,nodeId,indoc){\n  if( indoc.get(\"code\") != 200 ){\n    return 1;// 断言成立\n  }\n  return 0;// 断言失败\n}",
+   "routerCondition": ""
+  },
+  "R00003": {
+   "pNodeId": "R00003",
+   "pNodeType": "router",
+   "pNodeName": "R00003",
+   "sourceId": "T00001",
+   "targetId": "E00003",
+   "order": "3",
+   "async": "false",
+   "asyncFlag": "0",
+   "clearProcessMainData": "0",
+   "serialLock": "0",
+   "assertCondition": "6",
+   "assertionCodeType": "",
+   "assertionCondition": "",
+   "condition": "",
+   "routerCondition": ""
+  },
+  "R00004": {
+   "pNodeId": "R00004",
+   "pNodeType": "router",
+   "pNodeName": "R00004",
+   "sourceId": "E00002",
+   "targetId": "E00003",
+   "order": "4",
+   "async": "false",
+   "asyncFlag": "0",
+   "clearProcessMainData": "0",
+   "serialLock": "0"
+  }
+ },
+ "warnings": [],
+ "issues": [
+  {
+   "level": "info",
+   "code": "EXPR_UNDECLARED",
+   "msg": "节点使用了 $. 表达式，但全流程没有 exportParams 声明——平台流程普遍不声明，属提示而非缺陷"
+  }
+ ]
+}

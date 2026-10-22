@@ -1,0 +1,12 @@
+{
+  "name": "@dw/cli",
+  "version": "0.4.1",
+  "type": "module",
+  "bin": {
+    "dw": "dist/index.js"
+  },
+  "dependencies": {
+    "@rc/core": "0.4.1"
+  },
+  "private": true
+}

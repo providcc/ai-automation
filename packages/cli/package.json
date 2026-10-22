@@ -1,0 +1,12 @@
+{
+  "name": "@rc/cli",
+  "version": "0.4.1",
+  "type": "module",
+  "bin": {
+    "rc": "dist/index.js"
+  },
+  "dependencies": {
+    "@rc/core": "0.4.1"
+  },
+  "private": true
+}

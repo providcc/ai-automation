@@ -1,0 +1,6010 @@
+{
+ "generatedAt": "2026-10-20T15:07:07.788Z",
+ "version": 1,
+ "source": "catalog/war/error-catalog.json",
+ "total": 712,
+ "categories": {
+  "任务调度": 43,
+  "文件": 46,
+  "API 资产": 74,
+  "资源冲突": 31,
+  "资源不存在": 60,
+  "数据库": 72,
+  "平台能力": 2,
+  "数据格式": 27,
+  "参数校验": 35,
+  "审批": 1,
+  "数据模型": 8,
+  "代码/脚本": 12,
+  "权限": 7,
+  "平台错误": 171,
+  "流程图": 48,
+  "消息": 12,
+  "缓存": 8,
+  "连接器": 9,
+  "调度": 8,
+  "认证": 33,
+  "网络": 5
+ },
+ "items": [
+  {
+   "msg": "上一任务还没有结束,本任务存在重复执行排队问题",
+   "category": "任务调度",
+   "action": "先查运行实例与补偿记录，再决定重跑/补偿",
+   "classes": [
+    "cn.restcloud.etl.process.engine.utils.ETLProcessEventUtil"
+   ]
+  },
+  {
+   "msg": "上传失败!",
+   "category": "文件",
+   "action": "确认文件存在、大小与路径权限；必要时改用 SFTP",
+   "classes": [
+    "cn.restcloud.coreservice.config.controller.SprintbootBeanRest"
+   ]
+  },
+  {
+   "msg": "上传文件不能为空",
+   "category": "文件",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.connect.connector.service.impl.ApplicationVideoServiceImpl"
+   ]
+  },
+  {
+   "msg": "上传文件超时",
+   "category": "文件",
+   "action": "检查目标可达性与超时配置；必要时增大 timeout 或改为异步",
+   "classes": [
+    "cn.restcloud.connect.connector.util.MinioUtils"
+   ]
+  },
+  {
+   "msg": "下线失败,API未发布!",
+   "category": "API 资产",
+   "action": "用 rc api list/get 核对服务定义与发布状态",
+   "classes": [
+    "cn.restcloud.apiportal.controller.ApiPortalApiConfigRest"
+   ]
+  },
+  {
+   "msg": "下重复了",
+   "category": "资源冲突",
+   "action": "先查询查重，改用唯一编码/名称",
+   "classes": [
+    "cn.restcloud.monitor.businesslog.service.impl.ActionUrlBusinessQueryConfigServiceImpl"
+   ]
+  },
+  {
+   "msg": "不允许删除待补偿的记录",
+   "category": "任务调度",
+   "action": "先查运行实例与补偿记录，再决定重跑/补偿",
+   "classes": [
+    "cn.restcloud.apiflow.process.monitor.controller.ESBCompensateNodeMonitorRest"
+   ]
+  },
+  {
+   "msg": "不再重复产生任务",
+   "category": "任务调度",
+   "action": "先查运行实例与补偿记录，再决定重跑/补偿",
+   "classes": [
+    "cn.restcloud.apiflow.process.task.service.ESBProcessTaskUtil",
+    "cn.restcloud.etl.process.task.service.ETLProcessTaskUtil"
+   ]
+  },
+  {
+   "msg": "不再重复执行command",
+   "category": "任务调度",
+   "action": "先查运行实例与补偿记录，再决定重跑/补偿",
+   "classes": [
+    "cn.restcloud.framework.cluster.service.ClusterCommandUtil"
+   ]
+  },
+  {
+   "msg": "不可重复",
+   "category": "资源冲突",
+   "action": "先查询查重，改用唯一编码/名称",
+   "classes": [
+    "cn.restcloud.connect.gdb.controller.GdbHsDispatcher"
+   ]
+  },
+  {
+   "msg": "不存在,请在组件管理自行定义它!",
+   "category": "资源不存在",
+   "action": "确认 id/名称并刷新列表；平台有时用 500 表示资源不存在",
+   "classes": [
+    "cn.restcloud.apiflow.process.engine.service.ESBProcessEngine"
+   ]
+  },
+  {
+   "msg": "不存在,请手动更新配置文件!",
+   "category": "数据库",
+   "action": "用 rc datasource test 验证连接，再用最小 SQL 复现",
+   "classes": [
+    "cn.restcloud.framework.utils.CommonUtil"
+   ]
+  },
+  {
+   "msg": "不存在:",
+   "category": "资源不存在",
+   "action": "确认 id/名称并刷新列表；平台有时用 500 表示资源不存在",
+   "classes": [
+    "cn.restcloud.ai.chat.util.AiChatApiUtil",
+    "cn.restcloud.apiflow.process.pmodel.controller.ESBProcessModelConfigRest",
+    "cn.restcloud.bpm.process.pmodel.controller.BPMProcessModelConfigRest",
+    "cn.restcloud.etl.process.pmodel.controller.ETLProcessModelConfigRest",
+    "cn.restcloud.framework.permission.impl.AKSKApiPermissionStrategy"
+   ]
+  },
+  {
+   "msg": "不存在!",
+   "category": "资源不存在",
+   "action": "确认 id/名称并刷新列表；平台有时用 500 表示资源不存在",
+   "classes": [
+    "cn.restcloud.apiflow.application.controller.ESBApplicationConfigRest",
+    "cn.restcloud.apiflow.mapping.service.DataMappingEngine",
+    "cn.restcloud.apiflow.process.engine.drive.impl.ESBGateWayNode",
+    "cn.restcloud.apiflow.process.engine.drive.impl.write.impl.ESBJdbcWriteNodeServiceImpl",
+    "cn.restcloud.apiflow.process.engine.service.ESBProcessEngine"
+   ]
+  },
+  {
+   "msg": "不存在.",
+   "category": "资源不存在",
+   "action": "确认 id/名称并刷新列表；平台有时用 500 表示资源不存在",
+   "classes": [
+    "cn.restcloud.etl.process.engine.drive.impl.file.ETLZipFileNode"
+   ]
+  },
+  {
+   "msg": "不存在历史记录里!",
+   "category": "资源不存在",
+   "action": "确认 id/名称并刷新列表；平台有时用 500 表示资源不存在",
+   "classes": [
+    "cn.restcloud.apiflow.process.task.service.impl.ESBProcessTaskQueueServiceImpl"
+   ]
+  },
+  {
+   "msg": "不存在或已经结束!",
+   "category": "资源不存在",
+   "action": "确认 id/名称并刷新列表；平台有时用 500 表示资源不存在",
+   "classes": [
+    "cn.restcloud.apiflow.process.monitor.controller.ESBProcessMonitorRest",
+    "cn.restcloud.etl.process.monitor.controller.ETLProcessMonitorRest"
+   ]
+  },
+  {
+   "msg": "不存在或已经被删除!",
+   "category": "资源不存在",
+   "action": "确认 id/名称并刷新列表；平台有时用 500 表示资源不存在",
+   "classes": [
+    "cn.restcloud.apiflow.process.engine.dao.insmgr.impl.mongo.ESBCompensateNodeInstanceDaoImpl",
+    "cn.restcloud.apiflow.process.engine.dao.insmgr.impl.rdb.ESBCompensateNodeInstanceDaoImpl"
+   ]
+  },
+  {
+   "msg": "不存在或已被删除!",
+   "category": "资源不存在",
+   "action": "确认 id/名称并刷新列表；平台有时用 500 表示资源不存在",
+   "classes": [
+    "cn.restcloud.gateway.security.controller.GatewaySecurityConfigRest"
+   ]
+  },
+  {
+   "msg": "不存在或未发布",
+   "category": "资源不存在",
+   "action": "确认 id/名称并刷新列表；平台有时用 500 表示资源不存在",
+   "classes": [
+    "cn.restcloud.apiportal.controller.ApiPortalApiConfigRest"
+   ]
+  },
+  {
+   "msg": "不存在请手动指定输出字段!",
+   "category": "数据库",
+   "action": "用 rc datasource test 验证连接，再用最小 SQL 复现",
+   "classes": [
+    "cn.restcloud.etl.process.pmodel.controller.ETLElasticWriteNodeNodeRest"
+   ]
+  },
+  {
+   "msg": "不存在运行记录里!",
+   "category": "资源不存在",
+   "action": "确认 id/名称并刷新列表；平台有时用 500 表示资源不存在",
+   "classes": [
+    "cn.restcloud.apiflow.process.task.service.impl.ESBProcessTaskQueueServiceImpl"
+   ]
+  },
+  {
+   "msg": "不支持的条件判断,对像配置错误!",
+   "category": "平台能力",
+   "action": "确认平台版本与端点目录；该能力可能只在更高版本提供",
+   "classes": [
+    "cn.restcloud.apiflow.mapping.service.DataMappingEngine",
+    "cn.restcloud.designer.mapping.service.GatewayDataMappingEngine"
+   ]
+  },
+  {
+   "msg": "不能与上级编码编码重复!",
+   "category": "数据格式",
+   "action": "换一个唯一编码/名称，或先按名称查询并复用既有对象",
+   "classes": [
+    "cn.restcloud.coreservice.org.controller.OrgDepartmentsRest"
+   ]
+  },
+  {
+   "msg": "不能与机构编码重复!",
+   "category": "数据格式",
+   "action": "换一个唯一编码/名称，或先按名称查询并复用既有对象",
+   "classes": [
+    "cn.restcloud.coreservice.org.controller.OrgDepartmentsRest"
+   ]
+  },
+  {
+   "msg": "不能为空",
+   "category": "参数校验",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.ai.chat.controller.AiChatRecordItemRest",
+    "cn.restcloud.ai.chat.controller.AiChatRecordRest",
+    "cn.restcloud.ai.chat.controller.AiChatRest",
+    "cn.restcloud.ai.chat.controller.AiChatSupplierRest",
+    "cn.restcloud.ai.chat.controller.ModelPlatformRest"
+   ]
+  },
+  {
+   "msg": "不能为空!",
+   "category": "参数校验",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.apiflow.process.pmodel.controller.ESBProcessModelConfigRest",
+    "cn.restcloud.bpm.process.pmodel.controller.BPMProcessModelConfigRest",
+    "cn.restcloud.etl.process.engine.controller.ETLExecuteProcessRest",
+    "cn.restcloud.monitor.servicerelate.controller.ServiceRelateRest",
+    "cn.restcloud.mqbus.util.kafka.KafkaConsumerUtils"
+   ]
+  },
+  {
+   "msg": "不能重复运行!",
+   "category": "资源冲突",
+   "action": "先查询查重，改用唯一编码/名称",
+   "classes": [
+    "cn.restcloud.tester.pts.controller.PerformanceTestExecuteRest"
+   ]
+  },
+  {
+   "msg": "个流程审批失败!",
+   "category": "审批",
+   "action": "检查审批流与审批人；确认审批流配置与审批状态",
+   "classes": [
+    "cn.restcloud.apiflow.process.monitor.controller.ESBProcessMonitorRest",
+    "cn.restcloud.etl.process.monitor.controller.ETLProcessMonitorRest"
+   ]
+  },
+  {
+   "msg": "主数据不存在",
+   "category": "数据模型",
+   "action": "刷新元数据/模型缓存，确认模型已发布",
+   "classes": [
+    "cn.restcloud.standardmgr.masterdata.controller.StdMasterDataRest"
+   ]
+  },
+  {
+   "msg": "主键Keyids不能为空!",
+   "category": "数据库",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.apiflow.process.engine.service.db.ESBDataRdbUtil",
+    "cn.restcloud.etl.process.engine.service.db.ETLRdbUtil"
+   ]
+  },
+  {
+   "msg": "主键不能为空",
+   "category": "数据库",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.connect.mongo.dao.impl.GenerateMongoObjectServiceDaoImpl",
+    "cn.restcloud.connect.mongo.util.GenerateMongoObjectServiceUtil",
+    "cn.restcloud.framework.dm.service.GenerateServiceUrl"
+   ]
+  },
+  {
+   "msg": "主键值不能为空",
+   "category": "数据库",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.connect.mongo.dao.impl.GenerateMongoObjectServiceDaoImpl",
+    "cn.restcloud.connect.mongo.util.GenerateMongoObjectServiceUtil",
+    "cn.restcloud.framework.dm.service.GenerateServiceUrl"
+   ]
+  },
+  {
+   "msg": "主键值不能为空,多个请用逗号分隔!",
+   "category": "数据库",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.coreservice.dm.controller.MongoDataModelRest",
+    "cn.restcloud.coreservice.dm.controller.RdbDataModelRest"
+   ]
+  },
+  {
+   "msg": "主键值不能为空!",
+   "category": "数据库",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.coreservice.dm.controller.MongoDataModelRest"
+   ]
+  },
+  {
+   "msg": "云id不存在",
+   "category": "资源不存在",
+   "action": "确认 id/名称并刷新列表；平台有时用 500 表示资源不存在",
+   "classes": [
+    "cn.restcloud.gateway.cloud.utils.GatewayCloudUtil"
+   ]
+  },
+  {
+   "msg": "今日API错误数",
+   "category": "API 资产",
+   "action": "用 rc api list/get 核对服务定义与发布状态",
+   "classes": [
+    "cn.restcloud.operation.monitor.controller.MonitorLargeScreenRest"
+   ]
+  },
+  {
+   "msg": "今日API错误率",
+   "category": "API 资产",
+   "action": "用 rc api list/get 核对服务定义与发布状态",
+   "classes": [
+    "cn.restcloud.operation.monitor.controller.MonitorLargeScreenRest"
+   ]
+  },
+  {
+   "msg": "从调度失败的事务队列中恢复",
+   "category": "任务调度",
+   "action": "先查运行实例与补偿记录，再决定重跑/补偿",
+   "classes": [
+    "cn.restcloud.coreservice.async.controller.DistributedTransactionRest"
+   ]
+  },
+  {
+   "msg": "代码生成错误",
+   "category": "代码/脚本",
+   "action": "检查脚本语法与沙箱限制，用最小脚本复现",
+   "classes": [
+    "cn.restcloud.coreservice.dm.controller.GenerateModelCodeRest"
+   ]
+  },
+  {
+   "msg": "代码编译失败",
+   "category": "代码/脚本",
+   "action": "检查脚本语法与沙箱限制，用最小脚本复现",
+   "classes": [
+    "cn.restcloud.mqbus.util.dynamicmq.DynamicMQUtil"
+   ]
+  },
+  {
+   "msg": "任务实例不存在!",
+   "category": "任务调度",
+   "action": "先查运行实例与补偿记录，再决定重跑/补偿",
+   "classes": [
+    "cn.restcloud.etl.process.engine.service.ETLProcessEngine"
+   ]
+  },
+  {
+   "msg": "传入了空的或者错误的XML:",
+   "category": "数据格式",
+   "action": "用最小 JSON/XML 样例校验格式与编码",
+   "classes": [
+    "cn.restcloud.gateway.dispatcher.forward.RestToWebServiceRest"
+   ]
+  },
+  {
+   "msg": "传入的serviceId不存在!",
+   "category": "资源不存在",
+   "action": "确认 id/名称并刷新列表；平台有时用 500 表示资源不存在",
+   "classes": [
+    "cn.restcloud.designer.apidoc.controller.AppApiDocRest"
+   ]
+  },
+  {
+   "msg": "使用!,禁止在其它未授权范围使用!:::::::::::",
+   "category": "权限",
+   "action": "联系平台管理员检查服务角色与权限项",
+   "classes": [
+    "cn.restcloud.framework.core.context.ServletInitApplication"
+   ]
+  },
+  {
+   "msg": "保存失败",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.apiflow.process.pmodel.controller.ESBProcessModelConfigRest",
+    "cn.restcloud.apiflow.process.pmodel.controller.ESBProcessModelVersionRest",
+    "cn.restcloud.connect.redis.service.impl.RedisDataObjectServiceImpl",
+    "cn.restcloud.coreservice.dm.controller.ModelColumnsConfigRest",
+    "cn.restcloud.coreservice.org.controller.OrgCompanysRest"
+   ]
+  },
+  {
+   "msg": "保存失败,URL不能为空!",
+   "category": "参数校验",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.coreservice.config.controller.ActionUrlConfigRest",
+    "cn.restcloud.coreservice.config.controller.ActionUrlConfigTemplateRest"
+   ]
+  },
+  {
+   "msg": "保存失败,发现相同URL和版本号的API,已存在API的id为(",
+   "category": "API 资产",
+   "action": "换一个唯一编码/名称，或先按名称查询并复用既有对象",
+   "classes": [
+    "cn.restcloud.coreservice.config.controller.ActionUrlConfigRest"
+   ]
+  },
+  {
+   "msg": "保存失败,环境编码出现重复!",
+   "category": "数据格式",
+   "action": "用最小 JSON/XML 样例校验格式与编码",
+   "classes": [
+    "cn.restcloud.appassembly.controller.AppAssemblyEnvironmentController"
+   ]
+  },
+  {
+   "msg": "保存失败!",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.coreservice.setting.controller.PlatformConfigRest"
+   ]
+  },
+  {
+   "msg": "修复WSDL转发时wsdl内容中的BaseUrl错误路径",
+   "category": "API 资产",
+   "action": "用 rc api list/get 核对服务定义与发布状态",
+   "classes": [
+    "cn.restcloud.framework.scsplugs.strategy.response.WebServiceWsdlBaseUrlFixed"
+   ]
+  },
+  {
+   "msg": "修改模板失败!",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.appassembly.controller.LowCodePageModelConfigController"
+   ]
+  },
+  {
+   "msg": "修改错误编码",
+   "category": "数据格式",
+   "action": "用最小 JSON/XML 样例校验格式与编码",
+   "classes": [
+    "cn.restcloud.coreservice.config.controller.ServiceResponseCodeConfigRest"
+   ]
+  },
+  {
+   "msg": "修改错误编码参数",
+   "category": "数据格式",
+   "action": "用最小 JSON/XML 样例校验格式与编码",
+   "classes": [
+    "cn.restcloud.framework.config.dao.impl.mongo.ActionUrlConfigDaoImpl"
+   ]
+  },
+  {
+   "msg": "停止失败",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.etl.datafile.controller.ETLDataFileRest"
+   ]
+  },
+  {
+   "msg": "停止失败:",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.coreservice.async.controller.AsyncServiceRest"
+   ]
+  },
+  {
+   "msg": "停止流程调度服务时失败,请查看控制台日记信息!",
+   "category": "任务调度",
+   "action": "先查运行实例与补偿记录，再决定重跑/补偿",
+   "classes": [
+    "cn.restcloud.apiflow.process.pmodel.controller.ESBProcessModelConfigRest"
+   ]
+  },
+  {
+   "msg": "元数据模型不存在!",
+   "category": "数据模型",
+   "action": "刷新元数据/模型缓存，确认模型已发布",
+   "classes": [
+    "cn.restcloud.etl.metadata.controller.ETLMetaDataMgrRest",
+    "cn.restcloud.etl.process.pmodel.controller.ETLMetaDataReadNodeRest"
+   ]
+  },
+  {
+   "msg": "入参文件不存在服务器中,已忽略 filePath",
+   "category": "文件",
+   "action": "确认文件存在、大小与路径权限；必要时改用 SFTP",
+   "classes": [
+    "cn.restcloud.apiflow.process.engine.drive.impl.ESBApiNode"
+   ]
+  },
+  {
+   "msg": "入参格式错误",
+   "category": "数据格式",
+   "action": "用最小 JSON/XML 样例校验格式与编码",
+   "classes": [
+    "cn.restcloud.connect.mongo.controller.MongoDataObjectRest"
+   ]
+  },
+  {
+   "msg": "公钥格式错误错误:",
+   "category": "数据格式",
+   "action": "用最小 JSON/XML 样例校验格式与编码",
+   "classes": [
+    "cn.restcloud.connect.gdb.util.RsaUtils"
+   ]
+  },
+  {
+   "msg": "公钥解析错误:",
+   "category": "数据格式",
+   "action": "用最小 JSON/XML 样例校验格式与编码",
+   "classes": [
+    "cn.restcloud.connect.gdb.util.RsaUtils"
+   ]
+  },
+  {
+   "msg": "关闭监听失败!",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.connect.sap.controller.SapRFCMonitorConfigRest"
+   ]
+  },
+  {
+   "msg": "准备执行kettle job:执行失败",
+   "category": "任务调度",
+   "action": "先查运行实例与补偿记录，再决定重跑/补偿",
+   "classes": [
+    "cn.restcloud.etl.process.engine.service.db.ETLKettleNodeUtil"
+   ]
+  },
+  {
+   "msg": "函数名或函数描述不能为空",
+   "category": "参数校验",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.connect.sap.controller.ConnectSapRFCRest"
+   ]
+  },
+  {
+   "msg": "分区标识不能为空",
+   "category": "参数校验",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.mqbus.util.rocketmq.util.RocketMqUtil"
+   ]
+  },
+  {
+   "msg": "分类Id已存在",
+   "category": "资源冲突",
+   "action": "换一个唯一编码/名称，或先按名称查询并复用既有对象",
+   "classes": [
+    "cn.restcloud.gateway.config.controller.GatewayAppConfigRest"
+   ]
+  },
+  {
+   "msg": "分类不能为空",
+   "category": "参数校验",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.connect.sap.controller.ConnectSapRFCRest"
+   ]
+  },
+  {
+   "msg": "分类名称已存在",
+   "category": "资源冲突",
+   "action": "换一个唯一编码/名称，或先按名称查询并复用既有对象",
+   "classes": [
+    "cn.restcloud.gateway.config.controller.GatewayAppConfigRest"
+   ]
+  },
+  {
+   "msg": "分类还有组件删除失败!",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.apiflow.module.dao.impl.ESBProcessModuleCategoryDaoImpl"
+   ]
+  },
+  {
+   "msg": "分页传输数据时目标节点返回了断言失败的结果,终止分页传输!",
+   "category": "流程图",
+   "action": "用 rc flow validate 定位节点/连线问题，修正后再保存",
+   "classes": [
+    "cn.restcloud.apiflow.process.engine.drive.impl.read.ESBTableReadNode",
+    "cn.restcloud.etl.process.engine.drive.impl.file.ETLReadBigTxtFileNode",
+    "cn.restcloud.etl.process.engine.drive.impl.read.ETLElasticHttpClientReadNode",
+    "cn.restcloud.etl.process.engine.drive.impl.read.ETLMongoDbReadNode",
+    "cn.restcloud.etl.process.engine.drive.impl.read.ETLSqlReadNode"
+   ]
+  },
+  {
+   "msg": "分页列出所有错误数据",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.etl.dataquality.datacontent.controller.ETLDataQualityContentErrorDataRest"
+   ]
+  },
+  {
+   "msg": "分页列出流程的错误数据统计信息",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.etl.dataquality.translog.controller.ETLProcessErrorDataReportRest"
+   ]
+  },
+  {
+   "msg": "分页加载数据失败:",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.framework.core.context.LoadPlatformDataFromService"
+   ]
+  },
+  {
+   "msg": "列出所有重复或者失效的API",
+   "category": "API 资产",
+   "action": "用 rc api list/get 核对服务定义与发布状态",
+   "classes": [
+    "cn.restcloud.monitor.InvalidApiParamsReportRest"
+   ]
+  },
+  {
+   "msg": "列表字段字段ID不允许为空",
+   "category": "数据库",
+   "action": "用 rc datasource test 验证连接，再用最小 SQL 复现",
+   "classes": [
+    "cn.restcloud.monitor.businesslog.service.impl.ActionUrlBusinessQueryConfigServiceImpl"
+   ]
+  },
+  {
+   "msg": "创建失败",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.apiflow.process.engine.service.db.ESBRdbMetaDataUtil",
+    "cn.restcloud.etl.process.engine.drive.impl.write.impl.ETLDorisLoadWriteNode",
+    "cn.restcloud.etl.process.engine.service.db.ETLRdbMetaDataUtil"
+   ]
+  },
+  {
+   "msg": "创建失败,流程退出执行!",
+   "category": "任务调度",
+   "action": "先查运行实例与补偿记录，再决定重跑/补偿",
+   "classes": [
+    "cn.restcloud.apiflow.process.engine.drive.impl.write.impl.ESBJdbcWriteNodeServiceImpl",
+    "cn.restcloud.etl.process.engine.drive.impl.write.ETLGreenplumCopyWriteNode",
+    "cn.restcloud.etl.process.engine.drive.impl.write.impl.ETLJdbcWriteNodeServiceImpl"
+   ]
+  },
+  {
+   "msg": "初始化失败",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.apiflow.process.engine.service.ESBProcessEngine"
+   ]
+  },
+  {
+   "msg": "初始化熔断线程策略失败:",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.gateway.hystrix.HystrixMonitor"
+   ]
+  },
+  {
+   "msg": "删除不存在的API时出错:",
+   "category": "API 资产",
+   "action": "用 rc api list/get 核对服务定义与发布状态",
+   "classes": [
+    "cn.restcloud.framework.config.dao.impl.mongo.ActionUrlConfigDaoImpl"
+   ]
+  },
+  {
+   "msg": "删除失败",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.apiflow.application.controller.ESBApplicationConfigRest",
+    "cn.restcloud.apiflow.module.controller.ESBProcessModuleCategoryRest",
+    "cn.restcloud.apiflow.process.pmodel.controller.ESBProcessModelVersionRest",
+    "cn.restcloud.apiportal.controller.ApiPortalApplicationRest",
+    "cn.restcloud.apiportal.controller.ApiPortalCategoryRest"
+   ]
+  },
+  {
+   "msg": "删除失败,标签:",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.standardmgr.apitags.controller.StdErrorCodeRest"
+   ]
+  },
+  {
+   "msg": "删除失败数量:",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.etl.process.engine.drive.impl.write.ETLMongoDbWriteNode"
+   ]
+  },
+  {
+   "msg": "删除条件不能为空,请重新设置API的条件!",
+   "category": "API 资产",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.coreservice.dm.controller.RdbDataModelRest"
+   ]
+  },
+  {
+   "msg": "加密失败",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.Integration.weixin.wxjh.AesException"
+   ]
+  },
+  {
+   "msg": "加密生成签名失败",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.Integration.weixin.wxjh.AesException"
+   ]
+  },
+  {
+   "msg": "加密错误",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.Integration.weixin.wxjh.AesException"
+   ]
+  },
+  {
+   "msg": "加载失败:",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.util.ScanPackage"
+   ]
+  },
+  {
+   "msg": "升级失败:",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.version.VersionUpgradeUtil"
+   ]
+  },
+  {
+   "msg": "参数不能为空",
+   "category": "参数校验",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.framework.common.dao.impl.mongo.DataChangeLogDaoImpl"
+   ]
+  },
+  {
+   "msg": "参数不能为空,多个id用逗号分隔!",
+   "category": "参数校验",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.designer.appbasedata.controller.AppBaseDataRest"
+   ]
+  },
+  {
+   "msg": "参数设置错误,collection是必须参数",
+   "category": "参数校验",
+   "action": "核对必填字段、类型与长度；参考命令帮助",
+   "classes": [
+    "cn.restcloud.etl.dataquality.datacontent.dao.impl.ETLDataQualityContentErrorDataImpl"
+   ]
+  },
+  {
+   "msg": "参数设置错误,conn,tableName,orderBy是必须参数",
+   "category": "参数校验",
+   "action": "核对必填字段、类型与长度；参考命令帮助",
+   "classes": [
+    "cn.restcloud.etl.process.monitor.dao.impl.rdb.ETLProcessMonitorDaoImpl"
+   ]
+  },
+  {
+   "msg": "参数输入错误!",
+   "category": "参数校验",
+   "action": "核对必填字段、类型与长度；参考命令帮助",
+   "classes": [
+    "cn.restcloud.apiportal.controller.ApiPortalExportOpenApiRest"
+   ]
+  },
+  {
+   "msg": "参数错误",
+   "category": "参数校验",
+   "action": "核对必填字段、类型与长度；参考命令帮助",
+   "classes": [
+    "cn.restcloud.connect.mongo.controller.MongoDataObjectRest"
+   ]
+  },
+  {
+   "msg": "参数错误,1表示确认通过,0表示拒绝!",
+   "category": "数据库",
+   "action": "用 rc datasource test 验证连接，再用最小 SQL 复现",
+   "classes": [
+    "cn.restcloud.apiflow.process.engine.controller.ESBApproveProcessRest",
+    "cn.restcloud.apiflow.process.monitor.controller.ESBProcessMonitorRest",
+    "cn.restcloud.etl.process.engine.controller.ETLApproveProcessRest",
+    "cn.restcloud.etl.process.monitor.controller.ETLProcessMonitorRest"
+   ]
+  },
+  {
+   "msg": "发布失败",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.connect.redis.service.impl.GenerateRedisLinkerApiServiceImpl",
+    "cn.restcloud.connect.redis.service.impl.RedisDataObjectServiceImpl"
+   ]
+  },
+  {
+   "msg": "发布失败!",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.appassembly.controller.AppAssemblyEnvironmentController"
+   ]
+  },
+  {
+   "msg": "发布的API静态质量评分太低,发布失败!",
+   "category": "API 资产",
+   "action": "用 rc api list/get 核对服务定义与发布状态",
+   "classes": [
+    "cn.restcloud.apiportal.service.impl.ApiPortalCallApplyServiceImpl",
+    "cn.restcloud.apiportal.service.impl.ApiPortalPublishServiceImpl"
+   ]
+  },
+  {
+   "msg": "发生错误",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.gateway.websocket.WebsocketExecuter"
+   ]
+  },
+  {
+   "msg": "发送失败",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.apiflow.process.monitor.controller.ESBProcessMonitorRest"
+   ]
+  },
+  {
+   "msg": "发送失败,节点处于补偿运行状态!",
+   "category": "流程图",
+   "action": "用 rc flow validate 定位节点/连线问题，修正后再保存",
+   "classes": [
+    "cn.restcloud.apiflow.process.engine.drive.impl.ESBMqttNode"
+   ]
+  },
+  {
+   "msg": "发送消息失败!",
+   "category": "消息",
+   "action": "检查 topic/group/broker 与消费位点",
+   "classes": [
+    "cn.restcloud.bpm.process.engine.drive.impl.SendWeiXinNode"
+   ]
+  },
+  {
+   "msg": "发送邮件失败!",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.bpm.process.engine.drive.impl.SendEmailMessageNode"
+   ]
+  },
+  {
+   "msg": "发送顺序MQ消息失败",
+   "category": "消息",
+   "action": "检查 topic/group/broker 与消费位点",
+   "classes": [
+    "cn.restcloud.mqbus.util.rocketmq.service.RocketMqSendService"
+   ]
+  },
+  {
+   "msg": "取消失败",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.apiflow.process.favorite.service.impl.EsbProcessNodeFavoriteServiceImpl",
+    "cn.restcloud.apiflow.process.monitor.controller.ESBCompensateNodeMonitorRest",
+    "cn.restcloud.apiflow.process.monitor.controller.ESBProcessMonitorRest"
+   ]
+  },
+  {
+   "msg": "取消失败,必须要有一个默认的平台",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.ai.chat.service.impl.AiChatModelPlatformServiceImpl"
+   ]
+  },
+  {
+   "msg": "变更记录插入失败:",
+   "category": "数据库",
+   "action": "用 rc datasource test 验证连接，再用最小 SQL 复现",
+   "classes": [
+    "cn.restcloud.framework.common.dao.impl.mongo.DataChangeLogDaoImpl"
+   ]
+  },
+  {
+   "msg": "可能不存在!",
+   "category": "资源不存在",
+   "action": "确认 id/名称并刷新列表；平台有时用 500 表示资源不存在",
+   "classes": [
+    "cn.restcloud.etl.process.pmodel.controller.ETLElasticWriteNodeNodeRest"
+   ]
+  },
+  {
+   "msg": "同步-清除数据连接缓存失败:",
+   "category": "缓存",
+   "action": "检查缓存连接与 key，清理后重试",
+   "classes": [
+    "cn.restcloud.connect.sap.util.SAPRFCOfflineUtil$3"
+   ]
+  },
+  {
+   "msg": "同步-清除组织缓存失败",
+   "category": "缓存",
+   "action": "检查缓存连接与 key，清理后重试",
+   "classes": [
+    "cn.restcloud.connect.sap.util.SAPRFCOfflineUtil"
+   ]
+  },
+  {
+   "msg": "同步-清除缓存失败P_AppProperties:",
+   "category": "缓存",
+   "action": "检查缓存连接与 key，清理后重试",
+   "classes": [
+    "cn.restcloud.connect.sap.util.SAPRFCOfflineUtil$4"
+   ]
+  },
+  {
+   "msg": "同步-清除缓存失败P_GatewayDataMappingCategory:",
+   "category": "缓存",
+   "action": "检查缓存连接与 key，清理后重试",
+   "classes": [
+    "cn.restcloud.connect.sap.util.SAPRFCOfflineUtil$8"
+   ]
+  },
+  {
+   "msg": "同步-清除缓存失败P_GatewayDataMappingConfig:",
+   "category": "缓存",
+   "action": "检查缓存连接与 key，清理后重试",
+   "classes": [
+    "cn.restcloud.connect.sap.util.SAPRFCOfflineUtil$9"
+   ]
+  },
+  {
+   "msg": "同步-清除缓存失败P_PermissionMapResource",
+   "category": "缓存",
+   "action": "检查缓存连接与 key，清理后重试",
+   "classes": [
+    "cn.restcloud.connect.sap.util.SAPRFCOfflineUtil$1"
+   ]
+  },
+  {
+   "msg": "同步-清除缓存失败P_PlatformConfig:",
+   "category": "缓存",
+   "action": "检查缓存连接与 key，清理后重试",
+   "classes": [
+    "cn.restcloud.connect.sap.util.SAPRFCOfflineUtil$5"
+   ]
+  },
+  {
+   "msg": "同步-清除缓存失败P_SAPConnectRuleEntry:",
+   "category": "连接器",
+   "action": "检查连接器配置、OAuth 回调与网络可达性",
+   "classes": [
+    "cn.restcloud.connect.sap.util.SAPRFCOfflineUtil$7"
+   ]
+  },
+  {
+   "msg": "同步发送普通MQ消息失败",
+   "category": "消息",
+   "action": "检查 topic/group/broker 与消费位点",
+   "classes": [
+    "cn.restcloud.mqbus.util.rocketmq.service.RocketMqSendService"
+   ]
+  },
+  {
+   "msg": "同步失败:",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.gateway.cloud.service.impl.SchedulerCloudConfigSyncJob"
+   ]
+  },
+  {
+   "msg": "同步接口调用失败:",
+   "category": "API 资产",
+   "action": "用 rc api list/get 核对服务定义与发布状态",
+   "classes": [
+    "cn.restcloud.gateway.cloud.service.impl.SchedulerCloudConfigSyncJob"
+   ]
+  },
+  {
+   "msg": "名称不能为空",
+   "category": "参数校验",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.designer.apidoc.controller.ImportApiFromExcelRest"
+   ]
+  },
+  {
+   "msg": "后端API的URL不能为空",
+   "category": "API 资产",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.designer.apidoc.controller.ImportApiFromExcelRest"
+   ]
+  },
+  {
+   "msg": "启动失败",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.etl.datafile.controller.ETLDataFileRest"
+   ]
+  },
+  {
+   "msg": "启动失败,因为流程已经在运行中了!",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.apiflow.process.pmodel.controller.ESBProcessModelConfigRest",
+    "cn.restcloud.etl.process.pmodel.controller.ETLProcessModelConfigRest"
+   ]
+  },
+  {
+   "msg": "启动失败,因为规则已经在运行中了!",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.apiflow.status.controller.ESBProcessStatusRuleRest",
+    "cn.restcloud.etl.dataquality.datachange.controller.ETLDataQualityChangeRuleRest",
+    "cn.restcloud.etl.dataquality.datacontent.controller.ETLDataQualityContentRuleRest",
+    "cn.restcloud.etl.dataquality.datacount.controller.ETLDataQualityCountRuleRest",
+    "cn.restcloud.etl.dataquality.metachange.controller.ETLQualityMetaChangeRuleRest"
+   ]
+  },
+  {
+   "msg": "启动失败,定时表达式不能为空!",
+   "category": "数据库",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.apiflow.process.pmodel.controller.ESBProcessModelConfigRest",
+    "cn.restcloud.apiflow.status.controller.ESBProcessStatusRuleRest",
+    "cn.restcloud.etl.dataquality.datachange.controller.ETLDataQualityChangeRuleRest",
+    "cn.restcloud.etl.dataquality.datacontent.controller.ETLDataQualityContentRuleRest",
+    "cn.restcloud.etl.dataquality.datacount.controller.ETLDataQualityCountRuleRest"
+   ]
+  },
+  {
+   "msg": "启动失败,所属应用不在本服务器运行范围中!",
+   "category": "API 资产",
+   "action": "用 rc api list/get 核对服务定义与发布状态",
+   "classes": [
+    "cn.restcloud.apiflow.status.controller.ESBProcessStatusRuleRest",
+    "cn.restcloud.etl.dataquality.datachange.controller.ETLDataQualityChangeRuleRest",
+    "cn.restcloud.etl.dataquality.datacontent.controller.ETLDataQualityContentRuleRest",
+    "cn.restcloud.etl.dataquality.datacount.controller.ETLDataQualityCountRuleRest",
+    "cn.restcloud.etl.dataquality.metachange.controller.ETLQualityMetaChangeRuleRest"
+   ]
+  },
+  {
+   "msg": "启动失败,没有指定调度策略!",
+   "category": "任务调度",
+   "action": "先查运行实例与补偿记录，再决定重跑/补偿",
+   "classes": [
+    "cn.restcloud.apiflow.status.controller.ESBProcessStatusRuleRest",
+    "cn.restcloud.etl.dataquality.datachange.controller.ETLDataQualityChangeRuleRest",
+    "cn.restcloud.etl.dataquality.datacontent.controller.ETLDataQualityContentRuleRest",
+    "cn.restcloud.etl.dataquality.datacount.controller.ETLDataQualityCountRuleRest",
+    "cn.restcloud.etl.dataquality.metachange.controller.ETLQualityMetaChangeRuleRest"
+   ]
+  },
+  {
+   "msg": "启动失败,流程所属应用不在本服务器运行范围中!",
+   "category": "API 资产",
+   "action": "用 rc api list/get 核对服务定义与发布状态",
+   "classes": [
+    "cn.restcloud.apiflow.process.pmodel.controller.ESBProcessModelConfigRest",
+    "cn.restcloud.etl.process.pmodel.controller.ETLProcessModelConfigRest"
+   ]
+  },
+  {
+   "msg": "启动失败,流程没有指定调度策略!",
+   "category": "任务调度",
+   "action": "先查运行实例与补偿记录，再决定重跑/补偿",
+   "classes": [
+    "cn.restcloud.apiflow.process.pmodel.controller.ESBProcessModelConfigRest",
+    "cn.restcloud.etl.process.pmodel.controller.ETLProcessModelConfigRest"
+   ]
+  },
+  {
+   "msg": "启动失败,流程绑定的定时调度策略状态为未启用!",
+   "category": "调度",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.apiflow.process.pmodel.controller.ESBProcessModelConfigRest",
+    "cn.restcloud.etl.process.pmodel.controller.ETLProcessModelConfigRest"
+   ]
+  },
+  {
+   "msg": "启动失败,流程被禁用或者不是自动调度模式!",
+   "category": "任务调度",
+   "action": "先查运行实例与补偿记录，再决定重跑/补偿",
+   "classes": [
+    "cn.restcloud.apiflow.process.pmodel.controller.ESBProcessModelConfigRest",
+    "cn.restcloud.etl.process.pmodel.controller.ETLProcessModelConfigRest"
+   ]
+  },
+  {
+   "msg": "启动失败,绑定的定时调度策略状态为未启用!",
+   "category": "调度",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.apiflow.status.controller.ESBProcessStatusRuleRest",
+    "cn.restcloud.etl.dataquality.datachange.controller.ETLDataQualityChangeRuleRest",
+    "cn.restcloud.etl.dataquality.datacontent.controller.ETLDataQualityContentRuleRest",
+    "cn.restcloud.etl.dataquality.datacount.controller.ETLDataQualityCountRuleRest",
+    "cn.restcloud.etl.dataquality.metachange.controller.ETLQualityMetaChangeRuleRest"
+   ]
+  },
+  {
+   "msg": "启动失败,被禁用或者不是自动调度模式!",
+   "category": "任务调度",
+   "action": "先查运行实例与补偿记录，再决定重跑/补偿",
+   "classes": [
+    "cn.restcloud.apiflow.status.controller.ESBProcessStatusRuleRest",
+    "cn.restcloud.etl.dataquality.datachange.controller.ETLDataQualityChangeRuleRest",
+    "cn.restcloud.etl.dataquality.datacontent.controller.ETLDataQualityContentRuleRest",
+    "cn.restcloud.etl.dataquality.datacount.controller.ETLDataQualityCountRuleRest",
+    "cn.restcloud.etl.dataquality.metachange.controller.ETLQualityMetaChangeRuleRest"
+   ]
+  },
+  {
+   "msg": "启动失败:",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.coreservice.async.controller.AsyncServiceRest"
+   ]
+  },
+  {
+   "msg": "启动监听失败!",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.connect.sap.controller.SapRFCMonitorConfigRest"
+   ]
+  },
+  {
+   "msg": "和Method已经存在,不能重复发布!",
+   "category": "资源冲突",
+   "action": "先查询查重，改用唯一编码/名称",
+   "classes": [
+    "cn.restcloud.proxy.controller.TcpipApiRecordLogEntryRest",
+    "cn.restcloud.proxy.controller.TcpipConnectLogEntryRest"
+   ]
+  },
+  {
+   "msg": "响应流转换失败",
+   "category": "API 资产",
+   "action": "用 rc api list/get 核对服务定义与发布状态",
+   "classes": [
+    "cn.restcloud.gateway.file.HttpFilePersistenceUtils$ResponseEntryData"
+   ]
+  },
+  {
+   "msg": "响应超时",
+   "category": "API 资产",
+   "action": "检查目标可达性与超时配置；必要时增大 timeout 或改为异步",
+   "classes": [
+    "cn.restcloud.gateway.file.HttpFileAPIClient"
+   ]
+  },
+  {
+   "msg": "响应超时预警",
+   "category": "API 资产",
+   "action": "检查目标可达性与超时配置；必要时增大 timeout 或改为异步",
+   "classes": [
+    "cn.restcloud.gateway.security.controller.GatewaySecurityConfigRest"
+   ]
+  },
+  {
+   "msg": "因为AutoScanPackageName配置为空值,扫描失败!",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.framework.core.scan.ScanBeanConfig"
+   ]
+  },
+  {
+   "msg": "在5分钟内输入的错误密码超过5次!",
+   "category": "认证",
+   "action": "重新登录或刷新 token；检查账号状态与目标环境",
+   "classes": [
+    "cn.restcloud.framework.login.service.LoginValidationService"
+   ]
+  },
+  {
+   "msg": "在5分钟内输入的错误密码达到5次,请稍后再试!",
+   "category": "认证",
+   "action": "重新登录或刷新 token；检查账号状态与目标环境",
+   "classes": [
+    "cn.restcloud.framework.login.service.LoginValidationService"
+   ]
+  },
+  {
+   "msg": "在API模板配置中存在关联,删除失败!",
+   "category": "API 资产",
+   "action": "用 rc api list/get 核对服务定义与发布状态",
+   "classes": [
+    "cn.restcloud.standardmgr.businessarea.controller.BusinessAreaConfigRest"
+   ]
+  },
+  {
+   "msg": "在API注册配置中存在关联,删除失败!",
+   "category": "API 资产",
+   "action": "用 rc api list/get 核对服务定义与发布状态",
+   "classes": [
+    "cn.restcloud.standardmgr.businessarea.controller.BusinessAreaConfigRest"
+   ]
+  },
+  {
+   "msg": "在指这下条件下不存在",
+   "category": "资源不存在",
+   "action": "确认 id/名称并刷新列表；平台有时用 500 表示资源不存在",
+   "classes": [
+    "cn.restcloud.discovery.config.controller.DisConfigCenterServerRest"
+   ]
+  },
+  {
+   "msg": "备份失败",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.designer.base.controller.UpdateSystemRest"
+   ]
+  },
+  {
+   "msg": "复制失败",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.connect.redis.service.impl.RedisDataObjectServiceImpl"
+   ]
+  },
+  {
+   "msg": "多行数据合并为一行并去除重复字段",
+   "category": "数据库",
+   "action": "用 rc datasource test 验证连接，再用最小 SQL 复现",
+   "classes": [
+    "cn.restcloud.etl.menu.controller.ETLProcessNodeMenuRest"
+   ]
+  },
+  {
+   "msg": "失效失败",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.apiportal.controller.AppKeyConfigRest"
+   ]
+  },
+  {
+   "msg": "失败传输数据量:",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.etl.process.pmodel.controller.ETLProcessModelConfigRest"
+   ]
+  },
+  {
+   "msg": "失败原因:",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.connect.sap.util.SapRFCWaringUtil",
+    "cn.restcloud.discovery.config.service.impl.ServiceCacheUtil",
+    "cn.restcloud.framework.cluster.service.ClusterCommandUtil",
+    "cn.restcloud.framework.common.dao.impl.mongo.DataChangeLogDaoImpl",
+    "cn.restcloud.mqbus.util.MqWaringUtil"
+   ]
+  },
+  {
+   "msg": "失败数为:",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.connect.sap.util.SAPMonitorService",
+    "cn.restcloud.mqbus.service.impl.MqConsumerService"
+   ]
+  },
+  {
+   "msg": "失败数量:",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.etl.process.engine.drive.impl.write.ETLGreenplumCopyWriteNode",
+    "cn.restcloud.etl.process.engine.drive.impl.write.ETLJdbcWriteNode",
+    "cn.restcloud.etl.process.engine.drive.impl.write.ETLMiddleDbWriteNode",
+    "cn.restcloud.etl.process.engine.drive.impl.write.ETLMongoDbWriteNode",
+    "cn.restcloud.etl.process.engine.drive.impl.write.ETLTableBatchWriteNode"
+   ]
+  },
+  {
+   "msg": "失败输出示例",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.coreservice.config.controller.ActionUrlConfigRest"
+   ]
+  },
+  {
+   "msg": "失败返回示例",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.apiportal.controller.ApiPortalExportOpenApiRest"
+   ]
+  },
+  {
+   "msg": "子流程id不能为空",
+   "category": "流程图",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.bpm.process.engine.drive.impl.SubProcessNode"
+   ]
+  },
+  {
+   "msg": "字段值不能为空",
+   "category": "数据库",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.appassembly.controller.ApplicationController",
+    "cn.restcloud.coreservice.config.controller.ApplicationConfigRest",
+    "cn.restcloud.coreservice.config.controller.BeanConfigRest",
+    "cn.restcloud.framework.view.controller.ViewTemplateRest"
+   ]
+  },
+  {
+   "msg": "字段内容为空,导致API解析失败!",
+   "category": "数据库",
+   "action": "用 rc datasource test 验证连接，再用最小 SQL 复现",
+   "classes": [
+    "cn.restcloud.designer.apidoc.controller.OpenApiRest"
+   ]
+  },
+  {
+   "msg": "字段分析失败!",
+   "category": "数据库",
+   "action": "用 rc datasource test 验证连接，再用最小 SQL 复现",
+   "classes": [
+    "cn.restcloud.etl.process.pmodel.controller.ETLDBFReadNodeRest",
+    "cn.restcloud.etl.process.pmodel.controller.ETLExcelReadNodeRest"
+   ]
+  },
+  {
+   "msg": "字段名不能为空",
+   "category": "数据库",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.appassembly.controller.ApplicationController",
+    "cn.restcloud.coreservice.config.controller.ApplicationConfigRest",
+    "cn.restcloud.coreservice.config.controller.BeanConfigRest",
+    "cn.restcloud.framework.view.controller.ViewTemplateRest"
+   ]
+  },
+  {
+   "msg": "字段类型不存在",
+   "category": "数据库",
+   "action": "用 rc datasource test 验证连接，再用最小 SQL 复现",
+   "classes": [
+    "cn.restcloud.gateway.waring.util.BusinessWarnCodeUtil"
+   ]
+  },
+  {
+   "msg": "字段配置中的字段不能为空!",
+   "category": "数据库",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.apiflow.process.pmodel.controller.ESBTableReadNodeRest",
+    "cn.restcloud.etl.process.pmodel.controller.ETLMetaDataReadNodeRest",
+    "cn.restcloud.etl.process.pmodel.controller.ETLSqlReadNodeRest"
+   ]
+  },
+  {
+   "msg": "存储过程不存在!",
+   "category": "资源不存在",
+   "action": "确认 id/名称并刷新列表；平台有时用 500 表示资源不存在",
+   "classes": [
+    "cn.restcloud.designer.procedure.controller.ProcedureConfigEntryRest"
+   ]
+  },
+  {
+   "msg": "定时任务初始化失败!",
+   "category": "调度",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.framework.scheduler.service.SchedulerContext"
+   ]
+  },
+  {
+   "msg": "定时任务调度器为空,定时任务启动失败!",
+   "category": "调度",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.framework.scheduler.service.SchedulerContext"
+   ]
+  },
+  {
+   "msg": "定时表达式语法有误",
+   "category": "数据库",
+   "action": "用 rc datasource test 验证连接，再用最小 SQL 复现",
+   "classes": [
+    "cn.restcloud.apiflow.process.pmodel.controller.ESBProcessModelConfigRest",
+    "cn.restcloud.coreservice.scheduler.controller.SchedulerStrategyRest",
+    "cn.restcloud.etl.process.pmodel.controller.ETLProcessModelConfigRest"
+   ]
+  },
+  {
+   "msg": "定时表达式语法错误",
+   "category": "数据库",
+   "action": "用 rc datasource test 验证连接，再用最小 SQL 复现",
+   "classes": [
+    "cn.restcloud.framework.notification.service.impl.AlarmLevelConfigServiceImpl"
+   ]
+  },
+  {
+   "msg": "实例模型不存在!",
+   "category": "任务调度",
+   "action": "先查运行实例与补偿记录，再决定重跑/补偿",
+   "classes": [
+    "cn.restcloud.coreservice.dm.controller.ModelColumnsConfigRest"
+   ]
+  },
+  {
+   "msg": "审批流程申请异常,API发布失败!",
+   "category": "API 资产",
+   "action": "用 rc api list/get 核对服务定义与发布状态",
+   "classes": [
+    "cn.restcloud.apiportal.service.impl.ApiPortalPublishServiceImpl"
+   ]
+  },
+  {
+   "msg": "审核数据不存在",
+   "category": "资源不存在",
+   "action": "确认 id/名称并刷新列表；平台有时用 500 表示资源不存在",
+   "classes": [
+    "cn.restcloud.designer.version.controller.ReceiveDesignerDataRest"
+   ]
+  },
+  {
+   "msg": "密码不能为空",
+   "category": "认证",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.apimarket.controller.MarketUserLoginRest"
+   ]
+  },
+  {
+   "msg": "密码不能为空!",
+   "category": "认证",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.coreservice.login.controller.LoginRest"
+   ]
+  },
+  {
+   "msg": "密码编码失败",
+   "category": "认证",
+   "action": "重新登录或刷新 token；检查账号状态与目标环境",
+   "classes": [
+    "cn.restcloud.discovery.config.service.impl.NacosServiceClient"
+   ]
+  },
+  {
+   "msg": "密钥生成失败",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.apiportal.controller.AppKeyConfigRest"
+   ]
+  },
+  {
+   "msg": "密钥获取失败",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.apiportal.controller.AppKeyConfigRest"
+   ]
+  },
+  {
+   "msg": "对象不存在(",
+   "category": "资源不存在",
+   "action": "确认 id/名称并刷新列表；平台有时用 500 表示资源不存在",
+   "classes": [
+    "cn.restcloud.connect.redis.util.RedisObjectConfigCacheUtil"
+   ]
+  },
+  {
+   "msg": "对重复数据记录进行去重或者合并运算",
+   "category": "资源冲突",
+   "action": "先查询查重，改用唯一编码/名称",
+   "classes": [
+    "cn.restcloud.etl.menu.controller.ETLProcessNodeMenuRest"
+   ]
+  },
+  {
+   "msg": "导入失败",
+   "category": "文件",
+   "action": "确认文件存在、大小与路径权限；必要时改用 SFTP",
+   "classes": [
+    "cn.restcloud.designer.apidoc.controller.ImportApiFromExcelRest"
+   ]
+  },
+  {
+   "msg": "导入失败,API(",
+   "category": "文件",
+   "action": "确认文件存在、大小与路径权限；必要时改用 SFTP",
+   "classes": [
+    "cn.restcloud.designer.apidoc.controller.ImportApiFromExcelRest"
+   ]
+  },
+  {
+   "msg": "导入失败,id已存在跳过不处理",
+   "category": "文件",
+   "action": "换一个唯一编码/名称，或先按名称查询并复用既有对象",
+   "classes": [
+    "cn.restcloud.designer.apidoc.controller.ImportApiFromExcelRest"
+   ]
+  },
+  {
+   "msg": "导入失败,发现相同URL和版本号的API,已存在API的id为(",
+   "category": "文件",
+   "action": "换一个唯一编码/名称，或先按名称查询并复用既有对象",
+   "classes": [
+    "cn.restcloud.designer.apidoc.controller.ImportApiFromExcelRest"
+   ]
+  },
+  {
+   "msg": "导入失败:数据文件(",
+   "category": "文件",
+   "action": "确认文件存在、大小与路径权限；必要时改用 SFTP",
+   "classes": [
+    "cn.restcloud.coreservice.dm.controller.ModelConfigRest"
+   ]
+  },
+  {
+   "msg": "导出失败",
+   "category": "文件",
+   "action": "确认文件存在、大小与路径权限；必要时改用 SFTP",
+   "classes": [
+    "cn.restcloud.apiportal.controller.ApiPortalExportToWordRest",
+    "cn.restcloud.coreservice.config.controller.ActionUrlConfigRest",
+    "cn.restcloud.framework.notification.service.impl.AlarmLevelConfigServiceImpl",
+    "cn.restcloud.framework.notification.service.impl.NotificationConfigServiceImpl",
+    "cn.restcloud.monitor.businesslog.service.impl.ActionUrlBusinessQueryConfigServiceImpl"
+   ]
+  },
+  {
+   "msg": "导出失败,应用id不存在!",
+   "category": "文件",
+   "action": "确认文件存在、大小与路径权限；必要时改用 SFTP",
+   "classes": [
+    "cn.restcloud.designer.install.service.InitSystemDataUtil"
+   ]
+  },
+  {
+   "msg": "导出错误码配置",
+   "category": "文件",
+   "action": "确认文件存在、大小与路径权限；必要时改用 SFTP",
+   "classes": [
+    "cn.restcloud.standardmgr.errorcode.controller.StdErrorCodeRest"
+   ]
+  },
+  {
+   "msg": "已删除备份表:",
+   "category": "数据库",
+   "action": "用 rc datasource test 验证连接，再用最小 SQL 复现",
+   "classes": [
+    "cn.restcloud.version.VersionUpgradeUtil"
+   ]
+  },
+  {
+   "msg": "已删除数据变更历史记录:",
+   "category": "资源不存在",
+   "action": "确认 id/名称并刷新列表；平台有时用 500 表示资源不存在",
+   "classes": [
+    "cn.restcloud.gateway.cloud.service.impl.ConfigDataServiceImpl"
+   ]
+  },
+  {
+   "msg": "已删除过期请求上下文件:",
+   "category": "文件",
+   "action": "确认文件存在、大小与路径权限；必要时改用 SFTP",
+   "classes": [
+    "cn.restcloud.gateway.file.HttpFileContextRecycler"
+   ]
+  },
+  {
+   "msg": "已删除过期请求缓存:",
+   "category": "API 资产",
+   "action": "用 rc api list/get 核对服务定义与发布状态",
+   "classes": [
+    "cn.restcloud.gateway.file.HttpRequestTheadCache"
+   ]
+  },
+  {
+   "msg": "已存在,不能添加重复配置",
+   "category": "资源冲突",
+   "action": "换一个唯一编码/名称，或先按名称查询并复用既有对象",
+   "classes": [
+    "cn.restcloud.connect.sap.controller.SapRFCMonitorConfigRest"
+   ]
+  },
+  {
+   "msg": "已存在,保存失败!",
+   "category": "资源冲突",
+   "action": "换一个唯一编码/名称，或先按名称查询并复用既有对象",
+   "classes": [
+    "cn.restcloud.framework.notification.controller.NotificationConfigRest"
+   ]
+  },
+  {
+   "msg": "已存在,已成功更新!",
+   "category": "数据库",
+   "action": "换一个唯一编码/名称，或先按名称查询并复用既有对象",
+   "classes": [
+    "cn.restcloud.apiportal.service.impl.ApiPortalPublishServiceImpl"
+   ]
+  },
+  {
+   "msg": "已存在,请更换其他编号!",
+   "category": "资源冲突",
+   "action": "换一个唯一编码/名称，或先按名称查询并复用既有对象",
+   "classes": [
+    "cn.restcloud.etl.process.pmodel.controller.ETLProcessModelConfigRest"
+   ]
+  },
+  {
+   "msg": "已存在!",
+   "category": "资源冲突",
+   "action": "换一个唯一编码/名称，或先按名称查询并复用既有对象",
+   "classes": [
+    "cn.restcloud.apiflow.menu.controller.ESBProcessNodeTemplateRest",
+    "cn.restcloud.apiportal.controller.ApiPortalCloudRest",
+    "cn.restcloud.designer.version.service.AppVersionUtil",
+    "cn.restcloud.etl.menu.controller.ETLProcessNodeMenuRest",
+    "cn.restcloud.gateway.security.controller.GatewaySecurityConfigRest"
+   ]
+  },
+  {
+   "msg": "已存在主字段值相同的记录",
+   "category": "数据库",
+   "action": "换一个唯一编码/名称，或先按名称查询并复用既有对象",
+   "classes": [
+    "cn.restcloud.connect.mongo.dao.impl.ObjectDocDaoImpl"
+   ]
+  },
+  {
+   "msg": "已存在匹配API数据!",
+   "category": "API 资产",
+   "action": "换一个唯一编码/名称，或先按名称查询并复用既有对象",
+   "classes": [
+    "cn.restcloud.gateway.security.controller.GatewaySecurityConfigRest"
+   ]
+  },
+  {
+   "msg": "已存在唯一id(",
+   "category": "数据库",
+   "action": "换一个唯一编码/名称，或先按名称查询并复用既有对象",
+   "classes": [
+    "cn.restcloud.coreservice.setting.controller.PlatformConfigRest"
+   ]
+  },
+  {
+   "msg": "已存在的数据量:",
+   "category": "资源冲突",
+   "action": "换一个唯一编码/名称，或先按名称查询并复用既有对象",
+   "classes": [
+    "cn.restcloud.etl.process.engine.drive.impl.write.impl.ETLDeleteTableDataServiceImpl"
+   ]
+  },
+  {
+   "msg": "已经删除或不存在!",
+   "category": "资源不存在",
+   "action": "确认 id/名称并刷新列表；平台有时用 500 表示资源不存在",
+   "classes": [
+    "cn.restcloud.apiportal.controller.ApiProtalTestConfigRest"
+   ]
+  },
+  {
+   "msg": "已经处理了!撤回失败!",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.bpm.process.engine.service.BPMProcessEngine"
+   ]
+  },
+  {
+   "msg": "已经存在,如果要重复执行升级reUpdate请传入true!",
+   "category": "任务调度",
+   "action": "先查运行实例与补偿记录，再决定重跑/补偿",
+   "classes": [
+    "cn.restcloud.apiflow.application.controller.ESBApplicationUpdateRest",
+    "cn.restcloud.etl.application.controller.ETLApplicationUpdateRest"
+   ]
+  },
+  {
+   "msg": "已经注册有API,不允许修改appId!",
+   "category": "API 资产",
+   "action": "用 rc api list/get 核对服务定义与发布状态",
+   "classes": [
+    "cn.restcloud.apiportal.controller.ApiPortalApplicationRest"
+   ]
+  },
+  {
+   "msg": "已结束,不能重复回调!",
+   "category": "连接器",
+   "action": "检查连接器配置、OAuth 回调与网络可达性",
+   "classes": [
+    "cn.restcloud.apiflow.process.engine.controller.ESBApproveProcessRest"
+   ]
+  },
+  {
+   "msg": "已结束,不能重复确认!",
+   "category": "资源冲突",
+   "action": "先查询查重，改用唯一编码/名称",
+   "classes": [
+    "cn.restcloud.apiflow.process.engine.controller.ESBApproveProcessRest",
+    "cn.restcloud.etl.process.engine.controller.ETLApproveProcessRest"
+   ]
+  },
+  {
+   "msg": "已补偿的流程不允许取消",
+   "category": "任务调度",
+   "action": "先查运行实例与补偿记录，再决定重跑/补偿",
+   "classes": [
+    "cn.restcloud.apiflow.process.monitor.controller.ESBProcessMonitorRest"
+   ]
+  },
+  {
+   "msg": "已补偿过的节点不允许取消",
+   "category": "流程图",
+   "action": "用 rc flow validate 定位节点/连线问题，修正后再保存",
+   "classes": [
+    "cn.restcloud.apiflow.process.monitor.controller.ESBCompensateNodeMonitorRest"
+   ]
+  },
+  {
+   "msg": "平台的流程规则编译有错误:",
+   "category": "代码/脚本",
+   "action": "检查脚本语法与沙箱限制，用最小脚本复现",
+   "classes": [
+    "cn.restcloud.bpm.rule.service.BPMProcessRuleUtil"
+   ]
+  },
+  {
+   "msg": "并行网关和聚合网关没有成对!",
+   "category": "流程图",
+   "action": "用 rc flow validate 定位节点/连线问题，修正后再保存",
+   "classes": [
+    "cn.restcloud.apiflow.process.pmodel.controller.ESBProcessModelConfigRest"
+   ]
+  },
+  {
+   "msg": "应用applicationId不能为空",
+   "category": "参数校验",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.apiflow.mapping.controller.DataMappingCategoryRest"
+   ]
+  },
+  {
+   "msg": "应用Id不允许为空!",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.apiflow.process.pmodel.controller.ESBProcessModelConfigRest",
+    "cn.restcloud.etl.process.pmodel.controller.ETLProcessModelConfigRest"
+   ]
+  },
+  {
+   "msg": "应用id不允许包含",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.apiportal.controller.ApiPortalApplicationRest",
+    "cn.restcloud.designer.apidoc.controller.ImportApiFromExcelRest",
+    "cn.restcloud.designer.apidoc.controller.OpenApiRest"
+   ]
+  },
+  {
+   "msg": "应用id不能为空!",
+   "category": "参数校验",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.designer.appbasedata.controller.AppBaseDataRest"
+   ]
+  },
+  {
+   "msg": "应用下已存在变量ID为",
+   "category": "资源冲突",
+   "action": "换一个唯一编码/名称，或先按名称查询并复用既有对象",
+   "classes": [
+    "cn.restcloud.apiflow.process.pmodel.service.impl.ESBProcessSharedVariableServiceImpl"
+   ]
+  },
+  {
+   "msg": "应用下已存在相同的版本文件[",
+   "category": "文件",
+   "action": "换一个唯一编码/名称，或先按名称查询并复用既有对象",
+   "classes": [
+    "cn.restcloud.appassembly.controller.AppVersionController",
+    "cn.restcloud.designer.version.controller.AppVersionRest"
+   ]
+  },
+  {
+   "msg": "应用不存在",
+   "category": "资源不存在",
+   "action": "确认 id/名称并刷新列表；平台有时用 500 表示资源不存在",
+   "classes": [
+    "cn.restcloud.designer.tags.controller.TagsConfigRest"
+   ]
+  },
+  {
+   "msg": "应用不存在:",
+   "category": "资源不存在",
+   "action": "确认 id/名称并刷新列表；平台有时用 500 表示资源不存在",
+   "classes": [
+    "cn.restcloud.esbpack.controller.LowCodePackRest"
+   ]
+  },
+  {
+   "msg": "应用不存在!",
+   "category": "资源不存在",
+   "action": "确认 id/名称并刷新列表；平台有时用 500 表示资源不存在",
+   "classes": [
+    "cn.restcloud.apimarket.controller.MarketApiDetailsRest",
+    "cn.restcloud.apimarket.controller.MarketCategoryPageRest"
+   ]
+  },
+  {
+   "msg": "应用安装失败",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.appassembly.controller.AppVersionController",
+    "cn.restcloud.appassembly.template.controller.AppAssemblyTemplateLibraryController",
+    "cn.restcloud.designer.version.controller.AppVersionRest"
+   ]
+  },
+  {
+   "msg": "应用安装失败,请查看后台管理日记!",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.appassembly.controller.AppVersionController",
+    "cn.restcloud.appassembly.template.controller.AppAssemblyTemplateLibraryController",
+    "cn.restcloud.designer.version.controller.AppVersionRest"
+   ]
+  },
+  {
+   "msg": "应用安装失败,请查看控制台日志!",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.apiflow.application.controller.ESBApplicationConfigRest",
+    "cn.restcloud.bpm.application.controller.BPMApplicationConfigRest",
+    "cn.restcloud.etl.application.controller.ETLApplicationConfigRest"
+   ]
+  },
+  {
+   "msg": "应用安装失败!",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.appassembly.controller.AppVersionController",
+    "cn.restcloud.designer.version.controller.AppVersionRest"
+   ]
+  },
+  {
+   "msg": "延时时间不能为空",
+   "category": "参数校验",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.mqbus.util.rocketmq.util.RocketMqUtil"
+   ]
+  },
+  {
+   "msg": "异步发送普通MQ消息失败",
+   "category": "消息",
+   "action": "检查 topic/group/broker 与消费位点",
+   "classes": [
+    "cn.restcloud.mqbus.util.rocketmq.service.RocketMqSendService$1",
+    "cn.restcloud.mqbus.util.rocketmq.service.RocketMqSendService$2"
+   ]
+  },
+  {
+   "msg": "异步回调超时异常结束",
+   "category": "连接器",
+   "action": "检查目标可达性与超时配置；必要时增大 timeout 或改为异步",
+   "classes": [
+    "cn.restcloud.apiflow.scheduler.ESBSchedulerCompensate"
+   ]
+  },
+  {
+   "msg": "异步路由运行失败(",
+   "category": "流程图",
+   "action": "用 rc flow validate 定位节点/连线问题，修正后再保存",
+   "classes": [
+    "cn.restcloud.apiflow.process.engine.service.ESBAsynchronousNodeDriveEngine",
+    "cn.restcloud.etl.process.engine.service.ETLAsynchronousNodeDriveEngine"
+   ]
+  },
+  {
+   "msg": "当前API不允许在服务器(",
+   "category": "API 资产",
+   "action": "用 rc api list/get 核对服务定义与发布状态",
+   "classes": [
+    "cn.restcloud.framework.scsplugs.strategy.system.SystemServiceBeforeExcuteStrategy"
+   ]
+  },
+  {
+   "msg": "当前API不存在,确认是否已删除",
+   "category": "API 资产",
+   "action": "用 rc api list/get 核对服务定义与发布状态",
+   "classes": [
+    "cn.restcloud.coreservice.config.controller.ActionUrlConfigRest"
+   ]
+  },
+  {
+   "msg": "当前文件名称已存在:",
+   "category": "文件",
+   "action": "换一个唯一编码/名称，或先按名称查询并复用既有对象",
+   "classes": [
+    "cn.restcloud.framework.attachment.service.DefaultAttachmentUpload"
+   ]
+  },
+  {
+   "msg": "当前流程事务ID不存在执行数据!",
+   "category": "任务调度",
+   "action": "先查运行实例与补偿记录，再决定重跑/补偿",
+   "classes": [
+    "cn.restcloud.apiflow.process.monitor.controller.ESBProcessMonitorRest"
+   ]
+  },
+  {
+   "msg": "待补偿,断言失败:",
+   "category": "任务调度",
+   "action": "先查运行实例与补偿记录，再决定重跑/补偿",
+   "classes": [
+    "cn.restcloud.apiflow.process.monitor.controller.ESBProcessMonitorRest"
+   ]
+  },
+  {
+   "msg": "恢复失败",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.designer.apidoc.controller.APIChangeLogHistoryRest"
+   ]
+  },
+  {
+   "msg": "您没有调用本应用下API的权限,错误编码:",
+   "category": "权限",
+   "action": "联系平台管理员检查服务角色与权限项",
+   "classes": [
+    "cn.restcloud.framework.scsplugs.strategy.system.service.AppPermissionStrategyService"
+   ]
+  },
+  {
+   "msg": "成功覆盖已存在的自定义节点!",
+   "category": "流程图",
+   "action": "换一个唯一编码/名称，或先按名称查询并复用既有对象",
+   "classes": [
+    "cn.restcloud.apiflow.menu.controller.ESBProcessNodeTemplateRest",
+    "cn.restcloud.etl.menu.controller.ETLProcessNodeMenuRest"
+   ]
+  },
+  {
+   "msg": "成功订阅(订阅已存在):",
+   "category": "资源冲突",
+   "action": "换一个唯一编码/名称，或先按名称查询并复用既有对象",
+   "classes": [
+    "cn.restcloud.mqbus.util.mqtt.MQTTUtil"
+   ]
+  },
+  {
+   "msg": "所有错误码列表(选择快捷输入使用)",
+   "category": "数据库",
+   "action": "用 rc datasource test 验证连接，再用最小 SQL 复现",
+   "classes": [
+    "cn.restcloud.standardmgr.errorcode.controller.StdErrorCodeRest"
+   ]
+  },
+  {
+   "msg": "所有错误码列表(选择用)",
+   "category": "数据库",
+   "action": "用 rc datasource test 验证连接，再用最小 SQL 复现",
+   "classes": [
+    "cn.restcloud.standardmgr.errorcode.controller.StdErrorCodeRest",
+    "cn.restcloud.standardmgr.headercode.controller.StdHeaderCodeRest"
+   ]
+  },
+  {
+   "msg": "所选中的XML模本在API注册中被引用,删除失败!",
+   "category": "API 资产",
+   "action": "用 rc api list/get 核对服务定义与发布状态",
+   "classes": [
+    "cn.restcloud.framework.xml.controller.XmlTemplateConfigRest"
+   ]
+  },
+  {
+   "msg": "所选中的后端服务存在关联,删除失败!",
+   "category": "API 资产",
+   "action": "用 rc api list/get 核对服务定义与发布状态",
+   "classes": [
+    "cn.restcloud.gateway.config.controller.GatewayServicesRest"
+   ]
+  },
+  {
+   "msg": "所选中的控制策略已在API注册中绑定,删除失败!",
+   "category": "API 资产",
+   "action": "用 rc api list/get 核对服务定义与发布状态",
+   "classes": [
+    "cn.restcloud.coreservice.scsplugs.controller.ServiceControlStrategyRest"
+   ]
+  },
+  {
+   "msg": "所选中的数据源被数据缓存规则引用,删除失败!",
+   "category": "数据库",
+   "action": "用 rc datasource test 验证连接，再用最小 SQL 复现",
+   "classes": [
+    "cn.restcloud.datasource.controller.DataSourceConfigRest"
+   ]
+  },
+  {
+   "msg": "所选中的模拟响应配置已在API注册被引用,删除失败!",
+   "category": "API 资产",
+   "action": "用 rc api list/get 核对服务定义与发布状态",
+   "classes": [
+    "cn.restcloud.coreservice.mock.controller.MockResponseConfigRest"
+   ]
+  },
+  {
+   "msg": "所选中的通知类型已被告警规则引用,删除失败!",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.framework.notification.controller.NotificationConfigRest"
+   ]
+  },
+  {
+   "msg": "所选的控制策略在API注册中有配置,删除失败!",
+   "category": "API 资产",
+   "action": "用 rc api list/get 核对服务定义与发布状态",
+   "classes": [
+    "cn.restcloud.coreservice.scsplugs.controller.LoadBalanceConfigRest"
+   ]
+  },
+  {
+   "msg": "手动推送配置时失败,服务器RestUrl",
+   "category": "API 资产",
+   "action": "用 rc api list/get 核对服务定义与发布状态",
+   "classes": [
+    "cn.restcloud.discovery.config.controller.PublishCallBack"
+   ]
+  },
+  {
+   "msg": "打包失败,不存在该appId应用数据!",
+   "category": "资源不存在",
+   "action": "确认 id/名称并刷新列表；平台有时用 500 表示资源不存在",
+   "classes": [
+    "cn.restcloud.appassembly.service.AppAssemblyVersionUtil"
+   ]
+  },
+  {
+   "msg": "执行一个已存在的流程",
+   "category": "任务调度",
+   "action": "换一个唯一编码/名称，或先按名称查询并复用既有对象",
+   "classes": [
+    "cn.restcloud.bpm.process.engine.service.BPMProcessEngine"
+   ]
+  },
+  {
+   "msg": "执行失败",
+   "category": "任务调度",
+   "action": "先查运行实例与补偿记录，再决定重跑/补偿",
+   "classes": [
+    "cn.restcloud.apiportal.controller.ApiPortalExportOpenApiRest",
+    "cn.restcloud.connect.redis.service.RedisObjectApiMappingService",
+    "cn.restcloud.etl.process.engine.service.db.ETLKettleNodeUtil"
+   ]
+  },
+  {
+   "msg": "执行失败:",
+   "category": "任务调度",
+   "action": "先查运行实例与补偿记录，再决定重跑/补偿",
+   "classes": [
+    "cn.restcloud.apiflow.process.engine.drive.impl.ESBApiNodeCallback"
+   ]
+  },
+  {
+   "msg": "执行失败!",
+   "category": "任务调度",
+   "action": "先查运行实例与补偿记录，再决定重跑/补偿",
+   "classes": [
+    "cn.restcloud.bpm.process.engine.drive.impl.RunJavaCodeNode"
+   ]
+  },
+  {
+   "msg": "执行已超时,已超过(",
+   "category": "任务调度",
+   "action": "检查目标可达性与超时配置；必要时增大 timeout 或改为异步",
+   "classes": [
+    "cn.restcloud.apiflow.status.dao.impl.ESBProcessStatusRuleDaoImpl",
+    "cn.restcloud.etl.dataquality.processstatus.dao.impl.ETLProcessStatusRuleDaoImpl"
+   ]
+  },
+  {
+   "msg": "报表Id不能为空",
+   "category": "数据库",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.framework.view.report.ViewParserEngineRest"
+   ]
+  },
+  {
+   "msg": "授权已超时",
+   "category": "权限",
+   "action": "检查目标可达性与超时配置；必要时增大 timeout 或改为异步",
+   "classes": [
+    "cn.restcloud.connect.connector.controller.ConnectionConfigurationRest"
+   ]
+  },
+  {
+   "msg": "排序条件错误必须是JSON格式!",
+   "category": "数据格式",
+   "action": "用最小 JSON/XML 样例校验格式与编码",
+   "classes": [
+    "cn.restcloud.etl.process.pmodel.controller.ETLMongoDBReadNodeRest"
+   ]
+  },
+  {
+   "msg": "接口升级失败:",
+   "category": "API 资产",
+   "action": "用 rc api list/get 核对服务定义与发布状态",
+   "classes": [
+    "cn.restcloud.version.VersionUpgradeUtil"
+   ]
+  },
+  {
+   "msg": "接口调用失败!",
+   "category": "API 资产",
+   "action": "用 rc api list/get 核对服务定义与发布状态",
+   "classes": [
+    "cn.restcloud.appassembly.controller.AppAssemblyEnvironmentController"
+   ]
+  },
+  {
+   "msg": "推送失败",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.framework.notification.service.impl.NotificationConfigServiceImpl",
+    "cn.restcloud.framework.notification.util.NotificationPushUtil"
+   ]
+  },
+  {
+   "msg": "提交失败(",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.coreservice.coderepository.controller.SvnAndGitRepositoryRest"
+   ]
+  },
+  {
+   "msg": "提示:ESB流程状态监测启动失败,因为",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.apiflow.scheduler.ESBSchedulerProcessStatusStarter"
+   ]
+  },
+  {
+   "msg": "提示:ETL元数据变更检测启动失败,因为",
+   "category": "数据模型",
+   "action": "刷新元数据/模型缓存，确认模型已发布",
+   "classes": [
+    "cn.restcloud.etl.dataquality.scheduler.ETLSchedulerMetaChangeStarter"
+   ]
+  },
+  {
+   "msg": "提示:ETL数据质量分析启动失败,因为",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.etl.dataquality.scheduler.ETLSchedulerDataContentStarter"
+   ]
+  },
+  {
+   "msg": "提示:ETL数据质量调度启动失败,因为",
+   "category": "任务调度",
+   "action": "先查运行实例与补偿记录，再决定重跑/补偿",
+   "classes": [
+    "cn.restcloud.etl.dataquality.scheduler.ETLSchedulerDataChangeStarter",
+    "cn.restcloud.etl.dataquality.scheduler.ETLSchedulerDataCountStarter"
+   ]
+  },
+  {
+   "msg": "提示:ETL流程状态监测启动失败,因为",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.etl.dataquality.scheduler.ETLSchedulerProcessStatusStarter"
+   ]
+  },
+  {
+   "msg": "提示:ETL流程调度启动失败,因为",
+   "category": "任务调度",
+   "action": "先查运行实例与补偿记录，再决定重跑/补偿",
+   "classes": [
+    "cn.restcloud.etl.scheduler.ETLSchedulerTaskStarter"
+   ]
+  },
+  {
+   "msg": "提示:创建表失败,可能表已经存在:",
+   "category": "数据库",
+   "action": "用 rc datasource test 验证连接，再用最小 SQL 复现",
+   "classes": [
+    "cn.restcloud.framework.core.context.LoadPlatformDataFromRdb"
+   ]
+  },
+  {
+   "msg": "提示:发送消息时sendToUserId不能为空!",
+   "category": "参数校验",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.framework.message.service.MessageUtil"
+   ]
+  },
+  {
+   "msg": "提示:发送消息时title不能为空!",
+   "category": "参数校验",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.framework.message.service.MessageUtil"
+   ]
+  },
+  {
+   "msg": "提示:发送集群通知命令失败:目标服务器:",
+   "category": "API 资产",
+   "action": "用 rc api list/get 核对服务定义与发布状态",
+   "classes": [
+    "cn.restcloud.connect.sap.util.SapRFCWaringUtil",
+    "cn.restcloud.framework.cluster.service.ClusterCommandUtil",
+    "cn.restcloud.mqbus.util.MqWaringUtil"
+   ]
+  },
+  {
+   "msg": "提示:增量数据运算,已存在的数据量",
+   "category": "资源冲突",
+   "action": "换一个唯一编码/名称，或先按名称查询并复用既有对象",
+   "classes": [
+    "cn.restcloud.etl.process.engine.drive.impl.compute.impl.IncrementDataNodeComputeImpl"
+   ]
+  },
+  {
+   "msg": "提示:定时预警调度启动失败,因为",
+   "category": "调度",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.gateway.waring.scheduler.GatewayWarnSchedulerTaskStarter"
+   ]
+  },
+  {
+   "msg": "提示:执行sql失败:",
+   "category": "数据库",
+   "action": "用 rc datasource test 验证连接，再用最小 SQL 复现",
+   "classes": [
+    "cn.restcloud.designer.install.service.InitSystemSqlDataUtil"
+   ]
+  },
+  {
+   "msg": "提示:接口Class不存在",
+   "category": "API 资产",
+   "action": "用 rc api list/get 核对服务定义与发布状态",
+   "classes": [
+    "cn.restcloud.appassembly.service.AppAssemblyVersionUtil",
+    "cn.restcloud.designer.version.service.AppVersionUtil"
+   ]
+  },
+  {
+   "msg": "提示:服务注册同步失败:目标服务器:",
+   "category": "API 资产",
+   "action": "用 rc api list/get 核对服务定义与发布状态",
+   "classes": [
+    "cn.restcloud.discovery.config.service.impl.ServiceCacheUtil"
+   ]
+  },
+  {
+   "msg": "提示:注册中心返回了错误的数据",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.discovery.dis.client.service.ClientDiscoveryHeartBeat"
+   ]
+  },
+  {
+   "msg": "提示:注册中心返回了错误的更新数据",
+   "category": "数据库",
+   "action": "用 rc datasource test 验证连接，再用最小 SQL 复现",
+   "classes": [
+    "cn.restcloud.discovery.dis.client.service.ClientDiscoveryHeartBeat"
+   ]
+  },
+  {
+   "msg": "提示:流程processId不存在:",
+   "category": "资源不存在",
+   "action": "确认 id/名称并刷新列表；平台有时用 500 表示资源不存在",
+   "classes": [
+    "cn.restcloud.etl.process.engine.service.ETLProcessEngine"
+   ]
+  },
+  {
+   "msg": "提示:流程初始化失败,因为(",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.apiflow.process.engine.service.ESBProcessEngine",
+    "cn.restcloud.bpm.process.engine.service.BPMProcessEngine"
+   ]
+  },
+  {
+   "msg": "提示:流程调度启动失败,因为",
+   "category": "任务调度",
+   "action": "先查运行实例与补偿记录，再决定重跑/补偿",
+   "classes": [
+    "cn.restcloud.apiflow.scheduler.ESBSchedulerTaskStarter"
+   ]
+  },
+  {
+   "msg": "提示:流程调度失败,状态码(",
+   "category": "任务调度",
+   "action": "先查运行实例与补偿记录，再决定重跑/补偿",
+   "classes": [
+    "cn.restcloud.apiflow.scheduler.ESBProcessEngineDispatcher"
+   ]
+  },
+  {
+   "msg": "提示:用户id不存在:",
+   "category": "认证",
+   "action": "重新登录或刷新 token；检查账号状态与目标环境",
+   "classes": [
+    "cn.restcloud.framework.login.dao.impl.ValidatePersonDaoImpl"
+   ]
+  },
+  {
+   "msg": "提示:用户输入了错误的密码:",
+   "category": "认证",
+   "action": "重新登录或刷新 token；检查账号状态与目标环境",
+   "classes": [
+    "cn.restcloud.framework.login.dao.impl.ValidatePersonDaoImpl"
+   ]
+  },
+  {
+   "msg": "提示:类文件不存在",
+   "category": "文件",
+   "action": "确认文件存在、大小与路径权限；必要时改用 SFTP",
+   "classes": [
+    "cn.restcloud.appassembly.service.AppAssemblyVersionUtil",
+    "cn.restcloud.designer.version.service.AppVersionUtil"
+   ]
+  },
+  {
+   "msg": "提示:系统序列号配置有误或序列号无效",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.framework.core.context.ServletInitApplication"
+   ]
+  },
+  {
+   "msg": "提示:表不存在:",
+   "category": "数据库",
+   "action": "用 rc datasource test 验证连接，再用最小 SQL 复现",
+   "classes": [
+    "cn.restcloud.framework.core.context.LoadPlatformDataFromRdb"
+   ]
+  },
+  {
+   "msg": "提示:要运行的API编排流程processId不存在:",
+   "category": "API 资产",
+   "action": "用 rc api list/get 核对服务定义与发布状态",
+   "classes": [
+    "cn.restcloud.apiflow.process.engine.service.ESBProcessEngine"
+   ]
+  },
+  {
+   "msg": "提示:要运行的流程processId不存在:",
+   "category": "资源不存在",
+   "action": "确认 id/名称并刷新列表；平台有时用 500 表示资源不存在",
+   "classes": [
+    "cn.restcloud.bpm.process.engine.service.BPMProcessEngine"
+   ]
+  },
+  {
+   "msg": "提示:进行innerjoin运算,已存在A数据集合为:",
+   "category": "资源冲突",
+   "action": "换一个唯一编码/名称，或先按名称查询并复用既有对象",
+   "classes": [
+    "cn.restcloud.etl.process.engine.drive.impl.compute.impl.DataInnerJoinComputeImpl"
+   ]
+  },
+  {
+   "msg": "提示:进行leftjoin运算,已存在数据集合为:",
+   "category": "资源冲突",
+   "action": "换一个唯一编码/名称，或先按名称查询并复用既有对象",
+   "classes": [
+    "cn.restcloud.etl.process.engine.drive.impl.compute.impl.DataLeftJoinComputeImpl"
+   ]
+  },
+  {
+   "msg": "提示:进行笛卡尔积运算,已存在数据集合为:",
+   "category": "资源冲突",
+   "action": "换一个唯一编码/名称，或先按名称查询并复用既有对象",
+   "classes": [
+    "cn.restcloud.etl.process.engine.drive.impl.compute.impl.DataCartesianJoinComputeImpl"
+   ]
+  },
+  {
+   "msg": "提示:配置中心返回了错误的更新数据",
+   "category": "数据库",
+   "action": "用 rc datasource test 验证连接，再用最小 SQL 复现",
+   "classes": [
+    "cn.restcloud.discovery.config.client.service.ClientConfigCenterHeartBeat"
+   ]
+  },
+  {
+   "msg": "搜索字段字段ID和类型不允许为空",
+   "category": "数据库",
+   "action": "用 rc datasource test 验证连接，再用最小 SQL 复现",
+   "classes": [
+    "cn.restcloud.monitor.businesslog.service.impl.ActionUrlBusinessQueryConfigServiceImpl"
+   ]
+  },
+  {
+   "msg": "撤回失败,未找到当前用户的审批记录!",
+   "category": "认证",
+   "action": "重新登录或刷新 token；检查账号状态与目标环境",
+   "classes": [
+    "cn.restcloud.bpm.process.engine.service.BPMProcessEngine"
+   ]
+  },
+  {
+   "msg": "操作不存在",
+   "category": "资源不存在",
+   "action": "确认 id/名称并刷新列表；平台有时用 500 表示资源不存在",
+   "classes": [
+    "cn.restcloud.coreservice.wsdl.util.WsdlUtils"
+   ]
+  },
+  {
+   "msg": "操作失败",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.apiflow.process.pmodel.controller.ESBProcessModelConfigRest",
+    "cn.restcloud.bpm.process.pmodel.controller.BPMProcessModelConfigRest",
+    "cn.restcloud.etl.process.pmodel.controller.ETLProcessModelConfigRest",
+    "cn.restcloud.framework.notification.service.impl.AlarmLevelConfigServiceImpl",
+    "cn.restcloud.framework.notification.service.impl.NotificationConfigServiceImpl"
+   ]
+  },
+  {
+   "msg": "数据不存在",
+   "category": "资源不存在",
+   "action": "确认 id/名称并刷新列表；平台有时用 500 表示资源不存在",
+   "classes": [
+    "cn.restcloud.knowledge.service.impl.KnowledgeArticleServiceImpl"
+   ]
+  },
+  {
+   "msg": "数据写入失败:",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.etl.process.engine.drive.impl.write.ETLRedisWriteNode"
+   ]
+  },
+  {
+   "msg": "数据分类id不能为空!",
+   "category": "参数校验",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.designer.appbasedata.controller.AppBaseDataRest"
+   ]
+  },
+  {
+   "msg": "数据删除时失败(记录不存在)",
+   "category": "资源不存在",
+   "action": "确认 id/名称并刷新列表；平台有时用 500 表示资源不存在",
+   "classes": [
+    "cn.restcloud.etl.process.engine.drive.impl.write.impl.ETLJdbcDataWriteUtil",
+    "cn.restcloud.etl.process.engine.drive.impl.write.impl.ETLMongoWriteNodeServiceImpl"
+   ]
+  },
+  {
+   "msg": "数据包导入失败",
+   "category": "文件",
+   "action": "确认文件存在、大小与路径权限；必要时改用 SFTP",
+   "classes": [
+    "cn.restcloud.designer.dbmgr.mongo.controller.MongodbManageController"
+   ]
+  },
+  {
+   "msg": "数据包导入失败!",
+   "category": "文件",
+   "action": "确认文件存在、大小与路径权限；必要时改用 SFTP",
+   "classes": [
+    "cn.restcloud.designer.dbmgr.mongo.controller.MongodbManageController"
+   ]
+  },
+  {
+   "msg": "数据对象objectId不存在",
+   "category": "资源不存在",
+   "action": "确认 id/名称并刷新列表；平台有时用 500 表示资源不存在",
+   "classes": [
+    "cn.restcloud.connect.mongo.controller.MongoObjectColumnConfigRest"
+   ]
+  },
+  {
+   "msg": "数据对象不存在",
+   "category": "资源不存在",
+   "action": "确认 id/名称并刷新列表；平台有时用 500 表示资源不存在",
+   "classes": [
+    "cn.restcloud.connect.redis.service.RedisObjectApiMappingService"
+   ]
+  },
+  {
+   "msg": "数据库删除失败:",
+   "category": "数据库",
+   "action": "用 rc datasource test 验证连接，再用最小 SQL 复现",
+   "classes": [
+    "cn.restcloud.framework.analysis.dao.impl.collectlog.DeleteHistoryLogFile"
+   ]
+  },
+  {
+   "msg": "数据库表是否已存在检测结果:",
+   "category": "数据库",
+   "action": "换一个唯一编码/名称，或先按名称查询并复用既有对象",
+   "classes": [
+    "cn.restcloud.etl.process.engine.drive.impl.write.ETLCreateTableNode"
+   ]
+  },
+  {
+   "msg": "数据库链接不存在dbConnId",
+   "category": "数据库",
+   "action": "用 rc datasource test 验证连接，再用最小 SQL 复现",
+   "classes": [
+    "cn.restcloud.connect.mongo.dao.impl.MongoObjectConfigDaoImpl",
+    "cn.restcloud.framework.dm.dao.impl.mongo.ModelConfigDaoImpl"
+   ]
+  },
+  {
+   "msg": "数据拆分后传输失败,节点处于补偿运行状态,数据结束位置为:",
+   "category": "流程图",
+   "action": "用 rc flow validate 定位节点/连线问题，修正后再保存",
+   "classes": [
+    "cn.restcloud.apiflow.process.engine.drive.impl.ESBDataSplitNode"
+   ]
+  },
+  {
+   "msg": "数据模型id不存在:",
+   "category": "数据模型",
+   "action": "刷新元数据/模型缓存，确认模型已发布",
+   "classes": [
+    "cn.restcloud.coreservice.dm.controller.ModelColumnsConfigRest"
+   ]
+  },
+  {
+   "msg": "数据源不存在:",
+   "category": "数据库",
+   "action": "用 rc datasource test 验证连接，再用最小 SQL 复现",
+   "classes": [
+    "cn.restcloud.connect.sap.util.SAPMonitorService"
+   ]
+  },
+  {
+   "msg": "数据源配置不能为空",
+   "category": "数据库",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.connect.sap.controller.ConnectSapRFCRest"
+   ]
+  },
+  {
+   "msg": "数据读取错误(",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.etl.process.pmodel.controller.ETLElasticWriteNodeNodeRest"
+   ]
+  },
+  {
+   "msg": "数据质量分析出的错误数据",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.etl.dataquality.datacontent.controller.ETLDataQualityContentErrorDataRest"
+   ]
+  },
+  {
+   "msg": "文件上传失败或禁止上传此类文件!",
+   "category": "文件",
+   "action": "确认文件存在、大小与路径权限；必要时改用 SFTP",
+   "classes": [
+    "cn.restcloud.coreservice.attachment.controller.AttachmentRecordRest",
+    "cn.restcloud.coreservice.config.controller.SprintbootBeanRest"
+   ]
+  },
+  {
+   "msg": "文件上传调用失败,返回结果",
+   "category": "文件",
+   "action": "确认文件存在、大小与路径权限；必要时改用 SFTP",
+   "classes": [
+    "cn.restcloud.apiflow.process.engine.drive.impl.ESBApiUploadNode"
+   ]
+  },
+  {
+   "msg": "文件不存在,读取失败:",
+   "category": "文件",
+   "action": "确认文件存在、大小与路径权限；必要时改用 SFTP",
+   "classes": [
+    "cn.restcloud.etl.process.engine.drive.impl.file.ETLDBFFileReadNode",
+    "cn.restcloud.etl.process.engine.drive.impl.file.ETLExcelReadNode",
+    "cn.restcloud.etl.process.engine.drive.impl.file.ETLReadFilePathNode",
+    "cn.restcloud.etl.process.engine.drive.impl.file.ETLTxtFileReadNode"
+   ]
+  },
+  {
+   "msg": "文件不存在:",
+   "category": "文件",
+   "action": "确认文件存在、大小与路径权限；必要时改用 SFTP",
+   "classes": [
+    "cn.restcloud.etl.process.engine.drive.impl.file.ETLMoveFileNode"
+   ]
+  },
+  {
+   "msg": "文件不存在!",
+   "category": "文件",
+   "action": "确认文件存在、大小与路径权限；必要时改用 SFTP",
+   "classes": [
+    "cn.restcloud.coreservice.attachment.controller.AttachmentRecordRest"
+   ]
+  },
+  {
+   "msg": "文件不能为空",
+   "category": "文件",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.connect.sap.controller.ConnectSapRFCRest"
+   ]
+  },
+  {
+   "msg": "文件写入错误:",
+   "category": "文件",
+   "action": "确认文件存在、大小与路径权限；必要时改用 SFTP",
+   "classes": [
+    "cn.restcloud.coreservice.coderepository.controller.SvnAndGitRepositoryRest"
+   ]
+  },
+  {
+   "msg": "文件解析失败",
+   "category": "文件",
+   "action": "确认文件存在、大小与路径权限；必要时改用 SFTP",
+   "classes": [
+    "cn.restcloud.designer.apidoc.controller.ImportApiFromExcelRest"
+   ]
+  },
+  {
+   "msg": "文件读取错误:",
+   "category": "文件",
+   "action": "确认文件存在、大小与路径权限；必要时改用 SFTP",
+   "classes": [
+    "cn.restcloud.coreservice.coderepository.controller.SvnAndGitRepositoryRest"
+   ]
+  },
+  {
+   "msg": "文档不存在!",
+   "category": "资源不存在",
+   "action": "确认 id/名称并刷新列表；平台有时用 500 表示资源不存在",
+   "classes": [
+    "cn.restcloud.apimarket.controller.MarketAddCommentRest",
+    "cn.restcloud.apiportal.controller.ApiPortalApiConfigRest"
+   ]
+  },
+  {
+   "msg": "断言失败",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.apiflow.process.engine.drive.impl.ESBAliOSSWriteNode",
+    "cn.restcloud.apiflow.process.engine.drive.impl.ESBApiDownloadNode",
+    "cn.restcloud.apiflow.process.engine.drive.impl.ESBApiNode",
+    "cn.restcloud.apiflow.process.engine.drive.impl.ESBApiUploadNode",
+    "cn.restcloud.apiflow.process.engine.drive.impl.ESBCosDownloadNode"
+   ]
+  },
+  {
+   "msg": "断言失败,节点处于补偿运行状态!",
+   "category": "流程图",
+   "action": "用 rc flow validate 定位节点/连线问题，修正后再保存",
+   "classes": [
+    "cn.restcloud.apiflow.process.engine.drive.impl.ESBApiDownloadNode",
+    "cn.restcloud.apiflow.process.engine.drive.impl.ESBApiNode",
+    "cn.restcloud.apiflow.process.engine.drive.impl.ESBApiUploadNode",
+    "cn.restcloud.apiflow.process.engine.drive.impl.ESBDataConnectorNode",
+    "cn.restcloud.apiflow.process.engine.drive.impl.ESBDubboNode"
+   ]
+  },
+  {
+   "msg": "断言失败!",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.apiflow.process.engine.service.ESBProcessEventUtil",
+    "cn.restcloud.etl.process.engine.utils.ETLProcessEventUtil"
+   ]
+  },
+  {
+   "msg": "新增失败",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.apiportal.controller.AppKeyConfigRest",
+    "cn.restcloud.datav.controller.BigScreenPrictureRest"
+   ]
+  },
+  {
+   "msg": "方法不存在",
+   "category": "资源不存在",
+   "action": "确认 id/名称并刷新列表；平台有时用 500 表示资源不存在",
+   "classes": [
+    "cn.restcloud.framework.config.dao.impl.mongo.ActionUrlConfigDaoImpl"
+   ]
+  },
+  {
+   "msg": "无效API统计",
+   "category": "API 资产",
+   "action": "用 rc api list/get 核对服务定义与发布状态",
+   "classes": [
+    "cn.restcloud.monitor.InvalidApiParamsReportRest"
+   ]
+  },
+  {
+   "msg": "无权限进行此操作",
+   "category": "权限",
+   "action": "联系平台管理员检查服务角色与权限项",
+   "classes": [
+    "cn.restcloud.connect.connector.controller.ConnectionConfigurationRest"
+   ]
+  },
+  {
+   "msg": "旧密码错误!",
+   "category": "认证",
+   "action": "重新登录或刷新 token；检查账号状态与目标环境",
+   "classes": [
+    "cn.restcloud.apimarket.manager.MarketUserInfoRest",
+    "cn.restcloud.designer.homepage.ChangeUserProfileInfoRest"
+   ]
+  },
+  {
+   "msg": "时失败!",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.etl.process.engine.drive.impl.read.ETLTableBatchReadNode"
+   ]
+  },
+  {
+   "msg": "时间段限制配置错误",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.gateway.security.service.impl.MaxQpsSecurityCheckRuleImpl"
+   ]
+  },
+  {
+   "msg": "映射配置不存在",
+   "category": "资源不存在",
+   "action": "确认 id/名称并刷新列表；平台有时用 500 表示资源不存在",
+   "classes": [
+    "cn.restcloud.standardmgr.masterdata.controller.StdMasterDataRest"
+   ]
+  },
+  {
+   "msg": "是否有失败数据:",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.etl.process.engine.drive.impl.write.ETLElasticWriteNode"
+   ]
+  },
+  {
+   "msg": "更新失败:",
+   "category": "数据库",
+   "action": "用 rc datasource test 验证连接，再用最小 SQL 复现",
+   "classes": [
+    "cn.restcloud.framework.cluster.service.ClusterCommandUtil"
+   ]
+  },
+  {
+   "msg": "有部分失败",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.etl.process.engine.drive.impl.write.ETLElasticWriteNode"
+   ]
+  },
+  {
+   "msg": "服务不存在",
+   "category": "API 资产",
+   "action": "用 rc api list/get 核对服务定义与发布状态",
+   "classes": [
+    "cn.restcloud.coreservice.wsdl.util.WsdlUtils"
+   ]
+  },
+  {
+   "msg": "服务不存在:",
+   "category": "API 资产",
+   "action": "用 rc api list/get 核对服务定义与发布状态",
+   "classes": [
+    "cn.restcloud.gateway.grpc.GRpcClientUtil"
+   ]
+  },
+  {
+   "msg": "服务器侦听失败:",
+   "category": "API 资产",
+   "action": "用 rc api list/get 核对服务定义与发布状态",
+   "classes": [
+    "cn.restcloud.discovery.dis.server.service.SchedulerCheckServerState"
+   ]
+  },
+  {
+   "msg": "服务器同步失败!请查看对应服务器异常日志",
+   "category": "API 资产",
+   "action": "用 rc api list/get 核对服务定义与发布状态",
+   "classes": [
+    "cn.restcloud.mqbus.util.MqClusterSyncUtil"
+   ]
+  },
+  {
+   "msg": "服务器地址格式配置错误:",
+   "category": "API 资产",
+   "action": "用 rc api list/get 核对服务定义与发布状态",
+   "classes": [
+    "cn.restcloud.auth.oauth2.service.RedisDataSourceConnectionFactory"
+   ]
+  },
+  {
+   "msg": "服务器链接失败",
+   "category": "API 资产",
+   "action": "用 rc api list/get 核对服务定义与发布状态",
+   "classes": [
+    "cn.restcloud.apiflow.process.engine.drive.impl.ESBSFTPUploadNode",
+    "cn.restcloud.etl.process.engine.drive.impl.file.ETLSFTPUploadNode"
+   ]
+  },
+  {
+   "msg": "服务调用失败准备进行重试",
+   "category": "任务调度",
+   "action": "先查运行实例与补偿记录，再决定重跑/补偿",
+   "classes": [
+    "cn.restcloud.gateway.dispatcher.GatewayRouterRuleHandler"
+   ]
+  },
+  {
+   "msg": "服务运行失败",
+   "category": "API 资产",
+   "action": "用 rc api list/get 核对服务定义与发布状态",
+   "classes": [
+    "cn.restcloud.coreservice.config.controller.ActionUrlConfigRest"
+   ]
+  },
+  {
+   "msg": "服务连接超时",
+   "category": "API 资产",
+   "action": "检查目标可达性与超时配置；必要时增大 timeout 或改为异步",
+   "classes": [
+    "cn.restcloud.coreservice.attachment.controller.AttachmentRecordRest"
+   ]
+  },
+  {
+   "msg": "未匹配到任何错误码规则",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.gateway.waring.service.impl.ResponseCodeWaringTriggerImpl"
+   ]
+  },
+  {
+   "msg": "未匹配到任何防重复提交规则[0]",
+   "category": "资源冲突",
+   "action": "先查询查重，改用唯一编码/名称",
+   "classes": [
+    "cn.restcloud.gateway.security.service.impl.ResubmitRuleCheckRuleImpl"
+   ]
+  },
+  {
+   "msg": "未发现超时流程",
+   "category": "网络",
+   "action": "检查目标可达性与超时配置；必要时增大 timeout 或改为异步",
+   "classes": [
+    "cn.restcloud.apiflow.status.dao.impl.ESBProcessStatusRuleDaoImpl",
+    "cn.restcloud.etl.dataquality.processstatus.dao.impl.ETLProcessStatusRuleDaoImpl"
+   ]
+  },
+  {
+   "msg": "未发现错误!",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.apiflow.process.pmodel.controller.ESBProcessModelConfigRest",
+    "cn.restcloud.etl.process.pmodel.controller.ETLProcessModelConfigRest"
+   ]
+  },
+  {
+   "msg": "未授权模块",
+   "category": "权限",
+   "action": "联系平台管理员检查服务角色与权限项",
+   "classes": [
+    "cn.restcloud.designer.homepage.DevPortalIndexRestV5"
+   ]
+  },
+  {
+   "msg": "未测试API,发布失败!",
+   "category": "API 资产",
+   "action": "用 rc api list/get 核对服务定义与发布状态",
+   "classes": [
+    "cn.restcloud.apiportal.service.impl.ApiPortalPublishServiceImpl"
+   ]
+  },
+  {
+   "msg": "未知错误",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.etl.process.engine.drive.impl.write.ETLElasticWriteNode"
+   ]
+  },
+  {
+   "msg": "未设置-",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.designer.apidoc.controller.AppApiDocRest"
+   ]
+  },
+  {
+   "msg": "未设置API审批人",
+   "category": "API 资产",
+   "action": "用 rc api list/get 核对服务定义与发布状态",
+   "classes": [
+    "cn.restcloud.apiportal.service.impl.ApiPortalCallApplyServiceImpl"
+   ]
+  },
+  {
+   "msg": "未通过测试不允许发布",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.apiportal.service.impl.ApiPortalCallApplyServiceImpl"
+   ]
+  },
+  {
+   "msg": "本地文件已存在",
+   "category": "文件",
+   "action": "换一个唯一编码/名称，或先按名称查询并复用既有对象",
+   "classes": [
+    "cn.restcloud.apiflow.process.engine.drive.impl.ESBSFTPReadNode",
+    "cn.restcloud.etl.process.engine.drive.impl.file.ETLSFTPReadNode"
+   ]
+  },
+  {
+   "msg": "本接口指定的模拟响应配置不存在,请在API配置中重新选择!",
+   "category": "API 资产",
+   "action": "用 rc api list/get 核对服务定义与发布状态",
+   "classes": [
+    "cn.restcloud.framework.scsplugs.strategy.system.service.APIMockDataStatusService",
+    "cn.restcloud.gateway.dispatcher.forward.DubboForwardRest",
+    "cn.restcloud.gateway.dispatcher.forward.FileToApiRest",
+    "cn.restcloud.gateway.dispatcher.forward.GRpcRest",
+    "cn.restcloud.gateway.dispatcher.forward.RestToWebServiceRest"
+   ]
+  },
+  {
+   "msg": "本服务不允许获取加密的配置值或者配置不存在!",
+   "category": "API 资产",
+   "action": "用 rc api list/get 核对服务定义与发布状态",
+   "classes": [
+    "cn.restcloud.coreservice.setting.controller.AppPropertiesRest",
+    "cn.restcloud.coreservice.setting.controller.PlatformConfigRest"
+   ]
+  },
+  {
+   "msg": "本次请求匹配到的超时预警规则:[",
+   "category": "API 资产",
+   "action": "检查目标可达性与超时配置；必要时增大 timeout 或改为异步",
+   "classes": [
+    "cn.restcloud.gateway.waring.service.impl.ResponseTimeoutWaringTriggerImpl"
+   ]
+  },
+  {
+   "msg": "本次请求匹配到的错误码预警规则:[",
+   "category": "API 资产",
+   "action": "用 rc api list/get 核对服务定义与发布状态",
+   "classes": [
+    "cn.restcloud.gateway.waring.service.impl.ResponseCodeWaringTriggerImpl"
+   ]
+  },
+  {
+   "msg": "本次请求匹配到的防重复提交规则",
+   "category": "API 资产",
+   "action": "用 rc api list/get 核对服务定义与发布状态",
+   "classes": [
+    "cn.restcloud.gateway.security.service.impl.ResubmitRuleCheckRuleImpl"
+   ]
+  },
+  {
+   "msg": "本次请求未匹配到任何超时规则",
+   "category": "API 资产",
+   "action": "检查目标可达性与超时配置；必要时增大 timeout 或改为异步",
+   "classes": [
+    "cn.restcloud.gateway.waring.service.impl.ResponseTimeoutWaringTriggerImpl"
+   ]
+  },
+  {
+   "msg": "机构名称或机构编码已存在",
+   "category": "数据格式",
+   "action": "换一个唯一编码/名称，或先按名称查询并复用既有对象",
+   "classes": [
+    "cn.restcloud.coreservice.org.controller.OrgCompanysRest"
+   ]
+  },
+  {
+   "msg": "机构编码不能与部门编码重复!",
+   "category": "数据格式",
+   "action": "换一个唯一编码/名称，或先按名称查询并复用既有对象",
+   "classes": [
+    "cn.restcloud.coreservice.org.controller.OrgCompanysRest"
+   ]
+  },
+  {
+   "msg": "查看错误",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.apiportal.controller.AppKeyConfigRest"
+   ]
+  },
+  {
+   "msg": "查询失败",
+   "category": "数据库",
+   "action": "用 rc datasource test 验证连接，再用最小 SQL 复现",
+   "classes": [
+    "cn.restcloud.connect.redis.service.RedisObjectApiMappingService",
+    "cn.restcloud.connect.redis.service.impl.RedisDataObjectServiceImpl"
+   ]
+  },
+  {
+   "msg": "查询条件错误必须是JSON格式!",
+   "category": "数据库",
+   "action": "用 rc datasource test 验证连接，再用最小 SQL 复现",
+   "classes": [
+    "cn.restcloud.etl.process.pmodel.controller.ETLMongoDBReadNodeRest"
+   ]
+  },
+  {
+   "msg": "校验失败",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.Integration.weixin.wxjh.AesException"
+   ]
+  },
+  {
+   "msg": "格式配置错误正确格式为:ip:port:channel:queueManager:ccsid",
+   "category": "数据格式",
+   "action": "用最小 JSON/XML 样例校验格式与编码",
+   "classes": [
+    "cn.restcloud.mqbus.util.jms.JmsUtil"
+   ]
+  },
+  {
+   "msg": "格式错误",
+   "category": "数据格式",
+   "action": "用最小 JSON/XML 样例校验格式与编码",
+   "classes": [
+    "cn.restcloud.coreservice.config.controller.ActionUrlParamsConfigRest",
+    "cn.restcloud.standardmgr.masterdata.controller.StdMasterDataRest"
+   ]
+  },
+  {
+   "msg": "检查流程图绘制的是否有错误",
+   "category": "流程图",
+   "action": "用 rc flow validate 定位节点/连线问题，修正后再保存",
+   "classes": [
+    "cn.restcloud.apiflow.process.pmodel.controller.ESBProcessModelConfigRest",
+    "cn.restcloud.etl.process.pmodel.controller.ETLProcessModelConfigRest"
+   ]
+  },
+  {
+   "msg": "检测到当前预警规则类别已存在相同名称规则",
+   "category": "资源冲突",
+   "action": "换一个唯一编码/名称，或先按名称查询并复用既有对象",
+   "classes": [
+    "cn.restcloud.gateway.waring.controller.GatewayWaringConfigRest"
+   ]
+  },
+  {
+   "msg": "检测到流程中不存在节点",
+   "category": "流程图",
+   "action": "用 rc flow validate 定位节点/连线问题，修正后再保存",
+   "classes": [
+    "cn.restcloud.apiflow.process.pmodel.service.impl.ESBProcessTemplateServiceImpl"
+   ]
+  },
+  {
+   "msg": "检测到该serverId已存在",
+   "category": "资源冲突",
+   "action": "换一个唯一编码/名称，或先按名称查询并复用既有对象",
+   "classes": [
+    "cn.restcloud.discovery.dis.server.controller.DiscoveryServerConfigRest"
+   ]
+  },
+  {
+   "msg": "检测结果:不存在的数据量:",
+   "category": "资源不存在",
+   "action": "确认 id/名称并刷新列表；平台有时用 500 表示资源不存在",
+   "classes": [
+    "cn.restcloud.etl.process.engine.drive.impl.write.impl.ETLDeleteTableDataServiceImpl"
+   ]
+  },
+  {
+   "msg": "模型平台id不存在:",
+   "category": "资源不存在",
+   "action": "确认 id/名称并刷新列表；平台有时用 500 表示资源不存在",
+   "classes": [
+    "cn.restcloud.ai.chat.util.AiChatCacheUtil"
+   ]
+  },
+  {
+   "msg": "模板不存在!",
+   "category": "资源不存在",
+   "action": "确认 id/名称并刷新列表；平台有时用 500 表示资源不存在",
+   "classes": [
+    "cn.restcloud.coreservice.coderepository.controller.CodeRepositoryRest"
+   ]
+  },
+  {
+   "msg": "次循环断言失败",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.apiflow.process.engine.drive.impl.ESBDataSplitNode"
+   ]
+  },
+  {
+   "msg": "此API不存在或已下线!",
+   "category": "API 资产",
+   "action": "用 rc api list/get 核对服务定义与发布状态",
+   "classes": [
+    "cn.restcloud.apimarket.controller.MarketAddCommentRest"
+   ]
+  },
+  {
+   "msg": "此业务域还有子业务域删除失败!",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.standardmgr.businessarea.controller.BusinessAreaConfigRest"
+   ]
+  },
+  {
+   "msg": "此字段还有子数据项删除失败!",
+   "category": "数据库",
+   "action": "用 rc datasource test 验证连接，再用最小 SQL 复现",
+   "classes": [
+    "cn.restcloud.apiflow.mapping.controller.DataMappingConfigRest",
+    "cn.restcloud.designer.mapping.controller.GatewayDataMappingConfigRest"
+   ]
+  },
+  {
+   "msg": "此帐号为应用系统帐号,不允许修改帐号信息!",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.designer.homepage.ChangeUserProfileInfoRest"
+   ]
+  },
+  {
+   "msg": "此数据还有子节点数据删除失败!",
+   "category": "流程图",
+   "action": "用 rc flow validate 定位节点/连线问题，修正后再保存",
+   "classes": [
+    "cn.restcloud.designer.appbasedata.controller.AppBaseDataRecordRest",
+    "cn.restcloud.designer.appbasedata.controller.AppBaseDataRest"
+   ]
+  },
+  {
+   "msg": "此用户id已存在,请更新一个用户id",
+   "category": "数据库",
+   "action": "换一个唯一编码/名称，或先按名称查询并复用既有对象",
+   "classes": [
+    "cn.restcloud.apimarket.controller.MarketUserLoginRest"
+   ]
+  },
+  {
+   "msg": "此菜单还有子节菜单删除失败!",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.designer.appmenu.controller.AppMenuItemConfigRest"
+   ]
+  },
+  {
+   "msg": "此警告规则已存在对应匹配API数据,删除失败!",
+   "category": "API 资产",
+   "action": "换一个唯一编码/名称，或先按名称查询并复用既有对象",
+   "classes": [
+    "cn.restcloud.gateway.waring.controller.GatewayWaringConfigRest"
+   ]
+  },
+  {
+   "msg": "没有数据流入断言失败!",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.etl.process.engine.drive.impl.compute.ETLDataSplitNode"
+   ]
+  },
+  {
+   "msg": "没有设置属性!",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.apiflow.process.pmodel.controller.ESBProcessModelConfigRest",
+    "cn.restcloud.etl.process.pmodel.controller.ETLProcessModelConfigRest"
+   ]
+  },
+  {
+   "msg": "注册RestToWebService-服务转发失败返回结果",
+   "category": "API 资产",
+   "action": "用 rc api list/get 核对服务定义与发布状态",
+   "classes": [
+    "cn.restcloud.gateway.dispatcher.forward.RestToWebServiceRest"
+   ]
+  },
+  {
+   "msg": "注册RestToWebService-转发失败返回Header结果",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.gateway.dispatcher.forward.RestToWebServiceRest"
+   ]
+  },
+  {
+   "msg": "注册WebService-服务转发失败返回结果",
+   "category": "API 资产",
+   "action": "用 rc api list/get 核对服务定义与发布状态",
+   "classes": [
+    "cn.restcloud.gateway.dispatcher.forward.WebServiceForwardRest"
+   ]
+  },
+  {
+   "msg": "注册WebService-转发失败返回Header结果",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.gateway.dispatcher.forward.WebServiceForwardRest"
+   ]
+  },
+  {
+   "msg": "流式调用失败:",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.ai.chat.util.AiChatApiUtil$1"
+   ]
+  },
+  {
+   "msg": "流式调用错误错误",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.apiflow.process.engine.service.ESBProcessEngineUtil$1"
+   ]
+  },
+  {
+   "msg": "流程Ids不允许为空!",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.apiflow.process.pmodel.controller.ESBProcessModelConfigRest",
+    "cn.restcloud.etl.process.pmodel.controller.ETLProcessModelConfigRest"
+   ]
+  },
+  {
+   "msg": "流程不存在节点保存失败!",
+   "category": "流程图",
+   "action": "用 rc flow validate 定位节点/连线问题，修正后再保存",
+   "classes": [
+    "cn.restcloud.apiflow.process.pmodel.controller.ESBProcessNodeConfigRest",
+    "cn.restcloud.bpm.process.pmodel.controller.BPMProcessNodeConfigRest",
+    "cn.restcloud.etl.process.pmodel.controller.ETLProcessNodeConfigRest"
+   ]
+  },
+  {
+   "msg": "流程创建失败",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.apiflow.process.pmodel.service.impl.ESBProcessTemplateServiceImpl"
+   ]
+  },
+  {
+   "msg": "流程初始化失败",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.apiflow.process.monitor.controller.ESBProcessMonitorRest"
+   ]
+  },
+  {
+   "msg": "流程实例不存在",
+   "category": "任务调度",
+   "action": "先查运行实例与补偿记录，再决定重跑/补偿",
+   "classes": [
+    "cn.restcloud.apiflow.process.monitor.controller.ESBProcessDebugLogRest"
+   ]
+  },
+  {
+   "msg": "流程实例不存在:",
+   "category": "任务调度",
+   "action": "先查运行实例与补偿记录，再决定重跑/补偿",
+   "classes": [
+    "cn.restcloud.apiflow.process.engine.controller.ESBApproveProcessRest",
+    "cn.restcloud.etl.process.engine.controller.ETLApproveProcessRest"
+   ]
+  },
+  {
+   "msg": "流程实例不存在!",
+   "category": "任务调度",
+   "action": "先查运行实例与补偿记录，再决定重跑/补偿",
+   "classes": [
+    "cn.restcloud.apiflow.process.engine.service.ESBProcessEngine",
+    "cn.restcloud.apiflow.process.monitor.controller.ESBProcessMonitorRest"
+   ]
+  },
+  {
+   "msg": "流程实例不存在或手动审批节点已经结束!",
+   "category": "流程图",
+   "action": "用 rc flow validate 定位节点/连线问题，修正后再保存",
+   "classes": [
+    "cn.restcloud.apiflow.process.engine.service.ESBProcessEngine",
+    "cn.restcloud.etl.process.engine.service.ETLProcessEngine"
+   ]
+  },
+  {
+   "msg": "流程执行失败",
+   "category": "任务调度",
+   "action": "先查运行实例与补偿记录，再决定重跑/补偿",
+   "classes": [
+    "cn.restcloud.etl.process.engine.utils.ETLProcessEventUtil"
+   ]
+  },
+  {
+   "msg": "流程数据不存在!",
+   "category": "资源不存在",
+   "action": "确认 id/名称并刷新列表；平台有时用 500 表示资源不存在",
+   "classes": [
+    "cn.restcloud.bpm.process.engine.controller.BPMApproveProcessRest"
+   ]
+  },
+  {
+   "msg": "流程数据插入失败",
+   "category": "数据库",
+   "action": "用 rc datasource test 验证连接，再用最小 SQL 复现",
+   "classes": [
+    "cn.restcloud.apiflow.scheduler.ESBSchedulerInsHistoryDispatcher"
+   ]
+  },
+  {
+   "msg": "流程有部分数据写入失败",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.etl.process.engine.utils.ETLProcessEventUtil"
+   ]
+  },
+  {
+   "msg": "流程编码已存在",
+   "category": "数据格式",
+   "action": "换一个唯一编码/名称，或先按名称查询并复用既有对象",
+   "classes": [
+    "cn.restcloud.apiflow.process.pmodel.controller.ESBProcessModelConfigRest"
+   ]
+  },
+  {
+   "msg": "流程节点配置错误",
+   "category": "流程图",
+   "action": "用 rc flow validate 定位节点/连线问题，修正后再保存",
+   "classes": [
+    "cn.restcloud.apiflow.process.engine.drive.impl.ESBTimeNode"
+   ]
+  },
+  {
+   "msg": "流程重跑节点不存在!",
+   "category": "流程图",
+   "action": "用 rc flow validate 定位节点/连线问题，修正后再保存",
+   "classes": [
+    "cn.restcloud.apiflow.process.monitor.controller.ESBProcessMonitorRest"
+   ]
+  },
+  {
+   "msg": "流程错误数据统计报表",
+   "category": "数据库",
+   "action": "用 rc datasource test 验证连接，再用最小 SQL 复现",
+   "classes": [
+    "cn.restcloud.etl.dataquality.translog.controller.ETLProcessErrorDataReportRest"
+   ]
+  },
+  {
+   "msg": "流量镜向服务实例不存在或者负载均衡算法没有返回一个服务实例对像!",
+   "category": "任务调度",
+   "action": "先查运行实例与补偿记录，再决定重跑/补偿",
+   "classes": [
+    "cn.restcloud.gateway.dispatcher.GatewayTrafficMirroringHandler"
+   ]
+  },
+  {
+   "msg": "流量镜调用失败",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.gateway.dispatcher.GatewayTrafficMirroringHandler$1"
+   ]
+  },
+  {
+   "msg": "测试任务运行错误:测试用例或者被测试服务不存在",
+   "category": "任务调度",
+   "action": "先查运行实例与补偿记录，再决定重跑/补偿",
+   "classes": [
+    "cn.restcloud.tester.service.RunTesterTaskService"
+   ]
+  },
+  {
+   "msg": "测试失败",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.framework.notification.service.impl.NotificationConfigServiceImpl"
+   ]
+  },
+  {
+   "msg": "测试数据不允许为空",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.apiflow.process.engine.controller.ESBNodeTestRest"
+   ]
+  },
+  {
+   "msg": "测试用例不存在",
+   "category": "资源不存在",
+   "action": "确认 id/名称并刷新列表；平台有时用 500 表示资源不存在",
+   "classes": [
+    "cn.restcloud.tester.controller.TestCaseMapTestPlanRest"
+   ]
+  },
+  {
+   "msg": "测试用例的id不能为空",
+   "category": "参数校验",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.tester.controller.TestCaseMapTestPlanRest"
+   ]
+  },
+  {
+   "msg": "测试的URL不能为空!",
+   "category": "参数校验",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.apiflow.api.controller.ESBExecuteTestAPIRest",
+    "cn.restcloud.bpm.api.controller.BPMExecuteTestAPIRest",
+    "cn.restcloud.etl.api.controller.ETLExecuteTestAPIRest",
+    "cn.restcloud.tester.controller.ExecuteTestServiceRest"
+   ]
+  },
+  {
+   "msg": "测试计划的id不能为空",
+   "category": "参数校验",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.tester.controller.TestCaseMapTestPlanRest"
+   ]
+  },
+  {
+   "msg": "测试错误的服务数为(",
+   "category": "API 资产",
+   "action": "用 rc api list/get 核对服务定义与发布状态",
+   "classes": [
+    "cn.restcloud.tester.service.RunTesterTaskService"
+   ]
+  },
+  {
+   "msg": "消息:加载数据库表中的数据失败:",
+   "category": "数据库",
+   "action": "用 rc datasource test 验证连接，再用最小 SQL 复现",
+   "classes": [
+    "cn.restcloud.framework.core.context.LoadPlatformDataFromRdb"
+   ]
+  },
+  {
+   "msg": "消息主题topic不能为空",
+   "category": "参数校验",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.mqbus.util.rocketmq.util.RocketMqUtil"
+   ]
+  },
+  {
+   "msg": "消息内容不能为空",
+   "category": "参数校验",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.mqbus.util.rocketmq.util.RocketMqUtil"
+   ]
+  },
+  {
+   "msg": "消息发布代码编译失败:",
+   "category": "消息",
+   "action": "检查 topic/group/broker 与消费位点",
+   "classes": [
+    "cn.restcloud.mqbus.component.impl.DynamicMQDataSourceImpl"
+   ]
+  },
+  {
+   "msg": "消息发布者配置不存在!",
+   "category": "消息",
+   "action": "检查 topic/group/broker 与消费位点",
+   "classes": [
+    "cn.restcloud.mqbus.controller.MqMessageProducerRest"
+   ]
+  },
+  {
+   "msg": "消息发送失败:",
+   "category": "消息",
+   "action": "检查 topic/group/broker 与消费位点",
+   "classes": [
+    "cn.restcloud.apiflow.process.engine.drive.impl.ESBJmsWriteNode",
+    "cn.restcloud.apiflow.process.engine.drive.impl.ESBKafkaNode",
+    "cn.restcloud.apiflow.process.engine.drive.impl.ESBMqttNode",
+    "cn.restcloud.apiflow.process.engine.drive.impl.ESBMsgNode",
+    "cn.restcloud.apiflow.process.engine.drive.impl.ESBRabbitMQNode"
+   ]
+  },
+  {
+   "msg": "消息接收失败:",
+   "category": "消息",
+   "action": "检查 topic/group/broker 与消费位点",
+   "classes": [
+    "cn.restcloud.etl.process.engine.drive.impl.read.ETLKafkaReadNode",
+    "cn.restcloud.etl.process.engine.drive.impl.read.ETLRedisReadNode"
+   ]
+  },
+  {
+   "msg": "消息的业务标识不能为空",
+   "category": "参数校验",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.mqbus.util.rocketmq.util.RocketMqUtil"
+   ]
+  },
+  {
+   "msg": "消息订阅代码编译失败:",
+   "category": "消息",
+   "action": "检查 topic/group/broker 与消费位点",
+   "classes": [
+    "cn.restcloud.mqbus.component.impl.DynamicMQDataSourceImpl"
+   ]
+  },
+  {
+   "msg": "清空日记失败",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.apiflow.process.monitor.controller.ESBProcessDebugLogRest",
+    "cn.restcloud.bpm.process.monitor.controller.BPMProcessDebugLogRest",
+    "cn.restcloud.etl.log.controller.ETLProcessDebugLogRest"
+   ]
+  },
+  {
+   "msg": "清除缓存失败:",
+   "category": "缓存",
+   "action": "检查缓存连接与 key，清理后重试",
+   "classes": [
+    "cn.restcloud.connect.sap.util.SAPRFCOfflineUtil"
+   ]
+  },
+  {
+   "msg": "清除缓存失败:removeAPICache",
+   "category": "API 资产",
+   "action": "用 rc api list/get 核对服务定义与发布状态",
+   "classes": [
+    "cn.restcloud.gateway.cloud.service.impl.SchedulerCloudConfigSyncJob"
+   ]
+  },
+  {
+   "msg": "源文件写入错误:",
+   "category": "文件",
+   "action": "确认文件存在、大小与路径权限；必要时改用 SFTP",
+   "classes": [
+    "cn.restcloud.coreservice.coderepository.controller.CodeRepositoryRest"
+   ]
+  },
+  {
+   "msg": "源节点不存在!",
+   "category": "流程图",
+   "action": "用 rc flow validate 定位节点/连线问题，修正后再保存",
+   "classes": [
+    "cn.restcloud.etl.process.pmodel.controller.ETLProcessNodeConfigRest"
+   ]
+  },
+  {
+   "msg": "源节点不存在或还没有保存!",
+   "category": "流程图",
+   "action": "用 rc flow validate 定位节点/连线问题，修正后再保存",
+   "classes": [
+    "cn.restcloud.apiflow.process.pmodel.controller.ESBProcessNodeConfigRest",
+    "cn.restcloud.bpm.process.pmodel.controller.BPMProcessNodeConfigRest"
+   ]
+  },
+  {
+   "msg": "源表和目标表进行对比并删除不存在的数据",
+   "category": "数据库",
+   "action": "用 rc datasource test 验证连接，再用最小 SQL 复现",
+   "classes": [
+    "cn.restcloud.etl.menu.controller.ETLProcessNodeMenuRest"
+   ]
+  },
+  {
+   "msg": "熔断降级-转发失败返回Header结果",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.gateway.circuitbreaker.CircuitBreakerUtil"
+   ]
+  },
+  {
+   "msg": "熔断降级-转发失败返回结果",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.gateway.circuitbreaker.CircuitBreakerUtil"
+   ]
+  },
+  {
+   "msg": "版本ID不能为空",
+   "category": "参数校验",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.appassembly.controller.LowCodePageVersionController",
+    "cn.restcloud.appassembly.template.controller.LowCodePageVersionModelController",
+    "cn.restcloud.lowcode.page.controller.LowCodePageVersionRest"
+   ]
+  },
+  {
+   "msg": "版本发布失败!",
+   "category": "平台能力",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.designer.version.controller.PublishDesignerDataRest"
+   ]
+  },
+  {
+   "msg": "版本号已存在",
+   "category": "资源冲突",
+   "action": "换一个唯一编码/名称，或先按名称查询并复用既有对象",
+   "classes": [
+    "cn.restcloud.apiflow.process.pmodel.controller.ESBProcessModelVersionRest"
+   ]
+  },
+  {
+   "msg": "版本说明不能为空",
+   "category": "参数校验",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.appassembly.controller.LowCodePageVersionController",
+    "cn.restcloud.appassembly.template.controller.LowCodePageVersionModelController",
+    "cn.restcloud.lowcode.page.controller.LowCodePageVersionRest"
+   ]
+  },
+  {
+   "msg": "环境配置不能为空,请指定一个环境配置!",
+   "category": "参数校验",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.appassembly.controller.AppAssemblyEnvironmentController"
+   ]
+  },
+  {
+   "msg": "生成失败",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.Integration.weixin.wxjh.AesException",
+    "cn.restcloud.monitor.servicerelate.service.impl.ServiceRelateServiceImpl"
+   ]
+  },
+  {
+   "msg": "生成日志错误!",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.framework.analysis.service.APIAccessAndExceptionLog"
+   ]
+  },
+  {
+   "msg": "用户APPKEY已存在",
+   "category": "认证",
+   "action": "换一个唯一编码/名称，或先按名称查询并复用既有对象",
+   "classes": [
+    "cn.restcloud.coreservice.org.controller.OrgPersonsRest"
+   ]
+  },
+  {
+   "msg": "用户Id不能为空!",
+   "category": "认证",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.apimarket.controller.MarketUserLoginRest"
+   ]
+  },
+  {
+   "msg": "用户token有效期设置错误!",
+   "category": "认证",
+   "action": "重新登录或刷新 token；检查账号状态与目标环境",
+   "classes": [
+    "cn.restcloud.coreservice.org.controller.OrgPersonsRest"
+   ]
+  },
+  {
+   "msg": "用户不存在",
+   "category": "认证",
+   "action": "重新登录或刷新 token；检查账号状态与目标环境",
+   "classes": [
+    "cn.restcloud.apiportal.controller.AppKeyConfigRest",
+    "cn.restcloud.framework.scsplugs.strategy.request.MarketBillStrategy",
+    "cn.restcloud.gateway.security.service.impl.APIChargesServiceImpl"
+   ]
+  },
+  {
+   "msg": "用户不存在:",
+   "category": "认证",
+   "action": "重新登录或刷新 token；检查账号状态与目标环境",
+   "classes": [
+    "cn.restcloud.framework.core.context.AppContext"
+   ]
+  },
+  {
+   "msg": "用户不存在!",
+   "category": "认证",
+   "action": "重新登录或刷新 token；检查账号状态与目标环境",
+   "classes": [
+    "cn.restcloud.coreservice.org.controller.OrgPersonsRest"
+   ]
+  },
+  {
+   "msg": "用户名userId不能为空!",
+   "category": "认证",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.coreservice.login.controller.LoginRest"
+   ]
+  },
+  {
+   "msg": "用户名userName不能为空!",
+   "category": "认证",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.coreservice.login.controller.LoginRest"
+   ]
+  },
+  {
+   "msg": "用户名或密码错误!",
+   "category": "认证",
+   "action": "重新登录或刷新 token；检查账号状态与目标环境",
+   "classes": [
+    "cn.restcloud.auth.oauth2.service.SystemUserDetailsService"
+   ]
+  },
+  {
+   "msg": "用户或密码错误!",
+   "category": "认证",
+   "action": "重新登录或刷新 token；检查账号状态与目标环境",
+   "classes": [
+    "cn.restcloud.framework.login.service.LoginValidationService"
+   ]
+  },
+  {
+   "msg": "用户未登录或用户不存在!",
+   "category": "认证",
+   "action": "重新登录或刷新 token；检查账号状态与目标环境",
+   "classes": [
+    "cn.restcloud.apimarket.manager.MarketUserInfoRest",
+    "cn.restcloud.designer.homepage.ChangeUserProfileInfoRest"
+   ]
+  },
+  {
+   "msg": "用户认证:用户id不存在或未配置认证",
+   "category": "认证",
+   "action": "重新登录或刷新 token；检查账号状态与目标环境",
+   "classes": [
+    "cn.restcloud.framework.permission.impl.UserApiPermissionStrategy"
+   ]
+  },
+  {
+   "msg": "登录远程机器失败",
+   "category": "认证",
+   "action": "重新登录或刷新 token；检查账号状态与目标环境",
+   "classes": [
+    "cn.restcloud.etl.process.engine.drive.impl.event.ETLShellExecuterNode"
+   ]
+  },
+  {
+   "msg": "登录验证失败",
+   "category": "认证",
+   "action": "重新登录或刷新 token；检查账号状态与目标环境",
+   "classes": [
+    "cn.restcloud.framework.login.service.LoginValidationService"
+   ]
+  },
+  {
+   "msg": "的API公开URL不能为空",
+   "category": "API 资产",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.designer.apidoc.controller.ImportApiFromExcelRest"
+   ]
+  },
+  {
+   "msg": "的JavaBean已存在",
+   "category": "代码/脚本",
+   "action": "换一个唯一编码/名称，或先按名称查询并复用既有对象",
+   "classes": [
+    "cn.restcloud.coreservice.dm.controller.GenerateModelCodeRest"
+   ]
+  },
+  {
+   "msg": "的LOG数据库格式配置错误:",
+   "category": "数据库",
+   "action": "用 rc datasource test 验证连接，再用最小 SQL 复现",
+   "classes": [
+    "cn.restcloud.framework.analysis.dao.impl.collectlog.DeleteHistoryLogFile"
+   ]
+  },
+  {
+   "msg": "的token已超时失效,需要重新登录",
+   "category": "认证",
+   "action": "检查目标可达性与超时配置；必要时增大 timeout 或改为异步",
+   "classes": [
+    "cn.restcloud.framework.login.service.JwtTokenService"
+   ]
+  },
+  {
+   "msg": "的URL已经存在,发布失败!",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.apiflow.process.pmodel.controller.ESBPublishProcessAPIRest",
+    "cn.restcloud.designer.procedure.controller.ProcedureConfigEntryRest",
+    "cn.restcloud.etl.process.pmodel.controller.ETLPublishProcessAPIRest"
+   ]
+  },
+  {
+   "msg": "的主键不能为空!",
+   "category": "数据库",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.coreservice.dm.controller.RdbDataModelRest"
+   ]
+  },
+  {
+   "msg": "的关键字段不能为空",
+   "category": "数据库",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.framework.dm.dao.impl.rdb.BusinessModelDocDaoImpl"
+   ]
+  },
+  {
+   "msg": "的关键字段不能为空!",
+   "category": "数据库",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.etl.process.engine.drive.impl.write.ETLElasticWriteNode"
+   ]
+  },
+  {
+   "msg": "的历史审批用户不存在!",
+   "category": "认证",
+   "action": "重新登录或刷新 token；检查账号状态与目标环境",
+   "classes": [
+    "cn.restcloud.bpm.process.engine.drive.impl.DraftTaskNode"
+   ]
+  },
+  {
+   "msg": "的图形已被删除,请点击一次保存修复!",
+   "category": "资源不存在",
+   "action": "确认 id/名称并刷新列表；平台有时用 500 表示资源不存在",
+   "classes": [
+    "cn.restcloud.apiflow.process.pmodel.controller.ESBProcessModelConfigRest",
+    "cn.restcloud.etl.process.pmodel.controller.ETLProcessModelConfigRest"
+   ]
+  },
+  {
+   "msg": "的核心字段未设置",
+   "category": "数据库",
+   "action": "用 rc datasource test 验证连接，再用最小 SQL 复现",
+   "classes": [
+    "cn.restcloud.connect.mongo.controller.MongoDataObjectRest"
+   ]
+  },
+  {
+   "msg": "的用户不能为空!",
+   "category": "认证",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.bpm.process.engine.drive.impl.DraftTaskNode",
+    "cn.restcloud.bpm.process.engine.drive.impl.JoinTaskNode",
+    "cn.restcloud.bpm.process.engine.drive.impl.UserTaskNode"
+   ]
+  },
+  {
+   "msg": "的配置不存在!",
+   "category": "资源不存在",
+   "action": "确认 id/名称并刷新列表；平台有时用 500 表示资源不存在",
+   "classes": [
+    "cn.restcloud.connect.sap.controller.SapRFCExecuteEngine"
+   ]
+  },
+  {
+   "msg": "的驱动逻辑不存在!",
+   "category": "资源不存在",
+   "action": "确认 id/名称并刷新列表；平台有时用 500 表示资源不存在",
+   "classes": [
+    "cn.restcloud.etl.process.engine.service.ETLProcessEngine"
+   ]
+  },
+  {
+   "msg": "目录不存在:",
+   "category": "资源不存在",
+   "action": "确认 id/名称并刷新列表；平台有时用 500 表示资源不存在",
+   "classes": [
+    "cn.restcloud.appassembly.service.AppAssemblyVersionUtil",
+    "cn.restcloud.designer.version.service.AppVersionUtil"
+   ]
+  },
+  {
+   "msg": "目录创建失败!",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.etl.common.CompressUtil",
+    "cn.restcloud.etl.common.service.KafkaService"
+   ]
+  },
+  {
+   "msg": "视频文件不存在!",
+   "category": "文件",
+   "action": "确认文件存在、大小与路径权限；必要时改用 SFTP",
+   "classes": [
+    "cn.restcloud.coreservice.attachment.controller.AttachmentRecordRest"
+   ]
+  },
+  {
+   "msg": "禁用失败",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.apiportal.controller.ApiPortalCloudRest"
+   ]
+  },
+  {
+   "msg": "私钥Base64解密错误",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.connect.gdb.util.RsaUtils"
+   ]
+  },
+  {
+   "msg": "私钥格式错误,非PKCS8格式",
+   "category": "数据格式",
+   "action": "用最小 JSON/XML 样例校验格式与编码",
+   "classes": [
+    "cn.restcloud.connect.gdb.util.RsaUtils"
+   ]
+  },
+  {
+   "msg": "私钥解析错误:",
+   "category": "数据格式",
+   "action": "用最小 JSON/XML 样例校验格式与编码",
+   "classes": [
+    "cn.restcloud.connect.gdb.util.RsaUtils"
+   ]
+  },
+  {
+   "msg": "移动已存在的目标文件:",
+   "category": "文件",
+   "action": "换一个唯一编码/名称，或先按名称查询并复用既有对象",
+   "classes": [
+    "cn.restcloud.etl.process.engine.drive.impl.file.ETLMoveFileNode"
+   ]
+  },
+  {
+   "msg": "端口不存在",
+   "category": "资源不存在",
+   "action": "确认 id/名称并刷新列表；平台有时用 500 表示资源不存在",
+   "classes": [
+    "cn.restcloud.coreservice.wsdl.util.WsdlUtils"
+   ]
+  },
+  {
+   "msg": "签名失败:(传入签名)",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.framework.permission.impl.AKSKApiPermissionStrategy"
+   ]
+  },
+  {
+   "msg": "签名验证错误",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.Integration.weixin.wxjh.AesException"
+   ]
+  },
+  {
+   "msg": "系统还没有初始化完成,定时任务启动失败!",
+   "category": "调度",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.framework.scheduler.service.SchedulerContext"
+   ]
+  },
+  {
+   "msg": "组件Id不能重复(",
+   "category": "资源冲突",
+   "action": "先查询查重，改用唯一编码/名称",
+   "classes": [
+    "cn.restcloud.apiflow.module.controller.ESBProcessModuleItemRest"
+   ]
+  },
+  {
+   "msg": "组件安装失败,请查看控制台日志!",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.apiflow.module.controller.ESBProcessModuleItemInstallRest"
+   ]
+  },
+  {
+   "msg": "绑定的存储过程不存在!",
+   "category": "资源不存在",
+   "action": "确认 id/名称并刷新列表；平台有时用 500 表示资源不存在",
+   "classes": [
+    "cn.restcloud.designer.procedure.controller.ProcedureExecuterRest"
+   ]
+  },
+  {
+   "msg": "绑定的数据源不存在!",
+   "category": "数据库",
+   "action": "用 rc datasource test 验证连接，再用最小 SQL 复现",
+   "classes": [
+    "cn.restcloud.mqbus.controller.MessageQueue2APIRest",
+    "cn.restcloud.mqbus.controller.MqSubscribeConfigRest"
+   ]
+  },
+  {
+   "msg": "绑定的服务实例不存在或者负载均衡算法没有返回一个服务实例对像!",
+   "category": "任务调度",
+   "action": "先查运行实例与补偿记录，再决定重跑/补偿",
+   "classes": [
+    "cn.restcloud.gateway.dispatcher.GatewayRouterRuleHandler"
+   ]
+  },
+  {
+   "msg": "统计错误码分布情况",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.monitor.ApiLogRunRateReportRest"
+   ]
+  },
+  {
+   "msg": "维度值配置错误格式为:",
+   "category": "数据格式",
+   "action": "用最小 JSON/XML 样例校验格式与编码",
+   "classes": [
+    "cn.restcloud.gateway.security.service.impl.MaxQpsSecurityCheckRuleImpl"
+   ]
+  },
+  {
+   "msg": "编排平台的流程规则编译有错误:",
+   "category": "代码/脚本",
+   "action": "检查脚本语法与沙箱限制，用最小脚本复现",
+   "classes": [
+    "cn.restcloud.apiflow.rule.service.ESBProcessRuleUtil"
+   ]
+  },
+  {
+   "msg": "编译失败",
+   "category": "代码/脚本",
+   "action": "检查脚本语法与沙箱限制，用最小脚本复现",
+   "classes": [
+    "cn.restcloud.coreservice.coderepository.controller.CodeRepositoryRest"
+   ]
+  },
+  {
+   "msg": "编译失败,beanId:",
+   "category": "代码/脚本",
+   "action": "检查脚本语法与沙箱限制，用最小脚本复现",
+   "classes": [
+    "cn.restcloud.gateway.cloud.service.impl.SchedulerCloudConfigSyncJob"
+   ]
+  },
+  {
+   "msg": "编译错误",
+   "category": "代码/脚本",
+   "action": "检查脚本语法与沙箱限制，用最小脚本复现",
+   "classes": [
+    "cn.restcloud.esbpack.service.LowCodePackServiceImpl"
+   ]
+  },
+  {
+   "msg": "网关后端Websocket链接失败, response is null.",
+   "category": "流程图",
+   "action": "用 rc flow validate 定位节点/连线问题，修正后再保存",
+   "classes": [
+    "cn.restcloud.gateway.websocket.WebSocketClient"
+   ]
+  },
+  {
+   "msg": "网关预警,服务器连通性测试失败",
+   "category": "流程图",
+   "action": "用 rc flow validate 定位节点/连线问题，修正后再保存",
+   "classes": [
+    "cn.restcloud.monitor.NetWorkLinkMonitorRest"
+   ]
+  },
+  {
+   "msg": "脚本运行错误",
+   "category": "代码/脚本",
+   "action": "检查脚本语法与沙箱限制，用最小脚本复现",
+   "classes": [
+    "cn.restcloud.coreservice.dm.controller.RdbSqlMapperRest"
+   ]
+  },
+  {
+   "msg": "自动标识为断言失败!",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.apiflow.process.engine.drive.impl.ESBApiDownloadNode",
+    "cn.restcloud.apiflow.process.engine.drive.impl.ESBApiNode",
+    "cn.restcloud.apiflow.process.engine.drive.impl.ESBApiUploadNode",
+    "cn.restcloud.apiflow.process.engine.drive.impl.ESBDataConnectorNode",
+    "cn.restcloud.apiflow.process.engine.drive.impl.ESBTCPNode"
+   ]
+  },
+  {
+   "msg": "节点key不能为空",
+   "category": "流程图",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.apiflow.process.favorite.controller.EsbProcessNodeFavoriteRest"
+   ]
+  },
+  {
+   "msg": "节点不能为空",
+   "category": "流程图",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.apiflow.process.pmodel.controller.ESBProcessNodeConfigRest",
+    "cn.restcloud.etl.process.pmodel.controller.ETLProcessNodeConfigRest"
+   ]
+  },
+  {
+   "msg": "节点后继路由执行失败(",
+   "category": "流程图",
+   "action": "用 rc flow validate 定位节点/连线问题，修正后再保存",
+   "classes": [
+    "cn.restcloud.etl.process.engine.drive.impl.service.ETLAsynchronousThreadPoolNodeEngine"
+   ]
+  },
+  {
+   "msg": "节点数据插入失败",
+   "category": "流程图",
+   "action": "用 rc flow validate 定位节点/连线问题，修正后再保存",
+   "classes": [
+    "cn.restcloud.apiflow.scheduler.ESBSchedulerInsHistoryDispatcher"
+   ]
+  },
+  {
+   "msg": "节点的主键字段不能为空!",
+   "category": "流程图",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.etl.process.engine.drive.impl.compute.impl.IncrementDataNodeComputeImpl"
+   ]
+  },
+  {
+   "msg": "获取token失败",
+   "category": "认证",
+   "action": "重新登录或刷新 token；检查账号状态与目标环境",
+   "classes": [
+    "cn.restcloud.ai.chat.util.AiChatBaiduTokenUtil"
+   ]
+  },
+  {
+   "msg": "获取最后同步时间失败",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.framework.core.context.LoadPlatformDataFromService"
+   ]
+  },
+  {
+   "msg": "获取序号错误!",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.apiportal.controller.ApiPortalPlatformInfoRest",
+    "cn.restcloud.coreservice.setting.controller.BasePlatformConfigRest"
+   ]
+  },
+  {
+   "msg": "获取量子随机数失败",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.util.QuantumRandom"
+   ]
+  },
+  {
+   "msg": "行校验失败",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.connect.sap.controller.ConnectSapRFCRest"
+   ]
+  },
+  {
+   "msg": "表单数据不存在启动失败",
+   "category": "数据库",
+   "action": "用 rc datasource test 验证连接，再用最小 SQL 复现",
+   "classes": [
+    "cn.restcloud.bpm.process.engine.dao.service.ProcessNodeInstanceUtil"
+   ]
+  },
+  {
+   "msg": "表示失败日志",
+   "category": "数据库",
+   "action": "用 rc datasource test 验证连接，再用最小 SQL 复现",
+   "classes": [
+    "cn.restcloud.etl.dataquality.translog.controller.ETLProcessDataTransLogRest"
+   ]
+  },
+  {
+   "msg": "表示执行失败",
+   "category": "数据库",
+   "action": "用 rc datasource test 验证连接，再用最小 SQL 复现",
+   "classes": [
+    "cn.restcloud.apiflow.process.task.controller.ESBProcessTaskQueueRest",
+    "cn.restcloud.etl.process.task.controller.ETLProcessTaskQueueRest"
+   ]
+  },
+  {
+   "msg": "表示补偿失败,2表示补偿成功,3表示取消补偿,8表示全部非补偿类型,9所有节点",
+   "category": "流程图",
+   "action": "用 rc flow validate 定位节点/连线问题，修正后再保存",
+   "classes": [
+    "cn.restcloud.apiflow.process.monitor.controller.ESBCompensateNodeMonitorRest"
+   ]
+  },
+  {
+   "msg": "表示超时,2表示错误码,3表示ip,4表示请求速度,5表示异常,6表示业务数据)",
+   "category": "数据库",
+   "action": "检查目标可达性与超时配置；必要时增大 timeout 或改为异步",
+   "classes": [
+    "cn.restcloud.gateway.security.controller.GatewaySecurityConfigRest",
+    "cn.restcloud.gateway.waring.controller.GatewayWaringConfigRest"
+   ]
+  },
+  {
+   "msg": "表示运行中的,0表示已结束的,2表示全部,3表示成功运行的记录,4表示错误的记录,5待补偿流程,6补偿失败的流程,7待审批,8已审批,9是警告流程",
+   "category": "数据库",
+   "action": "用 rc datasource test 验证连接，再用最小 SQL 复现",
+   "classes": [
+    "cn.restcloud.etl.process.monitor.controller.ETLProcessMonitorRest"
+   ]
+  },
+  {
+   "msg": "表示运行中的,0表示已结束的,2表示全部,3表示成功运行的记录,4表示错误的记录,5待补偿流程,6补偿失败的流程,7表示待审批,8已审批,24异步队列",
+   "category": "数据库",
+   "action": "用 rc datasource test 验证连接，再用最小 SQL 复现",
+   "classes": [
+    "cn.restcloud.apiflow.process.monitor.controller.ESBProcessInstanceHistoryRest",
+    "cn.restcloud.apiflow.process.monitor.controller.ESBProcessMonitorRest"
+   ]
+  },
+  {
+   "msg": "表达式填写错误",
+   "category": "数据库",
+   "action": "用 rc datasource test 验证连接，再用最小 SQL 复现",
+   "classes": [
+    "cn.restcloud.apiflow.scheduler.ESBSchedulerInsHistoryDispatcher"
+   ]
+  },
+  {
+   "msg": "要回退的用户实例不存在!",
+   "category": "认证",
+   "action": "重新登录或刷新 token；检查账号状态与目标环境",
+   "classes": [
+    "cn.restcloud.bpm.process.engine.drive.impl.ReturnToBackUserAction",
+    "cn.restcloud.bpm.process.engine.drive.impl.ReturnToPrevUserAction"
+   ]
+  },
+  {
+   "msg": "要导出的组件不存在!",
+   "category": "文件",
+   "action": "确认文件存在、大小与路径权限；必要时改用 SFTP",
+   "classes": [
+    "cn.restcloud.apiflow.module.controller.ESBProcessModuleItemRest"
+   ]
+  },
+  {
+   "msg": "要返回的转交用户实例不存在!",
+   "category": "认证",
+   "action": "重新登录或刷新 token；检查账号状态与目标环境",
+   "classes": [
+    "cn.restcloud.bpm.process.engine.drive.impl.ReturnToTransferUserAction"
+   ]
+  },
+  {
+   "msg": "覆盖(存在覆盖不存在追加)",
+   "category": "资源不存在",
+   "action": "确认 id/名称并刷新列表；平台有时用 500 表示资源不存在",
+   "classes": [
+    "cn.restcloud.apiportal.controller.ApiPortalExportToWordRest"
+   ]
+  },
+  {
+   "msg": "规则id不存在:",
+   "category": "资源不存在",
+   "action": "确认 id/名称并刷新列表；平台有时用 500 表示资源不存在",
+   "classes": [
+    "cn.restcloud.apiflow.process.engine.service.ESBProcessNodeCommonUtil",
+    "cn.restcloud.etl.dataquality.datacontent.dao.impl.ETLDataQualityContentRuleDaoImpl",
+    "cn.restcloud.etl.process.engine.service.ETLProcessNodeCommonUtil"
+   ]
+  },
+  {
+   "msg": "规则不存在!",
+   "category": "资源不存在",
+   "action": "确认 id/名称并刷新列表；平台有时用 500 表示资源不存在",
+   "classes": [
+    "cn.restcloud.gateway.security.controller.GatewayAPIDataCacheRest"
+   ]
+  },
+  {
+   "msg": "规则代码执行失败",
+   "category": "任务调度",
+   "action": "先查运行实例与补偿记录，再决定重跑/补偿",
+   "classes": [
+    "cn.restcloud.apiportal.service.impl.ActionUrlConfigAnalysisServiceImpl"
+   ]
+  },
+  {
+   "msg": "角色编码已存在",
+   "category": "权限",
+   "action": "换一个唯一编码/名称，或先按名称查询并复用既有对象",
+   "classes": [
+    "cn.restcloud.coreservice.org.controller.OrgRolesRest"
+   ]
+  },
+  {
+   "msg": "解密失败",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.Integration.weixin.wxjh.AesException"
+   ]
+  },
+  {
+   "msg": "解密错误",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.Integration.weixin.wxjh.AesException"
+   ]
+  },
+  {
+   "msg": "解密错误:",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.gateway.security.service.impl.DataEncrySecurityCheckRuleImpl"
+   ]
+  },
+  {
+   "msg": "解析失败",
+   "category": "数据格式",
+   "action": "用最小 JSON/XML 样例校验格式与编码",
+   "classes": [
+    "cn.restcloud.Integration.weixin.wxjh.AesException",
+    "cn.restcloud.connect.redis.service.impl.RedisDataObjectServiceImpl",
+    "cn.restcloud.coreservice.wsdl.controller.WsdlToJavaRest",
+    "cn.restcloud.coreservice.wsdl.util.WsdlUtils",
+    "cn.restcloud.etl.process.pmodel.controller.ETLMongoDBReadNodeRest"
+   ]
+  },
+  {
+   "msg": "解锁失败!",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.apiflow.process.pmodel.controller.ESBProcessModelConfigRest",
+    "cn.restcloud.bpm.process.pmodel.controller.BPMProcessModelConfigRest",
+    "cn.restcloud.etl.process.pmodel.controller.ETLProcessModelConfigRest"
+   ]
+  },
+  {
+   "msg": "订阅MQ绑定的数据源不存在",
+   "category": "数据库",
+   "action": "用 rc datasource test 验证连接，再用最小 SQL 复现",
+   "classes": [
+    "cn.restcloud.mqbus.service.impl.MqConsumerService"
+   ]
+  },
+  {
+   "msg": "认证失败",
+   "category": "认证",
+   "action": "重新登录或刷新 token；检查账号状态与目标环境",
+   "classes": [
+    "cn.restcloud.framework.permission.ApiPermissionUtil",
+    "cn.restcloud.framework.scsplugs.strategy.system.service.AppPermissionStrategyService",
+    "cn.restcloud.tester.controller.ExecuteTestServiceRest"
+   ]
+  },
+  {
+   "msg": "记录不存在",
+   "category": "资源不存在",
+   "action": "确认 id/名称并刷新列表；平台有时用 500 表示资源不存在",
+   "classes": [
+    "cn.restcloud.apiportal.service.impl.ApiPortalCallApplyServiceImpl",
+    "cn.restcloud.connect.redis.service.impl.RedisDataObjectServiceImpl"
+   ]
+  },
+  {
+   "msg": "访问失败:",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.designer.apidoc.controller.OpenApiRest"
+   ]
+  },
+  {
+   "msg": "评价不存在!",
+   "category": "资源不存在",
+   "action": "确认 id/名称并刷新列表；平台有时用 500 表示资源不存在",
+   "classes": [
+    "cn.restcloud.apiportal.controller.ApiPortalApiConfigRest"
+   ]
+  },
+  {
+   "msg": "评分失败,API不存在!",
+   "category": "API 资产",
+   "action": "用 rc api list/get 核对服务定义与发布状态",
+   "classes": [
+    "cn.restcloud.apiportal.service.impl.ActionUrlConfigAnalysisServiceImpl"
+   ]
+  },
+  {
+   "msg": "评分失败,该API为审批中状态不允许操作!",
+   "category": "API 资产",
+   "action": "用 rc api list/get 核对服务定义与发布状态",
+   "classes": [
+    "cn.restcloud.apiportal.service.impl.ActionUrlConfigAnalysisServiceImpl"
+   ]
+  },
+  {
+   "msg": "该ID不存在",
+   "category": "资源不存在",
+   "action": "确认 id/名称并刷新列表；平台有时用 500 表示资源不存在",
+   "classes": [
+    "cn.restcloud.appassembly.service.impl.AppAssemblyLowCodePageConfigServiceImpl",
+    "cn.restcloud.appassembly.template.service.impl.AppAssemblyLowCodePageModelConfigServiceImpl",
+    "cn.restcloud.lowcode.page.service.impl.LowCodePageConfigServiceImpl"
+   ]
+  },
+  {
+   "msg": "该密钥对不存在",
+   "category": "资源不存在",
+   "action": "确认 id/名称并刷新列表；平台有时用 500 表示资源不存在",
+   "classes": [
+    "cn.restcloud.apiportal.controller.AppKeyConfigRest"
+   ]
+  },
+  {
+   "msg": "该配置不存在",
+   "category": "资源不存在",
+   "action": "确认 id/名称并刷新列表；平台有时用 500 表示资源不存在",
+   "classes": [
+    "cn.restcloud.framework.notification.service.impl.AlarmLevelConfigServiceImpl",
+    "cn.restcloud.framework.notification.service.impl.NotificationConfigServiceImpl"
+   ]
+  },
+  {
+   "msg": "语句不能为空,请先生成SQL语句!",
+   "category": "数据库",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.apiflow.process.pmodel.controller.ESBTableReadNodeRest",
+    "cn.restcloud.etl.process.pmodel.controller.ETLMetaDataReadNodeRest",
+    "cn.restcloud.etl.process.pmodel.controller.ETLSqlReadNodeRest"
+   ]
+  },
+  {
+   "msg": "请求URL不能为空",
+   "category": "API 资产",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.designer.apidoc.controller.ImportApiFromExcelRest"
+   ]
+  },
+  {
+   "msg": "请求参数不能为空!",
+   "category": "API 资产",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.coreservice.config.controller.ActionUrlConfigRest"
+   ]
+  },
+  {
+   "msg": "请求失败",
+   "category": "API 资产",
+   "action": "用 rc api list/get 核对服务定义与发布状态",
+   "classes": [
+    "cn.restcloud.appassembly.util.DingTalkAuthClient"
+   ]
+  },
+  {
+   "msg": "请求失败,总耗时:(",
+   "category": "API 资产",
+   "action": "用 rc api list/get 核对服务定义与发布状态",
+   "classes": [
+    "cn.restcloud.tester.pts.HttpThreadInstance"
+   ]
+  },
+  {
+   "msg": "请求失败,结果:",
+   "category": "API 资产",
+   "action": "用 rc api list/get 核对服务定义与发布状态",
+   "classes": [
+    "cn.restcloud.tester.pts.HttpThreadInstance"
+   ]
+  },
+  {
+   "msg": "请求方式不能为空",
+   "category": "API 资产",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.designer.apidoc.controller.ImportApiFromExcelRest"
+   ]
+  },
+  {
+   "msg": "读取文件失败",
+   "category": "文件",
+   "action": "确认文件存在、大小与路径权限；必要时改用 SFTP",
+   "classes": [
+    "cn.restcloud.apiflow.process.engine.drive.impl.ESBFileDownload"
+   ]
+  },
+  {
+   "msg": "调用ETL流程服务器时失败,准备重试:",
+   "category": "任务调度",
+   "action": "先查运行实例与补偿记录，再决定重跑/补偿",
+   "classes": [
+    "cn.restcloud.etl.scheduler.ETLProcessEngineDispatcher"
+   ]
+  },
+  {
+   "msg": "调用失败,返回结果",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.apiflow.process.engine.drive.impl.ESBApiDownloadNode",
+    "cn.restcloud.apiflow.process.engine.drive.impl.ESBApiNode",
+    "cn.restcloud.apiflow.process.engine.drive.impl.ESBDataConnectorNode",
+    "cn.restcloud.apiflow.process.engine.drive.impl.ESBWebServiceNode",
+    "cn.restcloud.bpm.process.engine.drive.impl.ApiNode"
+   ]
+  },
+  {
+   "msg": "调用失败!",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.bpm.process.engine.drive.impl.ApiNode"
+   ]
+  },
+  {
+   "msg": "调用失败准备进行重试",
+   "category": "任务调度",
+   "action": "先查运行实例与补偿记录，再决定重跑/补偿",
+   "classes": [
+    "cn.restcloud.apiflow.process.engine.drive.impl.ESBApiDownloadNode",
+    "cn.restcloud.apiflow.process.engine.drive.impl.ESBApiNode",
+    "cn.restcloud.apiflow.process.engine.drive.impl.ESBApiUploadNode",
+    "cn.restcloud.apiflow.process.engine.drive.impl.ESBDataConnectorNode",
+    "cn.restcloud.apiflow.process.engine.drive.impl.ESBWebServiceNode"
+   ]
+  },
+  {
+   "msg": "调用失败示例:",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.apiportal.controller.ApiPortalExportToWordRest"
+   ]
+  },
+  {
+   "msg": "警告:并行网关和聚合网关没有成对!",
+   "category": "流程图",
+   "action": "用 rc flow validate 定位节点/连线问题，修正后再保存",
+   "classes": [
+    "cn.restcloud.etl.process.pmodel.controller.ETLProcessModelConfigRest"
+   ]
+  },
+  {
+   "msg": "负载均衡算法的JavaBean对像不存在",
+   "category": "代码/脚本",
+   "action": "检查脚本语法与沙箱限制，用最小脚本复现",
+   "classes": [
+    "cn.restcloud.framework.blance.service.LocalServiceNameUtil"
+   ]
+  },
+  {
+   "msg": "负载均衡配置对像不存在",
+   "category": "资源不存在",
+   "action": "确认 id/名称并刷新列表；平台有时用 500 表示资源不存在",
+   "classes": [
+    "cn.restcloud.framework.blance.service.LocalServiceNameUtil"
+   ]
+  },
+  {
+   "msg": "资源已释放失败:",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.apiflow.process.engine.service.ESBProcessEngine"
+   ]
+  },
+  {
+   "msg": "资源目录已存在相同的配置文件名称,请确认",
+   "category": "文件",
+   "action": "换一个唯一编码/名称，或先按名称查询并复用既有对象",
+   "classes": [
+    "cn.restcloud.mqbus.component.impl.DynamicMQDataSourceImpl"
+   ]
+  },
+  {
+   "msg": "超时时间",
+   "category": "网络",
+   "action": "检查目标可达性与超时配置；必要时增大 timeout 或改为异步",
+   "classes": [
+    "cn.restcloud.monitor.NetWorkLinkMonitorRest"
+   ]
+  },
+  {
+   "msg": "超时读取",
+   "category": "网络",
+   "action": "检查目标可达性与超时配置；必要时增大 timeout 或改为异步",
+   "classes": [
+    "cn.restcloud.proxy.service.ReadWriteRunnable"
+   ]
+  },
+  {
+   "msg": "超时预警规则",
+   "category": "网络",
+   "action": "检查目标可达性与超时配置；必要时增大 timeout 或改为异步",
+   "classes": [
+    "cn.restcloud.gateway.waring.service.impl.ResponseTimeoutWaringTriggerImpl"
+   ]
+  },
+  {
+   "msg": "路径参数错误",
+   "category": "API 资产",
+   "action": "用 rc api list/get 核对服务定义与发布状态",
+   "classes": [
+    "cn.restcloud.connect.mongo.controller.MongoObjectCategoryRest",
+    "cn.restcloud.connect.redis.service.impl.RedisDataObjectServiceImpl"
+   ]
+  },
+  {
+   "msg": "路由不存在!",
+   "category": "流程图",
+   "action": "用 rc flow validate 定位节点/连线问题，修正后再保存",
+   "classes": [
+    "cn.restcloud.Integration.weixin.WeixinConnectorUtil"
+   ]
+  },
+  {
+   "msg": "路由匹配失败",
+   "category": "流程图",
+   "action": "用 rc flow validate 定位节点/连线问题，修正后再保存",
+   "classes": [
+    "cn.restcloud.gateway.dispatcher.GatewayDispatcher"
+   ]
+  },
+  {
+   "msg": "路由转发-服务转发失败返回结果",
+   "category": "流程图",
+   "action": "用 rc flow validate 定位节点/连线问题，修正后再保存",
+   "classes": [
+    "cn.restcloud.gateway.file.HttpFileAPIClient"
+   ]
+  },
+  {
+   "msg": "路由转发-转发失败返回Header结果",
+   "category": "流程图",
+   "action": "用 rc flow validate 定位节点/连线问题，修正后再保存",
+   "classes": [
+    "cn.restcloud.gateway.file.HttpFileAPIClient"
+   ]
+  },
+  {
+   "msg": "路由转发失败,Body返回结果",
+   "category": "流程图",
+   "action": "用 rc flow validate 定位节点/连线问题，修正后再保存",
+   "classes": [
+    "cn.restcloud.gateway.dispatcher.GatewayRouterRuleHandler"
+   ]
+  },
+  {
+   "msg": "路由转发失败,Header返回结果",
+   "category": "流程图",
+   "action": "用 rc flow validate 定位节点/连线问题，修正后再保存",
+   "classes": [
+    "cn.restcloud.gateway.dispatcher.GatewayRouterRuleHandler"
+   ]
+  },
+  {
+   "msg": "输入参数解析失败",
+   "category": "数据格式",
+   "action": "用最小 JSON/XML 样例校验格式与编码",
+   "classes": [
+    "cn.restcloud.designer.apidoc.controller.ImportApiFromExcelRest"
+   ]
+  },
+  {
+   "msg": "输入参数错误",
+   "category": "参数校验",
+   "action": "核对必填字段、类型与长度；参考命令帮助",
+   "classes": [
+    "cn.restcloud.etl.rule.ext.ETL_RULE_200403002"
+   ]
+  },
+  {
+   "msg": "输出参数解析失败",
+   "category": "数据格式",
+   "action": "用最小 JSON/XML 样例校验格式与编码",
+   "classes": [
+    "cn.restcloud.designer.apidoc.controller.ImportApiFromExcelRest"
+   ]
+  },
+  {
+   "msg": "输出节点中配置了表中不存在字段:",
+   "category": "流程图",
+   "action": "用 rc flow validate 定位节点/连线问题，修正后再保存",
+   "classes": [
+    "cn.restcloud.apiflow.process.engine.service.db.ESBDataRdbUtil",
+    "cn.restcloud.etl.process.engine.service.db.ETLRdbUtil"
+   ]
+  },
+  {
+   "msg": "输出表不存在",
+   "category": "数据库",
+   "action": "用 rc datasource test 验证连接，再用最小 SQL 复现",
+   "classes": [
+    "cn.restcloud.etl.process.engine.drive.impl.write.impl.ETLDorisLoadWriteNode"
+   ]
+  },
+  {
+   "msg": "迁移失败",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.apiflow.process.pmodel.controller.ESBProcessModelConfigRest"
+   ]
+  },
+  {
+   "msg": "运算条件不能为空",
+   "category": "参数校验",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.etl.process.engine.drive.impl.compute.impl.DataInnerJoinComputeImpl"
+   ]
+  },
+  {
+   "msg": "运算条件不能为空!",
+   "category": "参数校验",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.etl.process.engine.drive.impl.compute.impl.DataLeftJoinComputeImpl"
+   ]
+  },
+  {
+   "msg": "运算条件错误",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.etl.process.engine.drive.impl.compute.impl.DataInnerJoinComputeImpl",
+    "cn.restcloud.etl.process.engine.drive.impl.compute.impl.DataLeftJoinComputeImpl"
+   ]
+  },
+  {
+   "msg": "运算符不存在",
+   "category": "资源不存在",
+   "action": "确认 id/名称并刷新列表；平台有时用 500 表示资源不存在",
+   "classes": [
+    "cn.restcloud.gateway.waring.util.BusinessWarnCodeUtil"
+   ]
+  },
+  {
+   "msg": "运行已存在的流程(",
+   "category": "资源冲突",
+   "action": "换一个唯一编码/名称，或先按名称查询并复用既有对象",
+   "classes": [
+    "cn.restcloud.apiflow.process.engine.service.ESBProcessEngine",
+    "cn.restcloud.etl.process.engine.service.ETLProcessEngine"
+   ]
+  },
+  {
+   "msg": "运行流程实例不存在",
+   "category": "任务调度",
+   "action": "先查运行实例与补偿记录，再决定重跑/补偿",
+   "classes": [
+    "cn.restcloud.etl.log.controller.ETLProcessDebugLogRest"
+   ]
+  },
+  {
+   "msg": "运行编排归档定时任务失败",
+   "category": "调度",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.apiflow.scheduler.ESBSchedulerInsHistoryDispatcher"
+   ]
+  },
+  {
+   "msg": "运行错误",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.apiflow.process.pmodel.controller.ESBProcessModelConfigRest"
+   ]
+  },
+  {
+   "msg": "运行面生成服务信息错误:",
+   "category": "API 资产",
+   "action": "用 rc api list/get 核对服务定义与发布状态",
+   "classes": [
+    "cn.restcloud.gateway.cloud.utils.GatewayCloudUtil"
+   ]
+  },
+  {
+   "msg": "还有子节点删除失败!",
+   "category": "流程图",
+   "action": "用 rc flow validate 定位节点/连线问题，修正后再保存",
+   "classes": [
+    "cn.restcloud.appassembly.controller.CategoryTreeController",
+    "cn.restcloud.designer.category.controller.CategoryTreeRest"
+   ]
+  },
+  {
+   "msg": "远程调用失败",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.apiflow.process.monitor.controller.ESBProcessMonitorRest"
+   ]
+  },
+  {
+   "msg": "远程调用接口失败:",
+   "category": "API 资产",
+   "action": "用 rc api list/get 核对服务定义与发布状态",
+   "classes": [
+    "cn.restcloud.framework.core.context.LoadPlatformDataFromService"
+   ]
+  },
+  {
+   "msg": "连接器应用ID不能为空",
+   "category": "连接器",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.connect.connector.controller.ConnectionDocumentConfigRest"
+   ]
+  },
+  {
+   "msg": "连接器排序不能为空",
+   "category": "连接器",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.connect.connector.controller.ConnectionDocumentConfigRest"
+   ]
+  },
+  {
+   "msg": "连接器文档内容不能为空",
+   "category": "连接器",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.connect.connector.controller.ConnectionDocumentConfigRest"
+   ]
+  },
+  {
+   "msg": "连接器文档名称不能为空",
+   "category": "连接器",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.connect.connector.controller.ConnectionDocumentConfigRest"
+   ]
+  },
+  {
+   "msg": "连接器类型不能为空",
+   "category": "连接器",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.connect.connector.controller.ConnectionConfigurationRest"
+   ]
+  },
+  {
+   "msg": "连接错误",
+   "category": "网络",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.etl.process.engine.service.db.ETLElasticSearchUtil"
+   ]
+  },
+  {
+   "msg": "配置下发命令发送失败:",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.framework.common.dao.impl.mongo.DataChangeLogDaoImpl"
+   ]
+  },
+  {
+   "msg": "配置不存在!",
+   "category": "资源不存在",
+   "action": "确认 id/名称并刷新列表；平台有时用 500 表示资源不存在",
+   "classes": [
+    "cn.restcloud.connect.sap.controller.ConnectSapRFCRest",
+    "cn.restcloud.monitor.controller.ServerConnectTestConfigRest",
+    "cn.restcloud.proxy.controller.TcpipConnectMapConfigRest"
+   ]
+  },
+  {
+   "msg": "配置不存在或已删除!",
+   "category": "资源不存在",
+   "action": "确认 id/名称并刷新列表；平台有时用 500 表示资源不存在",
+   "classes": [
+    "cn.restcloud.tester.pts.controller.PerformanceTestExecuteRest"
+   ]
+  },
+  {
+   "msg": "配置不能为空",
+   "category": "参数校验",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.esbpack.service.ESBPackServiceImpl",
+    "cn.restcloud.esbpack.service.LowCodePackServiceImpl"
+   ]
+  },
+  {
+   "msg": "配置中心数据返回错误",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.discovery.config.client.service.ClientInitLocalConfigFromCenter"
+   ]
+  },
+  {
+   "msg": "配置名称不可重复",
+   "category": "资源冲突",
+   "action": "先查询查重，改用唯一编码/名称",
+   "classes": [
+    "cn.restcloud.connect.connector.controller.ConnectionConfigurationRest"
+   ]
+  },
+  {
+   "msg": "配置名称不能为空",
+   "category": "参数校验",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.connect.connector.controller.ConnectionConfigurationRest"
+   ]
+  },
+  {
+   "msg": "配置数据都不存在",
+   "category": "资源不存在",
+   "action": "确认 id/名称并刷新列表；平台有时用 500 表示资源不存在",
+   "classes": [
+    "cn.restcloud.monitor.businesslog.service.impl.ActionUrlBusinessQueryConfigServiceImpl"
+   ]
+  },
+  {
+   "msg": "配置文件名称不能为空",
+   "category": "文件",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.mqbus.component.impl.DynamicMQDataSourceImpl"
+   ]
+  },
+  {
+   "msg": "配置文件名称不能重复",
+   "category": "文件",
+   "action": "确认文件存在、大小与路径权限；必要时改用 SFTP",
+   "classes": [
+    "cn.restcloud.mqbus.component.impl.DynamicMQDataSourceImpl"
+   ]
+  },
+  {
+   "msg": "配置规则已被删除或不存在!",
+   "category": "资源不存在",
+   "action": "确认 id/名称并刷新列表；平台有时用 500 表示资源不存在",
+   "classes": [
+    "cn.restcloud.gateway.security.controller.GatewaySecurityConfigRest"
+   ]
+  },
+  {
+   "msg": "里面不存在文件,无需压缩.",
+   "category": "文件",
+   "action": "确认文件存在、大小与路径权限；必要时改用 SFTP",
+   "classes": [
+    "cn.restcloud.etl.process.engine.drive.impl.file.ETLZipFileNode"
+   ]
+  },
+  {
+   "msg": "重发失败",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.monitor.ApiLogRunRateReportRest"
+   ]
+  },
+  {
+   "msg": "重发失败:",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.monitor.ApiLogRunRateReportRest"
+   ]
+  },
+  {
+   "msg": "重复API",
+   "category": "API 资产",
+   "action": "用 rc api list/get 核对服务定义与发布状态",
+   "classes": [
+    "cn.restcloud.framework.config.dao.impl.mongo.ActionUrlConfigDaoImpl"
+   ]
+  },
+  {
+   "msg": "重置失败",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.apiflow.process.task.service.impl.ESBProcessTaskQueueServiceImpl"
+   ]
+  },
+  {
+   "msg": "重试Rest2WebService链接失败,已达最大重试次数!",
+   "category": "任务调度",
+   "action": "先查运行实例与补偿记录，再决定重跑/补偿",
+   "classes": [
+    "cn.restcloud.gateway.dispatcher.forward.RestToWebServiceRest"
+   ]
+  },
+  {
+   "msg": "重试WebService链接失败,已达最大重试次数!",
+   "category": "任务调度",
+   "action": "先查运行实例与补偿记录，再决定重跑/补偿",
+   "classes": [
+    "cn.restcloud.gateway.dispatcher.forward.WebServiceForwardRest"
+   ]
+  },
+  {
+   "msg": "重跑失败",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.etl.scheduler.ETLSchedulerCompensateTaskThread"
+   ]
+  },
+  {
+   "msg": "重跑失败,还有(",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.etl.scheduler.ETLSchedulerCompensateTaskThread"
+   ]
+  },
+  {
+   "msg": "钉钉关联不存在!",
+   "category": "连接器",
+   "action": "检查连接器配置、OAuth 回调与网络可达性",
+   "classes": [
+    "cn.restcloud.appassembly.dingding.controller.DingDingLoginRest"
+   ]
+  },
+  {
+   "msg": "链接失败",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.datasource.component.impl.ElasticSearchDataSourceImpl",
+    "cn.restcloud.datasource.component.impl.MongoDataSourceImpl",
+    "cn.restcloud.datasource.component.impl.RdbDataSourceImpl",
+    "cn.restcloud.datasource.component.impl.SAPDataSourceImpl",
+    "cn.restcloud.datasource.component.impl.SAPMonitorDataSourceImpl"
+   ]
+  },
+  {
+   "msg": "链接失败,header:null",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.apiflow.api.controller.ESBExecuteTestAPIRest",
+    "cn.restcloud.apimarket.controller.MarketAPITestRest",
+    "cn.restcloud.bpm.api.controller.BPMExecuteTestAPIRest",
+    "cn.restcloud.etl.api.controller.ETLExecuteTestAPIRest",
+    "cn.restcloud.tester.controller.ExecuteTestServiceRest"
+   ]
+  },
+  {
+   "msg": "链接失败!",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.designer.install.service.InitSystemSqlDataUtil"
+   ]
+  },
+  {
+   "msg": "链接失败(",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.datasource.component.impl.RedisDataSourceImpl"
+   ]
+  },
+  {
+   "msg": "错误,Join节点(",
+   "category": "流程图",
+   "action": "用 rc flow validate 定位节点/连线问题，修正后再保存",
+   "classes": [
+    "cn.restcloud.etl.process.engine.drive.impl.compute.ETLDataJoinNode"
+   ]
+  },
+  {
+   "msg": "错误:API编排流程不存在",
+   "category": "API 资产",
+   "action": "用 rc api list/get 核对服务定义与发布状态",
+   "classes": [
+    "cn.restcloud.apiflow.scheduler.ESBProcessEngineDispatcher"
+   ]
+  },
+  {
+   "msg": "错误:ETL文件监控器功能未启用,目录(",
+   "category": "文件",
+   "action": "确认文件存在、大小与路径权限；必要时改用 SFTP",
+   "classes": [
+    "cn.restcloud.etl.datafile.monitor.ETLFileMonitor"
+   ]
+  },
+  {
+   "msg": "错误:ETL未找到可运行的集群服务器节点!",
+   "category": "流程图",
+   "action": "用 rc flow validate 定位节点/连线问题，修正后再保存",
+   "classes": [
+    "cn.restcloud.etl.scheduler.ETLProcessEngineDispatcher"
+   ]
+  },
+  {
+   "msg": "错误:ETL流程不存在",
+   "category": "资源不存在",
+   "action": "确认 id/名称并刷新列表；平台有时用 500 表示资源不存在",
+   "classes": [
+    "cn.restcloud.etl.scheduler.ETLProcessEngineDispatcher"
+   ]
+  },
+  {
+   "msg": "错误:ETL流程节点(",
+   "category": "流程图",
+   "action": "用 rc flow validate 定位节点/连线问题，修正后再保存",
+   "classes": [
+    "cn.restcloud.etl.process.engine.drive.impl.apinode.ETLWebServiceNode"
+   ]
+  },
+  {
+   "msg": "错误:SQL执行时出现错误表已存在或语法错误,建议使用客户端工具进行调试!",
+   "category": "数据库",
+   "action": "换一个唯一编码/名称，或先按名称查询并复用既有对象",
+   "classes": [
+    "cn.restcloud.coreservice.dm.controller.ModelTableSqlRest"
+   ]
+  },
+  {
+   "msg": "错误:WebService返回结果为JSON时报错要转换的节点",
+   "category": "流程图",
+   "action": "用 rc flow validate 定位节点/连线问题，修正后再保存",
+   "classes": [
+    "cn.restcloud.gateway.dispatcher.forward.WebServiceForwardRest"
+   ]
+  },
+  {
+   "msg": "错误:WebService返回结果为JSON时报错要转换的节点,返回的XML数据为:",
+   "category": "流程图",
+   "action": "用 rc flow validate 定位节点/连线问题，修正后再保存",
+   "classes": [
+    "cn.restcloud.gateway.dispatcher.forward.WebServiceForwardRest"
+   ]
+  },
+  {
+   "msg": "错误:WebService返回结果处理时报错,返回的XML数据为:",
+   "category": "数据格式",
+   "action": "用最小 JSON/XML 样例校验格式与编码",
+   "classes": [
+    "cn.restcloud.gateway.dispatcher.forward.WebServiceForwardRest"
+   ]
+  },
+  {
+   "msg": "错误:不支持的转换类型!",
+   "category": "数据格式",
+   "action": "确认平台版本与端点目录；该能力可能只在更高版本提供",
+   "classes": [
+    "cn.restcloud.apiflow.process.engine.drive.impl.ESBDataTransformNode"
+   ]
+  },
+  {
+   "msg": "错误:业务模型不支持批量插入",
+   "category": "数据库",
+   "action": "确认平台版本与端点目录；该能力可能只在更高版本提供",
+   "classes": [
+    "cn.restcloud.framework.dm.dao.impl.mongo.BusinessModelDocDaoImpl"
+   ]
+  },
+  {
+   "msg": "错误:业务模型不支持批量插入操作,只有实体模理才支持批量插入",
+   "category": "数据库",
+   "action": "确认平台版本与端点目录；该能力可能只在更高版本提供",
+   "classes": [
+    "cn.restcloud.framework.dm.dao.impl.rdb.BusinessModelDocDaoImpl"
+   ]
+  },
+  {
+   "msg": "错误:同步配置中心时出错:",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.discovery.config.client.service.ClientConfigCenterHeartBeat"
+   ]
+  },
+  {
+   "msg": "错误:启用配置中心时必须在本地application.properties中配置token.password.sys的值",
+   "category": "认证",
+   "action": "重新登录或刷新 token；检查账号状态与目标环境",
+   "classes": [
+    "cn.restcloud.framework.login.service.JwtTokenService"
+   ]
+  },
+  {
+   "msg": "错误:在版本文件中未找到文件!",
+   "category": "文件",
+   "action": "确认文件存在、大小与路径权限；必要时改用 SFTP",
+   "classes": [
+    "cn.restcloud.appassembly.service.AppAssemblyVersionUtil",
+    "cn.restcloud.designer.version.service.AppVersionUtil"
+   ]
+  },
+  {
+   "msg": "错误:定时任务(",
+   "category": "调度",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.framework.scheduler.service.SchedulerContext"
+   ]
+  },
+  {
+   "msg": "错误:实体模型不存在",
+   "category": "数据模型",
+   "action": "刷新元数据/模型缓存，确认模型已发布",
+   "classes": [
+    "cn.restcloud.framework.mock.dao.impl.mongo.MockDataConfigDaoImpl"
+   ]
+  },
+  {
+   "msg": "错误:容器中的java bean未初始化完全!",
+   "category": "代码/脚本",
+   "action": "检查脚本语法与沙箱限制，用最小脚本复现",
+   "classes": [
+    "cn.restcloud.framework.scsplugs.service.ServiceControlStrategy"
+   ]
+  },
+  {
+   "msg": "错误:平台默认数据源(",
+   "category": "数据库",
+   "action": "用 rc datasource test 验证连接，再用最小 SQL 复现",
+   "classes": [
+    "cn.restcloud.designer.install.service.InitSystemSqlDataUtil"
+   ]
+  },
+  {
+   "msg": "错误:建表语句不能为空!",
+   "category": "数据库",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.etl.process.engine.drive.impl.write.ETLCreateTableNode"
+   ]
+  },
+  {
+   "msg": "错误:当前活动节点(",
+   "category": "流程图",
+   "action": "用 rc flow validate 定位节点/连线问题，修正后再保存",
+   "classes": [
+    "cn.restcloud.apiflow.process.engine.controller.ESBHtmlPageProcessRest"
+   ]
+  },
+  {
+   "msg": "错误:文件在SVN中不存在:",
+   "category": "文件",
+   "action": "确认文件存在、大小与路径权限；必要时改用 SFTP",
+   "classes": [
+    "cn.restcloud.coreservice.coderepository.controller.SvnAndGitRepositoryRest"
+   ]
+  },
+  {
+   "msg": "错误:日记文件所在路径不存在,可以在core.properties文件中指定ResourceLocationPath的值解决此问题,当前错误的日记路径为",
+   "category": "文件",
+   "action": "确认文件存在、大小与路径权限；必要时改用 SFTP",
+   "classes": [
+    "cn.restcloud.etl.log.controller.ETLProcessDebugLogRest"
+   ]
+  },
+  {
+   "msg": "错误:未找到集群服务器节点,如果调度服务器也参与运行可设置esb.dispatcher.server.all",
+   "category": "流程图",
+   "action": "用 rc flow validate 定位节点/连线问题，修正后再保存",
+   "classes": [
+    "cn.restcloud.apiflow.scheduler.ESBProcessEngineDispatcher"
+   ]
+  },
+  {
+   "msg": "错误:本地文件(",
+   "category": "文件",
+   "action": "确认文件存在、大小与路径权限；必要时改用 SFTP",
+   "classes": [
+    "cn.restcloud.coreservice.coderepository.controller.SvnAndGitRepositoryRest"
+   ]
+  },
+  {
+   "msg": "错误:模拟规则(",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.framework.mock.service.GenerateDataLogic"
+   ]
+  },
+  {
+   "msg": "错误:流程",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.apiflow.scheduler.ESBSchedulerQueueDispatcher"
+   ]
+  },
+  {
+   "msg": "错误:流程(",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.apiflow.process.engine.service.ESBProcessEngine"
+   ]
+  },
+  {
+   "msg": "错误:流程实例已结束!",
+   "category": "任务调度",
+   "action": "先查运行实例与补偿记录，再决定重跑/补偿",
+   "classes": [
+    "cn.restcloud.apiflow.process.engine.controller.ESBHtmlPageProcessRest"
+   ]
+  },
+  {
+   "msg": "错误:流程当前没有活动的节点,请确认事务id是否对应了一个已经结束的流程!",
+   "category": "流程图",
+   "action": "用 rc flow validate 定位节点/连线问题，修正后再保存",
+   "classes": [
+    "cn.restcloud.etl.process.engine.service.ETLProcessEngine"
+   ]
+  },
+  {
+   "msg": "错误:流程节点(",
+   "category": "流程图",
+   "action": "用 rc flow validate 定位节点/连线问题，修正后再保存",
+   "classes": [
+    "cn.restcloud.apiflow.process.engine.drive.impl.ESBTCPNode",
+    "cn.restcloud.apiflow.process.engine.drive.impl.ESBWebServiceNode"
+   ]
+  },
+  {
+   "msg": "错误:用户(",
+   "category": "认证",
+   "action": "重新登录或刷新 token；检查账号状态与目标环境",
+   "classes": [
+    "cn.restcloud.bpm.process.engine.service.BPMProcessEngine"
+   ]
+  },
+  {
+   "msg": "错误:节点(",
+   "category": "流程图",
+   "action": "用 rc flow validate 定位节点/连线问题，修正后再保存",
+   "classes": [
+    "cn.restcloud.apiflow.process.engine.drive.impl.write.impl.ESBJdbcWriteNodeServiceImpl",
+    "cn.restcloud.etl.process.engine.drive.impl.write.impl.ETLDeleteTableDataServiceImpl",
+    "cn.restcloud.etl.process.engine.drive.impl.write.impl.ETLJdbcWriteNodeServiceImpl",
+    "cn.restcloud.etl.process.engine.drive.impl.write.impl.ETLTableBatchWriteNodeServiceImpl"
+   ]
+  },
+  {
+   "msg": "错误:要安装的版本文件",
+   "category": "文件",
+   "action": "确认文件存在、大小与路径权限；必要时改用 SFTP",
+   "classes": [
+    "cn.restcloud.appassembly.service.AppAssemblyVersionUtil",
+    "cn.restcloud.designer.version.service.AppVersionUtil"
+   ]
+  },
+  {
+   "msg": "错误:要输出的html代码为空null!",
+   "category": "代码/脚本",
+   "action": "检查脚本语法与沙箱限制，用最小脚本复现",
+   "classes": [
+    "cn.restcloud.framework.view.impl.HtmlView"
+   ]
+  },
+  {
+   "msg": "错误:规则(",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.apiflow.rule.service.ESBProcessRuleUtil",
+    "cn.restcloud.bpm.rule.service.BPMProcessRuleUtil"
+   ]
+  },
+  {
+   "msg": "错误:规则不存在",
+   "category": "资源不存在",
+   "action": "确认 id/名称并刷新列表；平台有时用 500 表示资源不存在",
+   "classes": [
+    "cn.restcloud.apiflow.rule.service.ESBProcessRuleUtil",
+    "cn.restcloud.bpm.rule.service.BPMProcessRuleUtil",
+    "cn.restcloud.connect.sap.controller.SAPRFC2APIRest",
+    "cn.restcloud.connect.sap.controller.SapRFCExecuteEngine",
+    "cn.restcloud.etl.rule.service.ETLProcessRuleUtil"
+   ]
+  },
+  {
+   "msg": "错误:计算数据模型(",
+   "category": "数据模型",
+   "action": "刷新元数据/模型缓存，确认模型已发布",
+   "classes": [
+    "cn.restcloud.coreservice.dm.controller.ModelConfigRest"
+   ]
+  },
+  {
+   "msg": "错误:输出节点(",
+   "category": "流程图",
+   "action": "用 rc flow validate 定位节点/连线问题，修正后再保存",
+   "classes": [
+    "cn.restcloud.apiflow.process.engine.drive.impl.write.impl.ESBJdbcWriteNodeServiceImpl",
+    "cn.restcloud.etl.process.engine.drive.impl.write.ETLGreenplumCopyWriteNode",
+    "cn.restcloud.etl.process.engine.drive.impl.write.impl.ETLJdbcWriteNodeServiceImpl"
+   ]
+  },
+  {
+   "msg": "错误:链接注册中心时出错:",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.discovery.dis.client.service.ClientDiscoveryHeartBeat"
+   ]
+  },
+  {
+   "msg": "错误信息",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.apiportal.controller.ApiPortalExportToWordRest",
+    "cn.restcloud.framework.notification.util.NotificationPushUtil"
+   ]
+  },
+  {
+   "msg": "错误信息:",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.apiflow.process.engine.service.db.ESBDataRdbUtil",
+    "cn.restcloud.etl.process.engine.service.db.ETLRdbUtil"
+   ]
+  },
+  {
+   "msg": "错误列:[",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.framework.core.classloader.ClassLoaderUtil"
+   ]
+  },
+  {
+   "msg": "错误原因",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.apiflow.scheduler.ESBSchedulerQueueDispatcher"
+   ]
+  },
+  {
+   "msg": "错误提示 :找不到视图bean viewid",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.framework.view.util.ViewUtil"
+   ]
+  },
+  {
+   "msg": "错误提示:ESB流程状态监测",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.apiflow.scheduler.ESBSchedulerProcessStatusStarter"
+   ]
+  },
+  {
+   "msg": "错误提示:ETL元数据变更检测",
+   "category": "数据模型",
+   "action": "刷新元数据/模型缓存，确认模型已发布",
+   "classes": [
+    "cn.restcloud.etl.dataquality.scheduler.ETLSchedulerMetaChangeStarter"
+   ]
+  },
+  {
+   "msg": "错误提示:ETL数据质量",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.etl.dataquality.scheduler.ETLSchedulerDataCountStarter"
+   ]
+  },
+  {
+   "msg": "错误提示:ETL数据质量分析检测",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.etl.dataquality.scheduler.ETLSchedulerDataContentStarter"
+   ]
+  },
+  {
+   "msg": "错误提示:ETL数据质量异常数据量检测",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.etl.dataquality.scheduler.ETLSchedulerDataChangeStarter"
+   ]
+  },
+  {
+   "msg": "错误提示:ETL流程状态监测",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.etl.dataquality.scheduler.ETLSchedulerProcessStatusStarter"
+   ]
+  },
+  {
+   "msg": "错误提示:根据服务实例名(",
+   "category": "任务调度",
+   "action": "先查运行实例与补偿记录，再决定重跑/补偿",
+   "classes": [
+    "cn.restcloud.framework.blance.service.LocalServiceNameUtil"
+   ]
+  },
+  {
+   "msg": "错误提示:流程(",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.apiflow.process.engine.service.ESBProcessEngine"
+   ]
+  },
+  {
+   "msg": "错误提示:流程初始化后未找到活动的节点!",
+   "category": "流程图",
+   "action": "用 rc flow validate 定位节点/连线问题，修正后再保存",
+   "classes": [
+    "cn.restcloud.apiflow.process.engine.service.ESBProcessEngine"
+   ]
+  },
+  {
+   "msg": "错误提示:热加载类",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.framework.core.classloader.ClassLoaderUtil"
+   ]
+  },
+  {
+   "msg": "错误提示:选择JSON自动XML时请在自定义的XML模板中填写",
+   "category": "数据格式",
+   "action": "用最小 JSON/XML 样例校验格式与编码",
+   "classes": [
+    "cn.restcloud.gateway.dispatcher.forward.WebServiceForwardRest"
+   ]
+  },
+  {
+   "msg": "错误数据",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.etl.dataquality.datacontent.controller.ETLDataQualityContentErrorDataRest"
+   ]
+  },
+  {
+   "msg": "错误数据.xls",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.etl.dataquality.datacontent.controller.ETLDataQualityContentErrorDataRest"
+   ]
+  },
+  {
+   "msg": "错误时间段",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.apiflow.scheduler.ESBSchedulerInsHistoryDispatcher"
+   ]
+  },
+  {
+   "msg": "错误未定义",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.datav.util.bigMap.RestStandard"
+   ]
+  },
+  {
+   "msg": "错误消息:",
+   "category": "消息",
+   "action": "检查 topic/group/broker 与消费位点",
+   "classes": [
+    "cn.restcloud.discovery.dis.server.service.SchedulerCheckServerState"
+   ]
+  },
+  {
+   "msg": "错误的id号",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.appassembly.controller.AppVersionController",
+    "cn.restcloud.designer.version.controller.AppVersionRest"
+   ]
+  },
+  {
+   "msg": "错误的JSON数据格式",
+   "category": "数据格式",
+   "action": "用最小 JSON/XML 样例校验格式与编码",
+   "classes": [
+    "cn.restcloud.etl.process.engine.drive.impl.file.ETLTxtFileReadNode"
+   ]
+  },
+  {
+   "msg": "错误的字段串格式",
+   "category": "数据库",
+   "action": "用 rc datasource test 验证连接，再用最小 SQL 复现",
+   "classes": [
+    "cn.restcloud.etl.process.engine.drive.impl.read.ETLRedisReadNode"
+   ]
+  },
+  {
+   "msg": "错误码定义",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.apiportal.controller.ApiPortalExportToWordRest"
+   ]
+  },
+  {
+   "msg": "错误码标准管理",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.standardmgr.errorcode.controller.StdErrorCodeRest"
+   ]
+  },
+  {
+   "msg": "错误码标准管理DaoImpl",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.standardmgr.errorcode.dao.impl.StdErrorCodeDaoImpl"
+   ]
+  },
+  {
+   "msg": "错误码预警",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.gateway.security.controller.GatewaySecurityConfigRest"
+   ]
+  },
+  {
+   "msg": "错误码预警规则",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.gateway.waring.service.impl.ResponseCodeWaringTriggerImpl"
+   ]
+  },
+  {
+   "msg": "错误编码",
+   "category": "数据格式",
+   "action": "用最小 JSON/XML 样例校验格式与编码",
+   "classes": [
+    "cn.restcloud.gateway.monitor.controller.GatewayMonitorRest"
+   ]
+  },
+  {
+   "msg": "错误行:[",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.framework.core.classloader.ClassLoaderUtil"
+   ]
+  },
+  {
+   "msg": "错误详细描述",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.apiportal.controller.ApiPortalExportToWordRest"
+   ]
+  },
+  {
+   "msg": "防重复提交生成唯一提交号",
+   "category": "数据库",
+   "action": "用 rc datasource test 验证连接，再用最小 SQL 复现",
+   "classes": [
+    "cn.restcloud.gateway.security.controller.ReSubmitRest"
+   ]
+  },
+  {
+   "msg": "防重复提交规则",
+   "category": "资源冲突",
+   "action": "先查询查重，改用唯一编码/名称",
+   "classes": [
+    "cn.restcloud.gateway.security.service.impl.ResubmitRuleCheckRuleImpl"
+   ]
+  },
+  {
+   "msg": "防重复提交配置",
+   "category": "资源冲突",
+   "action": "先查询查重，改用唯一编码/名称",
+   "classes": [
+    "cn.restcloud.gateway.security.controller.GatewaySecurityConfigRest"
+   ]
+  },
+  {
+   "msg": "防重复提交随机号Dao实现类",
+   "category": "资源冲突",
+   "action": "先查询查重，改用唯一编码/名称",
+   "classes": [
+    "cn.restcloud.gateway.security.dao.impl.mongo.ReSubmitSerialNumDaoImpl",
+    "cn.restcloud.gateway.security.dao.impl.rdb.ReSubmitSerialNumDaoImpl"
+   ]
+  },
+  {
+   "msg": "集群中不存在服务器:",
+   "category": "API 资产",
+   "action": "用 rc api list/get 核对服务定义与发布状态",
+   "classes": [
+    "cn.restcloud.apiflow.process.monitor.controller.ESBProcessMonitorRest"
+   ]
+  },
+  {
+   "msg": "集群文件同步-已删除文件:",
+   "category": "文件",
+   "action": "确认文件存在、大小与路径权限；必要时改用 SFTP",
+   "classes": [
+    "cn.restcloud.framework.scheduler.service.SchedulerFileJob"
+   ]
+  },
+  {
+   "msg": "集群文件同步-已删除过期文件记录:",
+   "category": "文件",
+   "action": "确认文件存在、大小与路径权限；必要时改用 SFTP",
+   "classes": [
+    "cn.restcloud.framework.scheduler.service.SchedulerFileJob"
+   ]
+  },
+  {
+   "msg": "集群文件同步失败:",
+   "category": "文件",
+   "action": "确认文件存在、大小与路径权限；必要时改用 SFTP",
+   "classes": [
+    "cn.restcloud.framework.scheduler.service.SchedulerFileJob"
+   ]
+  },
+  {
+   "msg": "页时目标节点返回了错误信息",
+   "category": "流程图",
+   "action": "用 rc flow validate 定位节点/连线问题，修正后再保存",
+   "classes": [
+    "cn.restcloud.apiflow.process.engine.drive.impl.ESBApiNode"
+   ]
+  },
+  {
+   "msg": "页面ID不能为空",
+   "category": "参数校验",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.appassembly.controller.LowCodePageVersionController",
+    "cn.restcloud.appassembly.template.controller.LowCodePageVersionModelController",
+    "cn.restcloud.lowcode.page.controller.LowCodePageVersionRest"
+   ]
+  },
+  {
+   "msg": "页面数据不能为空",
+   "category": "参数校验",
+   "action": "补齐必填字段后重试；CLI 参数缺失会直接报 E_VALIDATION",
+   "classes": [
+    "cn.restcloud.appassembly.controller.LowCodePageVersionController",
+    "cn.restcloud.appassembly.template.controller.LowCodePageVersionModelController",
+    "cn.restcloud.lowcode.page.controller.LowCodePageVersionRest"
+   ]
+  },
+  {
+   "msg": "预警消息发送失败URL:",
+   "category": "消息",
+   "action": "检查 topic/group/broker 与消费位点",
+   "classes": [
+    "cn.restcloud.connect.sap.util.SapRFCWaringUtil$1",
+    "cn.restcloud.gateway.waring.service.WaringRuleConfigServiceUtil$1",
+    "cn.restcloud.gateway.waring.service.WaringRuleConfigServiceUtil$2",
+    "cn.restcloud.mqbus.util.MqWaringUtil$1"
+   ]
+  },
+  {
+   "msg": "预警消息推送失败!",
+   "category": "消息",
+   "action": "检查 topic/group/broker 与消费位点",
+   "classes": [
+    "cn.restcloud.gateway.waring.service.WaringRuleConfigServiceUtil"
+   ]
+  },
+  {
+   "msg": "验签签名格式错误",
+   "category": "数据格式",
+   "action": "用最小 JSON/XML 样例校验格式与编码",
+   "classes": [
+    "cn.restcloud.connect.gdb.util.RsaUtils"
+   ]
+  },
+  {
+   "msg": "验证ConfigId是否已存在",
+   "category": "资源冲突",
+   "action": "换一个唯一编码/名称，或先按名称查询并复用既有对象",
+   "classes": [
+    "cn.restcloud.coreservice.dm.controller.RdbSqlConfigRest"
+   ]
+  },
+  {
+   "msg": "验证失败",
+   "category": "平台错误",
+   "action": "按 traceId 查平台日志；补充该文案到错误目录",
+   "classes": [
+    "cn.restcloud.coreservice.login.controller.LoginRest"
+   ]
+  },
+  {
+   "msg": "验证应用ID是否已存在",
+   "category": "资源冲突",
+   "action": "换一个唯一编码/名称，或先按名称查询并复用既有对象",
+   "classes": [
+    "cn.restcloud.appassembly.controller.ApplicationController",
+    "cn.restcloud.coreservice.config.controller.ApplicationConfigRest"
+   ]
+  },
+  {
+   "msg": "验证数据模型是否已存在",
+   "category": "数据模型",
+   "action": "换一个唯一编码/名称，或先按名称查询并复用既有对象",
+   "classes": [
+    "cn.restcloud.coreservice.dm.controller.ModelConfigRest"
+   ]
+  },
+  {
+   "msg": "验证权限的唯一Id是否已存在",
+   "category": "数据库",
+   "action": "换一个唯一编码/名称，或先按名称查询并复用既有对象",
+   "classes": [
+    "cn.restcloud.coreservice.permission.controller.PermissionConfigRest"
+   ]
+  },
+  {
+   "msg": "验证用户是否已存在",
+   "category": "认证",
+   "action": "换一个唯一编码/名称，或先按名称查询并复用既有对象",
+   "classes": [
+    "cn.restcloud.coreservice.org.controller.OrgPersonsRest"
+   ]
+  },
+  {
+   "msg": "验证角色id是否已存在",
+   "category": "权限",
+   "action": "换一个唯一编码/名称，或先按名称查询并复用既有对象",
+   "classes": [
+    "cn.restcloud.coreservice.org.controller.OrgRolesRest"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,303 @@
+{
+ "id": "fanout-aggregate",
+ "name": "并行扇出/聚合",
+ "category": "并行",
+ "desc": "并行调用两个下游 → 聚合网关汇合 → 返回",
+ "model": {
+  "nodeDataArray": [
+   {
+    "key": "E00001",
+    "nodeType": "start",
+    "text": "开始",
+    "nodeName": "开始",
+    "name": "E00001",
+    "locLeft": 260,
+    "locTop": 265,
+    "flowType": "NewStartNode",
+    "showNodeType": "Old",
+    "titleType": "text",
+    "icon": "start-esb",
+    "systemFlag": 1,
+    "err": false,
+    "skipChecking": "0"
+   },
+   {
+    "key": "G00001",
+    "nodeType": "gateWay",
+    "text": "并行网关",
+    "nodeName": "并行网关",
+    "name": "G00001",
+    "locLeft": 510,
+    "locTop": 265,
+    "flowType": "BoxNode",
+    "showNodeType": "Old",
+    "titleType": "text",
+    "icon": "gateWay-esb",
+    "systemFlag": 1,
+    "err": false,
+    "skipChecking": "0"
+   },
+   {
+    "key": "T00001",
+    "nodeType": "apiNode",
+    "text": "并行调用 A",
+    "nodeName": "并行调用 A",
+    "name": "T00001",
+    "locLeft": 760,
+    "locTop": 265,
+    "flowType": "BoxNode",
+    "showNodeType": "Old",
+    "titleType": "text",
+    "icon": "apiNode-esb",
+    "systemFlag": 1,
+    "err": false,
+    "skipChecking": "0"
+   },
+   {
+    "key": "T00002",
+    "nodeType": "apiNode",
+    "text": "并行调用 B",
+    "nodeName": "并行调用 B",
+    "name": "T00002",
+    "locLeft": 760,
+    "locTop": 395,
+    "flowType": "BoxNode",
+    "showNodeType": "Old",
+    "titleType": "text",
+    "icon": "apiNode-esb",
+    "systemFlag": 1,
+    "err": false,
+    "skipChecking": "0"
+   },
+   {
+    "key": "G00002",
+    "nodeType": "gateWay",
+    "text": "聚合网关",
+    "nodeName": "聚合网关",
+    "name": "G00002",
+    "locLeft": 1010,
+    "locTop": 265,
+    "flowType": "BoxNode",
+    "showNodeType": "Old",
+    "titleType": "text",
+    "icon": "gateWay-esb",
+    "systemFlag": 1,
+    "err": false,
+    "skipChecking": "0"
+   },
+   {
+    "key": "T00003",
+    "nodeType": "returnDataNode",
+    "text": "返回结果",
+    "nodeName": "返回结果",
+    "name": "T00003",
+    "locLeft": 1260,
+    "locTop": 265,
+    "flowType": "BoxNode",
+    "showNodeType": "Old",
+    "titleType": "text",
+    "icon": "returnDataNode-esb",
+    "systemFlag": 1,
+    "err": false,
+    "skipChecking": "0"
+   },
+   {
+    "key": "E00002",
+    "nodeType": "end",
+    "text": "结束",
+    "nodeName": "结束",
+    "name": "E00002",
+    "locLeft": 1510,
+    "locTop": 265,
+    "flowType": "NewStartNode",
+    "showNodeType": "Old",
+    "titleType": "text",
+    "icon": "end-esb",
+    "systemFlag": 1,
+    "err": false,
+    "skipChecking": "0"
+   }
+  ],
+  "linkDataArray": [
+   {
+    "routerId": "R00001",
+    "from": "E00001",
+    "to": "G00001",
+    "label": "NO_SHOW",
+    "lineType": "Curved",
+    "assertCondition": "0"
+   },
+   {
+    "routerId": "R00002",
+    "from": "G00001",
+    "to": "T00001",
+    "label": "NO_SHOW",
+    "lineType": "Curved",
+    "assertCondition": "0"
+   },
+   {
+    "routerId": "R00003",
+    "from": "G00001",
+    "to": "T00002",
+    "label": "NO_SHOW",
+    "lineType": "Curved",
+    "assertCondition": "0"
+   },
+   {
+    "routerId": "R00004",
+    "from": "T00001",
+    "to": "G00002",
+    "label": "NO_SHOW",
+    "lineType": "Curved",
+    "assertCondition": "0"
+   },
+   {
+    "routerId": "R00005",
+    "from": "T00002",
+    "to": "G00002",
+    "label": "NO_SHOW",
+    "lineType": "Curved",
+    "assertCondition": "0"
+   },
+   {
+    "routerId": "R00006",
+    "from": "G00002",
+    "to": "T00003",
+    "label": "NO_SHOW",
+    "lineType": "Curved",
+    "assertCondition": "0"
+   },
+   {
+    "routerId": "R00007",
+    "from": "T00003",
+    "to": "E00002",
+    "label": "NO_SHOW",
+    "lineType": "Curved",
+    "assertCondition": "0"
+   }
+  ],
+  "transform": 1,
+  "translate": {
+   "x": 0,
+   "y": 0
+  },
+  "detailFlag": false
+ },
+ "props": {
+  "G00001": {
+   "pNodeId": "G00001",
+   "pNodeType": "gateWay",
+   "pNodeName": "并行网关",
+   "gatewayType": "2"
+  },
+  "T00001": {
+   "pNodeId": "T00001",
+   "pNodeType": "apiNode",
+   "pNodeName": "并行调用 A",
+   "methodType": "GET",
+   "connectTimeout": "10",
+   "retryNum": "1"
+  },
+  "T00002": {
+   "pNodeId": "T00002",
+   "pNodeType": "apiNode",
+   "pNodeName": "并行调用 B",
+   "methodType": "GET",
+   "connectTimeout": "10",
+   "retryNum": "1"
+  },
+  "G00002": {
+   "pNodeId": "G00002",
+   "pNodeType": "gateWay",
+   "pNodeName": "聚合网关",
+   "gatewayType": "2",
+   "joinNodeId": "G00001"
+  },
+  "R00001": {
+   "pNodeId": "R00001",
+   "pNodeType": "router",
+   "pNodeName": "R00001",
+   "sourceId": "E00001",
+   "targetId": "G00001",
+   "order": "1",
+   "async": "false",
+   "asyncFlag": "0",
+   "clearProcessMainData": "0",
+   "serialLock": "0"
+  },
+  "R00002": {
+   "pNodeId": "R00002",
+   "pNodeType": "router",
+   "pNodeName": "R00002",
+   "sourceId": "G00001",
+   "targetId": "T00001",
+   "order": "2",
+   "async": "false",
+   "asyncFlag": "0",
+   "clearProcessMainData": "0",
+   "serialLock": "0"
+  },
+  "R00003": {
+   "pNodeId": "R00003",
+   "pNodeType": "router",
+   "pNodeName": "R00003",
+   "sourceId": "G00001",
+   "targetId": "T00002",
+   "order": "3",
+   "async": "false",
+   "asyncFlag": "0",
+   "clearProcessMainData": "0",
+   "serialLock": "0"
+  },
+  "R00004": {
+   "pNodeId": "R00004",
+   "pNodeType": "router",
+   "pNodeName": "R00004",
+   "sourceId": "T00001",
+   "targetId": "G00002",
+   "order": "4",
+   "async": "false",
+   "asyncFlag": "0",
+   "clearProcessMainData": "0",
+   "serialLock": "0"
+  },
+  "R00005": {
+   "pNodeId": "R00005",
+   "pNodeType": "router",
+   "pNodeName": "R00005",
+   "sourceId": "T00002",
+   "targetId": "G00002",
+   "order": "5",
+   "async": "false",
+   "asyncFlag": "0",
+   "clearProcessMainData": "0",
+   "serialLock": "0"
+  },
+  "R00006": {
+   "pNodeId": "R00006",
+   "pNodeType": "router",
+   "pNodeName": "R00006",
+   "sourceId": "G00002",
+   "targetId": "T00003",
+   "order": "6",
+   "async": "false",
+   "asyncFlag": "0",
+   "clearProcessMainData": "0",
+   "serialLock": "0"
+  },
+  "R00007": {
+   "pNodeId": "R00007",
+   "pNodeType": "router",
+   "pNodeName": "R00007",
+   "sourceId": "T00003",
+   "targetId": "E00002",
+   "order": "7",
+   "async": "false",
+   "asyncFlag": "0",
+   "clearProcessMainData": "0",
+   "serialLock": "0"
+  }
+ },
+ "warnings": [],
+ "issues": []
+}

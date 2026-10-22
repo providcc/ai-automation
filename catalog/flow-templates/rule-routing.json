@@ -1,0 +1,242 @@
+{
+ "id": "rule-routing",
+ "name": "规则路由",
+ "category": "规则",
+ "desc": "读规则 → 按规则分流到不同子流程",
+ "model": {
+  "nodeDataArray": [
+   {
+    "key": "E00001",
+    "nodeType": "start",
+    "text": "开始",
+    "nodeName": "开始",
+    "name": "E00001",
+    "locLeft": 260,
+    "locTop": 265,
+    "flowType": "NewStartNode",
+    "showNodeType": "Old",
+    "titleType": "text",
+    "icon": "start-esb",
+    "systemFlag": 1,
+    "err": false,
+    "skipChecking": "0"
+   },
+   {
+    "key": "T00001",
+    "nodeType": "variableRuleNode",
+    "text": "读取记账规则",
+    "nodeName": "读取记账规则",
+    "name": "T00001",
+    "locLeft": 510,
+    "locTop": 265,
+    "flowType": "BoxNode",
+    "showNodeType": "Old",
+    "titleType": "text",
+    "icon": "variableRuleNode-esb",
+    "systemFlag": 1,
+    "err": false,
+    "skipChecking": "0"
+   },
+   {
+    "key": "S00001",
+    "nodeType": "subProcessNode",
+    "text": "规则 A 实现",
+    "nodeName": "规则 A 实现",
+    "name": "S00001",
+    "locLeft": 760,
+    "locTop": 265,
+    "flowType": "BoxNode",
+    "showNodeType": "Old",
+    "titleType": "text",
+    "icon": "subProcessNode-esb",
+    "systemFlag": 1,
+    "err": false,
+    "skipChecking": "0"
+   },
+   {
+    "key": "S00002",
+    "nodeType": "subProcessNode",
+    "text": "规则 B 实现",
+    "nodeName": "规则 B 实现",
+    "name": "S00002",
+    "locLeft": 760,
+    "locTop": 395,
+    "flowType": "BoxNode",
+    "showNodeType": "Old",
+    "titleType": "text",
+    "icon": "subProcessNode-esb",
+    "systemFlag": 1,
+    "err": false,
+    "skipChecking": "0"
+   },
+   {
+    "key": "E00002",
+    "nodeType": "end",
+    "text": "结束",
+    "nodeName": "结束",
+    "name": "E00002",
+    "locLeft": 1010,
+    "locTop": 265,
+    "flowType": "NewStartNode",
+    "showNodeType": "Old",
+    "titleType": "text",
+    "icon": "end-esb",
+    "systemFlag": 1,
+    "err": false,
+    "skipChecking": "0"
+   }
+  ],
+  "linkDataArray": [
+   {
+    "routerId": "R00001",
+    "from": "E00001",
+    "to": "T00001",
+    "label": "NO_SHOW",
+    "lineType": "Curved",
+    "assertCondition": "0"
+   },
+   {
+    "routerId": "R00002",
+    "from": "T00001",
+    "to": "S00001",
+    "label": "规则A",
+    "lineType": "Curved",
+    "assertCondition": "3"
+   },
+   {
+    "routerId": "R00003",
+    "from": "T00001",
+    "to": "S00002",
+    "label": "默认/规则B",
+    "lineType": "Curved",
+    "assertCondition": "6"
+   },
+   {
+    "routerId": "R00004",
+    "from": "S00001",
+    "to": "E00002",
+    "label": "NO_SHOW",
+    "lineType": "Curved",
+    "assertCondition": "0"
+   },
+   {
+    "routerId": "R00005",
+    "from": "S00002",
+    "to": "E00002",
+    "label": "NO_SHOW",
+    "lineType": "Curved",
+    "assertCondition": "0"
+   }
+  ],
+  "transform": 1,
+  "translate": {
+   "x": 0,
+   "y": 0
+  },
+  "detailFlag": false
+ },
+ "props": {
+  "T00001": {
+   "pNodeId": "T00001",
+   "pNodeType": "variableRuleNode",
+   "pNodeName": "读取记账规则",
+   "ruleId": "RULE_PLACEHOLDER"
+  },
+  "S00001": {
+   "pNodeId": "S00001",
+   "pNodeType": "subProcessNode",
+   "pNodeName": "规则 A 实现",
+   "subProcessId": "SUB_RULE_A",
+   "inDataFlag": "0",
+   "outDataFlag": "0",
+   "responseData": "1"
+  },
+  "S00002": {
+   "pNodeId": "S00002",
+   "pNodeType": "subProcessNode",
+   "pNodeName": "规则 B 实现",
+   "subProcessId": "SUB_RULE_B",
+   "inDataFlag": "0",
+   "outDataFlag": "0",
+   "responseData": "1"
+  },
+  "R00001": {
+   "pNodeId": "R00001",
+   "pNodeType": "router",
+   "pNodeName": "R00001",
+   "sourceId": "E00001",
+   "targetId": "T00001",
+   "order": "1",
+   "async": "false",
+   "asyncFlag": "0",
+   "clearProcessMainData": "0",
+   "serialLock": "0"
+  },
+  "R00002": {
+   "pNodeId": "R00002",
+   "pNodeType": "router",
+   "pNodeName": "R00002",
+   "sourceId": "T00001",
+   "targetId": "S00001",
+   "order": "2",
+   "async": "false",
+   "asyncFlag": "0",
+   "clearProcessMainData": "0",
+   "serialLock": "0",
+   "assertCondition": "3",
+   "assertionCodeType": "0",
+   "assertionCondition": "[{\"id\":\"rc_rule_\",\"group\":false,\"fieldId\":\"$.indoc.rule\",\"operator\":\"==\",\"compareValue\":\"A\"}]",
+   "condition": "function assert(engine,nodeDoc,nodeId,indoc){\n  if( indoc.get(\"rule\") == \"A\" ){\n    return 1;// 断言成立\n  }\n  return 0;// 断言失败\n}",
+   "routerCondition": ""
+  },
+  "R00003": {
+   "pNodeId": "R00003",
+   "pNodeType": "router",
+   "pNodeName": "R00003",
+   "sourceId": "T00001",
+   "targetId": "S00002",
+   "order": "3",
+   "async": "false",
+   "asyncFlag": "0",
+   "clearProcessMainData": "0",
+   "serialLock": "0",
+   "assertCondition": "6",
+   "assertionCodeType": "",
+   "assertionCondition": "",
+   "condition": "",
+   "routerCondition": ""
+  },
+  "R00004": {
+   "pNodeId": "R00004",
+   "pNodeType": "router",
+   "pNodeName": "R00004",
+   "sourceId": "S00001",
+   "targetId": "E00002",
+   "order": "4",
+   "async": "false",
+   "asyncFlag": "0",
+   "clearProcessMainData": "0",
+   "serialLock": "0"
+  },
+  "R00005": {
+   "pNodeId": "R00005",
+   "pNodeType": "router",
+   "pNodeName": "R00005",
+   "sourceId": "S00002",
+   "targetId": "E00002",
+   "order": "5",
+   "async": "false",
+   "asyncFlag": "0",
+   "clearProcessMainData": "0",
+   "serialLock": "0"
+  }
+ },
+ "warnings": [],
+ "issues": [
+  {
+   "level": "info",
+   "code": "EXPR_UNDECLARED",
+   "msg": "节点使用了 $. 表达式，但全流程没有 exportParams 声明——平台流程普遍不声明，属提示而非缺陷"
+  }
+ ]
+}

@@ -1,0 +1,10 @@
+node_modules
+dist
+.git
+reports
+catalog/live
+catalog/db
+.env
+rc.targets.json
+*.log
+.rc

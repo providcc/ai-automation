@@ -1,0 +1,68 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# 同一分支的旧运行自动取消，避免排队
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+          cache: npm
+
+      # 敏感扫描放**最前**：最便宜、且一旦命中后面全都不必跑。
+      # 扫的是"全部可发布文件"（已跟踪 + 未跟踪未忽略），不是只扫已跟踪——
+      # 新写的文件在 add 之前正是"还没进版本库也没被扫过"的窗口。
+      # 通用特征在 scripts/sensitive-scan.mjs 里；**具体词表从仓库外读**（CI secret），
+      # 词表本身（业务表名/MV 名/内部库名）不进仓库。
+      - name: Sensitive data scan
+        env:
+          DW_SENSITIVE_WORDS: ${{ secrets.DW_SENSITIVE_WORDS }}
+        run: node scripts/sensitive-scan.mjs
+
+      # 再扫一遍 git 历史：文件改掉之后旧版本仍在对象库里，push 上去照样能 `git log -p` 翻出来。
+      # 公开仓库这条必须过——只扫当前树是不够的。
+      - name: Sensitive data scan (git history)
+        env:
+          DW_SENSITIVE_WORDS: ${{ secrets.DW_SENSITIVE_WORDS }}
+        run: node scripts/sensitive-scan.mjs --history
+
+      # `npm ci` 要求 lock 与 package.json 严格一致；这一步同时验证了
+      # "新克隆的人能装得上"——workspace 增删后忘了更 lock 会在这里立刻暴露。
+      - run: npm ci
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Unit tests
+        run: npm test
+
+      - name: Coverage gate (core ≥95% lines / 90% branches / 95% funcs)
+        run: npm run test:coverage
+
+      - name: Template catalog
+        run: npm run templates
+
+      - name: Docker image build
+        run: docker build -t ai-automation:ci .
+
+      - name: Docker image smoke
+        run: |
+          set -e
+          docker run --rm ai-automation:ci rc --version
+          docker run --rm ai-automation:ci packages/cli/src/index.ts doctor | tail -3
+          docker run --rm ai-automation:ci dw --version
+          docker run --rm ai-automation:ci dw env list | tail -3

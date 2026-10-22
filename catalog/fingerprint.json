@@ -1,0 +1,86 @@
+{
+ "version": 1,
+ "algorithm": "sha256",
+ "generatedAt": "2026-10-20T15:07:07.918Z",
+ "catalogDir": "catalog",
+ "files": [
+  {
+   "file": "components.json",
+   "bytes": 110763,
+   "sha256": "cb2426d69cf105e99269eba98cb515487058b481831f0546f40231b8d2fc2b8b",
+   "count": 60
+  },
+  {
+   "file": "controllers.json",
+   "bytes": 381598,
+   "sha256": "6f9eb4ffb80f37eebc502f538725e3419dfafef15b93ba05cf939b8bc275ed97",
+   "count": 437
+  },
+  {
+   "file": "endpoints.json",
+   "bytes": 870196,
+   "sha256": "762f5c88f01c7f5f1e0722310a2e9efa4bfd38b67b771e6126eb0afcb4b067d8",
+   "count": 2265
+  },
+  {
+   "file": "error-actions.json",
+   "bytes": 7188,
+   "sha256": "330f3f3fd2782183843b6468d35f052bd8c72fb5fb858791843c9787f9563c46",
+   "count": 39
+  },
+  {
+   "file": "error-map.json",
+   "bytes": 199932,
+   "sha256": "2da2c7bb4137b34a0a9a8d67df66870505a3b889b100e845a446cb216eee84b4",
+   "count": 712
+  },
+  {
+   "file": "etl-components.json",
+   "bytes": 305733,
+   "sha256": "ce4cb18a2276f6a651043b610216bd167e1d5820cf620182dc0c3e5b71cab795",
+   "count": 184
+  },
+  {
+   "file": "expression-grammar.json",
+   "bytes": 1875,
+   "sha256": "e2b62a7bdf181115ae1109cce93d79c5ccd75fc8a71619ed8e2080c83578abbd"
+  },
+  {
+   "file": "expression-regression.json",
+   "bytes": 11735,
+   "sha256": "4e65d3d7e837a0218cbfc087ddd7607329e6e78337b33cdc69804f838feeb611",
+   "count": 50
+  },
+  {
+   "file": "node-driver-map.json",
+   "bytes": 133326,
+   "sha256": "22e16259a4b6341bdb5a1d2754c405f5aa536ac6578089f843d069eacc7cdaf2",
+   "count": 208
+  },
+  {
+   "file": "war/endpoints.json",
+   "bytes": 1035457,
+   "sha256": "d0c119c1d7c2efad30fae4d3956f66cddfa1bcbdbc9d46e69cbf516167638c1f",
+   "count": 2133
+  },
+  {
+   "file": "war/error-catalog.json",
+   "bytes": 121903,
+   "sha256": "c4dc481f29e9dd08f5c9bae859d4690da8582fdd00d91e47e3bdc85cdee28823",
+   "count": 712
+  },
+  {
+   "file": "war/models.json",
+   "bytes": 29814,
+   "sha256": "82fe8333b9fa3b73bca4fe5f577e8d8ec0e1c4ec5a858434db9b18eef42d69f2",
+   "count": 227
+  },
+  {
+   "file": "war/node-drivers.json",
+   "bytes": 103597,
+   "sha256": "aeaf4fdae30e8738acd19effa5872ba88a33a3d211045206200ca57e37eaca5f",
+   "count": 208
+  }
+ ],
+ "digest": "1fa98fdbe297e649dfa4bb54383f9544fd4fb30fa6096b5e59277326c24eb59f"
+}

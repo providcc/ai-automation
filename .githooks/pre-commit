@@ -1,0 +1,13 @@
+#!/bin/sh
+# pre-commit：只扫**暂存区**——快，且正好覆盖"这次要提交的东西"。
+# 全量扫描（含未跟踪文件）在 pre-push，因为那个窗口更长、更危险。
+#
+# 装钩子：npm install 会自动跑 `prepare` 设置 core.hooksPath=.githooks。
+# 手动装：git config core.hooksPath .githooks
+# 跳过（确认无误报时）：git commit --no-verify
+set -e
+if command -v node >/dev/null 2>&1; then
+  node scripts/sensitive-scan.mjs --staged
+else
+  echo "⚠ 未找到 node，跳过敏感扫描（CI 仍会拦）"
+fi

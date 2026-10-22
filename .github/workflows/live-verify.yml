@@ -1,0 +1,66 @@
+name: Live verify (manual)
+
+# 真实环境流程生命周期验收：需要可写环境，默认手动触发。
+# 凭据放在仓库 Secrets（RC_BASE_URL / RC_USER / RC_PASS），不写进代码或日志。
+# 目标主机必须显式放行：workflow 输入 allow-host（或 secrets.RC_ALLOW_WRITE_HOSTS）。
+
+on:
+  workflow_dispatch:
+    inputs:
+      allow-host:
+        description: '允许写入的目标主机，例如 test.example.com'
+        required: true
+      app:
+        description: '业务应用 id（流程归属）'
+        required: false
+        default: test
+  schedule:
+    # 每天 UTC 18:00（北京时间次日 02:00）跑一次真实环境验收
+    - cron: '0 18 * * *'
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+
+      - name: Check credentials
+        id: cfg
+        env:
+          RC_BASE_URL: ${{ secrets.RC_BASE_URL }}
+          RC_USER: ${{ secrets.RC_USER }}
+          RC_PASS: ${{ secrets.RC_PASS }}
+        run: |
+          if [ -n "$RC_BASE_URL" ] && [ -n "$RC_USER" ] && [ -n "$RC_PASS" ]; then
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::未配置 secrets（RC_BASE_URL / RC_USER / RC_PASS），跳过真实环境验收。"
+          fi
+
+      - name: Flow lifecycle verification
+        if: steps.cfg.outputs.ready == 'true'
+        env:
+          RC_BASE_URL: ${{ secrets.RC_BASE_URL }}
+          RC_USER: ${{ secrets.RC_USER }}
+          RC_PASS: ${{ secrets.RC_PASS }}
+          RC_PROFILE: uat
+          # 定时触发时没有 workflow input，用 secret 里的放行名单兜底
+          RC_ALLOW_WRITE_HOSTS: ${{ secrets.RC_ALLOW_WRITE_HOSTS }}
+        run: |
+          HOSTS="${{ inputs.allow-host }}"
+          if [ -z "$HOSTS" ]; then HOSTS="$RC_ALLOW_WRITE_HOSTS"; fi
+          if [ -z "$HOSTS" ]; then
+            echo "::notice::未配置放行主机（inputs.allow-host / secrets.RC_ALLOW_WRITE_HOSTS），跳过真实环境验收。"
+            exit 0
+          fi
+          for HOST in $HOSTS; do
+            node --experimental-strip-types scripts/verify-flow-lifecycle.mjs \
+              --allow-host "$HOST" \
+              --app "${{ inputs.app || 'test' }}"
+          done

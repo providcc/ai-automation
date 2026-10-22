@@ -1,0 +1,24 @@
+{
+  "//": "Copy to rc.targets.json if one deployment has multiple systems. Do not commit real hosts.",
+  "targets": [
+    {
+      "name": "gateway",
+      "baseUrl": "https://<gateway-host>/<context>",
+      "role": "gateway",
+      "network": "public"
+    },
+    {
+      "name": "orchestration",
+      "baseUrl": "https://<orchestration-host>/<context>",
+      "role": "orchestration",
+      "network": "public",
+      "default": true
+    },
+    {
+      "name": "lowcode",
+      "baseUrl": "https://<lowcode-host>/<context>",
+      "role": "lowcode",
+      "network": "public"
+    }
+  ]
+}

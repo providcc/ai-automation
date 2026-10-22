@@ -1,0 +1,19 @@
+# 统一换行：仓库里全部用 LF。
+# 没有这一条，Windows 上 checkout 会把 .sh / .mjs 换成 CRLF，
+# Docker 里的 `/bin/sh` 入口脚本会直接报 `not found`（CR 被当成 shebang 的一部分）。
+* text=auto eol=lf
+
+# 这些必须永远是 LF，且 diffs 里按文本看
+*.sh   text eol=lf
+*.mjs  text eol=lf
+*.ts   text eol=lf
+*.json text eol=lf
+*.md   text eol=lf
+
+# 二进制，别做换行转换
+*.png  binary
+*.jpg  binary
+*.gif  binary
+*.ico  binary
+*.woff binary
+*.woff2 binary

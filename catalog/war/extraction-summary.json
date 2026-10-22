@@ -1,0 +1,38 @@
+{
+ "source": "restcloud-all-6.0-poc.jar",
+ "generatedAt": "2026-10-20T12:39:29.961Z",
+ "classesParsed": 2426,
+ "endpoints": 2133,
+ "uniqueUrls": 2132,
+ "nodeDrivers": 208,
+ "models": 227,
+ "errorMessages": 712,
+ "byMethod": {
+  "POST": 956,
+  "GET": 1174,
+  "*": 3
+ },
+ "byPrefix": {
+  "/rest/esb/process": 148,
+  "/rest/etl/process": 95,
+  "/rest/core/modelconfigs": 49,
+  "/rest/etl/dataquality": 49,
+  "/rest/core/monitor": 47,
+  "/rest/core/org": 44,
+  "/rest/core/ai": 42,
+  "/rest/core/datasource": 39,
+  "/rest/apitest/testService": 36,
+  "/rest/core/services": 36,
+  "/rest/appassembly/lowcode": 32,
+  "/rest/core/report": 26,
+  "/rest/apiportal/apis": 25,
+  "/rest/discovery/config": 24,
+  "/rest/core/appVersions": 23
+ },
+ "frontendCatalog": {
+  "paths": 1864,
+  "overlap": 1710,
+  "onlyInWar": 422,
+  "onlyInFront": 154
+ }
+}

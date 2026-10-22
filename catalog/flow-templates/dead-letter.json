@@ -1,0 +1,237 @@
+{
+ "id": "dead-letter",
+ "name": "死信处理",
+ "category": "消息",
+ "desc": "消费消息 → 成功入库 / 失败转死信队列",
+ "model": {
+  "nodeDataArray": [
+   {
+    "key": "E00001",
+    "nodeType": "start",
+    "text": "开始",
+    "nodeName": "开始",
+    "name": "E00001",
+    "locLeft": 260,
+    "locTop": 265,
+    "flowType": "NewStartNode",
+    "showNodeType": "Old",
+    "titleType": "text",
+    "icon": "start-esb",
+    "systemFlag": 1,
+    "err": false,
+    "skipChecking": "0"
+   },
+   {
+    "key": "T00001",
+    "nodeType": "kafkaNode",
+    "text": "消费消息",
+    "nodeName": "消费消息",
+    "name": "T00001",
+    "locLeft": 510,
+    "locTop": 265,
+    "flowType": "BoxNode",
+    "showNodeType": "Old",
+    "titleType": "text",
+    "icon": "kafkaNode-esb",
+    "systemFlag": 1,
+    "err": false,
+    "skipChecking": "0"
+   },
+   {
+    "key": "T00002",
+    "nodeType": "jdbcWriteNode",
+    "text": "业务入库",
+    "nodeName": "业务入库",
+    "name": "T00002",
+    "locLeft": 760,
+    "locTop": 265,
+    "flowType": "BoxNode",
+    "showNodeType": "Old",
+    "titleType": "text",
+    "icon": "jdbcWriteNode-esb",
+    "systemFlag": 1,
+    "err": false,
+    "skipChecking": "0"
+   },
+   {
+    "key": "E00002",
+    "nodeType": "msgNode",
+    "text": "发送死信",
+    "nodeName": "发送死信",
+    "name": "E00002",
+    "locLeft": 760,
+    "locTop": 395,
+    "flowType": "BoxNode",
+    "showNodeType": "Old",
+    "titleType": "text",
+    "icon": "msgNode-esb",
+    "systemFlag": 1,
+    "err": false,
+    "skipChecking": "0"
+   },
+   {
+    "key": "E00003",
+    "nodeType": "end",
+    "text": "结束",
+    "nodeName": "结束",
+    "name": "E00003",
+    "locLeft": 1010,
+    "locTop": 265,
+    "flowType": "NewStartNode",
+    "showNodeType": "Old",
+    "titleType": "text",
+    "icon": "end-esb",
+    "systemFlag": 1,
+    "err": false,
+    "skipChecking": "0"
+   }
+  ],
+  "linkDataArray": [
+   {
+    "routerId": "R00001",
+    "from": "E00001",
+    "to": "T00001",
+    "label": "NO_SHOW",
+    "lineType": "Curved",
+    "assertCondition": "0"
+   },
+   {
+    "routerId": "R00002",
+    "from": "T00001",
+    "to": "E00002",
+    "label": "失败",
+    "lineType": "Curved",
+    "assertCondition": "3"
+   },
+   {
+    "routerId": "R00003",
+    "from": "T00001",
+    "to": "T00002",
+    "label": "成功/默认",
+    "lineType": "Curved",
+    "assertCondition": "6"
+   },
+   {
+    "routerId": "R00004",
+    "from": "T00002",
+    "to": "E00003",
+    "label": "NO_SHOW",
+    "lineType": "Curved",
+    "assertCondition": "0"
+   },
+   {
+    "routerId": "R00005",
+    "from": "E00002",
+    "to": "E00003",
+    "label": "NO_SHOW",
+    "lineType": "Curved",
+    "assertCondition": "0"
+   }
+  ],
+  "transform": 1,
+  "translate": {
+   "x": 0,
+   "y": 0
+  },
+  "detailFlag": false
+ },
+ "props": {
+  "T00001": {
+   "pNodeId": "T00001",
+   "pNodeType": "kafkaNode",
+   "pNodeName": "消费消息",
+   "topic": "rc-events",
+   "groupId": "rc-group"
+  },
+  "T00002": {
+   "pNodeId": "T00002",
+   "pNodeType": "jdbcWriteNode",
+   "pNodeName": "业务入库",
+   "appendFlag": "1"
+  },
+  "E00002": {
+   "pNodeId": "E00002",
+   "pNodeType": "msgNode",
+   "pNodeName": "发送死信",
+   "msgType": "1"
+  },
+  "R00001": {
+   "pNodeId": "R00001",
+   "pNodeType": "router",
+   "pNodeName": "R00001",
+   "sourceId": "E00001",
+   "targetId": "T00001",
+   "order": "1",
+   "async": "false",
+   "asyncFlag": "0",
+   "clearProcessMainData": "0",
+   "serialLock": "0"
+  },
+  "R00002": {
+   "pNodeId": "R00002",
+   "pNodeType": "router",
+   "pNodeName": "R00002",
+   "sourceId": "T00001",
+   "targetId": "E00002",
+   "order": "2",
+   "async": "false",
+   "asyncFlag": "0",
+   "clearProcessMainData": "0",
+   "serialLock": "0",
+   "assertCondition": "3",
+   "assertionCodeType": "0",
+   "assertionCondition": "[{\"id\":\"rc_success_\",\"group\":false,\"fieldId\":\"$.indoc.success\",\"operator\":\"==\",\"compareValue\":\"false\"}]",
+   "condition": "function assert(engine,nodeDoc,nodeId,indoc){\n  if( indoc.get(\"success\") == false ){\n    return 1;// 断言成立\n  }\n  return 0;// 断言失败\n}",
+   "routerCondition": ""
+  },
+  "R00003": {
+   "pNodeId": "R00003",
+   "pNodeType": "router",
+   "pNodeName": "R00003",
+   "sourceId": "T00001",
+   "targetId": "T00002",
+   "order": "3",
+   "async": "false",
+   "asyncFlag": "0",
+   "clearProcessMainData": "0",
+   "serialLock": "0",
+   "assertCondition": "6",
+   "assertionCodeType": "",
+   "assertionCondition": "",
+   "condition": "",
+   "routerCondition": ""
+  },
+  "R00004": {
+   "pNodeId": "R00004",
+   "pNodeType": "router",
+   "pNodeName": "R00004",
+   "sourceId": "T00002",
+   "targetId": "E00003",
+   "order": "4",
+   "async": "false",
+   "asyncFlag": "0",
+   "clearProcessMainData": "0",
+   "serialLock": "0"
+  },
+  "R00005": {
+   "pNodeId": "R00005",
+   "pNodeType": "router",
+   "pNodeName": "R00005",
+   "sourceId": "E00002",
+   "targetId": "E00003",
+   "order": "5",
+   "async": "false",
+   "asyncFlag": "0",
+   "clearProcessMainData": "0",
+   "serialLock": "0"
+  }
+ },
+ "warnings": [],
+ "issues": [
+  {
+   "level": "info",
+   "code": "EXPR_UNDECLARED",
+   "msg": "节点使用了 $. 表达式，但全流程没有 exportParams 声明——平台流程普遍不声明，属提示而非缺陷"
+  }
+ ]
+}

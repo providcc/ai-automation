@@ -1,0 +1,5378 @@
+{
+ "ApiDownloadNode.jsx": [
+  {
+   "key": "methodType",
+   "label": null,
+   "widget": "Select",
+   "required": false,
+   "message": null,
+   "initialValue": "\"GET\"",
+   "enum": [
+    {
+     "value": "GET",
+     "label": "GET"
+    },
+    {
+     "value": "POST",
+     "label": "POST"
+    },
+    {
+     "value": "PUT",
+     "label": "PUT"
+    },
+    {
+     "value": "DELETE",
+     "label": "DELETE"
+    }
+   ]
+  },
+  {
+   "key": "pNodeName",
+   "label": "节点名称",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "this.nodeObj.text",
+   "enum": [
+    {
+     "value": "1",
+     "label": "输出API结果到调用端"
+    },
+    {
+     "value": "0",
+     "label": "不输出API结果"
+    },
+    {
+     "value": "2",
+     "label": "多次循环调用时累加结果并输出"
+    }
+   ]
+  },
+  {
+   "key": "pNodeId",
+   "label": "节点Id",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "this.nodeObj.key",
+   "enum": [
+    {
+     "value": "1",
+     "label": "输出API结果到调用端"
+    },
+    {
+     "value": "0",
+     "label": "不输出API结果"
+    },
+    {
+     "value": "2",
+     "label": "多次循环调用时累加结果并输出"
+    }
+   ]
+  },
+  {
+   "key": "pNodeAlias",
+   "label": "节点别名",
+   "widget": "Input",
+   "required": false,
+   "message": null,
+   "initialValue": null,
+   "enum": [
+    {
+     "value": "1",
+     "label": "输出API结果到调用端"
+    },
+    {
+     "value": "0",
+     "label": "不输出API结果"
+    },
+    {
+     "value": "2",
+     "label": "多次循环调用时累加结果并输出"
+    }
+   ]
+  },
+  {
+   "key": "responseData",
+   "label": "输出结果",
+   "widget": "Select",
+   "required": false,
+   "message": null,
+   "initialValue": "\"1\"",
+   "enum": [
+    {
+     "value": "1",
+     "label": "输出API结果到调用端"
+    },
+    {
+     "value": "0",
+     "label": "不输出API结果"
+    },
+    {
+     "value": "2",
+     "label": "多次循环调用时累加结果并输出"
+    }
+   ]
+  },
+  {
+   "key": "saveRequestBody",
+   "label": "保存请求参数",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"1\"",
+   "enum": null
+  },
+  {
+   "key": "apiUrl",
+   "label": "API URL",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "\"${#config.apiserver",
+   "enum": null
+  },
+  {
+   "key": "addIdentitytoken",
+   "label": "追加认证头",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"1\"",
+   "enum": null
+  },
+  {
+   "key": "loadBalanceId",
+   "label": "负载均衡策略",
+   "widget": "AjaxSelect",
+   "required": false,
+   "message": null,
+   "initialValue": "\"WeightRandomServer\"",
+   "enum": null
+  },
+  {
+   "key": "connectTimeout",
+   "label": "请求超时时间",
+   "widget": "InputNumber",
+   "required": true,
+   "message": null,
+   "initialValue": "\"3000\"",
+   "enum": null
+  },
+  {
+   "key": "retryNum",
+   "label": "重试次数",
+   "widget": "InputNumber",
+   "required": true,
+   "message": null,
+   "initialValue": "\"0\"",
+   "enum": [
+    {
+     "value": "1",
+     "label": "HTTP请求分发给本节点的数据"
+    },
+    {
+     "value": "3",
+     "label": "HTTP请求的二进制流数据作为输入流"
+    },
+    {
+     "value": "2",
+     "label": "上一节点的执行结果"
+    }
+   ]
+  },
+  {
+   "key": "retrySleep",
+   "label": "重试间隔",
+   "widget": "InputNumber",
+   "required": true,
+   "message": null,
+   "initialValue": "\"0\"",
+   "enum": [
+    {
+     "value": "1",
+     "label": "HTTP请求分发给本节点的数据"
+    },
+    {
+     "value": "3",
+     "label": "HTTP请求的二进制流数据作为输入流"
+    },
+    {
+     "value": "2",
+     "label": "上一节点的执行结果"
+    },
+    {
+     "value": "4",
+     "label": "指定一个计算规则返回字符串作为输入参数"
+    },
+    {
+     "value": "0",
+     "label": "自定义一个字符串"
+    }
+   ]
+  },
+  {
+   "key": "requestBodyAuto",
+   "label": "参数获取方式",
+   "widget": "Select",
+   "required": false,
+   "message": null,
+   "initialValue": "\"1\"",
+   "enum": [
+    {
+     "value": "1",
+     "label": "HTTP请求分发给本节点的数据"
+    },
+    {
+     "value": "3",
+     "label": "HTTP请求的二进制流数据作为输入流"
+    },
+    {
+     "value": "2",
+     "label": "上一节点的执行结果"
+    },
+    {
+     "value": "4",
+     "label": "指定一个计算规则返回字符串作为输入参数"
+    },
+    {
+     "value": "0",
+     "label": "自定义一个字符串"
+    }
+   ]
+  },
+  {
+   "key": "requestBodyRuleId",
+   "label": "使用计算规则",
+   "widget": "TreeNodeSelect",
+   "required": false,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  },
+  {
+   "key": "transferHeader",
+   "label": null,
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"false\"",
+   "enum": null
+  },
+  {
+   "key": "save2variant",
+   "label": "保存方式",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"1\"",
+   "enum": null
+  },
+  {
+   "key": "downloadFolder",
+   "label": "保存目录",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "\"d:/apidownload\"",
+   "enum": null
+  },
+  {
+   "key": "downloadFileName",
+   "label": "文件名",
+   "widget": "Input",
+   "required": false,
+   "message": null,
+   "initialValue": "\"\"",
+   "enum": null
+  },
+  {
+   "key": "compensateFlag",
+   "label": "断言失败",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"1\"",
+   "enum": null
+  },
+  {
+   "key": "assertionCodeType",
+   "label": "参数编辑模式",
+   "widget": "Switch",
+   "required": false,
+   "message": null,
+   "initialValue": "true",
+   "enum": null
+  }
+ ],
+ "ApiNode.jsx": [
+  {
+   "key": "methodType",
+   "label": null,
+   "widget": "Select",
+   "required": false,
+   "message": null,
+   "initialValue": "'GET'",
+   "enum": [
+    {
+     "value": "GET",
+     "label": "GET"
+    },
+    {
+     "value": "POST",
+     "label": "POST"
+    },
+    {
+     "value": "PUT",
+     "label": "PUT"
+    },
+    {
+     "value": "DELETE",
+     "label": "DELETE"
+    },
+    {
+     "value": "PATCH",
+     "label": "PATCH"
+    }
+   ]
+  },
+  {
+   "key": "pNodeName",
+   "label": "节点名称",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "this.nodeObj.text",
+   "enum": [
+    {
+     "value": "1",
+     "label": "输出API结果到调用端"
+    },
+    {
+     "value": "0",
+     "label": "不输出API结果"
+    }
+   ]
+  },
+  {
+   "key": "pNodeId",
+   "label": "节点Id",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "this.nodeObj.key",
+   "enum": [
+    {
+     "value": "1",
+     "label": "输出API结果到调用端"
+    },
+    {
+     "value": "0",
+     "label": "不输出API结果"
+    },
+    {
+     "value": "2",
+     "label": "多次循环调用时累加结果并输出"
+    }
+   ]
+  },
+  {
+   "key": "pNodeAlias",
+   "label": "节点别名",
+   "widget": "Input",
+   "required": false,
+   "message": null,
+   "initialValue": null,
+   "enum": [
+    {
+     "value": "1",
+     "label": "输出API结果到调用端"
+    },
+    {
+     "value": "0",
+     "label": "不输出API结果"
+    },
+    {
+     "value": "2",
+     "label": "多次循环调用时累加结果并输出"
+    }
+   ]
+  },
+  {
+   "key": "responseData",
+   "label": "输出结果",
+   "widget": "Select",
+   "required": false,
+   "message": null,
+   "initialValue": "'1'",
+   "enum": [
+    {
+     "value": "1",
+     "label": "输出API结果到调用端"
+    },
+    {
+     "value": "0",
+     "label": "不输出API结果"
+    },
+    {
+     "value": "2",
+     "label": "多次循环调用时累加结果并输出"
+    }
+   ]
+  },
+  {
+   "key": "pageReadDataFlag",
+   "label": "分页读取",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "'0'",
+   "enum": null
+  },
+  {
+   "key": "pageDataJsonPath",
+   "label": "分页数据所在字段",
+   "widget": "Input",
+   "required": false,
+   "message": null,
+   "initialValue": "'$.data'",
+   "enum": null
+  },
+  {
+   "key": "endProcessFlag",
+   "label": "出错终止",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "'1'",
+   "enum": null
+  },
+  {
+   "key": "apiUrl",
+   "label": "API URL",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "'${#config.apiserver",
+   "enum": null
+  },
+  {
+   "key": "apiId",
+   "label": "选择的API的id",
+   "widget": "Input",
+   "required": false,
+   "message": null,
+   "initialValue": "''",
+   "enum": null
+  },
+  {
+   "key": "requestBodyFlag",
+   "label": "参数传递方式",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "'false'",
+   "enum": null
+  },
+  {
+   "key": "addIdentitytoken",
+   "label": "追加认证头",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "'1'",
+   "enum": null
+  },
+  {
+   "key": "asyncFlag",
+   "label": "异步调用",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "'0'",
+   "enum": null
+  },
+  {
+   "key": "responseSSE",
+   "label": "流式输出",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"0\"",
+   "enum": null
+  },
+  {
+   "key": "loadBalanceId",
+   "label": "负载均衡策略",
+   "widget": "AjaxSelect",
+   "required": false,
+   "message": null,
+   "initialValue": "'WeightRandomServer'",
+   "enum": [
+    {
+     "value": "1",
+     "label": "正向补偿(直到本节点断言成功后继续执行流程)"
+    },
+    {
+     "value": "3",
+     "label": "跳过(事后补偿本节点)"
+    },
+    {
+     "value": "0",
+     "label": "跳过(无需补偿)"
+    },
+    {
+     "value": "2",
+     "label": "终止流程"
+    },
+    {
+     "value": "4",
+     "label": "结束本节点(其他节点可继续执行)"
+    }
+   ]
+  },
+  {
+   "key": "connectTimeout",
+   "label": "请求读取超时",
+   "widget": "InputNumber",
+   "required": true,
+   "message": null,
+   "initialValue": "\"30000\"",
+   "enum": [
+    {
+     "value": "1",
+     "label": "正向补偿(直到本节点断言成功后继续执行流程)"
+    },
+    {
+     "value": "3",
+     "label": "跳过(事后补偿本节点)"
+    },
+    {
+     "value": "0",
+     "label": "跳过(无需补偿)"
+    },
+    {
+     "value": "2",
+     "label": "终止流程"
+    },
+    {
+     "value": "4",
+     "label": "结束本节点(其他节点可继续执行)"
+    }
+   ]
+  },
+  {
+   "key": "compensateFlag",
+   "label": "断言失败",
+   "widget": "Select",
+   "required": false,
+   "message": null,
+   "initialValue": "'1'",
+   "enum": [
+    {
+     "value": "1",
+     "label": "正向补偿(直到本节点断言成功后继续执行流程)"
+    },
+    {
+     "value": "3",
+     "label": "跳过(事后补偿本节点)"
+    },
+    {
+     "value": "0",
+     "label": "跳过(无需补偿)"
+    },
+    {
+     "value": "2",
+     "label": "终止流程"
+    },
+    {
+     "value": "4",
+     "label": "结束本节点(其他节点可继续执行)"
+    }
+   ]
+  },
+  {
+   "key": "assertionCodeType",
+   "label": "参数编辑模式",
+   "widget": "Switch",
+   "required": false,
+   "message": null,
+   "initialValue": "true",
+   "enum": null
+  },
+  {
+   "key": "callbackTimeout",
+   "label": "回调超时时间",
+   "widget": "InputNumber",
+   "required": true,
+   "message": null,
+   "initialValue": "formData.callbackTimeout || \"30\"",
+   "enum": null
+  },
+  {
+   "key": "tip",
+   "label": "提示信息",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "formData.tip ||\"流程需要等待业务系统进行处理\"",
+   "enum": null
+  },
+  {
+   "key": "isEnabledCallback",
+   "label": "是否开启异步回调",
+   "widget": "Switch",
+   "required": false,
+   "message": null,
+   "initialValue": "formData.isEnabledCallback === '1' ? true : false",
+   "enum": null
+  },
+  {
+   "key": "saveRequestBody",
+   "label": "保存请求参数",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "'1'",
+   "enum": null
+  },
+  {
+   "key": "saveResponseBody",
+   "label": "保存响应结果",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "'1'",
+   "enum": null
+  },
+  {
+   "key": "netConnectTimeout",
+   "label": "网络链接超时",
+   "widget": "InputNumber",
+   "required": true,
+   "message": null,
+   "initialValue": "\"10000\"",
+   "enum": null
+  },
+  {
+   "key": "retryNum",
+   "label": "重试次数",
+   "widget": "InputNumber",
+   "required": true,
+   "message": null,
+   "initialValue": "\"0\"",
+   "enum": null
+  },
+  {
+   "key": "retrySleep",
+   "label": "重试间隔",
+   "widget": "InputNumber",
+   "required": true,
+   "message": null,
+   "initialValue": "\"0\"",
+   "enum": null
+  },
+  {
+   "key": "transferHeader",
+   "label": null,
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "'false'",
+   "enum": [
+    {
+     "value": "1",
+     "label": "HTTP请求分发给本节点的数据"
+    },
+    {
+     "value": "3",
+     "label": "HTTP请求的二进制流数据作为输入流"
+    },
+    {
+     "value": "2",
+     "label": "上一节点的执行结果"
+    },
+    {
+     "value": "4",
+     "label": "指定一个计算规则返回字符串作为输入参数"
+    },
+    {
+     "value": "0",
+     "label": "自定义一个字符串"
+    }
+   ]
+  },
+  {
+   "key": "requestBodyAuto",
+   "label": "参数获取方式",
+   "widget": "Select",
+   "required": false,
+   "message": null,
+   "initialValue": "'1'",
+   "enum": [
+    {
+     "value": "1",
+     "label": "HTTP请求分发给本节点的数据"
+    },
+    {
+     "value": "3",
+     "label": "HTTP请求的二进制流数据作为输入流"
+    },
+    {
+     "value": "2",
+     "label": "上一节点的执行结果"
+    },
+    {
+     "value": "4",
+     "label": "指定一个计算规则返回字符串作为输入参数"
+    },
+    {
+     "value": "0",
+     "label": "自定义一个字符串"
+    }
+   ]
+  },
+  {
+   "key": "requestBodyRuleId",
+   "label": "使用计算规则",
+   "widget": "TreeNodeSelect",
+   "required": false,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  }
+ ],
+ "ApiUploadNode.jsx": [
+  {
+   "key": "methodType",
+   "label": null,
+   "widget": "Select",
+   "required": false,
+   "message": null,
+   "initialValue": "\"POST\"",
+   "enum": [
+    {
+     "value": "GET",
+     "label": "GET"
+    },
+    {
+     "value": "POST",
+     "label": "POST"
+    }
+   ]
+  },
+  {
+   "key": "pNodeName",
+   "label": "节点名称",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "this.nodeObj.text",
+   "enum": null
+  },
+  {
+   "key": "pNodeId",
+   "label": "节点Id",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "this.nodeObj.key",
+   "enum": [
+    {
+     "value": "1",
+     "label": "输出API结果到调用端"
+    }
+   ]
+  },
+  {
+   "key": "apiUrl",
+   "label": "API URL",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "host + \"/api/\"",
+   "enum": [
+    {
+     "value": "1",
+     "label": "输出API结果到调用端"
+    },
+    {
+     "value": "0",
+     "label": "不输出API结果"
+    },
+    {
+     "value": "2",
+     "label": "多次循环调用时累加结果并输出"
+    }
+   ]
+  },
+  {
+   "key": "responseData",
+   "label": "输出结果",
+   "widget": "Select",
+   "required": false,
+   "message": null,
+   "initialValue": "\"1\"",
+   "enum": [
+    {
+     "value": "1",
+     "label": "输出API结果到调用端"
+    },
+    {
+     "value": "0",
+     "label": "不输出API结果"
+    },
+    {
+     "value": "2",
+     "label": "多次循环调用时累加结果并输出"
+    }
+   ]
+  },
+  {
+   "key": "addIdentitytoken",
+   "label": "追加认证头",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"1\"",
+   "enum": null
+  },
+  {
+   "key": "connectTimeout",
+   "label": "请求超时时间",
+   "widget": "InputNumber",
+   "required": true,
+   "message": null,
+   "initialValue": "\"60000\"",
+   "enum": [
+    {
+     "value": "file",
+     "label": "服务器目录已存在的文件"
+    },
+    {
+     "value": "json",
+     "label": "上一节点数据转JSON文件后上传"
+    }
+   ]
+  },
+  {
+   "key": "retryNum",
+   "label": "重试次数",
+   "widget": "InputNumber",
+   "required": true,
+   "message": null,
+   "initialValue": "\"0\"",
+   "enum": [
+    {
+     "value": "file",
+     "label": "服务器目录已存在的文件"
+    },
+    {
+     "value": "json",
+     "label": "上一节点数据转JSON文件后上传"
+    },
+    {
+     "value": "http",
+     "label": "HTTP请求中的附件和参数(FormData提交)"
+    },
+    {
+     "value": "stream",
+     "label": "所有HTTP请求的二进制数据(binary提交)"
+    }
+   ]
+  },
+  {
+   "key": "retrySleep",
+   "label": "重试间隔",
+   "widget": "InputNumber",
+   "required": true,
+   "message": null,
+   "initialValue": "\"0\"",
+   "enum": [
+    {
+     "value": "file",
+     "label": "服务器目录已存在的文件"
+    },
+    {
+     "value": "json",
+     "label": "上一节点数据转JSON文件后上传"
+    },
+    {
+     "value": "http",
+     "label": "HTTP请求中的附件和参数(FormData提交)"
+    },
+    {
+     "value": "stream",
+     "label": "所有HTTP请求的二进制数据(binary提交)"
+    }
+   ]
+  },
+  {
+   "key": "fileType",
+   "label": "数据来源",
+   "widget": "Select",
+   "required": false,
+   "message": null,
+   "initialValue": "\"file\"",
+   "enum": [
+    {
+     "value": "file",
+     "label": "服务器目录已存在的文件"
+    },
+    {
+     "value": "json",
+     "label": "上一节点数据转JSON文件后上传"
+    },
+    {
+     "value": "http",
+     "label": "HTTP请求中的附件和参数(FormData提交)"
+    },
+    {
+     "value": "stream",
+     "label": "所有HTTP请求的二进制数据(binary提交)"
+    }
+   ]
+  },
+  {
+   "key": "binaryFlag",
+   "label": "数据上传方式",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"0\"",
+   "enum": null
+  },
+  {
+   "key": "controlName",
+   "label": "控件名称",
+   "widget": "Input",
+   "required": false,
+   "message": null,
+   "initialValue": "\"file\"",
+   "enum": null
+  },
+  {
+   "key": "localFolder",
+   "label": "本地文件目录",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "\"d:/etlfile\"",
+   "enum": null
+  },
+  {
+   "key": "fileFrom",
+   "label": "文件来源",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"1\"",
+   "enum": null
+  },
+  {
+   "key": "fileName",
+   "label": "指定文件名",
+   "widget": "Input",
+   "required": false,
+   "message": null,
+   "initialValue": "\"test.json\"",
+   "enum": null
+  },
+  {
+   "key": "fileExtension",
+   "label": "文件后缀",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "\"*\"",
+   "enum": null
+  },
+  {
+   "key": "lastUpdateFile",
+   "label": "按修改时间上传",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"0\"",
+   "enum": null
+  },
+  {
+   "key": "deleteFile",
+   "label": "上传后",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"0\"",
+   "enum": null
+  },
+  {
+   "key": "transferHeader",
+   "label": null,
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"false\"",
+   "enum": null
+  },
+  {
+   "key": "compensateFlag",
+   "label": "断言失败",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"2\"",
+   "enum": null
+  },
+  {
+   "key": "assertionCodeType",
+   "label": "参数编辑模式",
+   "widget": "Switch",
+   "required": false,
+   "message": null,
+   "initialValue": "true",
+   "enum": null
+  }
+ ],
+ "AsyncCallbackNode.jsx": [
+  {
+   "key": "pNodeName",
+   "label": "节点名称",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "this.nodeObj.text",
+   "enum": [
+    {
+     "value": "1",
+     "label": "输出结果到调用端和后继节点"
+    },
+    {
+     "value": "0",
+     "label": "不输出结果"
+    },
+    {
+     "value": "2",
+     "label": "多次循环调用时累加结果并输出"
+    }
+   ]
+  },
+  {
+   "key": "pNodeId",
+   "label": "节点Id",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "this.nodeObj.key",
+   "enum": [
+    {
+     "value": "1",
+     "label": "输出结果到调用端和后继节点"
+    },
+    {
+     "value": "0",
+     "label": "不输出结果"
+    },
+    {
+     "value": "2",
+     "label": "多次循环调用时累加结果并输出"
+    }
+   ]
+  },
+  {
+   "key": "responseData",
+   "label": "输出结果",
+   "widget": "Select",
+   "required": false,
+   "message": null,
+   "initialValue": "\"0\"",
+   "enum": [
+    {
+     "value": "1",
+     "label": "输出结果到调用端和后继节点"
+    },
+    {
+     "value": "0",
+     "label": "不输出结果"
+    },
+    {
+     "value": "2",
+     "label": "多次循环调用时累加结果并输出"
+    }
+   ]
+  },
+  {
+   "key": "callbackTimeout",
+   "label": "回调超时时间",
+   "widget": "InputNumber",
+   "required": true,
+   "message": null,
+   "initialValue": "\"30\"",
+   "enum": null
+  },
+  {
+   "key": "tip",
+   "label": "提示信息",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "\"流程需要等待业务系统进行处理\"",
+   "enum": null
+  }
+ ],
+ "AsyncQueueNode.jsx": [
+  {
+   "key": "pNodeName",
+   "label": "节点名称",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "this.nodeObj.text",
+   "enum": null
+  },
+  {
+   "key": "pNodeId",
+   "label": "节点Id",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "this.nodeObj.key",
+   "enum": null
+  },
+  {
+   "key": "threadPoolNum",
+   "label": "并发线程",
+   "widget": "InputNumber",
+   "required": true,
+   "message": null,
+   "initialValue": "\"1\"",
+   "enum": null
+  },
+  {
+   "key": "sleepTime",
+   "label": "间隔时间",
+   "widget": "InputNumber",
+   "required": true,
+   "message": null,
+   "initialValue": "100",
+   "enum": null
+  },
+  {
+   "key": "tip",
+   "label": "提示信息",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "\"流程已成功接收请求",
+   "enum": null
+  }
+ ],
+ "DataMapNode.jsx": [
+  {
+   "key": "pNodeName",
+   "label": "节点名称",
+   "widget": "Input",
+   "required": false,
+   "message": null,
+   "initialValue": "this.nodeObj.text",
+   "enum": [
+    {
+     "value": "1",
+     "label": "对流程的最终输出结果数据进行转换"
+    },
+    {
+     "value": "2",
+     "label": "仅对上一节点的输出结果进行转换"
+    }
+   ]
+  },
+  {
+   "key": "pNodeId",
+   "label": "节点Id",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "this.nodeObj.key",
+   "enum": [
+    {
+     "value": "1",
+     "label": "对流程的最终输出结果数据进行转换"
+    },
+    {
+     "value": "2",
+     "label": "仅对上一节点的输出结果进行转换"
+    }
+   ]
+  },
+  {
+   "key": "dataType",
+   "label": "要转换的数据",
+   "widget": "Select",
+   "required": false,
+   "message": null,
+   "initialValue": "\"1\"",
+   "enum": [
+    {
+     "value": "1",
+     "label": "对流程的最终输出结果数据进行转换"
+    },
+    {
+     "value": "2",
+     "label": "仅对上一节点的输出结果进行转换"
+    }
+   ]
+  },
+  {
+   "key": "objectType",
+   "label": "数据类型",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"object\"",
+   "enum": null
+  },
+  {
+   "key": "dataJsonPath",
+   "label": "字段所在层级",
+   "widget": "Input",
+   "required": false,
+   "message": null,
+   "initialValue": "\"\"",
+   "enum": null
+  },
+  {
+   "key": "debugData",
+   "label": "调试",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"1\"",
+   "enum": null
+  }
+ ],
+ "DataMergeNode.jsx": [
+  {
+   "key": "pNodeName",
+   "label": "节点名称",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  },
+  {
+   "key": "pNodeId",
+   "label": "节点Id",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  },
+  {
+   "key": "pNodeType",
+   "label": "节点类型",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  },
+  {
+   "key": "pNodeAlias",
+   "label": "节点别名",
+   "widget": "Input",
+   "required": false,
+   "message": null,
+   "initialValue": null,
+   "enum": [
+    {
+     "value": "1",
+     "label": "输出合并结果给调用端"
+    },
+    {
+     "value": "0",
+     "label": "不输出合并结果(仅作为下一节点的输入)"
+    },
+    {
+     "value": "2",
+     "label": "多次循环时累加合并结果后输出"
+    }
+   ]
+  },
+  {
+   "key": "mergeNodeList",
+   "label": "选择要合并的节点",
+   "widget": "AjaxSelect",
+   "required": true,
+   "message": null,
+   "initialValue": null,
+   "enum": [
+    {
+     "value": "1",
+     "label": "输出合并结果给调用端"
+    },
+    {
+     "value": "0",
+     "label": "不输出合并结果(仅作为下一节点的输入)"
+    },
+    {
+     "value": "2",
+     "label": "多次循环时累加合并结果后输出"
+    }
+   ]
+  },
+  {
+   "key": "responseData",
+   "label": "输出结果",
+   "widget": "Select",
+   "required": false,
+   "message": null,
+   "initialValue": "\"0\"",
+   "enum": [
+    {
+     "value": "1",
+     "label": "输出合并结果给调用端"
+    },
+    {
+     "value": "0",
+     "label": "不输出合并结果(仅作为下一节点的输入)"
+    },
+    {
+     "value": "2",
+     "label": "多次循环时累加合并结果后输出"
+    }
+   ]
+  }
+ ],
+ "DataOutputNode.jsx": [
+  {
+   "key": "pNodeName",
+   "label": "节点名称",
+   "widget": "Input",
+   "required": false,
+   "message": null,
+   "initialValue": "this.nodeObj.text",
+   "enum": [
+    {
+     "value": "1",
+     "label": "在控制台日志中输出"
+    },
+    {
+     "value": "2",
+     "label": "在调试日志中输出"
+    },
+    {
+     "value": "3",
+     "label": "输出到指定文件"
+    },
+    {
+     "value": "4",
+     "label": "不输出"
+    }
+   ]
+  },
+  {
+   "key": "pNodeId",
+   "label": "节点Id",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "this.nodeObj.key",
+   "enum": [
+    {
+     "value": "1",
+     "label": "在控制台日志中输出"
+    },
+    {
+     "value": "2",
+     "label": "在调试日志中输出"
+    },
+    {
+     "value": "3",
+     "label": "输出到指定文件"
+    },
+    {
+     "value": "4",
+     "label": "不输出"
+    }
+   ]
+  },
+  {
+   "key": "outputType",
+   "label": "输出方式",
+   "widget": "Select",
+   "required": false,
+   "message": null,
+   "initialValue": "\"1\"",
+   "enum": [
+    {
+     "value": "1",
+     "label": "在控制台日志中输出"
+    },
+    {
+     "value": "2",
+     "label": "在调试日志中输出"
+    },
+    {
+     "value": "3",
+     "label": "输出到指定文件"
+    },
+    {
+     "value": "4",
+     "label": "不输出"
+    }
+   ]
+  },
+  {
+   "key": "logFilePath",
+   "label": "指定文件路径",
+   "widget": "Input",
+   "required": false,
+   "message": null,
+   "initialValue": "\"\"",
+   "enum": null
+  }
+ ],
+ "DataSplitNode.jsx": [
+  {
+   "key": "pNodeName",
+   "label": "节点名称",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  },
+  {
+   "key": "pNodeId",
+   "label": "节点Id",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  },
+  {
+   "key": "pNodeType",
+   "label": "节点类型",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  },
+  {
+   "key": "pNodeAlias",
+   "label": "节点别名",
+   "widget": "Input",
+   "required": false,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  },
+  {
+   "key": "dataInNodeId",
+   "label": "指定要拆分的数据节点",
+   "widget": "AjaxSelect",
+   "required": false,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  },
+  {
+   "key": "dataFieldId",
+   "label": "数据体所在字段",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "\"\"",
+   "enum": null
+  },
+  {
+   "key": "outputType",
+   "label": "输出类型",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"0\"",
+   "enum": null
+  },
+  {
+   "key": "endProcessFlag",
+   "label": "有错误时",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  },
+  {
+   "key": "second",
+   "label": "间隔时间(毫秒)",
+   "widget": "InputNumber",
+   "required": true,
+   "message": null,
+   "initialValue": "100",
+   "enum": null
+  }
+ ],
+ "DataTransformNode.jsx": [
+  {
+   "key": "pNodeName",
+   "label": "节点名称",
+   "widget": "Input",
+   "required": false,
+   "message": null,
+   "initialValue": "this.nodeObj.text",
+   "enum": [
+    {
+     "value": "1",
+     "label": "对流程的最终输出结果数据进行转换"
+    },
+    {
+     "value": "2",
+     "label": "对上一节点的输出结果进行转换"
+    },
+    {
+     "value": "3",
+     "label": "对全局变量中的数据进行转换"
+    },
+    {
+     "value": "4",
+     "label": "对HTTP传入参数进行转换"
+    }
+   ]
+  },
+  {
+   "key": "pNodeId",
+   "label": "节点Id",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "this.nodeObj.key",
+   "enum": [
+    {
+     "value": "1",
+     "label": "对流程的最终输出结果数据进行转换"
+    },
+    {
+     "value": "2",
+     "label": "对上一节点的输出结果进行转换"
+    },
+    {
+     "value": "3",
+     "label": "对全局变量中的数据进行转换"
+    },
+    {
+     "value": "4",
+     "label": "对HTTP传入参数进行转换"
+    }
+   ]
+  },
+  {
+   "key": "dataType",
+   "label": "要转换的数据",
+   "widget": "Select",
+   "required": false,
+   "message": null,
+   "initialValue": "\"2\"",
+   "enum": [
+    {
+     "value": "1",
+     "label": "对流程的最终输出结果数据进行转换"
+    },
+    {
+     "value": "2",
+     "label": "对上一节点的输出结果进行转换"
+    },
+    {
+     "value": "3",
+     "label": "对全局变量中的数据进行转换"
+    },
+    {
+     "value": "4",
+     "label": "对HTTP传入参数进行转换"
+    }
+   ]
+  },
+  {
+   "key": "objectType",
+   "label": "数据类型",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"object\"",
+   "enum": null
+  },
+  {
+   "key": "dataJsonPath",
+   "label": "字段所在层级",
+   "widget": "Input",
+   "required": false,
+   "message": null,
+   "initialValue": "\"\"",
+   "enum": null
+  },
+  {
+   "key": "debugData",
+   "label": "调试",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"1\"",
+   "enum": null
+  }
+ ],
+ "DataValueMapNode.jsx": [
+  {
+   "key": "pNodeName",
+   "label": "节点名称",
+   "widget": "Input",
+   "required": false,
+   "message": null,
+   "initialValue": "this.nodeObj.text",
+   "enum": [
+    {
+     "value": "1",
+     "label": "对流程的最终输出结果数据进行转换"
+    },
+    {
+     "value": "2",
+     "label": "仅对上一节点的输出结果进行转换"
+    },
+    {
+     "value": "3",
+     "label": "对全局变量中的数据进行转换"
+    }
+   ]
+  },
+  {
+   "key": "pNodeId",
+   "label": "节点Id",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "this.nodeObj.key",
+   "enum": [
+    {
+     "value": "1",
+     "label": "对流程的最终输出结果数据进行转换"
+    },
+    {
+     "value": "2",
+     "label": "仅对上一节点的输出结果进行转换"
+    },
+    {
+     "value": "3",
+     "label": "对全局变量中的数据进行转换"
+    }
+   ]
+  },
+  {
+   "key": "dataType",
+   "label": "要转换的数据",
+   "widget": "Select",
+   "required": false,
+   "message": null,
+   "initialValue": "\"1\"",
+   "enum": [
+    {
+     "value": "1",
+     "label": "对流程的最终输出结果数据进行转换"
+    },
+    {
+     "value": "2",
+     "label": "仅对上一节点的输出结果进行转换"
+    },
+    {
+     "value": "3",
+     "label": "对全局变量中的数据进行转换"
+    }
+   ]
+  },
+  {
+   "key": "objectType",
+   "label": "数据类型",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"object\"",
+   "enum": null
+  },
+  {
+   "key": "dataJsonPath",
+   "label": "字段所在层级",
+   "widget": "Input",
+   "required": false,
+   "message": null,
+   "initialValue": "\"\"",
+   "enum": null
+  },
+  {
+   "key": "debugData",
+   "label": "调试",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"1\"",
+   "enum": null
+  }
+ ],
+ "DingNode.jsx": [
+  {
+   "key": "pNodeName",
+   "label": "节点名称",
+   "widget": "Input",
+   "required": false,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  },
+  {
+   "key": "pNodeId",
+   "label": "节点Id",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  },
+  {
+   "key": "pNodeType",
+   "label": "节点类型",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  },
+  {
+   "key": "webhook",
+   "label": "WebHook",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "\"${#config.webhook",
+   "enum": null
+  },
+  {
+   "key": "secret",
+   "label": "Secret",
+   "widget": "Input",
+   "required": false,
+   "message": null,
+   "initialValue": "\"\"",
+   "enum": null
+  },
+  {
+   "key": "msgType",
+   "label": "消息类型",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"text\"",
+   "enum": null
+  },
+  {
+   "key": "title",
+   "label": null,
+   "widget": "Input",
+   "required": false,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  },
+  {
+   "key": "messageUrl",
+   "label": "链接URL",
+   "widget": "Input",
+   "required": false,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  },
+  {
+   "key": "body",
+   "label": "消息内容",
+   "widget": "Input.TextArea",
+   "required": true,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  }
+ ],
+ "DubboNode.jsx": [
+  {
+   "key": "pNodeName",
+   "label": "节点名称",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "this.nodeObj.text",
+   "enum": null
+  },
+  {
+   "key": "pNodeId",
+   "label": "节点Id",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "this.nodeObj.key",
+   "enum": null
+  },
+  {
+   "key": "pNodeAlias",
+   "label": "节点别名",
+   "widget": "Input",
+   "required": false,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  },
+  {
+   "key": "responseData",
+   "label": "输出结果",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"1\"",
+   "enum": null
+  },
+  {
+   "key": "applicationName",
+   "label": "Dubbo服务名",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "\"${#config.esb.dubboprovider",
+   "enum": null
+  },
+  {
+   "key": "zookeeper",
+   "label": "zookeeper地址",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "\"${#config.esb.zookeeper",
+   "enum": null
+  },
+  {
+   "key": "interface",
+   "label": "接口Class路径",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": null,
+   "enum": [
+    {
+     "value": "Random",
+     "label": "随机"
+    },
+    {
+     "value": "RoundRobin",
+     "label": "按权重轮询"
+    }
+   ]
+  },
+  {
+   "key": "methodName",
+   "label": "接口的方法",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": null,
+   "enum": [
+    {
+     "value": "Random",
+     "label": "随机"
+    },
+    {
+     "value": "RoundRobin",
+     "label": "按权重轮询"
+    },
+    {
+     "value": "LeastActive",
+     "label": "最少活跃调用数"
+    },
+    {
+     "value": "ConsistentHash",
+     "label": "一致性Hash"
+    }
+   ]
+  },
+  {
+   "key": "asyncFlag",
+   "label": "异步调用",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"0\"",
+   "enum": [
+    {
+     "value": "Random",
+     "label": "随机"
+    },
+    {
+     "value": "RoundRobin",
+     "label": "按权重轮询"
+    },
+    {
+     "value": "LeastActive",
+     "label": "最少活跃调用数"
+    },
+    {
+     "value": "ConsistentHash",
+     "label": "一致性Hash"
+    }
+   ]
+  },
+  {
+   "key": "loadBalanceId",
+   "label": "负载均衡策略",
+   "widget": "Select",
+   "required": false,
+   "message": null,
+   "initialValue": "\"\"",
+   "enum": [
+    {
+     "value": "Random",
+     "label": "随机"
+    },
+    {
+     "value": "RoundRobin",
+     "label": "按权重轮询"
+    },
+    {
+     "value": "LeastActive",
+     "label": "最少活跃调用数"
+    },
+    {
+     "value": "ConsistentHash",
+     "label": "一致性Hash"
+    }
+   ]
+  },
+  {
+   "key": "connectTimeout",
+   "label": "请求超时时间",
+   "widget": "InputNumber",
+   "required": true,
+   "message": null,
+   "initialValue": "\"30000\"",
+   "enum": null
+  },
+  {
+   "key": "compensateFlag",
+   "label": "断言失败",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"1\"",
+   "enum": null
+  },
+  {
+   "key": "assertionCodeType",
+   "label": "参数编辑模式",
+   "widget": "Switch",
+   "required": false,
+   "message": null,
+   "initialValue": "true",
+   "enum": null
+  }
+ ],
+ "EndNode.jsx": [
+  {
+   "key": "pNodeName",
+   "label": "节点名称",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": null,
+   "enum": [
+    {
+     "value": "2",
+     "label": "不结束流程"
+    },
+    {
+     "value": "3",
+     "label": "流程终止运行"
+    }
+   ]
+  },
+  {
+   "key": "pNodeId",
+   "label": "节点Id",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": null,
+   "enum": [
+    {
+     "value": "2",
+     "label": "不结束流程"
+    },
+    {
+     "value": "3",
+     "label": "流程终止运行"
+    }
+   ]
+  },
+  {
+   "key": "pNodeType",
+   "label": "节点类型",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": null,
+   "enum": [
+    {
+     "value": "2",
+     "label": "不结束流程"
+    },
+    {
+     "value": "3",
+     "label": "流程终止运行"
+    }
+   ]
+  },
+  {
+   "key": "processEndType",
+   "label": "流程终止",
+   "widget": "Select",
+   "required": false,
+   "message": null,
+   "initialValue": "'3'",
+   "enum": [
+    {
+     "value": "2",
+     "label": "不结束流程"
+    },
+    {
+     "value": "3",
+     "label": "流程终止运行"
+    }
+   ]
+  }
+ ],
+ "EventNode.jsx": [
+  {
+   "key": "pNodeName",
+   "label": "节点名称",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "this.nodeObj.text",
+   "enum": null
+  },
+  {
+   "key": "pNodeId",
+   "label": "节点Id",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "this.nodeObj.key",
+   "enum": [
+    {
+     "value": "1",
+     "label": "输出API结果到调用端"
+    }
+   ]
+  },
+  {
+   "key": "ruleId",
+   "label": "选择要执行的规则",
+   "widget": "TreeNodeSelect",
+   "required": true,
+   "message": null,
+   "initialValue": null,
+   "enum": [
+    {
+     "value": "1",
+     "label": "输出API结果到调用端"
+    },
+    {
+     "value": "0",
+     "label": "不输出API结果"
+    }
+   ]
+  },
+  {
+   "key": "responseData",
+   "label": "输出结果",
+   "widget": "Select",
+   "required": false,
+   "message": null,
+   "initialValue": "\"0\"",
+   "enum": [
+    {
+     "value": "1",
+     "label": "输出API结果到调用端"
+    },
+    {
+     "value": "0",
+     "label": "不输出API结果"
+    }
+   ]
+  }
+ ],
+ "GatewayNode.jsx": [
+  {
+   "key": "pNodeName",
+   "label": "节点名称",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": null,
+   "enum": [
+    {
+     "value": "1",
+     "label": "排他网关"
+    },
+    {
+     "value": "2",
+     "label": "并行网关"
+    },
+    {
+     "value": "3",
+     "label": "包含网关"
+    }
+   ]
+  },
+  {
+   "key": "pNodeId",
+   "label": "节点Id",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": null,
+   "enum": [
+    {
+     "value": "1",
+     "label": "排他网关"
+    },
+    {
+     "value": "2",
+     "label": "并行网关"
+    },
+    {
+     "value": "3",
+     "label": "包含网关"
+    }
+   ]
+  },
+  {
+   "key": "joinNodeId",
+   "label": "聚合前继网关",
+   "widget": "AjaxEditSelect",
+   "required": false,
+   "message": null,
+   "initialValue": null,
+   "enum": [
+    {
+     "value": "1",
+     "label": "排他网关"
+    },
+    {
+     "value": "2",
+     "label": "并行网关"
+    },
+    {
+     "value": "3",
+     "label": "包含网关"
+    }
+   ]
+  },
+  {
+   "key": "gatewayType",
+   "label": "网关类型",
+   "widget": "Select",
+   "required": false,
+   "message": null,
+   "initialValue": "'2'",
+   "enum": [
+    {
+     "value": "1",
+     "label": "排他网关"
+    },
+    {
+     "value": "2",
+     "label": "并行网关"
+    },
+    {
+     "value": "3",
+     "label": "包含网关"
+    }
+   ]
+  },
+  {
+   "key": "copyData",
+   "label": "复制数据流",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "'0'",
+   "enum": null
+  },
+  {
+   "key": "defaultRouterNodeId",
+   "label": "缺省路由Id",
+   "widget": "AjaxSelect",
+   "required": false,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  },
+  {
+   "key": "pNodeType",
+   "label": "节点类型",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  }
+ ],
+ "HtmlPageNode.jsx": [
+  {
+   "key": "pNodeName",
+   "label": "节点名称",
+   "widget": "Input",
+   "required": false,
+   "message": null,
+   "initialValue": "this.nodeObj.text",
+   "enum": null
+  },
+  {
+   "key": "pNodeId",
+   "label": "节点Id",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "this.nodeObj.key",
+   "enum": null
+  },
+  {
+   "key": "executerType",
+   "label": "页面输出方式",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"1\"",
+   "enum": null
+  },
+  {
+   "key": "url",
+   "label": "转向URL",
+   "widget": "Input",
+   "required": false,
+   "message": null,
+   "initialValue": "\"http://localhost/test.html?transactionId=${transactionId",
+   "enum": null
+  },
+  {
+   "key": "pageCallBackFlag",
+   "label": "等待回调",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"0\"",
+   "enum": null
+  }
+ ],
+ "JavaBeanNode.jsx": [
+  {
+   "key": "pNodeName",
+   "label": "节点名称",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "this.nodeObj.text",
+   "enum": null
+  },
+  {
+   "key": "pNodeId",
+   "label": "节点Id",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "this.nodeObj.key",
+   "enum": null
+  },
+  {
+   "key": "pNodeAlias",
+   "label": "节点别名",
+   "widget": "Input",
+   "required": false,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  },
+  {
+   "key": "classPath",
+   "label": "Class路径",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  },
+  {
+   "key": "methodName",
+   "label": "调用方法",
+   "widget": "AutoComplete",
+   "required": true,
+   "message": null,
+   "initialValue": "\"\"",
+   "enum": null
+  },
+  {
+   "key": "responseData",
+   "label": "输出结果",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"1\"",
+   "enum": null
+  },
+  {
+   "key": "compensateFlag",
+   "label": "断言失败",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"1\"",
+   "enum": null
+  },
+  {
+   "key": "assertionCodeType",
+   "label": "参数编辑模式",
+   "widget": "Switch",
+   "required": false,
+   "message": null,
+   "initialValue": "true",
+   "enum": null
+  }
+ ],
+ "JavaCodeNode.jsx": [
+  {
+   "key": "pNodeName",
+   "label": "节点名称",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "this.nodeObj.text",
+   "enum": [
+    {
+     "value": "1",
+     "label": "输出API结果到调用端"
+    },
+    {
+     "value": "0",
+     "label": "不输出API结果"
+    }
+   ]
+  },
+  {
+   "key": "pNodeId",
+   "label": "节点Id",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "this.nodeObj.key",
+   "enum": [
+    {
+     "value": "1",
+     "label": "输出API结果到调用端"
+    },
+    {
+     "value": "0",
+     "label": "不输出API结果"
+    }
+   ]
+  },
+  {
+   "key": "skipCompensateFlag",
+   "label": "补偿时跳过",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"0\"",
+   "enum": [
+    {
+     "value": "1",
+     "label": "输出API结果到调用端"
+    },
+    {
+     "value": "0",
+     "label": "不输出API结果"
+    }
+   ]
+  },
+  {
+   "key": "responseData",
+   "label": "输出结果",
+   "widget": "Select",
+   "required": false,
+   "message": null,
+   "initialValue": "\"0\"",
+   "enum": [
+    {
+     "value": "1",
+     "label": "输出API结果到调用端"
+    },
+    {
+     "value": "0",
+     "label": "不输出API结果"
+    }
+   ]
+  }
+ ],
+ "JavaScriptCodeNode.jsx": [
+  {
+   "key": "pNodeName",
+   "label": "节点名称",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "this.nodeObj.text",
+   "enum": [
+    {
+     "value": "1",
+     "label": "输出API结果到调用端"
+    },
+    {
+     "value": "0",
+     "label": "不输出API结果"
+    }
+   ]
+  },
+  {
+   "key": "pNodeId",
+   "label": "节点Id",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "this.nodeObj.key",
+   "enum": [
+    {
+     "value": "1",
+     "label": "输出API结果到调用端"
+    },
+    {
+     "value": "0",
+     "label": "不输出API结果"
+    }
+   ]
+  },
+  {
+   "key": "skipCompensateFlag",
+   "label": "补偿时跳过",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"0\"",
+   "enum": [
+    {
+     "value": "1",
+     "label": "输出API结果到调用端"
+    },
+    {
+     "value": "0",
+     "label": "不输出API结果"
+    }
+   ]
+  },
+  {
+   "key": "responseData",
+   "label": "输出结果",
+   "widget": "Select",
+   "required": false,
+   "message": null,
+   "initialValue": "\"0\"",
+   "enum": [
+    {
+     "value": "1",
+     "label": "输出API结果到调用端"
+    },
+    {
+     "value": "0",
+     "label": "不输出API结果"
+    }
+   ]
+  }
+ ],
+ "JmsWriteNode.jsx": [
+  {
+   "key": "pNodeName",
+   "label": "节点名称",
+   "widget": "Input",
+   "required": false,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  },
+  {
+   "key": "pNodeId",
+   "label": "节点Id",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  },
+  {
+   "key": "pNodeType",
+   "label": "节点类型",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  },
+  {
+   "key": "dataSourceId",
+   "label": "JMS数据源Id",
+   "widget": "AjaxSelect",
+   "required": true,
+   "message": null,
+   "initialValue": "\"jms\"",
+   "enum": null
+  },
+  {
+   "key": "topicType",
+   "label": "类型",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"topic\"",
+   "enum": null
+  },
+  {
+   "key": "topic",
+   "label": "topic",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "\"esb\"",
+   "enum": null
+  },
+  {
+   "key": "compensateFlag",
+   "label": "发送失败",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"1\"",
+   "enum": null
+  },
+  {
+   "key": "body",
+   "label": "消息内容",
+   "widget": "Input.TextArea",
+   "required": true,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  }
+ ],
+ "Json2XmlNode.jsx": [
+  {
+   "key": "pNodeName",
+   "label": "节点名称",
+   "widget": "Input",
+   "required": false,
+   "message": null,
+   "initialValue": "this.nodeObj.text",
+   "enum": [
+    {
+     "value": "1",
+     "label": "输出API结果到调用端"
+    },
+    {
+     "value": "0",
+     "label": "不输出API结果"
+    },
+    {
+     "value": "2",
+     "label": "多次循环调用时累加结果并输出"
+    }
+   ]
+  },
+  {
+   "key": "pNodeId",
+   "label": "节点Id",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "this.nodeObj.key",
+   "enum": [
+    {
+     "value": "1",
+     "label": "输出API结果到调用端"
+    },
+    {
+     "value": "0",
+     "label": "不输出API结果"
+    },
+    {
+     "value": "2",
+     "label": "多次循环调用时累加结果并输出"
+    }
+   ]
+  },
+  {
+   "key": "jsonPath",
+   "label": "指定XML字符串所在字段",
+   "widget": "Input",
+   "required": false,
+   "message": null,
+   "initialValue": "\"$.ResponseBody\"",
+   "enum": [
+    {
+     "value": "1",
+     "label": "输出API结果到调用端"
+    },
+    {
+     "value": "0",
+     "label": "不输出API结果"
+    },
+    {
+     "value": "2",
+     "label": "多次循环调用时累加结果并输出"
+    }
+   ]
+  },
+  {
+   "key": "responseData",
+   "label": "输出结果",
+   "widget": "Select",
+   "required": false,
+   "message": null,
+   "initialValue": "\"0\"",
+   "enum": [
+    {
+     "value": "1",
+     "label": "输出API结果到调用端"
+    },
+    {
+     "value": "0",
+     "label": "不输出API结果"
+    },
+    {
+     "value": "2",
+     "label": "多次循环调用时累加结果并输出"
+    }
+   ]
+  }
+ ],
+ "KafkaNode.jsx": [
+  {
+   "key": "pNodeName",
+   "label": "节点名称",
+   "widget": "Input",
+   "required": false,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  },
+  {
+   "key": "pNodeId",
+   "label": "节点Id",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  },
+  {
+   "key": "pNodeType",
+   "label": "节点类型",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  },
+  {
+   "key": "dataSourceId",
+   "label": "Kafka数据源Id",
+   "widget": "AjaxSelect",
+   "required": true,
+   "message": null,
+   "initialValue": "\"kafka\"",
+   "enum": null
+  },
+  {
+   "key": "topic",
+   "label": "topic",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "\"esb\"",
+   "enum": null
+  },
+  {
+   "key": "compensateFlag",
+   "label": "发送失败",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"1\"",
+   "enum": null
+  },
+  {
+   "key": "body",
+   "label": "消息内容",
+   "widget": "Input.TextArea",
+   "required": true,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  }
+ ],
+ "LarkNode.jsx": [
+  {
+   "key": "pNodeName",
+   "label": "节点名称",
+   "widget": "Input",
+   "required": false,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  },
+  {
+   "key": "pNodeId",
+   "label": "节点Id",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  },
+  {
+   "key": "pNodeType",
+   "label": "节点类型",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  },
+  {
+   "key": "webhook",
+   "label": "WebHook",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "\"${#config.webhook",
+   "enum": null
+  },
+  {
+   "key": "secret",
+   "label": "Secret",
+   "widget": "Input",
+   "required": false,
+   "message": null,
+   "initialValue": "\"\"",
+   "enum": null
+  },
+  {
+   "key": "msgType",
+   "label": "消息类型",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"text\"",
+   "enum": null
+  },
+  {
+   "key": "title",
+   "label": "标题",
+   "widget": "Input",
+   "required": false,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  },
+  {
+   "key": "imageKey",
+   "label": "图片Key",
+   "widget": "Input",
+   "required": false,
+   "message": null,
+   "initialValue": "\"\"",
+   "enum": null
+  },
+  {
+   "key": "language",
+   "label": "语言配置",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"zh_cn\"",
+   "enum": null
+  },
+  {
+   "key": "body",
+   "label": "消息内容",
+   "widget": "Input.TextArea",
+   "required": false,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  },
+  {
+   "key": "markdownBody",
+   "label": "消息内容",
+   "widget": "MonacoEditor",
+   "required": false,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  },
+  {
+   "key": "jsonBody",
+   "label": "消息内容",
+   "widget": "MonacoEditor",
+   "required": false,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  }
+ ],
+ "ManualConfirmNode.jsx": [
+  {
+   "key": "pNodeName",
+   "label": "节点名称",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "this.nodeObj.text",
+   "enum": null
+  },
+  {
+   "key": "pNodeId",
+   "label": "节点Id",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "this.nodeObj.key",
+   "enum": null
+  },
+  {
+   "key": "approveUserIds",
+   "label": "审批用户",
+   "widget": "UserAsynTreeSelect",
+   "required": true,
+   "message": null,
+   "initialValue": "this.userId",
+   "enum": null
+  },
+  {
+   "key": "completeType",
+   "label": "审批模式",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"1\"",
+   "enum": null
+  }
+ ],
+ "MappingTemplateNode.jsx": [
+  {
+   "key": "pNodeName",
+   "label": "节点名称",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "this.nodeObj.text",
+   "enum": null
+  },
+  {
+   "key": "pNodeId",
+   "label": "节点Id",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "this.nodeObj.key",
+   "enum": null
+  },
+  {
+   "key": "categoryName",
+   "label": "映射配置名称",
+   "widget": "Input",
+   "required": false,
+   "message": null,
+   "initialValue": null,
+   "enum": [
+    {
+     "value": "1",
+     "label": "输出结果到调用端"
+    },
+    {
+     "value": "0",
+     "label": "不输出转换结果"
+    }
+   ]
+  },
+  {
+   "key": "mapppingConfigId",
+   "label": "映射配置Id",
+   "widget": "Input",
+   "required": false,
+   "message": null,
+   "initialValue": null,
+   "enum": [
+    {
+     "value": "1",
+     "label": "输出结果到调用端"
+    },
+    {
+     "value": "0",
+     "label": "不输出转换结果"
+    }
+   ]
+  },
+  {
+   "key": "responseData",
+   "label": "输出结果",
+   "widget": "Select",
+   "required": false,
+   "message": null,
+   "initialValue": "'0'",
+   "enum": [
+    {
+     "value": "1",
+     "label": "输出结果到调用端"
+    },
+    {
+     "value": "0",
+     "label": "不输出转换结果"
+    }
+   ]
+  },
+  {
+   "key": "exportJson",
+   "label": "输出示例",
+   "widget": "MonacoEditor",
+   "required": false,
+   "message": null,
+   "initialValue": "''",
+   "enum": null
+  }
+ ],
+ "MockResponseNode.jsx": [
+  {
+   "key": "pNodeName",
+   "label": "节点名称",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "this.nodeObj.text",
+   "enum": null
+  },
+  {
+   "key": "pNodeId",
+   "label": "节点Id",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "this.nodeObj.key",
+   "enum": null
+  },
+  {
+   "key": "mockResponseId",
+   "label": "模拟数据选择",
+   "widget": "AjaxSelect",
+   "required": true,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  },
+  {
+   "key": "toJson",
+   "label": "结果转换为JSON",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"0\"",
+   "enum": null
+  }
+ ],
+ "MqttNode.jsx": [
+  {
+   "key": "pNodeName",
+   "label": "节点名称",
+   "widget": "Input",
+   "required": false,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  },
+  {
+   "key": "pNodeId",
+   "label": "节点Id",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  },
+  {
+   "key": "pNodeType",
+   "label": "节点类型",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  },
+  {
+   "key": "dataSourceId",
+   "label": "Mqtt数据源Id",
+   "widget": "AjaxSelect",
+   "required": true,
+   "message": null,
+   "initialValue": "\"mqtt\"",
+   "enum": null
+  },
+  {
+   "key": "topic",
+   "label": "topic",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "\"esb\"",
+   "enum": null
+  },
+  {
+   "key": "compensateFlag",
+   "label": "发送失败",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"1\"",
+   "enum": null
+  },
+  {
+   "key": "body",
+   "label": "消息内容",
+   "widget": "Input.TextArea",
+   "required": true,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  }
+ ],
+ "MsgNode.jsx": [
+  {
+   "key": "pNodeName",
+   "label": "节点名称",
+   "widget": "Input",
+   "required": false,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  },
+  {
+   "key": "pNodeId",
+   "label": "节点Id",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  },
+  {
+   "key": "pNodeType",
+   "label": "节点类型",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  },
+  {
+   "key": "msgType",
+   "label": "消息类型",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"message\"",
+   "enum": null
+  },
+  {
+   "key": "compensateFlag",
+   "label": "发送失败",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"1\"",
+   "enum": null
+  },
+  {
+   "key": "sendTo",
+   "label": "接收地址",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "\"\"",
+   "enum": null
+  },
+  {
+   "key": "title",
+   "label": "消息标题",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  },
+  {
+   "key": "body",
+   "label": "消息内容",
+   "widget": "Input.TextArea",
+   "required": true,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  }
+ ],
+ "ProcessNode.jsx": [
+  {
+   "key": "configName",
+   "label": "流程名称",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  },
+  {
+   "key": "processId",
+   "label": "流程Id",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  },
+  {
+   "key": "configId",
+   "label": "流程编号",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  },
+  {
+   "key": "state",
+   "label": "运行方式",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "'2'",
+   "enum": null
+  },
+  {
+   "key": "parentProcessId",
+   "label": "指定依赖流程",
+   "widget": "TreeNodeSelect",
+   "required": false,
+   "message": null,
+   "initialValue": "\"\"",
+   "enum": null
+  },
+  {
+   "key": "dependentMinuteTime",
+   "label": "依赖周期(分钟)",
+   "widget": "InputNumber",
+   "required": false,
+   "message": null,
+   "initialValue": "60",
+   "enum": [
+    {
+     "value": "Task",
+     "label": "任务队列领取模式(推荐)"
+    },
+    {
+     "value": "AllServer",
+     "label": "所有集群服务器均可同时运行"
+    }
+   ]
+  },
+  {
+   "key": "expression",
+   "label": "调度策略",
+   "widget": "SearchBtnSelect",
+   "required": false,
+   "message": null,
+   "initialValue": null,
+   "enum": [
+    {
+     "value": "Task",
+     "label": "任务队列领取模式(推荐)"
+    },
+    {
+     "value": "AllServer",
+     "label": "所有集群服务器均可同时运行"
+    },
+    {
+     "value": "SingleServer",
+     "label": "只有主服务器可运行(主服务器失败时其他服务器接管)"
+    },
+    {
+     "value": "Dispatcher",
+     "label": "由调度服务器统一调度"
+    },
+    {
+     "value": "random",
+     "label": "所有集群服务器依次执行"
+    }
+   ]
+  },
+  {
+   "key": "taskLevel",
+   "label": "任务重要性",
+   "widget": "InputNumber",
+   "required": false,
+   "message": null,
+   "initialValue": "1",
+   "enum": null
+  },
+  {
+   "key": "repeatGenerationTask",
+   "label": "任务选项",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"1\"",
+   "enum": null
+  },
+  {
+   "key": "debug",
+   "label": "调试模式",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "1",
+   "enum": null
+  },
+  {
+   "key": "eventType",
+   "label": "触发API事件",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "'0'",
+   "enum": null
+  },
+  {
+   "key": "eventUrl",
+   "label": "API URL",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  },
+  {
+   "key": "eventBody",
+   "label": "内容",
+   "widget": "MonacoEditor",
+   "required": true,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  },
+  {
+   "key": "categoryId",
+   "label": "所属分类",
+   "widget": "TreeNodeSelect",
+   "required": true,
+   "message": null,
+   "initialValue": "this.categoryId",
+   "enum": null
+  },
+  {
+   "key": "processTransaction",
+   "label": "实例持久化",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "1",
+   "enum": null
+  },
+  {
+   "key": "transaction",
+   "label": "数据库事务",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "false",
+   "enum": null
+  },
+  {
+   "key": "maxRunProcess",
+   "label": "最大并发数",
+   "widget": "InputNumber",
+   "required": false,
+   "message": null,
+   "initialValue": "0",
+   "enum": null
+  },
+  {
+   "key": "maxRunProcessOption",
+   "label": "并发数选项",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"0\"",
+   "enum": null
+  },
+  {
+   "key": "compensateRule",
+   "label": "补偿规则(分钟)",
+   "widget": "Input",
+   "required": false,
+   "message": null,
+   "initialValue": "'5",
+   "enum": null
+  }
+ ],
+ "PythonNode.jsx": [
+  {
+   "key": "pNodeName",
+   "label": "节点名称",
+   "widget": "Input",
+   "required": false,
+   "message": null,
+   "initialValue": "this.nodeObj.text",
+   "enum": [
+    {
+     "value": "1",
+     "label": "输出Python执行结果给调用端"
+    },
+    {
+     "value": "0",
+     "label": "不输出Python执行结果"
+    },
+    {
+     "value": "2",
+     "label": "多次循环调用时累加结果并输出"
+    }
+   ]
+  },
+  {
+   "key": "pNodeId",
+   "label": "节点Id",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "this.nodeObj.key",
+   "enum": [
+    {
+     "value": "1",
+     "label": "输出Python执行结果给调用端"
+    },
+    {
+     "value": "0",
+     "label": "不输出Python执行结果"
+    },
+    {
+     "value": "2",
+     "label": "多次循环调用时累加结果并输出"
+    }
+   ]
+  },
+  {
+   "key": "responseData",
+   "label": "输出结果",
+   "widget": "Select",
+   "required": false,
+   "message": null,
+   "initialValue": "\"1\"",
+   "enum": [
+    {
+     "value": "1",
+     "label": "输出Python执行结果给调用端"
+    },
+    {
+     "value": "0",
+     "label": "不输出Python执行结果"
+    },
+    {
+     "value": "2",
+     "label": "多次循环调用时累加结果并输出"
+    }
+   ]
+  },
+  {
+   "key": "pythonCmd",
+   "label": "Python命令",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "\"python\"",
+   "enum": null
+  },
+  {
+   "key": "pythonFilePath",
+   "label": "Python文件",
+   "widget": "Input",
+   "required": false,
+   "message": null,
+   "initialValue": "\"\"",
+   "enum": null
+  },
+  {
+   "key": "inParams",
+   "label": "输入参数",
+   "widget": "Input",
+   "required": false,
+   "message": null,
+   "initialValue": "\"\"",
+   "enum": null
+  },
+  {
+   "key": "exceptionAssert",
+   "label": "执行异常",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"0\"",
+   "enum": null
+  },
+  {
+   "key": "compensateFlag",
+   "label": "断言失败",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"1\"",
+   "enum": null
+  }
+ ],
+ "RabbitMQNode.jsx": [
+  {
+   "key": "pNodeName",
+   "label": "节点名称",
+   "widget": "Input",
+   "required": false,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  },
+  {
+   "key": "pNodeId",
+   "label": "节点Id",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  },
+  {
+   "key": "pNodeType",
+   "label": "节点类型",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  },
+  {
+   "key": "dataSourceId",
+   "label": "RabbitMQ数据源Id",
+   "widget": "AjaxSelect",
+   "required": true,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  },
+  {
+   "key": "body",
+   "label": "消息内容",
+   "widget": "Input.TextArea",
+   "required": true,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  }
+ ],
+ "ResponseCropNode.jsx": [
+  {
+   "key": "pNodeName",
+   "label": "节点名称",
+   "widget": "Input",
+   "required": false,
+   "message": null,
+   "initialValue": "this.nodeObj.text",
+   "enum": [
+    {
+     "value": "1",
+     "label": "对流程的最终输出结果数据进行裁剪"
+    },
+    {
+     "value": "2",
+     "label": "仅对上一节点的输出结果进行裁剪,结果作为下一节点的输入"
+    }
+   ]
+  },
+  {
+   "key": "pNodeId",
+   "label": "节点Id",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "this.nodeObj.key",
+   "enum": [
+    {
+     "value": "1",
+     "label": "对流程的最终输出结果数据进行裁剪"
+    },
+    {
+     "value": "2",
+     "label": "仅对上一节点的输出结果进行裁剪,结果作为下一节点的输入"
+    }
+   ]
+  },
+  {
+   "key": "dataType",
+   "label": "裁剪数据",
+   "widget": "Select",
+   "required": false,
+   "message": null,
+   "initialValue": "\"1\"",
+   "enum": [
+    {
+     "value": "1",
+     "label": "对流程的最终输出结果数据进行裁剪"
+    },
+    {
+     "value": "2",
+     "label": "仅对上一节点的输出结果进行裁剪,结果作为下一节点的输入"
+    }
+   ]
+  },
+  {
+   "key": "mergeResult",
+   "label": "结果合并到顶层",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"0\"",
+   "enum": null
+  },
+  {
+   "key": "debugData",
+   "label": "调试",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"1\"",
+   "enum": null
+  }
+ ],
+ "ReturnDataNode.jsx": [
+  {
+   "key": "pNodeName",
+   "label": "节点名称",
+   "widget": "Input",
+   "required": false,
+   "message": null,
+   "initialValue": "this.nodeObj.text",
+   "enum": null
+  },
+  {
+   "key": "pNodeId",
+   "label": "节点Id",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "this.nodeObj.key",
+   "enum": null
+  },
+  {
+   "key": "dataJsonPath",
+   "label": "字段所在层级",
+   "widget": "Input",
+   "required": false,
+   "message": null,
+   "initialValue": "\"\"",
+   "enum": null
+  },
+  {
+   "key": "returnType",
+   "label": "返回数据类型",
+   "widget": "Radio.Group",
+   "required": false,
+   "message": null,
+   "initialValue": "\"0\"",
+   "enum": null
+  },
+  {
+   "key": "interceptFieldId",
+   "label": "返回数据字段ID",
+   "widget": "Input",
+   "required": false,
+   "message": null,
+   "initialValue": "\"\"",
+   "enum": null
+  },
+  {
+   "key": "returnBody",
+   "label": null,
+   "widget": "MonacoEditor",
+   "required": false,
+   "message": null,
+   "initialValue": "\"\"",
+   "enum": null
+  }
+ ],
+ "RocketMQNode.jsx": [
+  {
+   "key": "pNodeName",
+   "label": "节点名称",
+   "widget": "Input",
+   "required": false,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  },
+  {
+   "key": "pNodeId",
+   "label": "节点Id",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  },
+  {
+   "key": "pNodeType",
+   "label": "节点类型",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  },
+  {
+   "key": "dataSourceId",
+   "label": "RocketMQ数据源Id",
+   "widget": "AjaxSelect",
+   "required": true,
+   "message": null,
+   "initialValue": "\"\"",
+   "enum": null
+  },
+  {
+   "key": "rocketmq_messageType",
+   "label": "消息接入方式",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"HTTP\"",
+   "enum": null
+  },
+  {
+   "key": "rocketmq_mqKind",
+   "label": "消息种类",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"COMMON_MQ\"",
+   "enum": null
+  },
+  {
+   "key": "rocketmq_messageKey",
+   "label": "消息key",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": null,
+   "enum": [
+    {
+     "value": "item.value",
+     "label": "{item.text}"
+    }
+   ]
+  },
+  {
+   "key": "topic",
+   "label": "topic",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "\"esb\"",
+   "enum": null
+  },
+  {
+   "key": "compensateFlag",
+   "label": "发送失败",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"1\"",
+   "enum": null
+  },
+  {
+   "key": "body",
+   "label": "消息内容",
+   "widget": "Input.TextArea",
+   "required": true,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  }
+ ],
+ "RouterNode.jsx": [
+  {
+   "key": "pNodeName",
+   "label": "路由名称",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "this.nodeObj.nodeId",
+   "enum": null
+  },
+  {
+   "key": "pNodeId",
+   "label": "节点Id",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  },
+  {
+   "key": "pNodeType",
+   "label": "节点类型",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  },
+  {
+   "key": "async",
+   "label": "运行模式",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "'false'",
+   "enum": null
+  },
+  {
+   "key": "order",
+   "label": "执行顺序",
+   "widget": "InputNumber",
+   "required": false,
+   "message": null,
+   "initialValue": "1",
+   "enum": [
+    {
+     "value": "0",
+     "label": "始终执行"
+    },
+    {
+     "value": "10",
+     "label": "禁止执行"
+    }
+   ]
+  },
+  {
+   "key": "clearProcessMainData",
+   "label": "清空数据流",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "'0'",
+   "enum": [
+    {
+     "value": "0",
+     "label": "始终执行"
+    },
+    {
+     "value": "10",
+     "label": "禁止执行"
+    },
+    {
+     "value": "1",
+     "label": "上一节点断言成立时执行"
+    },
+    {
+     "value": "2",
+     "label": "上一节点断言失败时执行"
+    },
+    {
+     "value": "6",
+     "label": "默认路由(其他路由条件均不成立时执行)"
+    },
+    {
+     "value": "7",
+     "label": "全局变量中有完成变量标识时执行"
+    }
+   ]
+  },
+  {
+   "key": "serialLock",
+   "label": "串行锁",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "'0'",
+   "enum": [
+    {
+     "value": "0",
+     "label": "始终执行"
+    },
+    {
+     "value": "10",
+     "label": "禁止执行"
+    },
+    {
+     "value": "1",
+     "label": "上一节点断言成立时执行"
+    },
+    {
+     "value": "2",
+     "label": "上一节点断言失败时执行"
+    },
+    {
+     "value": "6",
+     "label": "默认路由(其他路由条件均不成立时执行)"
+    },
+    {
+     "value": "7",
+     "label": "全局变量中有完成变量标识时执行"
+    },
+    {
+     "value": "9",
+     "label": "所有前继节点执行结束后执行"
+    },
+    {
+     "value": "3",
+     "label": "自定义逻辑判断"
+    }
+   ]
+  },
+  {
+   "key": "assertCondition",
+   "label": "执行条件",
+   "widget": "Select",
+   "required": false,
+   "message": null,
+   "initialValue": null,
+   "enum": [
+    {
+     "value": "0",
+     "label": "始终执行"
+    },
+    {
+     "value": "10",
+     "label": "禁止执行"
+    },
+    {
+     "value": "1",
+     "label": "上一节点断言成立时执行"
+    },
+    {
+     "value": "2",
+     "label": "上一节点断言失败时执行"
+    },
+    {
+     "value": "6",
+     "label": "默认路由(其他路由条件均不成立时执行)"
+    },
+    {
+     "value": "7",
+     "label": "全局变量中有完成变量标识时执行"
+    },
+    {
+     "value": "9",
+     "label": "所有前继节点执行结束后执行"
+    },
+    {
+     "value": "3",
+     "label": "自定义逻辑判断"
+    }
+   ]
+  },
+  {
+   "key": "assertionCodeType",
+   "label": "参数编辑模式",
+   "widget": "Switch",
+   "required": false,
+   "message": null,
+   "initialValue": "true",
+   "enum": null
+  }
+ ],
+ "SQLExecuterNode.jsx": [
+  {
+   "key": "pNodeName",
+   "label": "节点名称",
+   "widget": "Input",
+   "required": false,
+   "message": null,
+   "initialValue": "this.nodeObj.text",
+   "enum": [
+    {
+     "value": "1",
+     "label": "输出SQL执行结果给调用端"
+    }
+   ]
+  },
+  {
+   "key": "pNodeId",
+   "label": "节点Id",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "this.nodeObj.key",
+   "enum": [
+    {
+     "value": "1",
+     "label": "输出SQL执行结果给调用端"
+    },
+    {
+     "value": "0",
+     "label": "不输出SQL执行结果"
+    },
+    {
+     "value": "2",
+     "label": "多次循环调用时累加结果并输出"
+    }
+   ]
+  },
+  {
+   "key": "dbConnId",
+   "label": "指定数据源",
+   "widget": "TreeNodeSelect",
+   "required": true,
+   "message": null,
+   "initialValue": "'default'",
+   "enum": [
+    {
+     "value": "1",
+     "label": "输出SQL执行结果给调用端"
+    },
+    {
+     "value": "0",
+     "label": "不输出SQL执行结果"
+    },
+    {
+     "value": "2",
+     "label": "多次循环调用时累加结果并输出"
+    }
+   ]
+  },
+  {
+   "key": "responseData",
+   "label": "输出结果",
+   "widget": "Select",
+   "required": false,
+   "message": null,
+   "initialValue": "'1'",
+   "enum": [
+    {
+     "value": "1",
+     "label": "输出SQL执行结果给调用端"
+    },
+    {
+     "value": "0",
+     "label": "不输出SQL执行结果"
+    },
+    {
+     "value": "2",
+     "label": "多次循环调用时累加结果并输出"
+    }
+   ]
+  },
+  {
+   "key": "executerType",
+   "label": "运行方式",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "'1'",
+   "enum": [
+    {
+     "value": "select",
+     "label": "select(读取单条或多条数据)"
+    },
+    {
+     "value": "update",
+     "label": "update(执行更新、插入、删除数据的SQL语句)"
+    },
+    {
+     "value": "batchsql",
+     "label": "批量执行SQL语句(多条SQL用分号进行分隔)"
+    }
+   ]
+  },
+  {
+   "key": "dataJsonPath",
+   "label": "JSON数据路径",
+   "widget": "AjaxEditSelect",
+   "required": false,
+   "message": null,
+   "initialValue": "''",
+   "enum": [
+    {
+     "value": "select",
+     "label": "select(读取单条或多条数据)"
+    },
+    {
+     "value": "update",
+     "label": "update(执行更新、插入、删除数据的SQL语句)"
+    },
+    {
+     "value": "batchsql",
+     "label": "批量执行SQL语句(多条SQL用分号进行分隔)"
+    },
+    {
+     "value": "1",
+     "label": "替换当前数据流"
+    },
+    {
+     "value": "2",
+     "label": "追加到indoc.data数据流中"
+    },
+    {
+     "value": "3",
+     "label": "追加到indoc变量中"
+    },
+    {
+     "value": "4",
+     "label": "追加到全局变量中"
+    },
+    {
+     "value": "5",
+     "label": "追加到指定字段中"
+    }
+   ]
+  },
+  {
+   "key": "methodType",
+   "label": "SQL执行选项",
+   "widget": "Select",
+   "required": false,
+   "message": null,
+   "initialValue": "'update'",
+   "enum": [
+    {
+     "value": "select",
+     "label": "select(读取单条或多条数据)"
+    },
+    {
+     "value": "update",
+     "label": "update(执行更新、插入、删除数据的SQL语句)"
+    },
+    {
+     "value": "batchsql",
+     "label": "批量执行SQL语句(多条SQL用分号进行分隔)"
+    },
+    {
+     "value": "1",
+     "label": "替换当前数据流"
+    },
+    {
+     "value": "2",
+     "label": "追加到indoc.data数据流中"
+    },
+    {
+     "value": "3",
+     "label": "追加到indoc变量中"
+    },
+    {
+     "value": "4",
+     "label": "追加到全局变量中"
+    },
+    {
+     "value": "5",
+     "label": "追加到指定字段中"
+    }
+   ]
+  },
+  {
+   "key": "appendFlag",
+   "label": "数据流选项",
+   "widget": "Select",
+   "required": false,
+   "message": null,
+   "initialValue": "'1'",
+   "enum": [
+    {
+     "value": "1",
+     "label": "替换当前数据流"
+    },
+    {
+     "value": "2",
+     "label": "追加到indoc.data数据流中"
+    },
+    {
+     "value": "3",
+     "label": "追加到indoc变量中"
+    },
+    {
+     "value": "4",
+     "label": "追加到全局变量中"
+    },
+    {
+     "value": "5",
+     "label": "追加到指定字段中"
+    }
+   ]
+  },
+  {
+   "key": "appendToFieldId",
+   "label": "指定字段Id",
+   "widget": "AjaxEditSelect",
+   "required": false,
+   "message": null,
+   "initialValue": "''",
+   "enum": null
+  },
+  {
+   "key": "exceptionAssert",
+   "label": "执行异常",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "'0'",
+   "enum": null
+  },
+  {
+   "key": "compensateFlag",
+   "label": "断言失败",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "'1'",
+   "enum": null
+  }
+ ],
+ "SharedVariableNode.jsx": [
+  {
+   "key": "pNodeName",
+   "label": "节点名称",
+   "widget": "Input",
+   "required": false,
+   "message": null,
+   "initialValue": "this.nodeObj.text",
+   "enum": null
+  },
+  {
+   "key": "pNodeId",
+   "label": "节点Id",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "this.nodeObj.key",
+   "enum": null
+  },
+  {
+   "key": "action",
+   "label": "操作类型",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"query\"",
+   "enum": null
+  },
+  {
+   "key": "globalParams",
+   "label": "变量类型",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"1\"",
+   "enum": null
+  }
+ ],
+ "ShellExecuterNode.jsx": [
+  {
+   "key": "pNodeName",
+   "label": "节点名称",
+   "widget": "Input",
+   "required": false,
+   "message": null,
+   "initialValue": "this.nodeObj.text",
+   "enum": [
+    {
+     "value": "1",
+     "label": "输出转换结果给调用端"
+    },
+    {
+     "value": "0",
+     "label": "不输出转换结果(仅作为下一节点的输入)"
+    },
+    {
+     "value": "2",
+     "label": "多次循环时累加结果并输出"
+    }
+   ]
+  },
+  {
+   "key": "pNodeId",
+   "label": "节点Id",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "this.nodeObj.key",
+   "enum": [
+    {
+     "value": "1",
+     "label": "输出转换结果给调用端"
+    },
+    {
+     "value": "0",
+     "label": "不输出转换结果(仅作为下一节点的输入)"
+    },
+    {
+     "value": "2",
+     "label": "多次循环时累加结果并输出"
+    }
+   ]
+  },
+  {
+   "key": "responseData",
+   "label": "输出结果",
+   "widget": "Select",
+   "required": false,
+   "message": null,
+   "initialValue": "\"0\"",
+   "enum": [
+    {
+     "value": "1",
+     "label": "输出转换结果给调用端"
+    },
+    {
+     "value": "0",
+     "label": "不输出转换结果(仅作为下一节点的输入)"
+    },
+    {
+     "value": "2",
+     "label": "多次循环时累加结果并输出"
+    }
+   ]
+  },
+  {
+   "key": "result",
+   "label": "结果保存",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "\"shellResult\"",
+   "enum": null
+  },
+  {
+   "key": "shellCode",
+   "label": "Shell脚本",
+   "widget": "Input.TextArea",
+   "required": false,
+   "message": null,
+   "initialValue": "\"cmd\\n/c\\necho\\nhello word\"",
+   "enum": null
+  },
+  {
+   "key": "exceptionAssert",
+   "label": "执行异常",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"0\"",
+   "enum": null
+  },
+  {
+   "key": "assertAction",
+   "label": "断言失败时",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"1\"",
+   "enum": null
+  }
+ ],
+ "StartNode.jsx": [
+  {
+   "key": "pNodeName",
+   "label": "节点名称",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  },
+  {
+   "key": "pNodeId",
+   "label": "节点Id",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  },
+  {
+   "key": "pNodeType",
+   "label": "节点类型",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  }
+ ],
+ "SubProcessNode.jsx": [
+  {
+   "key": "pNodeName",
+   "label": "节点名称",
+   "widget": "Input",
+   "required": false,
+   "message": null,
+   "initialValue": "this.nodeObj.text",
+   "enum": null
+  },
+  {
+   "key": "pNodeId",
+   "label": "节点Id",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "this.nodeObj.key",
+   "enum": null
+  },
+  {
+   "key": "subProcessId",
+   "label": "指定子流程",
+   "widget": "TreeNodeSelect",
+   "required": true,
+   "message": null,
+   "initialValue": "\"\"",
+   "enum": null
+  },
+  {
+   "key": "inDataFlag",
+   "label": "数据流入",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"0\"",
+   "enum": [
+    {
+     "value": "1",
+     "label": "输出执行结果给调用端"
+    },
+    {
+     "value": "0",
+     "label": "不输出执行结果"
+    },
+    {
+     "value": "2",
+     "label": "多次循环调用时累加结果并输出"
+    }
+   ]
+  },
+  {
+   "key": "outDataFlag",
+   "label": "数据流出",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"0\"",
+   "enum": [
+    {
+     "value": "1",
+     "label": "输出执行结果给调用端"
+    },
+    {
+     "value": "0",
+     "label": "不输出执行结果"
+    },
+    {
+     "value": "2",
+     "label": "多次循环调用时累加结果并输出"
+    }
+   ]
+  },
+  {
+   "key": "responseData",
+   "label": "输出结果",
+   "widget": "Select",
+   "required": false,
+   "message": null,
+   "initialValue": "\"1\"",
+   "enum": [
+    {
+     "value": "1",
+     "label": "输出执行结果给调用端"
+    },
+    {
+     "value": "0",
+     "label": "不输出执行结果"
+    },
+    {
+     "value": "2",
+     "label": "多次循环调用时累加结果并输出"
+    }
+   ]
+  },
+  {
+   "key": "exceptionAssert",
+   "label": "执行异常",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"0\"",
+   "enum": null
+  },
+  {
+   "key": "subProcessFailed",
+   "label": "子流程执行失败",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"0\"",
+   "enum": null
+  },
+  {
+   "key": "assertAction",
+   "label": "断言失败时",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"1\"",
+   "enum": null
+  }
+ ],
+ "TCPNode.jsx": [
+  {
+   "key": "pNodeName",
+   "label": "节点名称",
+   "widget": "Input",
+   "required": false,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  },
+  {
+   "key": "pNodeId",
+   "label": "节点Id",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  },
+  {
+   "key": "pNodeType",
+   "label": "节点类型",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  },
+  {
+   "key": "pNodeAlias",
+   "label": "节点别名",
+   "widget": "Input",
+   "required": false,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  },
+  {
+   "key": "tcpAddress",
+   "label": "TCP服务器地址",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "\"${#config.tcpAddress",
+   "enum": null
+  },
+  {
+   "key": "body",
+   "label": "信息内容",
+   "widget": "Input.TextArea",
+   "required": true,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  },
+  {
+   "key": "responseData",
+   "label": "输出结果",
+   "widget": "Select",
+   "required": false,
+   "message": null,
+   "initialValue": "\"1\"",
+   "enum": null
+  },
+  {
+   "key": "saveRequestBody",
+   "label": "保存请求参数",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"1\"",
+   "enum": null
+  },
+  {
+   "key": "saveResponseBody",
+   "label": "保存调用结果",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"1\"",
+   "enum": null
+  },
+  {
+   "key": "xmlToJson",
+   "label": "结果转为JSON",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"1\"",
+   "enum": null
+  },
+  {
+   "key": "xmlSubNode",
+   "label": "指定XML节点",
+   "widget": "Input",
+   "required": false,
+   "message": null,
+   "initialValue": "\"\"",
+   "enum": null
+  },
+  {
+   "key": "compensateFlag",
+   "label": "断言失败",
+   "widget": "Select",
+   "required": false,
+   "message": null,
+   "initialValue": "\"1\"",
+   "enum": null
+  },
+  {
+   "key": "assertionCodeType",
+   "label": "参数编辑模式",
+   "widget": "Switch",
+   "required": false,
+   "message": null,
+   "initialValue": "true",
+   "enum": null
+  }
+ ],
+ "TextNode.jsx": [
+  {
+   "key": "pNodeName",
+   "label": "文字内容",
+   "widget": "Input",
+   "required": false,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  },
+  {
+   "key": "pNodeId",
+   "label": "节点Id",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  },
+  {
+   "key": "pNodeType",
+   "label": "节点类型",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  }
+ ],
+ "TimeNode.jsx": [
+  {
+   "key": "pNodeName",
+   "label": "节点名称",
+   "widget": "Input",
+   "required": false,
+   "message": null,
+   "initialValue": null,
+   "enum": [
+    {
+     "value": "schedule",
+     "label": "定时任务"
+    },
+    {
+     "value": "sleep",
+     "label": "睡眠"
+    }
+   ]
+  },
+  {
+   "key": "pNodeId",
+   "label": "节点Id",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": null,
+   "enum": [
+    {
+     "value": "schedule",
+     "label": "定时任务"
+    },
+    {
+     "value": "sleep",
+     "label": "睡眠"
+    }
+   ]
+  },
+  {
+   "key": "pNodeType",
+   "label": "节点类型",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": null,
+   "enum": [
+    {
+     "value": "schedule",
+     "label": "定时任务"
+    },
+    {
+     "value": "sleep",
+     "label": "睡眠"
+    }
+   ]
+  },
+  {
+   "key": "timeType",
+   "label": "定时类型",
+   "widget": "Select",
+   "required": true,
+   "message": null,
+   "initialValue": "'sleep'",
+   "enum": [
+    {
+     "value": "schedule",
+     "label": "定时任务"
+    },
+    {
+     "value": "sleep",
+     "label": "睡眠"
+    }
+   ]
+  },
+  {
+   "key": "second",
+   "label": "时间(毫秒)",
+   "widget": "InputNumber",
+   "required": true,
+   "message": null,
+   "initialValue": "1000",
+   "enum": null
+  },
+  {
+   "key": "maxLoopCount",
+   "label": "最大执行次数",
+   "widget": "InputNumber",
+   "required": true,
+   "message": null,
+   "initialValue": "0",
+   "enum": null
+  },
+  {
+   "key": "assertAction",
+   "label": "超过次数时",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "'1'",
+   "enum": null
+  },
+  {
+   "key": "tip",
+   "label": "提示信息",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "'流程需要定时执行!'",
+   "enum": null
+  }
+ ],
+ "VariableNode.jsx": [
+  {
+   "key": "pNodeName",
+   "label": "节点名称",
+   "widget": "Input",
+   "required": false,
+   "message": null,
+   "initialValue": "this.nodeObj.text",
+   "enum": null
+  },
+  {
+   "key": "pNodeId",
+   "label": "节点Id",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "this.nodeObj.key",
+   "enum": null
+  },
+  {
+   "key": "gobalParams",
+   "label": "变量类型",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"1\"",
+   "enum": null
+  },
+  {
+   "key": "maxLoopCount",
+   "label": "最大执行次数",
+   "widget": "InputNumber",
+   "required": true,
+   "message": null,
+   "initialValue": "0",
+   "enum": null
+  },
+  {
+   "key": "assertAction",
+   "label": "超过次数时",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"1\"",
+   "enum": null
+  }
+ ],
+ "VariableRuleNode.jsx": [
+  {
+   "key": "pNodeName",
+   "label": "节点名称",
+   "widget": "Input",
+   "required": false,
+   "message": null,
+   "initialValue": "this.nodeObj.text",
+   "enum": null
+  },
+  {
+   "key": "pNodeId",
+   "label": "节点Id",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "this.nodeObj.key",
+   "enum": null
+  },
+  {
+   "key": "gobalParams",
+   "label": "变量类型",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"1\"",
+   "enum": null
+  }
+ ],
+ "VelocityNode.jsx": [
+  {
+   "key": "pNodeName",
+   "label": "节点名称",
+   "widget": "Input",
+   "required": false,
+   "message": null,
+   "initialValue": "this.nodeObj.text",
+   "enum": [
+    {
+     "value": "1",
+     "label": "输出转换结果给调用端"
+    },
+    {
+     "value": "0",
+     "label": "不输出转换结果"
+    },
+    {
+     "value": "2",
+     "label": "多次循环调用时累加结果并输出"
+    }
+   ]
+  },
+  {
+   "key": "pNodeId",
+   "label": "节点Id",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "this.nodeObj.key",
+   "enum": [
+    {
+     "value": "1",
+     "label": "输出转换结果给调用端"
+    },
+    {
+     "value": "0",
+     "label": "不输出转换结果"
+    },
+    {
+     "value": "2",
+     "label": "多次循环调用时累加结果并输出"
+    }
+   ]
+  },
+  {
+   "key": "responseData",
+   "label": "输出结果",
+   "widget": "Select",
+   "required": false,
+   "message": null,
+   "initialValue": "\"1\"",
+   "enum": [
+    {
+     "value": "1",
+     "label": "输出转换结果给调用端"
+    },
+    {
+     "value": "0",
+     "label": "不输出转换结果"
+    },
+    {
+     "value": "2",
+     "label": "多次循环调用时累加结果并输出"
+    }
+   ]
+  },
+  {
+   "key": "code",
+   "label": null,
+   "widget": "MonacoEditor",
+   "required": true,
+   "message": null,
+   "initialValue": "\"\"",
+   "enum": null
+  }
+ ],
+ "WebServiceNode.jsx": [
+  {
+   "key": "pNodeName",
+   "label": "节点名称",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "this.nodeObj.text",
+   "enum": [
+    {
+     "value": "1",
+     "label": "输出API结果到调用端"
+    },
+    {
+     "value": "0",
+     "label": "不输出API结果"
+    },
+    {
+     "value": "2",
+     "label": "多次循环调用时累加结果并输出"
+    }
+   ]
+  },
+  {
+   "key": "pNodeId",
+   "label": "节点Id",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "this.nodeObj.key",
+   "enum": [
+    {
+     "value": "1",
+     "label": "输出API结果到调用端"
+    },
+    {
+     "value": "0",
+     "label": "不输出API结果"
+    },
+    {
+     "value": "2",
+     "label": "多次循环调用时累加结果并输出"
+    }
+   ]
+  },
+  {
+   "key": "pNodeAlias",
+   "label": "节点别名",
+   "widget": "Input",
+   "required": false,
+   "message": null,
+   "initialValue": null,
+   "enum": [
+    {
+     "value": "1",
+     "label": "输出API结果到调用端"
+    },
+    {
+     "value": "0",
+     "label": "不输出API结果"
+    },
+    {
+     "value": "2",
+     "label": "多次循环调用时累加结果并输出"
+    }
+   ]
+  },
+  {
+   "key": "responseData",
+   "label": "输出结果",
+   "widget": "Select",
+   "required": false,
+   "message": null,
+   "initialValue": "\"1\"",
+   "enum": [
+    {
+     "value": "1",
+     "label": "输出API结果到调用端"
+    },
+    {
+     "value": "0",
+     "label": "不输出API结果"
+    },
+    {
+     "value": "2",
+     "label": "多次循环调用时累加结果并输出"
+    }
+   ]
+  },
+  {
+   "key": "apiUrl",
+   "label": "WSDL URL",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "\"${#config.esb.webservice",
+   "enum": null
+  },
+  {
+   "key": "addIdentitytoken",
+   "label": "追加认证头",
+   "widget": null,
+   "required": false,
+   "message": null,
+   "initialValue": "'1'",
+   "enum": null
+  },
+  {
+   "key": "asyncFlag",
+   "label": "异步调用",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"0\"",
+   "enum": null
+  },
+  {
+   "key": "loadBalanceId",
+   "label": "负载均衡策略",
+   "widget": "AjaxSelect",
+   "required": false,
+   "message": null,
+   "initialValue": "\"WeightRandomServer\"",
+   "enum": null
+  },
+  {
+   "key": "connectTimeout",
+   "label": "请求超时时间",
+   "widget": "InputNumber",
+   "required": true,
+   "message": null,
+   "initialValue": "\"30000\"",
+   "enum": null
+  },
+  {
+   "key": "xmltojson",
+   "label": "结果转为JSON",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"1\"",
+   "enum": [
+    {
+     "value": "1",
+     "label": "正向补偿(直到本节点断言成功后继续执行流程)"
+    },
+    {
+     "value": "3",
+     "label": "跳过(事后补偿本节点)"
+    },
+    {
+     "value": "0",
+     "label": "跳过(无需补偿)"
+    },
+    {
+     "value": "2",
+     "label": "终止流程"
+    }
+   ]
+  },
+  {
+   "key": "webServiceXmlSubNode",
+   "label": "指定XML节点",
+   "widget": "Input",
+   "required": false,
+   "message": null,
+   "initialValue": "\"\"",
+   "enum": [
+    {
+     "value": "1",
+     "label": "正向补偿(直到本节点断言成功后继续执行流程)"
+    },
+    {
+     "value": "3",
+     "label": "跳过(事后补偿本节点)"
+    },
+    {
+     "value": "0",
+     "label": "跳过(无需补偿)"
+    },
+    {
+     "value": "2",
+     "label": "终止流程"
+    },
+    {
+     "value": "4",
+     "label": "结束本节点(其他节点可继续执行)"
+    }
+   ]
+  },
+  {
+   "key": "compensateFlag",
+   "label": "断言失败",
+   "widget": "Select",
+   "required": false,
+   "message": null,
+   "initialValue": "\"1\"",
+   "enum": [
+    {
+     "value": "1",
+     "label": "正向补偿(直到本节点断言成功后继续执行流程)"
+    },
+    {
+     "value": "3",
+     "label": "跳过(事后补偿本节点)"
+    },
+    {
+     "value": "0",
+     "label": "跳过(无需补偿)"
+    },
+    {
+     "value": "2",
+     "label": "终止流程"
+    },
+    {
+     "value": "4",
+     "label": "结束本节点(其他节点可继续执行)"
+    }
+   ]
+  },
+  {
+   "key": "assertionCodeType",
+   "label": "参数编辑模式",
+   "widget": "Switch",
+   "required": false,
+   "message": null,
+   "initialValue": "true",
+   "enum": null
+  },
+  {
+   "key": "saveRequestBody",
+   "label": "保存请求参数",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"1\"",
+   "enum": null
+  },
+  {
+   "key": "saveResponseBody",
+   "label": "保存调用结果",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"1\"",
+   "enum": null
+  },
+  {
+   "key": "netConnectTimeout",
+   "label": "网络链接超时",
+   "widget": "InputNumber",
+   "required": true,
+   "message": null,
+   "initialValue": "\"10000\"",
+   "enum": null
+  },
+  {
+   "key": "retryNum",
+   "label": "重试次数",
+   "widget": "InputNumber",
+   "required": true,
+   "message": null,
+   "initialValue": "\"0\"",
+   "enum": null
+  },
+  {
+   "key": "retrySleep",
+   "label": "重试间隔",
+   "widget": "InputNumber",
+   "required": true,
+   "message": null,
+   "initialValue": "\"0\"",
+   "enum": null
+  },
+  {
+   "key": "transferHeader",
+   "label": null,
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"false\"",
+   "enum": [
+    {
+     "value": "1",
+     "label": "HTTP请求分发给本节点的数据"
+    },
+    {
+     "value": "4",
+     "label": "指定一个计算规则返回XML字符串作为输入参数"
+    },
+    {
+     "value": "0",
+     "label": "自定义一个XML字符串"
+    }
+   ]
+  },
+  {
+   "key": "requestBodyAuto",
+   "label": "参数获取方式",
+   "widget": "Select",
+   "required": false,
+   "message": null,
+   "initialValue": "\"0\"",
+   "enum": [
+    {
+     "value": "1",
+     "label": "HTTP请求分发给本节点的数据"
+    },
+    {
+     "value": "4",
+     "label": "指定一个计算规则返回XML字符串作为输入参数"
+    },
+    {
+     "value": "0",
+     "label": "自定义一个XML字符串"
+    }
+   ]
+  },
+  {
+   "key": "requestBodyRuleId",
+   "label": "使用计算规则",
+   "widget": "TreeNodeSelect",
+   "required": false,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  }
+ ],
+ "WeiXinNode.jsx": [
+  {
+   "key": "pNodeName",
+   "label": "节点名称",
+   "widget": "Input",
+   "required": false,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  },
+  {
+   "key": "pNodeId",
+   "label": "节点Id",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  },
+  {
+   "key": "pNodeType",
+   "label": "节点类型",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  },
+  {
+   "key": "corpId",
+   "label": "企业corpId",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "\"${#config.corpId",
+   "enum": null
+  },
+  {
+   "key": "agentId",
+   "label": "应用AgentId",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "\"${#config.agentId",
+   "enum": null
+  },
+  {
+   "key": "secrect",
+   "label": "应用密钥",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "\"${#config.secrect",
+   "enum": null
+  },
+  {
+   "key": "sendTo",
+   "label": "微信接收UserId",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  },
+  {
+   "key": "msgType",
+   "label": "消息类型",
+   "widget": "RadioGroup",
+   "required": false,
+   "message": null,
+   "initialValue": "\"text\"",
+   "enum": null
+  },
+  {
+   "key": "title",
+   "label": "标题",
+   "widget": "Input",
+   "required": false,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  },
+  {
+   "key": "messageUrl",
+   "label": "链接URL",
+   "widget": "Input",
+   "required": false,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  },
+  {
+   "key": "body",
+   "label": "消息内容",
+   "widget": "Input.TextArea",
+   "required": true,
+   "message": null,
+   "initialValue": null,
+   "enum": null
+  }
+ ],
+ "Xml2JsonNode.jsx": [
+  {
+   "key": "pNodeName",
+   "label": "节点名称",
+   "widget": "Input",
+   "required": false,
+   "message": null,
+   "initialValue": "this.nodeObj.text",
+   "enum": [
+    {
+     "value": "1",
+     "label": "输出API结果到调用端"
+    },
+    {
+     "value": "0",
+     "label": "不输出API结果"
+    }
+   ]
+  },
+  {
+   "key": "pNodeId",
+   "label": "节点Id",
+   "widget": "Input",
+   "required": true,
+   "message": null,
+   "initialValue": "this.nodeObj.key",
+   "enum": [
+    {
+     "value": "1",
+     "label": "输出API结果到调用端"
+    },
+    {
+     "value": "0",
+     "label": "不输出API结果"
+    },
+    {
+     "value": "2",
+     "label": "多次循环调用时累加结果并输出"
+    }
+   ]
+  },
+  {
+   "key": "xmlSubNode",
+   "label": "指定XML起始节点",
+   "widget": "Input",
+   "required": false,
+   "message": null,
+   "initialValue": "\"xml#body#rows\"",
+   "enum": [
+    {
+     "value": "1",
+     "label": "输出API结果到调用端"
+    },
+    {
+     "value": "0",
+     "label": "不输出API结果"
+    },
+    {
+     "value": "2",
+     "label": "多次循环调用时累加结果并输出"
+    }
+   ]
+  },
+  {
+   "key": "responseData",
+   "label": "输出结果",
+   "widget": "Select",
+   "required": false,
+   "message": null,
+   "initialValue": "\"0\"",
+   "enum": [
+    {
+     "value": "1",
+     "label": "输出API结果到调用端"
+    },
+    {
+     "value": "0",
+     "label": "不输出API结果"
+    },
+    {
+     "value": "2",
+     "label": "多次循环调用时累加结果并输出"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,914 @@
+{
+ "generatedAt": "2026-10-20T12:39:29.950Z",
+ "count": 227,
+ "models": [
+  {
+   "class": "cn/restcloud/ai/chat/model/P_AiChatModelEntry",
+   "pkg": "cn.restcloud.ai.chat.model"
+  },
+  {
+   "class": "cn/restcloud/ai/chat/model/P_AiChatModelPlatformEntry",
+   "pkg": "cn.restcloud.ai.chat.model"
+  },
+  {
+   "class": "cn/restcloud/ai/chat/model/P_AiChatPromptEntry",
+   "pkg": "cn.restcloud.ai.chat.model"
+  },
+  {
+   "class": "cn/restcloud/ai/chat/model/P_AiChatRecordEntry",
+   "pkg": "cn.restcloud.ai.chat.model"
+  },
+  {
+   "class": "cn/restcloud/ai/chat/model/P_AiChatRecordItemEntry",
+   "pkg": "cn.restcloud.ai.chat.model"
+  },
+  {
+   "class": "cn/restcloud/ai/chat/model/P_AiChatSupplierEntry",
+   "pkg": "cn.restcloud.ai.chat.model"
+  },
+  {
+   "class": "cn/restcloud/apiflow/application/model/P_ESBApplicationConfigEntry",
+   "pkg": "cn.restcloud.apiflow.application.model"
+  },
+  {
+   "class": "cn/restcloud/apiflow/mapping/model/P_ESBDataMappingCategoryEntry",
+   "pkg": "cn.restcloud.apiflow.mapping.model"
+  },
+  {
+   "class": "cn/restcloud/apiflow/mapping/model/P_ESBDataMappingConfig",
+   "pkg": "cn.restcloud.apiflow.mapping.model"
+  },
+  {
+   "class": "cn/restcloud/apiflow/module/model/P_ESBProcessModuleCategory",
+   "pkg": "cn.restcloud.apiflow.module.model"
+  },
+  {
+   "class": "cn/restcloud/apiflow/module/model/P_ESBProcessModuleItem",
+   "pkg": "cn.restcloud.apiflow.module.model"
+  },
+  {
+   "class": "cn/restcloud/apiflow/process/engine/model/P_ESBProcessInstanceEntry",
+   "pkg": "cn.restcloud.apiflow.process.engine.model"
+  },
+  {
+   "class": "cn/restcloud/apiflow/process/engine/model/P_ESBProcessInstanceHistoryEntry",
+   "pkg": "cn.restcloud.apiflow.process.engine.model"
+  },
+  {
+   "class": "cn/restcloud/apiflow/process/engine/model/P_ESBProcessNodeInstanceHistoryEntry",
+   "pkg": "cn.restcloud.apiflow.process.engine.model"
+  },
+  {
+   "class": "cn/restcloud/apiflow/process/engine/model/P_ESBProcessRouterLockEntry",
+   "pkg": "cn.restcloud.apiflow.process.engine.model"
+  },
+  {
+   "class": "cn/restcloud/apiflow/process/example/model/P_ESBProcessDataExampleEntry",
+   "pkg": "cn.restcloud.apiflow.process.example.model"
+  },
+  {
+   "class": "cn/restcloud/apiflow/process/favorite/model/P_ESBProcessNodeFavoriteEntry",
+   "pkg": "cn.restcloud.apiflow.process.favorite.model"
+  },
+  {
+   "class": "cn/restcloud/apiflow/process/monitor/model/P_ESBProcessNodeExecuteStatisticEntry",
+   "pkg": "cn.restcloud.apiflow.process.monitor.model"
+  },
+  {
+   "class": "cn/restcloud/apiflow/process/pmodel/model/P_ESBProcessModelConfig",
+   "pkg": "cn.restcloud.apiflow.process.pmodel.model"
+  },
+  {
+   "class": "cn/restcloud/apiflow/process/pmodel/model/P_ESBProcessModelSaveRecord",
+   "pkg": "cn.restcloud.apiflow.process.pmodel.model"
+  },
+  {
+   "class": "cn/restcloud/apiflow/process/pmodel/model/P_ESBProcessModelVersion",
+   "pkg": "cn.restcloud.apiflow.process.pmodel.model"
+  },
+  {
+   "class": "cn/restcloud/apiflow/process/pmodel/model/P_ESBProcessNodeConfig",
+   "pkg": "cn.restcloud.apiflow.process.pmodel.model"
+  },
+  {
+   "class": "cn/restcloud/apiflow/process/pmodel/model/P_ESBProcessNodeTemplateEntry",
+   "pkg": "cn.restcloud.apiflow.process.pmodel.model"
+  },
+  {
+   "class": "cn/restcloud/apiflow/process/pmodel/model/P_ESBProcessSharedVariableEntry",
+   "pkg": "cn.restcloud.apiflow.process.pmodel.model"
+  },
+  {
+   "class": "cn/restcloud/apiflow/process/pmodel/model/P_ESBProcessTemplateEntry",
+   "pkg": "cn.restcloud.apiflow.process.pmodel.model"
+  },
+  {
+   "class": "cn/restcloud/apiflow/process/task/model/P_ESBProcessTaskQueueHistoryEntry",
+   "pkg": "cn.restcloud.apiflow.process.task.model"
+  },
+  {
+   "class": "cn/restcloud/apiflow/rule/model/P_ESBProcessRuleEntry",
+   "pkg": "cn.restcloud.apiflow.rule.model"
+  },
+  {
+   "class": "cn/restcloud/apiflow/status/model/P_ESBProcessStatusLog",
+   "pkg": "cn.restcloud.apiflow.status.model"
+  },
+  {
+   "class": "cn/restcloud/apiflow/status/model/P_ESBProcessStatusRule",
+   "pkg": "cn.restcloud.apiflow.status.model"
+  },
+  {
+   "class": "cn/restcloud/apiportal/model/P_ApiPortalApiCategoryEntry",
+   "pkg": "cn.restcloud.apiportal.model"
+  },
+  {
+   "class": "cn/restcloud/apiportal/model/P_ApiPortalCloudEntry",
+   "pkg": "cn.restcloud.apiportal.model"
+  },
+  {
+   "class": "cn/restcloud/apiportal/model/P_ApiProtalApplication",
+   "pkg": "cn.restcloud.apiportal.model"
+  },
+  {
+   "class": "cn/restcloud/apiportal/model/P_ApiProtalCallAppyEntry",
+   "pkg": "cn.restcloud.apiportal.model"
+  },
+  {
+   "class": "cn/restcloud/apiportal/model/P_ApiVersionChangeEntry",
+   "pkg": "cn.restcloud.apiportal.model"
+  },
+  {
+   "class": "cn/restcloud/apiportal/model/P_AppKeyConfig",
+   "pkg": "cn.restcloud.apiportal.model"
+  },
+  {
+   "class": "cn/restcloud/appassembly/model/P_AppAssemblyActionUrlConfigEntry",
+   "pkg": "cn.restcloud.appassembly.model"
+  },
+  {
+   "class": "cn/restcloud/appassembly/model/P_AppAssemblyApplicationConfigEntry",
+   "pkg": "cn.restcloud.appassembly.model"
+  },
+  {
+   "class": "cn/restcloud/appassembly/model/P_AppAssemblyAppLoginEntry",
+   "pkg": "cn.restcloud.appassembly.model"
+  },
+  {
+   "class": "cn/restcloud/appassembly/model/P_AppAssemblyEnvironmentEntry",
+   "pkg": "cn.restcloud.appassembly.model"
+  },
+  {
+   "class": "cn/restcloud/appassembly/model/P_AppAssemblyEnvironmentLogEntry",
+   "pkg": "cn.restcloud.appassembly.model"
+  },
+  {
+   "class": "cn/restcloud/appassembly/model/P_AppAssemblyFrame",
+   "pkg": "cn.restcloud.appassembly.model"
+  },
+  {
+   "class": "cn/restcloud/appassembly/model/P_AppAssemblyHistoryLogEntry",
+   "pkg": "cn.restcloud.appassembly.model"
+  },
+  {
+   "class": "cn/restcloud/appassembly/model/P_AppAssemblyLeftFrameConfig",
+   "pkg": "cn.restcloud.appassembly.model"
+  },
+  {
+   "class": "cn/restcloud/appassembly/model/P_AppAssemblyLowCodePageConfig",
+   "pkg": "cn.restcloud.appassembly.model"
+  },
+  {
+   "class": "cn/restcloud/appassembly/model/P_AppAssemblyLowCodePageConfigLog",
+   "pkg": "cn.restcloud.appassembly.model"
+  },
+  {
+   "class": "cn/restcloud/appassembly/model/P_AppAssemblyLowCodePageVersion",
+   "pkg": "cn.restcloud.appassembly.model"
+  },
+  {
+   "class": "cn/restcloud/appassembly/model/P_AppAssemblyNavigationEntry",
+   "pkg": "cn.restcloud.appassembly.model"
+  },
+  {
+   "class": "cn/restcloud/appassembly/model/P_AppAssemblyResourcesEntry",
+   "pkg": "cn.restcloud.appassembly.model"
+  },
+  {
+   "class": "cn/restcloud/appassembly/model/P_AppAssemblyServiceCategoryEntry",
+   "pkg": "cn.restcloud.appassembly.model"
+  },
+  {
+   "class": "cn/restcloud/appassembly/model/P_AppAssemblySystemAppConfigEntry",
+   "pkg": "cn.restcloud.appassembly.model"
+  },
+  {
+   "class": "cn/restcloud/appassembly/model/P_AppAssemblyVersion",
+   "pkg": "cn.restcloud.appassembly.model"
+  },
+  {
+   "class": "cn/restcloud/appassembly/template/model/P_AppAssemblyApplicationConfigModelEntry",
+   "pkg": "cn.restcloud.appassembly.template.model"
+  },
+  {
+   "class": "cn/restcloud/appassembly/template/model/P_AppAssemblyAppLoginModelEntry",
+   "pkg": "cn.restcloud.appassembly.template.model"
+  },
+  {
+   "class": "cn/restcloud/appassembly/template/model/P_AppAssemblyLowCodePageConfigLogModel",
+   "pkg": "cn.restcloud.appassembly.template.model"
+  },
+  {
+   "class": "cn/restcloud/appassembly/template/model/P_AppAssemblyLowCodePageModelConfig",
+   "pkg": "cn.restcloud.appassembly.template.model"
+  },
+  {
+   "class": "cn/restcloud/appassembly/template/model/P_AppAssemblyLowCodePageVersionModel",
+   "pkg": "cn.restcloud.appassembly.template.model"
+  },
+  {
+   "class": "cn/restcloud/appassembly/template/model/P_AppAssemblyMenuModel",
+   "pkg": "cn.restcloud.appassembly.template.model"
+  },
+  {
+   "class": "cn/restcloud/appassembly/template/model/P_AppAssemblyNavigationModelEntry",
+   "pkg": "cn.restcloud.appassembly.template.model"
+  },
+  {
+   "class": "cn/restcloud/appassembly/template/model/P_AppAssemblyTemplateLibraryEntry",
+   "pkg": "cn.restcloud.appassembly.template.model"
+  },
+  {
+   "class": "cn/restcloud/auth/oauth2/model/P_OauthClientDetails",
+   "pkg": "cn.restcloud.auth.oauth2.model"
+  },
+  {
+   "class": "cn/restcloud/bpm/application/model/P_BPMApplicationConfigEntry",
+   "pkg": "cn.restcloud.bpm.application.model"
+  },
+  {
+   "class": "cn/restcloud/bpm/process/pmodel/model/P_BPMProcessModelConfig",
+   "pkg": "cn.restcloud.bpm.process.pmodel.model"
+  },
+  {
+   "class": "cn/restcloud/bpm/process/pmodel/model/P_BPMProcessNodeConfig",
+   "pkg": "cn.restcloud.bpm.process.pmodel.model"
+  },
+  {
+   "class": "cn/restcloud/bpm/rule/model/P_BPMProcessRuleEntry",
+   "pkg": "cn.restcloud.bpm.rule.model"
+  },
+  {
+   "class": "cn/restcloud/connect/connector/model/P_ApplicationVideoEntry",
+   "pkg": "cn.restcloud.connect.connector.model"
+  },
+  {
+   "class": "cn/restcloud/connect/connector/model/P_ConnectionConfigurationEntry",
+   "pkg": "cn.restcloud.connect.connector.model"
+  },
+  {
+   "class": "cn/restcloud/connect/connector/model/P_ConnectionDocumentConfigEntry",
+   "pkg": "cn.restcloud.connect.connector.model"
+  },
+  {
+   "class": "cn/restcloud/connect/sap/model/P_SAPConnectRuleEntry",
+   "pkg": "cn.restcloud.connect.sap.model"
+  },
+  {
+   "class": "cn/restcloud/connect/sap/model/P_SapRFCMonitorConfig",
+   "pkg": "cn.restcloud.connect.sap.model"
+  },
+  {
+   "class": "cn/restcloud/connect/sap/model/P_SapRFCMonitorLog",
+   "pkg": "cn.restcloud.connect.sap.model"
+  },
+  {
+   "class": "cn/restcloud/connect/sap/model/P_SapRFCWaringConfig",
+   "pkg": "cn.restcloud.connect.sap.model"
+  },
+  {
+   "class": "cn/restcloud/connect/sap/model/P_SapRFCWaringTriggerHistory",
+   "pkg": "cn.restcloud.connect.sap.model"
+  },
+  {
+   "class": "cn/restcloud/datasource/model/P_DataSourceComponent",
+   "pkg": "cn.restcloud.datasource.model"
+  },
+  {
+   "class": "cn/restcloud/datasource/model/P_DataSourceComponentForm",
+   "pkg": "cn.restcloud.datasource.model"
+  },
+  {
+   "class": "cn/restcloud/datasource/model/P_DataSourceComponentGroup",
+   "pkg": "cn.restcloud.datasource.model"
+  },
+  {
+   "class": "cn/restcloud/datav/model/P_BigScreenClassifyEntry",
+   "pkg": "cn.restcloud.datav.model"
+  },
+  {
+   "class": "cn/restcloud/datav/model/P_BigScreenDataEntry",
+   "pkg": "cn.restcloud.datav.model"
+  },
+  {
+   "class": "cn/restcloud/datav/model/P_BigScreenEntry",
+   "pkg": "cn.restcloud.datav.model"
+  },
+  {
+   "class": "cn/restcloud/datav/model/P_BigScreenPictureEntry",
+   "pkg": "cn.restcloud.datav.model"
+  },
+  {
+   "class": "cn/restcloud/datav/model/P_BigScreenTemplateEntry",
+   "pkg": "cn.restcloud.datav.model"
+  },
+  {
+   "class": "cn/restcloud/designer/apidoc/model/P_APIChangeLogHistoryEntry",
+   "pkg": "cn.restcloud.designer.apidoc.model"
+  },
+  {
+   "class": "cn/restcloud/designer/apidoc/model/P_APIDependentRecordEntry",
+   "pkg": "cn.restcloud.designer.apidoc.model"
+  },
+  {
+   "class": "cn/restcloud/designer/apidoc/model/P_AppApiDocEntry",
+   "pkg": "cn.restcloud.designer.apidoc.model"
+  },
+  {
+   "class": "cn/restcloud/designer/appmenu/model/P_AppMenuCategoryEntry",
+   "pkg": "cn.restcloud.designer.appmenu.model"
+  },
+  {
+   "class": "cn/restcloud/designer/appmenu/model/P_AppMenuItemConfigEntry",
+   "pkg": "cn.restcloud.designer.appmenu.model"
+  },
+  {
+   "class": "cn/restcloud/designer/appres/model/P_AppResourcesEntry",
+   "pkg": "cn.restcloud.designer.appres.model"
+  },
+  {
+   "class": "cn/restcloud/designer/devlog/model/P_AppDevelopmentLogEntry",
+   "pkg": "cn.restcloud.designer.devlog.model"
+  },
+  {
+   "class": "cn/restcloud/designer/knowledge/model/P_KnowledgeDocEntry",
+   "pkg": "cn.restcloud.designer.knowledge.model"
+  },
+  {
+   "class": "cn/restcloud/designer/mapping/model/P_GatewayDataMappingCategory",
+   "pkg": "cn.restcloud.designer.mapping.model"
+  },
+  {
+   "class": "cn/restcloud/designer/mapping/model/P_GatewayDataMappingConfig",
+   "pkg": "cn.restcloud.designer.mapping.model"
+  },
+  {
+   "class": "cn/restcloud/designer/notice/model/P_AppNoticesEntry",
+   "pkg": "cn.restcloud.designer.notice.model"
+  },
+  {
+   "class": "cn/restcloud/designer/procedure/model/P_ProcedureConfigEntry",
+   "pkg": "cn.restcloud.designer.procedure.model"
+  },
+  {
+   "class": "cn/restcloud/designer/tags/model/P_TagsConfigEntry",
+   "pkg": "cn.restcloud.designer.tags.model"
+  },
+  {
+   "class": "cn/restcloud/designer/task/model/P_AppTaskEntry",
+   "pkg": "cn.restcloud.designer.task.model"
+  },
+  {
+   "class": "cn/restcloud/designer/version/model/P_AppVersionEntry",
+   "pkg": "cn.restcloud.designer.version.model"
+  },
+  {
+   "class": "cn/restcloud/discovery/config/model/P_DisApplicationConfigEntry",
+   "pkg": "cn.restcloud.discovery.config.model"
+  },
+  {
+   "class": "cn/restcloud/discovery/config/model/P_DisConfigCenterEntry",
+   "pkg": "cn.restcloud.discovery.config.model"
+  },
+  {
+   "class": "cn/restcloud/discovery/config/model/P_DisConfigCenterLog",
+   "pkg": "cn.restcloud.discovery.config.model"
+  },
+  {
+   "class": "cn/restcloud/discovery/config/model/P_DisConfigSnapshotData",
+   "pkg": "cn.restcloud.discovery.config.model"
+  },
+  {
+   "class": "cn/restcloud/discovery/config/model/P_DisRegistrationCenterConfig",
+   "pkg": "cn.restcloud.discovery.config.model"
+  },
+  {
+   "class": "cn/restcloud/discovery/dis/server/model/P_DiscoveryMessageEntry",
+   "pkg": "cn.restcloud.discovery.dis.server.model"
+  },
+  {
+   "class": "cn/restcloud/discovery/dis/server/model/P_DiscoveryServerConfigEntry",
+   "pkg": "cn.restcloud.discovery.dis.server.model"
+  },
+  {
+   "class": "cn/restcloud/discovery/monitor/model/P_DiscoveryServerPerformance",
+   "pkg": "cn.restcloud.discovery.monitor.model"
+  },
+  {
+   "class": "cn/restcloud/etl/application/model/P_ETLApplicationConfigEntry",
+   "pkg": "cn.restcloud.etl.application.model"
+  },
+  {
+   "class": "cn/restcloud/etl/datafile/model/P_ETLDataFileEntry",
+   "pkg": "cn.restcloud.etl.datafile.model"
+  },
+  {
+   "class": "cn/restcloud/etl/dataquality/datachange/model/P_ETLDataQualityChangeHistoryLog",
+   "pkg": "cn.restcloud.etl.dataquality.datachange.model"
+  },
+  {
+   "class": "cn/restcloud/etl/dataquality/datachange/model/P_ETLDataQualityChangeRule",
+   "pkg": "cn.restcloud.etl.dataquality.datachange.model"
+  },
+  {
+   "class": "cn/restcloud/etl/dataquality/datacontent/model/P_ETLDataQualityContentHistoryLog",
+   "pkg": "cn.restcloud.etl.dataquality.datacontent.model"
+  },
+  {
+   "class": "cn/restcloud/etl/dataquality/datacontent/model/P_ETLDataQualityContentRule",
+   "pkg": "cn.restcloud.etl.dataquality.datacontent.model"
+  },
+  {
+   "class": "cn/restcloud/etl/dataquality/datacount/model/P_ETLDataQualityCountHistoryLog",
+   "pkg": "cn.restcloud.etl.dataquality.datacount.model"
+  },
+  {
+   "class": "cn/restcloud/etl/dataquality/datacount/model/P_ETLDataQualityCountRule",
+   "pkg": "cn.restcloud.etl.dataquality.datacount.model"
+  },
+  {
+   "class": "cn/restcloud/etl/dataquality/metachange/model/P_ETLQualityMetaChangeLog",
+   "pkg": "cn.restcloud.etl.dataquality.metachange.model"
+  },
+  {
+   "class": "cn/restcloud/etl/dataquality/metachange/model/P_ETLQualityMetaChangeRule",
+   "pkg": "cn.restcloud.etl.dataquality.metachange.model"
+  },
+  {
+   "class": "cn/restcloud/etl/dataquality/processstatus/model/P_ETLProcessStatusLog",
+   "pkg": "cn.restcloud.etl.dataquality.processstatus.model"
+  },
+  {
+   "class": "cn/restcloud/etl/dataquality/processstatus/model/P_ETLProcessStatusRule",
+   "pkg": "cn.restcloud.etl.dataquality.processstatus.model"
+  },
+  {
+   "class": "cn/restcloud/etl/log/model/P_ETLProcessDebugLog",
+   "pkg": "cn.restcloud.etl.log.model"
+  },
+  {
+   "class": "cn/restcloud/etl/process/pmodel/model/P_ETLProcessModelConfig",
+   "pkg": "cn.restcloud.etl.process.pmodel.model"
+  },
+  {
+   "class": "cn/restcloud/etl/process/pmodel/model/P_ETLProcessModelVersion",
+   "pkg": "cn.restcloud.etl.process.pmodel.model"
+  },
+  {
+   "class": "cn/restcloud/etl/process/pmodel/model/P_ETLProcessNodeConfig",
+   "pkg": "cn.restcloud.etl.process.pmodel.model"
+  },
+  {
+   "class": "cn/restcloud/etl/process/pmodel/model/P_ETLProcessNodeTemplateEntry",
+   "pkg": "cn.restcloud.etl.process.pmodel.model"
+  },
+  {
+   "class": "cn/restcloud/etl/rule/model/P_ETLProcessRuleEntry",
+   "pkg": "cn.restcloud.etl.rule.model"
+  },
+  {
+   "class": "cn/restcloud/framework/analysis/model/P_ActionUrlAccessLogDetailEntry",
+   "pkg": "cn.restcloud.framework.analysis.model"
+  },
+  {
+   "class": "cn/restcloud/framework/analysis/model/P_ActionUrlAccessLogEntry",
+   "pkg": "cn.restcloud.framework.analysis.model"
+  },
+  {
+   "class": "cn/restcloud/framework/analysis/model/P_ActionUrlExceptionEntry",
+   "pkg": "cn.restcloud.framework.analysis.model"
+  },
+  {
+   "class": "cn/restcloud/framework/attachment/model/P_AttachmentRecordEntry",
+   "pkg": "cn.restcloud.framework.attachment.model"
+  },
+  {
+   "class": "cn/restcloud/framework/blance/model/P_LoadBalanceConfigEntry",
+   "pkg": "cn.restcloud.framework.blance.model"
+  },
+  {
+   "class": "cn/restcloud/framework/businesssystem/model/P_BusinessSystemEntry",
+   "pkg": "cn.restcloud.framework.businesssystem.model"
+  },
+  {
+   "class": "cn/restcloud/framework/cluster/model/P_ClusterCommandEntry",
+   "pkg": "cn.restcloud.framework.cluster.model"
+  },
+  {
+   "class": "cn/restcloud/framework/cluster/model/P_ClusterServerStatusEntry",
+   "pkg": "cn.restcloud.framework.cluster.model"
+  },
+  {
+   "class": "cn/restcloud/framework/coderepository/model/P_CodeCommitHistoryEntry",
+   "pkg": "cn.restcloud.framework.coderepository.model"
+  },
+  {
+   "class": "cn/restcloud/framework/coderepository/model/P_CodeRepositoryEntry",
+   "pkg": "cn.restcloud.framework.coderepository.model"
+  },
+  {
+   "class": "cn/restcloud/framework/common/model/P_DataChangeLog",
+   "pkg": "cn.restcloud.framework.common.model"
+  },
+  {
+   "class": "cn/restcloud/framework/config/model/P_ActionUrlConfigEntry",
+   "pkg": "cn.restcloud.framework.config.model"
+  },
+  {
+   "class": "cn/restcloud/framework/config/model/P_ActionUrlConfigTemplate",
+   "pkg": "cn.restcloud.framework.config.model"
+  },
+  {
+   "class": "cn/restcloud/framework/config/model/P_ActionUrlParamsConfigEntry",
+   "pkg": "cn.restcloud.framework.config.model"
+  },
+  {
+   "class": "cn/restcloud/framework/config/model/P_ApplicationConfigEntry",
+   "pkg": "cn.restcloud.framework.config.model"
+  },
+  {
+   "class": "cn/restcloud/framework/config/model/P_BeanConfigEntry",
+   "pkg": "cn.restcloud.framework.config.model"
+  },
+  {
+   "class": "cn/restcloud/framework/config/model/P_EnvironmentConfig",
+   "pkg": "cn.restcloud.framework.config.model"
+  },
+  {
+   "class": "cn/restcloud/framework/config/model/P_GatewayRouterConfig",
+   "pkg": "cn.restcloud.framework.config.model"
+  },
+  {
+   "class": "cn/restcloud/framework/config/model/P_GlobalVarConfigEntry",
+   "pkg": "cn.restcloud.framework.config.model"
+  },
+  {
+   "class": "cn/restcloud/framework/config/model/P_SerialNumberConfigEntry",
+   "pkg": "cn.restcloud.framework.config.model"
+  },
+  {
+   "class": "cn/restcloud/framework/config/model/P_ServiceCacheObj",
+   "pkg": "cn.restcloud.framework.config.model"
+  },
+  {
+   "class": "cn/restcloud/framework/config/model/P_ServiceNameEntry",
+   "pkg": "cn.restcloud.framework.config.model"
+  },
+  {
+   "class": "cn/restcloud/framework/config/model/P_ServiceResponseConfigEntry",
+   "pkg": "cn.restcloud.framework.config.model"
+  },
+  {
+   "class": "cn/restcloud/framework/config/model/P_TimeToBeanConfigEntry",
+   "pkg": "cn.restcloud.framework.config.model"
+  },
+  {
+   "class": "cn/restcloud/framework/dm/model/P_ModelColumnConfigEntry",
+   "pkg": "cn.restcloud.framework.dm.model"
+  },
+  {
+   "class": "cn/restcloud/framework/dm/model/P_ModelConfigEntry",
+   "pkg": "cn.restcloud.framework.dm.model"
+  },
+  {
+   "class": "cn/restcloud/framework/dm/model/P_RdbSqlConfigComputeResult",
+   "pkg": "cn.restcloud.framework.dm.model"
+  },
+  {
+   "class": "cn/restcloud/framework/dm/model/P_RdbSqlConfigEntry",
+   "pkg": "cn.restcloud.framework.dm.model"
+  },
+  {
+   "class": "cn/restcloud/framework/login/model/P_UserLoginHistoryEntry",
+   "pkg": "cn.restcloud.framework.login.model"
+  },
+  {
+   "class": "cn/restcloud/framework/message/model/P_WarningMessageEntry",
+   "pkg": "cn.restcloud.framework.message.model"
+  },
+  {
+   "class": "cn/restcloud/framework/mock/model/P_MockDataConfigEntry",
+   "pkg": "cn.restcloud.framework.mock.model"
+  },
+  {
+   "class": "cn/restcloud/framework/mock/model/P_MockFieldRuleConfigEntry",
+   "pkg": "cn.restcloud.framework.mock.model"
+  },
+  {
+   "class": "cn/restcloud/framework/mock/model/P_MockResponseConfigEntry",
+   "pkg": "cn.restcloud.framework.mock.model"
+  },
+  {
+   "class": "cn/restcloud/framework/notification/model/P_AlarmLevelConfigEntry",
+   "pkg": "cn.restcloud.framework.notification.model"
+  },
+  {
+   "class": "cn/restcloud/framework/notification/model/P_NotificationConfigEntry",
+   "pkg": "cn.restcloud.framework.notification.model"
+  },
+  {
+   "class": "cn/restcloud/framework/org/model/P_OrgCompanysEntry",
+   "pkg": "cn.restcloud.framework.org.model"
+  },
+  {
+   "class": "cn/restcloud/framework/org/model/P_OrgDepartmentsEntry",
+   "pkg": "cn.restcloud.framework.org.model"
+  },
+  {
+   "class": "cn/restcloud/framework/org/model/P_OrgPersonContext",
+   "pkg": "cn.restcloud.framework.org.model"
+  },
+  {
+   "class": "cn/restcloud/framework/org/model/P_OrgPersonMapDeptEntry",
+   "pkg": "cn.restcloud.framework.org.model"
+  },
+  {
+   "class": "cn/restcloud/framework/org/model/P_OrgPersonsEntry",
+   "pkg": "cn.restcloud.framework.org.model"
+  },
+  {
+   "class": "cn/restcloud/framework/org/model/P_OrgRolesEntry",
+   "pkg": "cn.restcloud.framework.org.model"
+  },
+  {
+   "class": "cn/restcloud/framework/org/model/P_OrgRolesMembersEntry",
+   "pkg": "cn.restcloud.framework.org.model"
+  },
+  {
+   "class": "cn/restcloud/framework/permission/model/P_ApiSecurityMap",
+   "pkg": "cn.restcloud.framework.permission.model"
+  },
+  {
+   "class": "cn/restcloud/framework/scheduler/model/P_JvmMonitorSamplingEntry",
+   "pkg": "cn.restcloud.framework.scheduler.model"
+  },
+  {
+   "class": "cn/restcloud/framework/scheduler/model/P_SchedulerHistoryLog",
+   "pkg": "cn.restcloud.framework.scheduler.model"
+  },
+  {
+   "class": "cn/restcloud/framework/scheduler/model/P_SchedulerSingleTaskLockEntry",
+   "pkg": "cn.restcloud.framework.scheduler.model"
+  },
+  {
+   "class": "cn/restcloud/framework/scheduler/model/P_SchedulerStrategyEntry",
+   "pkg": "cn.restcloud.framework.scheduler.model"
+  },
+  {
+   "class": "cn/restcloud/framework/scheduler/model/P_SchedulerTaskConfigEntry",
+   "pkg": "cn.restcloud.framework.scheduler.model"
+  },
+  {
+   "class": "cn/restcloud/framework/scsplugs/model/P_ServiceControlStrategyEntry",
+   "pkg": "cn.restcloud.framework.scsplugs.model"
+  },
+  {
+   "class": "cn/restcloud/framework/setting/model/P_AppLangConfigEntry",
+   "pkg": "cn.restcloud.framework.setting.model"
+  },
+  {
+   "class": "cn/restcloud/framework/setting/model/P_AppPropertiesEntry",
+   "pkg": "cn.restcloud.framework.setting.model"
+  },
+  {
+   "class": "cn/restcloud/framework/setting/model/P_DataSourceConfig",
+   "pkg": "cn.restcloud.framework.setting.model"
+  },
+  {
+   "class": "cn/restcloud/framework/setting/model/P_PlatformConfigEntry",
+   "pkg": "cn.restcloud.framework.setting.model"
+  },
+  {
+   "class": "cn/restcloud/framework/setting/model/P_PlatformTemlateConfig",
+   "pkg": "cn.restcloud.framework.setting.model"
+  },
+  {
+   "class": "cn/restcloud/framework/view/model/P_ViewTemplateConfigEntry",
+   "pkg": "cn.restcloud.framework.view.model"
+  },
+  {
+   "class": "cn/restcloud/framework/xml/model/P_XmlTemplateConfigEntry",
+   "pkg": "cn.restcloud.framework.xml.model"
+  },
+  {
+   "class": "cn/restcloud/gateway/chargeslog/model/P_GatewayApiChargesRecord",
+   "pkg": "cn.restcloud.gateway.chargeslog.model"
+  },
+  {
+   "class": "cn/restcloud/gateway/cloud/model/P_ExecuteServer",
+   "pkg": "cn.restcloud.gateway.cloud.model"
+  },
+  {
+   "class": "cn/restcloud/gateway/config/model/P_GatewayAppConfigEntry",
+   "pkg": "cn.restcloud.gateway.config.model"
+  },
+  {
+   "class": "cn/restcloud/gateway/config/model/P_GatewayServicesEntry",
+   "pkg": "cn.restcloud.gateway.config.model"
+  },
+  {
+   "class": "cn/restcloud/gateway/config/model/P_GrayReleaseConfigEntry",
+   "pkg": "cn.restcloud.gateway.config.model"
+  },
+  {
+   "class": "cn/restcloud/gateway/config/model/P_RouterPluginMapConfig",
+   "pkg": "cn.restcloud.gateway.config.model"
+  },
+  {
+   "class": "cn/restcloud/gateway/pluginlog/model/P_GatewayPluginTriggerHistory",
+   "pkg": "cn.restcloud.gateway.pluginlog.model"
+  },
+  {
+   "class": "cn/restcloud/gateway/security/model/P_ReSubmitSerialNumEntry",
+   "pkg": "cn.restcloud.gateway.security.model"
+  },
+  {
+   "class": "cn/restcloud/gateway/tester/model/P_TestCaseConfigEntry",
+   "pkg": "cn.restcloud.gateway.tester.model"
+  },
+  {
+   "class": "cn/restcloud/knowledge/model/P_KnowledgeArticleEntry",
+   "pkg": "cn.restcloud.knowledge.model"
+  },
+  {
+   "class": "cn/restcloud/lowcode/page/model/P_LowCodePageConfig",
+   "pkg": "cn.restcloud.lowcode.page.model"
+  },
+  {
+   "class": "cn/restcloud/lowcode/page/model/P_LowCodePageConfigLog",
+   "pkg": "cn.restcloud.lowcode.page.model"
+  },
+  {
+   "class": "cn/restcloud/lowcode/page/model/P_LowCodePageVersion",
+   "pkg": "cn.restcloud.lowcode.page.model"
+  },
+  {
+   "class": "cn/restcloud/lowcode/workbench/model/P_UserWorkbenchConfig",
+   "pkg": "cn.restcloud.lowcode.workbench.model"
+  },
+  {
+   "class": "cn/restcloud/monitor/businesslog/model/P_ActionUrlBusinessQueryConfigEntry",
+   "pkg": "cn.restcloud.monitor.businesslog.model"
+  },
+  {
+   "class": "cn/restcloud/monitor/businesslog/model/P_BusinessLogFieldEntry",
+   "pkg": "cn.restcloud.monitor.businesslog.model"
+  },
+  {
+   "class": "cn/restcloud/monitor/businesslog/model/P_BusinessLogHistoryQueryEntry",
+   "pkg": "cn.restcloud.monitor.businesslog.model"
+  },
+  {
+   "class": "cn/restcloud/monitor/model/P_ServerConnectTestConfig",
+   "pkg": "cn.restcloud.monitor.model"
+  },
+  {
+   "class": "cn/restcloud/monitor/servicerelate/model/P_ServiceRelate",
+   "pkg": "cn.restcloud.monitor.servicerelate.model"
+  },
+  {
+   "class": "cn/restcloud/monitor/servicerelate/model/P_ServiceRelateSearch",
+   "pkg": "cn.restcloud.monitor.servicerelate.model"
+  },
+  {
+   "class": "cn/restcloud/monitor/servicerelate/model/P_ServiceRelateTopologyRecord",
+   "pkg": "cn.restcloud.monitor.servicerelate.model"
+  },
+  {
+   "class": "cn/restcloud/monitor/statistic/model/P_ActionUrlAccessEntry",
+   "pkg": "cn.restcloud.monitor.statistic.model"
+  },
+  {
+   "class": "cn/restcloud/monitor/statistic/model/P_ActionUrlAccessMinuteEntry",
+   "pkg": "cn.restcloud.monitor.statistic.model"
+  },
+  {
+   "class": "cn/restcloud/mqbus/model/P_MqMessageProducer",
+   "pkg": "cn.restcloud.mqbus.model"
+  },
+  {
+   "class": "cn/restcloud/mqbus/model/P_MqReceiveMessageLog",
+   "pkg": "cn.restcloud.mqbus.model"
+  },
+  {
+   "class": "cn/restcloud/mqbus/model/P_MqSubscribeConfig",
+   "pkg": "cn.restcloud.mqbus.model"
+  },
+  {
+   "class": "cn/restcloud/mqbus/model/P_MqTopicManager",
+   "pkg": "cn.restcloud.mqbus.model"
+  },
+  {
+   "class": "cn/restcloud/mqbus/model/P_MqWaringConfig",
+   "pkg": "cn.restcloud.mqbus.model"
+  },
+  {
+   "class": "cn/restcloud/mqbus/model/P_MqWaringTriggerHistory",
+   "pkg": "cn.restcloud.mqbus.model"
+  },
+  {
+   "class": "cn/restcloud/mqbus/util/rocketmq/model/P_OnesMqSendDto",
+   "pkg": "cn.restcloud.mqbus.util.rocketmq.model"
+  },
+  {
+   "class": "cn/restcloud/operation/assess/model/P_ApiQualityAssessEntry",
+   "pkg": "cn.restcloud.operation.assess.model"
+  },
+  {
+   "class": "cn/restcloud/proxy/model/P_TcpipApiRecordLog",
+   "pkg": "cn.restcloud.proxy.model"
+  },
+  {
+   "class": "cn/restcloud/proxy/model/P_TcpipConnectLogEntry",
+   "pkg": "cn.restcloud.proxy.model"
+  },
+  {
+   "class": "cn/restcloud/proxy/model/P_TcpipConnectMapConfig",
+   "pkg": "cn.restcloud.proxy.model"
+  },
+  {
+   "class": "cn/restcloud/standardmgr/apitags/model/P_StdApiTagsConfig",
+   "pkg": "cn.restcloud.standardmgr.apitags.model"
+  },
+  {
+   "class": "cn/restcloud/standardmgr/businessarea/model/P_BusinessAreaConfigEntry",
+   "pkg": "cn.restcloud.standardmgr.businessarea.model"
+  },
+  {
+   "class": "cn/restcloud/standardmgr/dictionary/model/P_DictionaryDataEntry",
+   "pkg": "cn.restcloud.standardmgr.dictionary.model"
+  },
+  {
+   "class": "cn/restcloud/standardmgr/errorcode/model/P_StdErrorCodeEntry",
+   "pkg": "cn.restcloud.standardmgr.errorcode.model"
+  },
+  {
+   "class": "cn/restcloud/standardmgr/headercode/model/P_StdHeaderCodeEntry",
+   "pkg": "cn.restcloud.standardmgr.headercode.model"
+  },
+  {
+   "class": "cn/restcloud/standardmgr/masterdata/model/P_StdMasterDataEntry",
+   "pkg": "cn.restcloud.standardmgr.masterdata.model"
+  },
+  {
+   "class": "cn/restcloud/tester/model/P_TestCaseMapTestPlan",
+   "pkg": "cn.restcloud.tester.model"
+  },
+  {
+   "class": "cn/restcloud/tester/model/P_TestPlanConfig",
+   "pkg": "cn.restcloud.tester.model"
+  },
+  {
+   "class": "cn/restcloud/tester/model/P_TestReportDetailsEntry",
+   "pkg": "cn.restcloud.tester.model"
+  },
+  {
+   "class": "cn/restcloud/tester/model/P_TestReportEntry",
+   "pkg": "cn.restcloud.tester.model"
+  },
+  {
+   "class": "cn/restcloud/tester/model/P_TestServiceConfig",
+   "pkg": "cn.restcloud.tester.model"
+  },
+  {
+   "class": "cn/restcloud/tester/model/P_TestServiceLogEntry",
+   "pkg": "cn.restcloud.tester.model"
+  },
+  {
+   "class": "cn/restcloud/tester/pts/model/P_PerformanceTestConfigEntry",
+   "pkg": "cn.restcloud.tester.pts.model"
+  },
+  {
+   "class": "cn/restcloud/tester/pts/model/P_PerformanceTestParamsEntry",
+   "pkg": "cn.restcloud.tester.pts.model"
+  },
+  {
+   "class": "cn/restcloud/tester/pts/model/P_PerformanceTestResultEntry",
+   "pkg": "cn.restcloud.tester.pts.model"
+  },
+  {
+   "class": "cn/restcloud/version/model/P_VersionUpgradeLog",
+   "pkg": "cn.restcloud.version.model"
+  }
+ ]
+}

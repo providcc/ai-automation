@@ -1,0 +1,17 @@
+#!/bin/sh
+# pre-push：push 是最后一道关，扫两遍。
+#
+#   1. **全部可发布文件**（已跟踪 + 未跟踪未忽略）。
+#      为什么不能只靠 pre-commit：pre-commit 只看暂存区，而"未跟踪但会被 push 的文件"
+#      （新写、忘了 add 的）恰好是历史上漏掉整个新增子域的那个窗口。
+#   2. **git 历史**。文件被改掉之后旧版本仍在对象库里，push 上去照样能 `git log -p` 翻出来——
+#      "当前树 clean"不等于"仓库 clean"。
+#
+# 跳过（确认无误报时）：git push --no-verify
+set -e
+if command -v node >/dev/null 2>&1; then
+  node scripts/sensitive-scan.mjs
+  node scripts/sensitive-scan.mjs --history
+else
+  echo "⚠ 未找到 node，跳过敏感扫描（CI 仍会拦）"
+fi

@@ -1,0 +1,14 @@
+{
+  "name": "@rc/core",
+  "version": "0.4.1",
+  "type": "module",
+  "main": "dist/client.js",
+  "types": "dist/client.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/client.d.ts",
+      "default": "./dist/client.js"
+    }
+  },
+  "private": true
+}

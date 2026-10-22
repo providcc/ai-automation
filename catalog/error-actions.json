@@ -1,0 +1,205 @@
+{
+ "generatedAt": "2026-10-20T15:07:07.789Z",
+ "version": 1,
+ "source": "catalog/war/error-catalog.json + 人工规则",
+ "note": "精确匹配见 error-map.json；本文件是正则兜底规则",
+ "actions": [
+  {
+   "pattern": "节点.*没有设置属性",
+   "category": "流程图",
+   "action": "先执行 rc flow props save 或 rc flow save 补齐节点属性；属性缺失会被平台校验拦截",
+   "doc": "docs/FLOW-JSON-SPEC.md §16"
+  },
+  {
+   "pattern": "并行网关和聚合网关没有成对",
+   "category": "流程图",
+   "action": "并行分支必须有且仅有一个聚合网关（gateWay），且 joinNodeId 指向并行网关",
+   "doc": "docs/FLOW-JSON-SPEC.md §9"
+  },
+  {
+   "pattern": "图形已被删除",
+   "category": "流程图",
+   "action": "节点属性引用了旧图节点：以图模型为准清理孤立属性（rc flow prune-props）"
+  },
+  {
+   "pattern": "流程编码已存在",
+   "category": "流程生命周期",
+   "action": "createFlow 会自动生成唯一 configId；重试时不要复用上一次的 configId"
+  },
+  {
+   "pattern": "流程名称已存在",
+   "category": "流程生命周期",
+   "action": "换一个流程名称，或先按名称查询并复用既有流程"
+  },
+  {
+   "pattern": "mapUrl.*已存在|接口路径.*已存在",
+   "category": "API 资产",
+   "action": "先 GET /rest/core/services 查重；导入时用 import-mode=skip 或改名"
+  },
+  {
+   "pattern": "不能为空",
+   "category": "参数校验",
+   "action": "检查必填 body/query 字段；本工具的命令签名见 docs/COMMAND-REFERENCE.md"
+  },
+  {
+   "pattern": "上传文件不能为空|文件大小|文件过大",
+   "category": "文件",
+   "action": "确认文件存在且小于平台限制；上传用 multipart，字段名 file"
+  },
+  {
+   "pattern": "登录|token|未授权|认证|401|403",
+   "category": "认证",
+   "action": "重新登录或刷新 token；检查 RC_USER/RC_PASS 与账号锁定状态"
+  },
+  {
+   "pattern": "权限|没有.*访问|无权限",
+   "category": "权限",
+   "action": "联系平台管理员检查角色与权限项"
+  },
+  {
+   "pattern": "连接.*失败|Connection refused|timeout|超时",
+   "category": "网络/数据源",
+   "action": "先用 datasource test 验证连通性；内网目标需 VPN，检查端口/白名单"
+  },
+  {
+   "pattern": "SQL|sql|语法",
+   "category": "数据库",
+   "action": "检查 SQL 方言、库名、字段名；用 datasource test 验证连接与权限"
+  },
+  {
+   "pattern": "重复执行|重复产生任务|还没有结束",
+   "category": "任务调度",
+   "action": "等待上一实例结束，或先 stop/查询运行中实例；不要并发触发同一流程"
+  },
+  {
+   "pattern": "待补偿|补偿",
+   "category": "任务调度",
+   "action": "用 etl compensate 按 transactionId 重跑；先 plan 再 apply"
+  },
+  {
+   "pattern": "JSON|json|解析|格式",
+   "category": "数据格式",
+   "action": "检查请求体/节点属性是否为合法 JSON；字符串字段需要二次 JSON 编码"
+  },
+  {
+   "pattern": "不支持|未实现|not support",
+   "category": "平台能力",
+   "action": "查 catalog/war/endpoints.json 确认平台版本是否提供该能力；必要时降级为手工步骤"
+  },
+  {
+   "pattern": "定时|cron|表达式",
+   "category": "调度",
+   "action": "cron 使用平台支持的 6/7 段格式；先用 flow validate 本地校验"
+  },
+  {
+   "pattern": "节点.*(没有设置属性|属性.*(为空|缺失))|缺少.*节点.*属性",
+   "category": "流程图",
+   "action": "先补齐节点属性（rc flow props save），再保存图模型"
+  },
+  {
+   "pattern": "并行网关.*(聚合|成对|配对)|聚合网关.*(缺少|不存在)",
+   "category": "流程图",
+   "action": "所有并行分支必须汇入同一个聚合网关，且 joinNodeId 指向并行网关"
+  },
+  {
+   "pattern": "图形已被删除|节点.*已被删除|不存在.*节点",
+   "category": "流程图",
+   "action": "清理孤立节点属性（rc flow prune-props），以图模型为准"
+  },
+  {
+   "pattern": "流程编码已存在|流程名称已存在",
+   "category": "流程生命周期",
+   "action": "换唯一编码/名称，或复用既有流程"
+  },
+  {
+   "pattern": "SQL|sql|数据库.*(连接|超时)|表.*不存在|字段.*不存在",
+   "category": "数据库",
+   "action": "用 rc datasource test 验证连接；核对表/字段与 SQL 方言"
+  },
+  {
+   "pattern": "登录|token|认证|未授权|401|403",
+   "category": "认证",
+   "action": "重新登录/刷新 token；检查账号与目标环境"
+  },
+  {
+   "pattern": "权限|没有.*访问|无权限",
+   "category": "权限",
+   "action": "联系平台管理员检查服务角色与权限项"
+  },
+  {
+   "pattern": "上传|下载|文件.*(为空|过大|超时)|sftp|ftp",
+   "category": "文件",
+   "action": "确认文件存在、大小与路径权限；大文件改用 SFTP"
+  },
+  {
+   "pattern": "重复执行|重复产生|还没有结束|排队",
+   "category": "任务调度",
+   "action": "等待上一实例结束或先停止；不要并发触发同一流程"
+  },
+  {
+   "pattern": "待补偿|补偿",
+   "category": "任务调度",
+   "action": "用 rc etl compensate-plan 按 transactionId 生成计划，再 apply"
+  },
+  {
+   "pattern": "定时|cron|调度.*(失败|错误)",
+   "category": "调度",
+   "action": "检查 cron 格式与平台时区；先用 rc flow validate"
+  },
+  {
+   "pattern": "JSON|json|解析|格式|编码|XML|xml",
+   "category": "数据格式",
+   "action": "用最小样例校验 JSON/XML 格式与编码"
+  },
+  {
+   "pattern": "不能为空|必填|参数.*(错误|非法)|长度",
+   "category": "参数校验",
+   "action": "补齐必填字段并检查类型/长度"
+  },
+  {
+   "pattern": "连接器|OAuth|oauth|回调|第三方",
+   "category": "连接器",
+   "action": "检查连接器配置、OAuth 回调与网络可达性"
+  },
+  {
+   "pattern": "不存在|未找到|已被删除|没有找到",
+   "category": "资源不存在",
+   "action": "确认 id/名称并刷新列表；平台有时用 500 表示资源不存在"
+  },
+  {
+   "pattern": "已存在|重复|冲突",
+   "category": "资源冲突",
+   "action": "先查询查重，改用唯一编码/名称"
+  },
+  {
+   "pattern": "审批",
+   "category": "审批",
+   "action": "检查审批流与审批人；确认审批流配置与审批状态"
+  },
+  {
+   "pattern": "MQ|消息|队列|kafka|rabbit|rocket|jms",
+   "category": "消息",
+   "action": "检查 topic/group/broker 与消费位点"
+  },
+  {
+   "pattern": "缓存|Redis|redis",
+   "category": "缓存",
+   "action": "检查缓存连接与 key，清理后重试"
+  },
+  {
+   "pattern": "编译|代码|脚本|class|java",
+   "category": "代码/脚本",
+   "action": "检查脚本语法与沙箱限制，用最小脚本复现"
+  },
+  {
+   "pattern": "元数据|主数据|数据模型|模型不存在",
+   "category": "数据模型",
+   "action": "刷新元数据/模型缓存，确认模型已发布"
+  },
+  {
+   "pattern": "不支持|未实现|not support",
+   "category": "平台能力",
+   "action": "查端点目录确认版本；必要时降级手工步骤"
+  }
+ ]
+}
