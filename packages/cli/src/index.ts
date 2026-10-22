@@ -280,7 +280,10 @@ function emit(r: ApiResult, json: boolean): number {
     if (r.request.body) console.log(JSON.stringify(r.request.body, null, 2).slice(0, 4000));
   } else if (r.ok) {
     console.log(`✔ ${r.request.method} ${r.request.url} (${r.httpStatus}, ${r.traceId ?? '-'})`);
-    console.log(JSON.stringify(r.data?.data ?? r.data, null, 2).slice(0, 6000));
+    // 大对象（flow get 的 processModel、api get 的参数）截断后仍是"半截 JSON"，
+    // 直接重定向到文件会得到无法解析的内容 —— 截断时必须明确提示，别让人以为是完整输出。
+    const text = JSON.stringify(r.data?.data ?? r.data, null, 2);
+    console.log(text.length > 6000 ? `${text.slice(0, 6000)}\n…（输出已截断，完整内容用 --json）` : text);
   } else {
     // httpStatus = -1 是网络层失败；此时 msg 已自带"网络请求失败"措辞，不要重复加前缀
     const where = r.httpStatus > 0 ? `HTTP ${r.httpStatus} ` : '';
@@ -1523,7 +1526,10 @@ async function main(argv: string[]): Promise<number> {
         return 0;
       }
       const r = await FLOW.runFlow(c, action, { kind });
-      return emit(r, json);
+      const code = emit(r, json);
+      const tid = (r.data?.data ?? r.data)?.transactionId;
+      if (!json && tid) console.log(`  transactionId=${tid}（节点级记录：rc flow run-log ${tid}）`);
+      return code;
     }
     case 'flow run-log': {
       // 一次运行的节点级记录：入参/出参/断言结果
@@ -1549,13 +1555,29 @@ async function main(argv: string[]): Promise<number> {
       return 0;
     }
     case 'flow schedule list': {
+      const kind: FLOW.FlowKind = v.kind === 'etl' ? 'etl' : 'esb';
       const r = await FLOW.listScheduleRules(c, { pageNo: v.page ? Number(v.page) : 1, pageSize: v.size ? Number(v.size) : 50 });
-      if (!r.ok) return emit(r, json);
-      const d: any = r.data?.data ?? r.data;
-      const rows = Array.isArray(d) ? d : (d?.rows ?? []);
-      if (json) console.log(JSON.stringify({ ok: true, count: rows.length, rules: rows }, null, 2));
+      // /bpm 规则服务不可达（网关超时 / 平台内 connect timed out）时，从流程记录里读 expression
+      const bpmDown = !r.ok && (r.httpStatus >= 500 || r.httpStatus <= 0 || /connect timed out|timed out/i.test(r.msg ?? ''));
+      let rows: any[] = [];
+      let via: 'bpm' | 'process' = 'bpm';
+      if (bpmDown) {
+        const alt = await FLOW.listScheduledFlows(c, { kind });
+        if (!alt.ok) {
+          console.error(`✖ BPM 规则服务不可用（${r.msg ?? r.httpStatus}），流程记录降级读取也失败：${alt.msg ?? ''}`);
+          return 5;
+        }
+        rows = alt.rows;
+        via = 'process';
+      } else if (!r.ok) {
+        return emit(r, json);
+      } else {
+        const d: any = r.data?.data ?? r.data;
+        rows = Array.isArray(d) ? d : (d?.rows ?? []);
+      }
+      if (json) console.log(JSON.stringify({ ok: true, via, count: rows.length, rules: rows }, null, 2));
       else {
-        console.log(`调度规则 ${rows.length} 条`);
+        console.log(`调度规则 ${rows.length} 条${via === 'process' ? '（BPM 规则服务不可用，读的是流程记录 expression）' : ''}`);
         rows.forEach((x: any) => console.log(`  ${String(x.id ?? '').padEnd(24)} ${String(x.name ?? '').padEnd(20)} ${x.processIds ?? ''} ${x.timeNumber ?? ''} ${x.cron ?? x.expression ?? ''}`));
         if (!rows.length) console.log('  （当前环境没有调度规则）');
       }
@@ -1564,6 +1586,7 @@ async function main(argv: string[]): Promise<number> {
     case 'flow schedule save': {
       const ids = v['process-ids'] ?? v['process-id'];
       if (!ids) throw new RcError('E_VALIDATION', '需要 --process-ids "id1,id2"（逗号分隔）');
+      const kind: FLOW.FlowKind = v.kind === 'etl' ? 'etl' : 'esb';
       const body = {
         processIds: String(ids),
         timeNumber: v['time-number'] ? Number(v['time-number']) : undefined,
@@ -1572,13 +1595,32 @@ async function main(argv: string[]): Promise<number> {
       };
       if (!v.apply) {
         console.log(`【dry-run】未创建调度规则：${JSON.stringify(body)}；加 --apply 才会真的建`);
-        console.log('  注意：平台的"启用"没有可用端点（rule/start 恒失败），建完还需要有人在平台上手工启用');
+        console.log('  BPM 规则路径建完还需要人工启用；若 BPM 服务不可用会自动降级为"写流程记录 + 启动调度"（建完即生效）');
         return 0;
       }
       const r = await FLOW.saveScheduleRule(c, body);
-      if (!r.ok) { console.error(`✖ 创建失败：${r.msg ?? r.httpStatus}`); return 4; }
-      console.log('✔ 调度规则已创建；平台的"启用"没有可用端点，请到平台上把它启用');
-      return 0;
+      if (r.ok) {
+        console.log('✔ 调度规则已创建；平台的"启用"没有可用端点，请到平台上把它启用');
+        return 0;
+      }
+      // BPM 规则服务不可达（网关超时 / 平台内 connect timed out / 5xx）→ 降级写流程记录的 expression
+      const bpmDown = r.httpStatus >= 500 || r.httpStatus <= 0 || /connect timed out|timed out/i.test(r.msg ?? '');
+      if (!bpmDown) { console.error(`✖ 创建失败：${r.msg ?? r.httpStatus}`); return 4; }
+      if (!body.cron) {
+        console.error(`✖ BPM 规则服务不可用（${r.msg ?? r.httpStatus}），降级路径需要 --cron 表达式`);
+        return 4;
+      }
+      const alt = await FLOW.saveScheduleViaProcess(c, { processIds: body.processIds.split(','), cron: body.cron, kind });
+      for (const x of alt.results) {
+        if (x.ok) console.log(`✔ ${x.processId} 调度已写入流程记录并启动：cron=${body.cron}`);
+        else console.error(`✖ ${x.processId} 降级失败：${x.msg ?? '未知原因'}`);
+      }
+      if (alt.ok) {
+        console.log('  （BPM 规则服务不可用，已自动降级为流程记录表达式 + /process/start；无需人工启用）');
+        return 0;
+      }
+      console.error(`✖ BPM 与流程记录两条路径都失败（BPM：${r.msg ?? r.httpStatus}）`);
+      return 4;
     }
     case 'flow schedule delete': {
       if (!action) throw new RcError('E_VALIDATION', '需要规则 id');

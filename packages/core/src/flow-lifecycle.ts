@@ -1864,7 +1864,36 @@ export async function runFlow(
 ): Promise<ApiResult> {
   const kind = opts.kind ?? 'esb';
   const E = flowEndpoints(kind);
-  return c.request(`${E.base}/monitor/instance/run`, { method: 'POST', body: { processId }, dryRun: false });
+  // 平台有两个"手工运行"端点，不同版本各有残废：
+  //   POST {base}/run                   —— 设计器/流程列表的"运行"（同步执行，返回执行结果）
+  //   POST {base}/monitor/instance/run  —— 监控页"运行实例"；部分版本对尚未产生过实例的流程
+  //                                        直接 500 `Service run exception`，且不会创建实例记录
+  // 先走 /run；端点不存在（404）、网络层失败（-1）或 5xx 时再回退到监控端点。
+  // 4xx（参数/权限/业务错误）不回退，避免同一流程被执行两次。
+  const primary = normalizeRunResult(
+    await c.request(`${E.base}/run`, { method: 'POST', body: { processId }, dryRun: false }),
+  );
+  if (primary.ok) return primary;
+  const retriable = primary.httpStatus === 404 || primary.httpStatus === -1 || primary.httpStatus >= 500;
+  if (!retriable) return primary;
+  const fallback = normalizeRunResult(
+    await c.request(`${E.base}/monitor/instance/run`, { method: 'POST', body: { processId }, dryRun: false }),
+  );
+  return fallback.ok ? fallback : primary;
+}
+
+/**
+ * `/process/run` 成功时仍返回 `state:false`（平台把 state 当"有异常"用），
+ * 真正的结论在 `resultCode`（1=成功）和 msg 的"是否成功=是"里。
+ * 不归一化的话，CLI 会把一次成功的运行打印成 ✖ 并以非 0 退出。
+ */
+function normalizeRunResult(r: ApiResult): ApiResult {
+  if (r.httpStatus !== 200) return r;
+  const d = r.data?.data ?? r.data;
+  if (!d || typeof d !== 'object') return r;
+  const okByResultCode = (d as any).resultCode === 1;
+  const okByMsg = /是否成功=是/.test(String((d as any).msg ?? r.msg ?? ''));
+  return okByResultCode || okByMsg ? { ...r, ok: true } : r;
 }
 
 /**
@@ -1919,6 +1948,114 @@ export async function saveScheduleRule(
 
 export async function deleteScheduleRule(c: RestCloudClient, id: string): Promise<ApiResult> {
   return c.request('/bpm/rules/delete', { method: 'POST', body: { id }, dryRun: false });
+}
+
+export interface ScheduleViaProcessResult {
+  processId: string;
+  ok: boolean;
+  msg?: string;
+  /** 回读到的流程记录表达式 */
+  expression?: string;
+}
+
+/**
+ * 把调度表达式写到**流程记录**上并启动（BPM 规则服务不可用时的等价路径）。
+ *
+ * 平台实测（2026-10）：
+ *   - 调度信息存在 process 记录的 `expression` / `runExpression` 上（`executeServer=Task`）；
+ *   - `POST {base}/save`（整条 process 记录）保存后，`POST {base}/start` 才会真正启动；
+ *   - 启动后 `/rest/core/scheduler/current/run/jobs` 能看到该流程的 Quartz 任务。
+ *
+ * `/bpm/rules/*` 是另一套"流程规则"，在部分环境整个 BPM 服务不可达
+ * （平台自身返回 `{"errcode":500,"msg":"connect timed out"}` 或网关超时），此时只能走这条路。
+ * 注意：`/bpm/rules/*` 建出来的规则还需要人工"启用"，而这条路建完即启动。
+ */
+export async function saveScheduleViaProcess(
+  c: RestCloudClient,
+  input: { processIds: string[]; cron: string; kind?: FlowKind },
+): Promise<{ ok: boolean; results: ScheduleViaProcessResult[] }> {
+  const kind = input.kind ?? 'esb';
+  const E = flowEndpoints(kind);
+  const cron = String(input.cron ?? '').trim();
+  if (!cron) throw new RcError('E_VALIDATION', '需要 cron 表达式（如 "0 0 * * * ?"）');
+  const results: ScheduleViaProcessResult[] = [];
+  for (const processId of input.processIds.map((x) => String(x).trim()).filter(Boolean)) {
+    const cur = await c.request(E.detail(processId), { method: 'GET' });
+    const doc = dataOf(cur);
+    if (!cur.ok || !doc || typeof doc !== 'object') {
+      results.push({ processId, ok: false, msg: cur.msg ?? '读取流程失败' });
+      continue;
+    }
+    const saved = await c.request(E.save, {
+      method: 'POST',
+      body: { ...doc, expression: cron, runExpression: cron, executeServer: 'Task' },
+      dryRun: false,
+    });
+    if (!saved.ok) {
+      results.push({ processId, ok: false, msg: saved.msg ?? '保存流程属性失败' });
+      continue;
+    }
+    // 流程正在运行（手动运行未结束）或调度已经启动过时，平台会拒绝再次启动：
+    // `启动失败,因为流程已经在运行中了!` —— 前者是瞬时状态，后者说明目标状态已达成。
+    // 因此以"Quartz 调度任务存在 + 流程记录 expression 正确"作为最终判据。
+    let started = await c.request(`${E.base}/start`, {
+      method: 'POST',
+      body: { processId },
+      dryRun: false,
+    });
+    for (let attempt = 0; attempt < 2 && !started.ok && /已经在运行|正在运行/.test(started.msg ?? ''); attempt++) {
+      await new Promise((r) => setTimeout(r, 3000));
+      started = await c.request(`${E.base}/start`, { method: 'POST', body: { processId }, dryRun: false });
+    }
+    // 回读：表达式必须真的落到流程记录上
+    const verify = await c.request(E.detail(processId), { method: 'GET' });
+    const v = dataOf(verify) ?? {};
+    const expression = String(v.expression ?? '');
+    // 调度任务列表：POST /rest/core/scheduler/current/run/jobs（流程任务的 id 通常是流程记录的 id）
+    const jobs = await c.request('/rest/core/scheduler/current/run/jobs', {
+      method: 'POST',
+      body: {},
+      dryRun: false,
+    });
+    const jobRows = Array.isArray(dataOf(jobs)) ? (dataOf(jobs) as any[]) : [];
+    const jobFound = jobRows.some(
+      (j) => j && (j.id === processId || j.id === (doc as any).id || j.configName === (doc as any).configName),
+    );
+    const ok = expression === cron && (started.ok || jobFound);
+    let msg = started.msg;
+    if (!ok) {
+      if (!started.ok && !jobFound) msg = started.msg ?? '启动调度失败';
+      else msg = '回读未见调度表达式';
+    } else if (!started.ok) msg = '调度已在运行（无需重复启动）';
+    results.push({ processId, ok, expression: expression || undefined, msg });
+    continue;
+  }
+  return { ok: results.length > 0 && results.every((r) => r.ok), results };
+}
+
+/**
+ * 从流程列表里读调度（`expression` 非空），用于 BPM 规则服务不可达时降级展示。
+ * 返回结构对齐 `/bpm/rules/list/page` 的行：`processIds` + `expression`。
+ */
+export async function listScheduledFlows(
+  c: RestCloudClient,
+  opts: { kind?: FlowKind } = {},
+): Promise<{ ok: boolean; msg?: string; rows: any[] }> {
+  const kind = opts.kind ?? 'esb';
+  const res = await listFlows(c, { kind, all: true, pageSize: 100 });
+  if (!res.ok) return { ok: false, msg: res.msg, rows: [] };
+  const rows = (unwrapFlowRows(dataOf(res)) as any[])
+    .filter((x) => x && (x.expression || x.runExpression))
+    .map((x) => ({
+      processId: x.processId ?? x.id,
+      processIds: x.processId ?? x.id,
+      processName: x.configName ?? x.processName,
+      expression: x.expression,
+      runExpression: x.runExpression,
+      executeServer: x.executeServer,
+      state: x.state,
+    }));
+  return { ok: true, rows };
 }
 
 /** 列出流程全部节点属性（ESB 走批量端点；ETL 自动逐节点降级）。 */

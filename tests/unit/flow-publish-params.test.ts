@@ -93,11 +93,11 @@ test('SQL：本地推导 SELECT 列名（取数端点需要非空字段配置）
   assert.deepEqual(deriveSqlColumns('update t set a=1'), []);
 });
 
-test('流程运行：POST monitor/instance/run，body 只有 processId', async () => {
+test('流程运行：优先 POST process/run，body 只有 processId', async () => {
   const { client, calls } = stub(() => ok({ state: true }));
   const r = await FLOW.runFlow(client, 'p1');
   assert.equal(r.ok, true);
-  assert.equal(calls[0].path, '/rest/esb/process/monitor/instance/run');
+  assert.equal(calls[0].path, '/rest/esb/process/run');
   assert.deepEqual(calls[0].opts.body, { processId: 'p1' });
 });
 

@@ -100,6 +100,13 @@ rc datasource test <id>
 4. 保存：`rc flow save ...`（先 dry-run）。
 5. 平台校验：`rc flow check --file model.json --process-id <pid>`。
 6. 回读：节点数、连线数、属性齐全，缺一即失败。
+7. 运行与调度：
+   - 手工运行：`rc flow run <pid> --apply`（返回 `transactionId`，可用 `rc flow run-log <tid>` 看节点级记录）。
+     平台两个运行端点版本差异大，CLI 会先走 `/process/run`、失败再回退 `/monitor/instance/run`；
+     **不要**自己拼接 `monitor/instance/run`，未产生过实例的流程会直接 500。
+   - 定时：`rc flow schedule save --process-ids <pid> --cron "0 0 * * * ?" --apply`。
+     `/bpm` 规则服务不可达时 CLI 自动降级为"写流程记录 expression + `/process/start`"，建完即生效；
+     回读看流程记录的 `expression` 与 `/rest/core/scheduler/current/run/jobs` 里的任务。
 
 新建流程先用 `rc templates show <id> --out model.json` 或 `rc flow from-nl` 出草案，再校验/创建/保存。
 
