@@ -1558,7 +1558,7 @@ async function main(argv: string[]): Promise<number> {
       const kind: FLOW.FlowKind = v.kind === 'etl' ? 'etl' : 'esb';
       const r = await FLOW.listScheduleRules(c, { pageNo: v.page ? Number(v.page) : 1, pageSize: v.size ? Number(v.size) : 50 });
       // /bpm 规则服务不可达（网关超时 / 平台内 connect timed out）时，从流程记录里读 expression
-      const bpmDown = !r.ok && (r.httpStatus >= 500 || r.httpStatus <= 0 || /connect timed out|timed out/i.test(r.msg ?? ''));
+      const bpmDown = !r.ok && FLOW.isBpmServiceUnavailable(r);
       let rows: any[] = [];
       let via: 'bpm' | 'process' = 'bpm';
       if (bpmDown) {
@@ -1604,7 +1604,7 @@ async function main(argv: string[]): Promise<number> {
         return 0;
       }
       // BPM 规则服务不可达（网关超时 / 平台内 connect timed out / 5xx）→ 降级写流程记录的 expression
-      const bpmDown = r.httpStatus >= 500 || r.httpStatus <= 0 || /connect timed out|timed out/i.test(r.msg ?? '');
+      const bpmDown = FLOW.isBpmServiceUnavailable(r);
       if (!bpmDown) { console.error(`✖ 创建失败：${r.msg ?? r.httpStatus}`); return 4; }
       if (!body.cron) {
         console.error(`✖ BPM 规则服务不可用（${r.msg ?? r.httpStatus}），降级路径需要 --cron 表达式`);
