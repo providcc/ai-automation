@@ -121,6 +121,7 @@ const OPTIONS = {
   'node-type': { type: 'string' },
   'check-registry': { type: 'boolean', default: false },
   'max-rows': { type: 'string' },
+  'table-columns': { type: 'string' },
   'process-ids': { type: 'string' },
   'time-number': { type: 'string' },
   cron: { type: 'string' },
@@ -1018,7 +1019,12 @@ async function main(argv: string[]): Promise<number> {
       const conn = v.conn ?? v['db-conn-id'];
       const query = v.query ?? v.sql;
       if (!conn || !query) throw new RcError('E_VALIDATION', '需要 --conn <dbConnId> 与 --query <SQL>');
-      const res = await SQLQ.querySql(c, { conn: String(conn), sql: String(query), maxRows: v['max-rows'] ? Number(v['max-rows']) : undefined });
+      const res = await SQLQ.querySql(c, {
+        conn: String(conn),
+        sql: String(query),
+        maxRows: v['max-rows'] ? Number(v['max-rows']) : undefined,
+        tableColumns: v['table-columns'] ? String(v['table-columns']) : undefined,
+      });
       if (json) console.log(JSON.stringify({ conn, ...res }, null, 2));
       else {
         console.log(SQLQ.formatSqlQuery(res));

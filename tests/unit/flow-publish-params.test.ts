@@ -117,3 +117,13 @@ test('调度规则：processIds 必须是逗号分隔的字符串', async () => 
   assert.equal((calls[0].opts.body as any).processIds, 'a,b');
   await assert.rejects(() => FLOW.saveScheduleRule(client, { processIds: '' }), /--process-ids/);
 });
+
+test('SQL：行注释/块注释开头的 SELECT 也能推导列名', () => {
+  assert.deepEqual(
+    deriveSqlColumns('-- 生产版：说明文字\nselect a.id, b.name as nm from t a join u b').map((c) => c.colName),
+    ['id', 'nm'],
+  );
+  assert.deepEqual(deriveSqlColumns('/* block */ select x as y from t').map((c) => c.colName), ['y']);
+  assert.deepEqual(deriveSqlColumns('# mysql 行注释\nselect 1 as n from dual').map((c) => c.colName), ['n']);
+  assert.deepEqual(deriveSqlColumns('-- 只有注释'), []);
+});
