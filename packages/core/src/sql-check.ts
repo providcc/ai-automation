@@ -209,8 +209,34 @@ function splitTopLevel(text: string): string[] {
  * 平台的取数端点要求"字段配置"非空，但**先调用解析端点会污染这个状态**（之后预览一直报
  * "字段配置中的字段不能为空"）→ 所以先用本地推导的列名去取数，列名最终以平台返回的 columns 为准。
  */
+/**
+ * 剥掉开头的注释（`-- …`、`# …`、`/* … *\/`）。
+ *
+ * SQL 以注释开头是常态（脚本里带说明），但 `deriveSqlColumns` 依赖 `^select` 匹配；
+ * 不剥注释会得到空列名 → `querySql` 没有任何"字段配置"可送 → 平台取数恒失败，
+ * 报出来却是"取数失败"（误导成网络/会话问题）。
+ */
+export function stripLeadingComments(sql: string): string {
+  let s = String(sql ?? '').trimStart();
+  for (;;) {
+    if (s.startsWith('--') || s.startsWith('#')) {
+      const nl = s.indexOf('\n');
+      if (nl < 0) return '';
+      s = s.slice(nl + 1).trimStart();
+      continue;
+    }
+    if (s.startsWith('/*')) {
+      const end = s.indexOf('*/');
+      if (end < 0) return '';
+      s = s.slice(end + 2).trimStart();
+      continue;
+    }
+    return s;
+  }
+}
+
 export function deriveSqlColumns(sql: string): { colName: string; colType: string }[] {
-  const m = /^\s*select\s+([\s\S]+?)\s+from\s/i.exec(String(sql ?? ''));
+  const m = /^\s*select\s+([\s\S]+?)\s+from\s/i.exec(stripLeadingComments(sql));
   if (!m) return [];
   const out: { colName: string; colType: string }[] = [];
   for (const item of splitTopLevel(m[1])) {
