@@ -159,3 +159,12 @@ test('runLog：平台 pNodeId/pNodeName 归一化成 nodeId/nodeName', async () 
   assert.equal(r.nodes[0].nodeName, '查询待推送节点');
   assert.equal(r.nodes[0].currentStatus, 'end');
 });
+
+test('isBpmServiceUnavailable：超时 / 404 / 5xx / 网络失败都算不可用', () => {
+  assert.equal(FLOW.isBpmServiceUnavailable({ httpStatus: 404, msg: '未匹配到任何API' }), true);
+  assert.equal(FLOW.isBpmServiceUnavailable({ httpStatus: 500, msg: 'connect timed out' }), true);
+  assert.equal(FLOW.isBpmServiceUnavailable({ httpStatus: -1, msg: '网络请求失败' }), true);
+  assert.equal(FLOW.isBpmServiceUnavailable({ httpStatus: 200, msg: 'connect timed out' }), true);
+  assert.equal(FLOW.isBpmServiceUnavailable({ httpStatus: 400, msg: '参数错误' }), false);
+  assert.equal(FLOW.isBpmServiceUnavailable({ httpStatus: 200, msg: '' }), false);
+});

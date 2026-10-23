@@ -1932,6 +1932,20 @@ export async function runLog(
  *   - **"启用"没有可用端点**（`rule/start` 恒报"启动失败"），只能由人在平台上启用；
  *     所以本工具只负责"建规则"，并在结果里明确提示还需要人工启用。
  */
+/**
+ * `/bpm` 规则服务是否不可用。不同环境表现不同：
+ * 网关超时、平台内 `connect timed out`、整个端点 404/405，或 5xx。
+ * 命中时调用方应降级为"写流程记录 expression + /process/start"。
+ */
+export function isBpmServiceUnavailable(r: { ok?: boolean; httpStatus: number; msg?: string }): boolean {
+  return r.httpStatus === 404
+    || r.httpStatus === 405
+    || r.httpStatus >= 500
+    || r.httpStatus <= 0
+    || /connect timed out|timed out/i.test(r.msg ?? '')
+    || /未匹配到任何API/.test(r.msg ?? '');
+}
+
 export async function listScheduleRules(
   c: RestCloudClient,
   opts: { pageNo?: number; pageSize?: number } = {},
