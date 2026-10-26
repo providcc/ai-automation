@@ -1860,10 +1860,13 @@ function urlHost(value: unknown): string {
 export async function runFlow(
   c: RestCloudClient,
   processId: string,
-  opts: { kind?: FlowKind } = {},
+  opts: { kind?: FlowKind; params?: Record<string, unknown> } = {},
 ): Promise<ApiResult> {
   const kind = opts.kind ?? 'esb';
   const E = flowEndpoints(kind);
+  // 手工运行时，平台把 body 里的额外字段直接放进 `$.http`（流程里的 `${$.http.xxx}` 取得到）。
+  // 这是 CLI 唯一能给"按 HTTP 入参运行"的流程传参的路径。
+  const body: Record<string, unknown> = { processId, ...(opts.params ?? {}) };
   // 平台有两个"手工运行"端点，不同版本各有残废：
   //   POST {base}/run                   —— 设计器/流程列表的"运行"（同步执行，返回执行结果）
   //   POST {base}/monitor/instance/run  —— 监控页"运行实例"；部分版本对尚未产生过实例的流程
@@ -1871,13 +1874,13 @@ export async function runFlow(
   // 先走 /run；端点不存在（404）、网络层失败（-1）或 5xx 时再回退到监控端点。
   // 4xx（参数/权限/业务错误）不回退，避免同一流程被执行两次。
   const primary = normalizeRunResult(
-    await c.request(`${E.base}/run`, { method: 'POST', body: { processId }, dryRun: false }),
+    await c.request(`${E.base}/run`, { method: 'POST', body, dryRun: false }),
   );
   if (primary.ok) return primary;
   const retriable = primary.httpStatus === 404 || primary.httpStatus === -1 || primary.httpStatus >= 500;
   if (!retriable) return primary;
   const fallback = normalizeRunResult(
-    await c.request(`${E.base}/monitor/instance/run`, { method: 'POST', body: { processId }, dryRun: false }),
+    await c.request(`${E.base}/monitor/instance/run`, { method: 'POST', body, dryRun: false }),
   );
   return fallback.ok ? fallback : primary;
 }
@@ -1932,6 +1935,20 @@ export async function runLog(
  *   - **"启用"没有可用端点**（`rule/start` 恒报"启动失败"），只能由人在平台上启用；
  *     所以本工具只负责"建规则"，并在结果里明确提示还需要人工启用。
  */
+/**
+ * 保存后需要人工“编译”的 Java 节点。
+ *
+ * 平台实测（2026-10）：`flow save` / `props save` 把 javaCodeNode 的 `code` 写进库里，
+ * 但**不会**让运行中的实例重新编译——必须在节点编辑器点『编译』；
+ * 多实例部署下各实例的编译类还可能不一致（同一流程连续运行会交替命中旧类/新类）。
+ * 所以 CLI 保存后要明确提示，不能让人以为"保存即生效"。
+ */
+export function javaCodeNodeIds(nodeProps: Array<{ nodeId: string; nodeType?: string; props?: Record<string, unknown> }>): string[] {
+  return nodeProps
+    .filter((n) => (n.nodeType ?? '') === 'javaCodeNode' && String((n.props ?? {}).code ?? '').trim().length > 0)
+    .map((n) => n.nodeId);
+}
+
 /**
  * `/bpm` 规则服务是否不可用。不同环境表现不同：
  * 网关超时、平台内 `connect timed out`、整个端点 404/405，或 5xx。

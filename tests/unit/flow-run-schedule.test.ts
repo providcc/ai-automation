@@ -168,3 +168,18 @@ test('isBpmServiceUnavailable：超时 / 404 / 5xx / 网络失败都算不可用
   assert.equal(FLOW.isBpmServiceUnavailable({ httpStatus: 400, msg: '参数错误' }), false);
   assert.equal(FLOW.isBpmServiceUnavailable({ httpStatus: 200, msg: '' }), false);
 });
+
+test('runFlow：--params 的字段作为顶层字段传给 /process/run（对应 ${$.http.xxx}）', async () => {
+  const { client, calls } = fake(() => res(200, { state: true, resultCode: 1 }));
+  await FLOW.runFlow(client, 'p1', { params: { shopName: 'shop-A', reportType: 'TYPE_X' } });
+  assert.deepEqual(calls[0].opts.body, { processId: 'p1', shopName: 'shop-A', reportType: 'TYPE_X' });
+});
+
+test('javaCodeNodeIds：只挑出带代码的 javaCodeNode', () => {
+  const ids = FLOW.javaCodeNodeIds([
+    { nodeId: 'T00001', nodeType: 'sqlExecuterNode', props: { sqlCode: 'select 1' } },
+    { nodeId: 'T00007', nodeType: 'javaCodeNode', props: { code: 'public class A {}' } },
+    { nodeId: 'T00008', nodeType: 'javaCodeNode', props: { code: '   ' } },
+  ]);
+  assert.deepEqual(ids, ['T00007']);
+});

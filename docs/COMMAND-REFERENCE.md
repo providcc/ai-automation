@@ -334,6 +334,15 @@ rc flow delete <pid> [--kind esb|etl] [--apply]
 - 判据以"流程记录 expression 正确 + Quartz 任务存在（`/rest/core/scheduler/current/run/jobs`）"为准；
   平台对"已在运行中"的流程会拒绝再次 start，工具视为已达成并继续成功返回。
 
+**手工运行带参流程**：`rc flow run <pid> --params '{"shopName":"x","reportType":"y"}' --apply`。
+`--params` 的字段作为请求体顶层字段传给 `/process/run`，流程里的 `${$.http.xxx}` 即可取到
+（CLI 之前没有这个入口，只能靠平台界面或用 `rc call` 手拼 body）。
+
+**Java 节点（javaCodeNode）保存 ≠ 生效**：`flow save` / `flow props save` 会把 `code` 写进库里，
+但平台**不会**随之重新编译——必须在节点编辑器点『编译』。多实例部署下各实例的编译类还可能不一致
+（实测同一流程连续运行会交替命中旧类/新类）。CLI 保存后会打印提醒；验证方法：连跑 3 次，
+行为/返回应一致。
+
 **手工运行流程**：`rc flow run <pid> --apply` 先走 `POST {base}/run`（设计器/流程列表的"运行"，
 同步执行并返回 `transactionId`），端点不存在（404）/网络失败/5xx 时回退 `monitor/instance/run`；
 4xx 业务错误不回退，避免同一流程被执行两次。注意 `/run` 成功时仍可能返回 `state:false`，

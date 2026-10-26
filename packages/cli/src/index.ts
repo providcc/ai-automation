@@ -122,6 +122,7 @@ const OPTIONS = {
   'check-registry': { type: 'boolean', default: false },
   'max-rows': { type: 'string' },
   'table-columns': { type: 'string' },
+  params: { type: 'string' },
   'process-ids': { type: 'string' },
   'time-number': { type: 'string' },
   cron: { type: 'string' },
@@ -295,6 +296,18 @@ function emit(r: ApiResult, json: boolean): number {
   // <=0 = 网络层失败（连不上 / 超时 / DNS）→ 上游故障，不是参数错误
   if (r.httpStatus >= 500 || r.httpStatus <= 0) return 5;
   return r.ok ? 0 : 4;
+}
+
+/**
+ * Java 节点保存后提醒：平台不会随保存自动编译，且多实例下编译类可能不一致。
+ * 不提示的话，很容易出现"代码改了、库里也对，但运行还是旧逻辑"的假象。
+ */
+function warnJavaNodesNeedCompile(nodeProps: Array<{ nodeId: string; nodeType?: string; props?: Record<string, unknown> }>): void {
+  const ids = FLOW.javaCodeNodeIds(nodeProps ?? []);
+  if (!ids.length) return;
+  console.error(`⚠ Java 节点代码已保存：${ids.join(', ')}`);
+  console.error('  平台不会随保存自动编译——需在节点编辑器点『编译』；多实例部署还要确认所有实例都已刷新，');
+  console.error('  否则同一流程连续运行可能交替命中旧类（实测）。验证：连跑 3 次，行为/返回应一致。');
 }
 
 const readJson = async (f: string) => JSON.parse(await readFile(f, 'utf8'));
@@ -1459,6 +1472,7 @@ async function main(argv: string[]): Promise<number> {
         }
         rep.failed.forEach((f) => console.error(`  ✖ ${f.nodeId}: ${f.msg}`));
       }
+      warnJavaNodesNeedCompile(nodes);
       return rep.failed.length ? 4 : 0;
     }
     case 'flow save': {
@@ -1520,6 +1534,7 @@ async function main(argv: string[]): Promise<number> {
         console.log(`   ${report.msg ?? ''}（加 --apply 才会真正写入）`);
       } else {
         console.log(report.ok ? '✔ 流程保存完成' : `✖ ${report.msg}`);
+        if (report.ok) warnJavaNodesNeedCompile(nodeProps);
       }
       return report.ok ? 0 : 4;
     }
@@ -1528,10 +1543,15 @@ async function main(argv: string[]): Promise<number> {
       if (!action) throw new RcError('E_VALIDATION', '需要 processId');
       const kind: FLOW.FlowKind = v.kind === 'etl' ? 'etl' : 'esb';
       if (!v.apply) {
-        console.log(`【dry-run】未运行：会执行 ${kind} 流程 ${action}（POST ${kind === 'etl' ? '/rest/etl' : '/rest/esb'}/process/monitor/instance/run）；加 --apply 才会真的跑`);
+        console.log(`【dry-run】未运行：会执行 ${kind} 流程 ${action}（POST ${kind === 'etl' ? '/rest/etl' : '/rest/esb'}/process/run；可用 --params '<json>' 传 ${'$'}.http 入参）；加 --apply 才会真的跑`);
         return 0;
       }
-      const r = await FLOW.runFlow(c, action, { kind });
+      let runParams: Record<string, unknown> | undefined;
+      if (v.params) {
+        try { runParams = JSON.parse(String(v.params)); }
+        catch { throw new RcError('E_VALIDATION', '--params 需要合法 JSON，例如 \'{"shopName":"x","reportType":"y"}\''); }
+      }
+      const r = await FLOW.runFlow(c, action, { kind, params: runParams });
       const code = emit(r, json);
       const tid = (r.data?.data ?? r.data)?.transactionId;
       if (!json && tid) console.log(`  transactionId=${tid}（节点级记录：rc flow run-log ${tid}）`);
