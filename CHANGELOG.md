@@ -4,6 +4,13 @@
 
 ## [Unreleased]
 
+### 新增
+
+- `rc flow run <pid> --params '<json>'`：把 JSON 字段作为顶层字段传给 `/process/run`，
+  对应流程里的 `${$.http.xxx}`（之前只能 `rc call` 手拼 body）。
+- `flow save` / `flow props save` 保存含 `javaCodeNode` 代码时会打印提醒：平台不会随保存自动编译，
+  必须在节点编辑器点『编译』；多实例部署下编译类可能不一致（实测会交替命中旧类）。
+
 ### 修复
 
 - **`rc flow run` 选错运行端点**：原实现只调 `monitor/instance/run`，部分平台版本对未产生过实例的流程

@@ -100,7 +100,9 @@ rc datasource test <id>
 4. 保存：`rc flow save ...`（先 dry-run）。
 5. 平台校验：`rc flow check --file model.json --process-id <pid>`。
 6. 回读：节点数、连线数、属性齐全，缺一即失败。
-7. 运行与调度：
+7. **Java 节点改代码后必须编译**：`flow save` / `flow props save` 只落库，不重新编译；
+   要在节点编辑器点『编译』，多实例环境还要确认各实例一致（连跑 3 次验证）。
+8. 运行与调度：
    - 手工运行：`rc flow run <pid> --apply`（返回 `transactionId`，可用 `rc flow run-log <tid>` 看节点级记录）。
      平台两个运行端点版本差异大，CLI 会先走 `/process/run`、失败再回退 `/monitor/instance/run`；
      **不要**自己拼接 `monitor/instance/run`，未产生过实例的流程会直接 500。
