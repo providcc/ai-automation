@@ -4,6 +4,8 @@ on:
   push:
     branches: [main]
   pull_request:
+  # 手动触发：main 之外的分支也需要跑门禁（PR 的 CI 是 fork 基线，未必覆盖本分支）
+  workflow_dispatch:
 
 # 同一分支的旧运行自动取消，避免排队
 concurrency:
