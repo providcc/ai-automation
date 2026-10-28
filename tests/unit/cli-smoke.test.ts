@@ -18,9 +18,14 @@ const ROOT = join(here, '..', '..');
 /** 跑一次 CLI，返回 {code, stdout, stderr}（不因非 0 退出码抛错）。 */
 async function rc(args: string[], env: Record<string, string> = {}) {
   try {
+    // 默认把 RC_BASE_URL 置空 → 命令报"缺少目标地址"（多数测试要的就是这个）。
+    // 传 `RC_BASE_URL: null` 表示**不要这个变量**，让命令走 rc.targets.json / RC_TARGET。
+    const envAll: Record<string, string> = { ...process.env, ...env, RC_PROFILE: 'uat' };
+    if (env.RC_BASE_URL === null) delete envAll.RC_BASE_URL;
+    else envAll.RC_BASE_URL = env.RC_BASE_URL ?? '';
     const r = await run(process.execPath, ['--experimental-strip-types', CLI, ...args], {
       cwd: ROOT,
-      env: { ...process.env, ...env, RC_PROFILE: 'uat', RC_BASE_URL: env.RC_BASE_URL ?? '' },
+      env: envAll,
       maxBuffer: 8 * 1024 * 1024,
     });
     return { code: 0, stdout: r.stdout, stderr: r.stderr };
@@ -152,7 +157,10 @@ test('CLI：dry-run 明确说"未写入"，不会打印"已创建/保存完成"'
 test('CLI：--help 里每条二级命令都有对应分支（漏接一条就是"文档写了但用不了"）', async () => {
   const help = (await rc(['--help'])).stdout;
   const cmds = new Set<string>();
-  for (const m of help.matchAll(/^\s+(?:rc\s+)?([a-z][a-z-]+)\s+([a-z][a-z-]+)/gm)) cmds.add(`${m[1]} ${m[2]}`);
+  // 顶层帮助的每行形如 `  rc flow get <pid> [--kind esb|etl]`。
+  // 前缀 `rc ` 是**必选**的：写成可选组时，`  rc apps` 这类单词命令会被解析成
+  // 假命令 `rc apps`（第一组匹配到 "rc"），测试就一直在测一个不存在的命令。
+  for (const m of help.matchAll(/^\s+rc\s+([a-z][a-z-]*)\s+([a-z][a-z-]+)/gm)) cmds.add(`${m[1]} ${m[2]}`);
   assert.ok(cmds.size >= 60, `从帮助里只解析出 ${cmds.size} 条命令，解析规则可能失效了`);
 
   const missing: string[] = [];

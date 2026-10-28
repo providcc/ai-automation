@@ -112,7 +112,7 @@ const OPTIONS = {
   all: { type: 'boolean', default: false },
   'all-db': { type: 'boolean', default: false },
   version: { type: 'boolean', default: false },
-  help: { type: 'boolean', default: false },
+  help: { type: 'boolean', short: 'h', default: false },
   readonly: { type: 'boolean', default: false },
 } as const;
 

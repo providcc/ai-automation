@@ -595,7 +595,10 @@ export const RC_HELP: HelpSpec = {
         { flag: '--node-id <nodeId>', desc: '节点 id' },
         { flag: '--limit N', desc: '预览行数上限' },
       ],
-      notes: ['只读：不会改动流程，也不会触发下游节点。'],
+      notes: [
+        '只读：不会改动流程，也不会触发下游节点。',
+        '**写类 SQL 一律拒绝预览**：sqlExecuterNode 可能是 methodType=update 的写库节点，预览它有真的写库的风险。',
+      ],
     },
     {
       group: G_FLOW,
