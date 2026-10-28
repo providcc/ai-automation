@@ -163,6 +163,14 @@ test('CLI：--help 里每条二级命令都有对应分支（漏接一条就是"
   assert.deepEqual(missing, [], `帮助里列了但 CLI 没有分支：${missing.join(', ')}`);
 });
 
+test('CLI：--help 遇到不存在的命令要报错，不能静默返回顶层清单', async () => {
+  // 曾经 `--help` 在 dispatch 之前短路，任何乱写的命令都返回顶层清单 + 退出码 0，
+  // 未知命令检测形同虚设（上面那条测试也因为这个一直测不出东西）。
+  const r = await rc(['totallybogus', '--help']);
+  assert.match(r.stderr + r.stdout, /未知命令|unknown command/i);
+  assert.notEqual(r.code, 0, '未知命令不能以 0 退出');
+});
+
 // ─────────────────────── 网络失败不许伪装成 dry-run ───────────────────────
 
 test('CLI：**网络不通时写命令必须报失败**，不许打印 [dry-run] 并退出 0', async () => {
@@ -201,4 +209,20 @@ test('CLI：真 dry-run（不带 --apply）仍然退出 0，并打印 [dry-run]'
   } finally {
     dir.cleanup();
   }
+});
+
+test('CLI：RC_TARGET 环境变量对所有命令生效（不只 doctor）', async () => {
+  // 曾经只有 doctor 读 RC_TARGET，其他命令只看 --target：
+  // `RC_TARGET=prod rc flow list` 会静默连到配置文件里的 default（test 环境）——
+  // "以为连了 A 其实连了 B"这类错最难查。
+  const withTargets = JSON.stringify({
+    targets: [
+      { name: 'alpha', baseUrl: 'https://alpha.invalid/restcloud', role: 'orchestration', network: 'public' },
+      { name: 'beta', baseUrl: 'https://beta.invalid/restcloud', role: 'orchestration', network: 'public' },
+    ],
+  });
+  const r = await rc(['flow', 'list'], { RC_TARGETS: withTargets, RC_TARGET: 'beta', RC_BASE_URL: null as any });
+  const out = r.stdout + r.stderr;
+  assert.match(out, /beta\.invalid/, `RC_TARGET=beta 应当连 beta，实际输出：${out.slice(0, 300)}`);
+  assert.equal(/alpha\.invalid/.test(out), false, '不该连到 alpha');
 });

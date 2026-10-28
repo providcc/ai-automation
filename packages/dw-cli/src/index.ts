@@ -10,7 +10,7 @@
  *   3. **代码里没有具体主机/库/MV 名**：一律来自配置或运行时发现。
  */
 import { parseArgs } from 'node:util';
-import { findCommand, renderCommandHelp, renderTopHelp } from '../../core/src/cli-help.ts';
+import { findCommand, renderCommandHelp, renderTopHelp, renderGroupHelp, findGroupCommands } from '../../core/src/cli-help.ts';
 import { DW_HELP } from './help.ts';
 import { readFile, readdir } from 'node:fs/promises';
 import { join } from 'node:path';
@@ -290,8 +290,11 @@ async function main(argv: string[]): Promise<number> {
   // 只写 `dw --help`（或什么都不写）才给顶层清单。
   if (bool(v.help)) {
     const c = findCommand(DW_HELP, positionals);
-    console.log(c ? renderCommandHelp(DW_HELP, c) : renderTopHelp(DW_HELP));
-    return 0;
+    if (c) { console.log(renderCommandHelp(DW_HELP, c)); return 0; }
+    // 组级：前缀本身不是命令，但有子命令
+    const group = findGroupCommands(DW_HELP, positionals);
+    if (group.length) { console.log(renderGroupHelp(DW_HELP, positionals)); return 0; }
+    // 什么都不匹配 → 不短路，继续走 dispatch 报"未知命令"
   }
   if (positionals.length === 0) {
     console.log(renderTopHelp(DW_HELP));

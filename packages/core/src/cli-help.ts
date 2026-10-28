@@ -76,6 +76,53 @@ export function findCommand(spec: HelpSpec, positionals: string[]): CommandSpec 
   return undefined;
 }
 
+/**
+ * 找出某个**前缀**下的子命令（`rc flow` → 所有 `flow xxx`）。
+ *
+ * 用途是组级帮助：`rc flow --help` 原本会回落到顶层全量清单（近百条），
+ * Agent 问"flow 下有哪些子命令"时根本看不到答案。组级帮助只列这个前缀下的。
+ */
+export function findGroupCommands(spec: HelpSpec, prefix: string[]): CommandSpec[] {
+  const key = prefix.join(' ');
+  if (!key) return [];
+  return spec.commands.filter((c) => c.name.startsWith(`${key} `));
+}
+
+/**
+ * 显示宽度：全角字符（CJK）占 2 列，半角占 1 列。
+ *
+ * 用字符串长度对齐会在中文参数说明上错位（`--name <接口名>` 字符数 11，
+ * 但显示占 14 列），描述列参差不齐。终端是按显示宽度排版的，所以这里也要。
+ */
+export function displayWidth(s: string): number {
+  let w = 0;
+  for (const ch of String(s)) {
+    const cp = ch.codePointAt(0) ?? 0;
+    // 全角范围（CJK 符号、假名、全角标点、汉字等）
+    const wide =
+      (cp >= 0x1100 && cp <= 0x115f) ||
+      (cp >= 0x2e80 && cp <= 0x303e) ||
+      (cp >= 0x3041 && cp <= 0x33ff) ||
+      (cp >= 0x3400 && cp <= 0x4dbf) ||
+      (cp >= 0x4e00 && cp <= 0x9fff) ||
+      (cp >= 0xa000 && cp <= 0xa4cf) ||
+      (cp >= 0xac00 && cp <= 0xd7a3) ||
+      (cp >= 0xf900 && cp <= 0xfaff) ||
+      (cp >= 0xfe30 && cp <= 0xfe6f) ||
+      (cp >= 0xff00 && cp <= 0xff60) ||
+      (cp >= 0xffe0 && cp <= 0xffe6) ||
+      (cp >= 0x20000 && cp <= 0x3fffd);
+    w += wide ? 2 : 1;
+  }
+  return w;
+}
+
+/** 按显示宽度右侧补空格（padEnd 的全角感知版）。 */
+export function padToWidth(s: string, width: number): string {
+  const pad = width - displayWidth(s);
+  return pad > 0 ? s + ' '.repeat(pad) : s;
+}
+
 // ─────────────────────────── 渲染 ───────────────────────────
 
 /** 按 `group` 首次出现的顺序分组。 */
@@ -99,15 +146,39 @@ export function renderTopHelp(spec: HelpSpec): string {
   const lines: string[] = [spec.title, ''];
   for (const [group, cmds] of grouped(spec.commands)) {
     lines.push(`${group}:`);
-    const width = Math.max(...cmds.map((c) => c.usage.length));
+    const width = Math.max(...cmds.map((c) => displayWidth(c.usage)));
     for (const c of cmds) {
-      const pad = ' '.repeat(width - c.usage.length);
-      lines.push(`  ${c.usage}${pad}   # ${c.summary}`);
+      lines.push(`  ${padToWidth(c.usage, width)}   # ${c.summary}`);
     }
     lines.push('');
   }
   for (const para of spec.footer ?? []) lines.push(para);
   return lines.join('\n').replace(/\n+$/, '');
+}
+
+/**
+ * 组级帮助：`rc flow --help` 列出 `flow` 下的全部子命令。
+ *
+ * 与顶层帮助的区分：组级只列**这个前缀**下的命令，并标注每个是不是写操作
+ * （写操作默认 dry-run，Agent 拼命令时需要知道）。
+ */
+export function renderGroupHelp(spec: HelpSpec, prefix: string[]): string {
+  const cmds = findGroupCommands(spec, prefix).filter((c) => !c.hidden);
+  const key = prefix.join(' ');
+  const lines: string[] = [`${spec.bin} ${key} 的子命令:`, ''];
+  if (!cmds.length) {
+    lines.push(`（没有匹配到 ${key} 的子命令）`);
+    lines.push('', `用 ${spec.bin} --help 看全部命令。`);
+    return lines.join('\n');
+  }
+  const width = Math.max(...cmds.map((c) => displayWidth(c.usage)));
+  for (const c of cmds) {
+    const mark = c.write ? ' [写]' : '';
+    lines.push(`  ${padToWidth(c.usage, width)}   # ${c.summary}${mark}`);
+  }
+  lines.push('', `用 ${spec.bin} ${key} <子命令> --help 看该子命令的用法。`);
+  lines.push(`用 ${spec.bin} --help 看全部命令。`);
+  return lines.join('\n');
 }
 
 /** 单命令帮助：用法 / 说明 / 选项 / 注意 / 示例。 */
@@ -118,8 +189,8 @@ export function renderCommandHelp(spec: HelpSpec, c: CommandSpec): string {
   }
   if (c.options?.length) {
     out.push('', '选项:');
-    const w = Math.max(...c.options.map((o) => o.flag.length));
-    for (const o of c.options) out.push(`  ${o.flag.padEnd(w)}  ${o.desc}`);
+    const w = Math.max(...c.options.map((o) => displayWidth(o.flag)));
+    for (const o of c.options) out.push(`  ${padToWidth(o.flag, w)}  ${o.desc}`);
   }
   if (c.notes?.length) {
     out.push('', '注意:');
