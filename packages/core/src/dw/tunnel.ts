@@ -201,6 +201,11 @@ const FAILURE_RULES: FailureRule[] = [
     re: /could not request local forwarding/i,
     summary: '跳板机拒绝了本地转发请求（端口被占用，或跳板机策略不允许 -L）',
     action: `下一步：确认本地端口没被占用（lsof），并确认跳板机允许 -L 转发。${FORWARD_CONVENTION}`,
+    actionWithPorts: (ports) =>
+      `下一步：\n` +
+      `  1) 看是谁占着：\`lsof -nP -iTCP:${ports[0]} -sTCP:LISTEN\`（macOS/Linux 通用）\n` +
+      '  2) 确认跳板机允许 -L 转发\n' +
+      `  3) 不想动它就把本地端口换个号：${FORWARD_CONVENTION}`,
   },
   {
     reason: 'auth',
@@ -251,10 +256,16 @@ export function diagnoseTunnelFailure(
   // 而 ssh 在 ExitOnForwardFailure 下不一定把 `Could not request local forwarding` 打出来；
   // 反过来，端口在监听而 ssh 又没报错时也能反推是占用。
   const listening = opts.listeningLocals ?? [];
-  const reason: TunnelFailureReason = rule?.reason
+  // `Could not request local forwarding` 单独出现时，原因既可能是端口被占、
+  // 也可能是跳板机策略不允许 -L。**端口确实在监听是更强的证据** —— 那就归到占用，
+  // 并给出具体端口的排查命令；跳板机策略问题通常不会有端口在监听。
+  const effectiveRule = rule?.reason === 'forward-refused' && listening.length > 0
+    ? FAILURE_RULES.find((r) => r.reason === 'port-in-use')
+    : rule;
+  const reason: TunnelFailureReason = effectiveRule?.reason
     ?? (listening.length > 0 ? 'port-in-use' : 'unknown');
 
-  let summary = rule?.summary ?? 'ssh 未成功建立隧道';
+  let summary = effectiveRule?.summary ?? 'ssh 未成功建立隧道';
   if (reason === 'port-in-use' && listening.length > 0) {
     summary = `本地端口 ${listening.join('、')} 已被占用，ssh 无法把转发挂上去`;
   } else if (reason === 'unknown') {
@@ -265,7 +276,9 @@ export function diagnoseTunnelFailure(
       : `ssh 以退出码 ${opts.exitCode ?? '非 0'} 退出，且没有输出可供归因`;
   }
 
-  const action = (rule?.actionWithPorts && listening.length > 0 ? rule.actionWithPorts(listening) : rule?.action)
+  const action = (effectiveRule?.actionWithPorts && listening.length > 0
+    ? effectiveRule.actionWithPorts(listening)
+    : effectiveRule?.action)
     ?? `下一步：手工跑一遍同一条命令看完整输出（ssh 的 -v 会给出更细的原因）。\n${FORWARD_CONVENTION}`;
 
   // 摘要里已经引用过的行不再重复列一遍（摘要+原文两处一样的句子只是噪声）
@@ -302,9 +315,19 @@ export async function tunnelStatus(
   }
   const pids = await runtime.findPids(tunnelSignature(spec));
   const up = forwards.every((f) => f.listening);
-  const owner: TunnelStatus['owner'] = !up ? 'none' : pids.length > 0 ? 'tool' : 'foreign';
+  const anyListening = forwards.some((f) => f.listening);
+  // owner 判的是"**谁**在提供这条隧道"，不是"通没通"：
+  // 端口在监听、却匹配不到本工具的进程 → 这条隧道是手工/别的工具起的（foreign），
+  // 这种形态在**隧道起不来**时最典型（端口被别人的隧道占着，dw 挂不上），
+  // 所以不能只看 up —— 否则失败归因里就少了"dw tunnel down 关不掉它"这条关键信息。
+  const owner: TunnelStatus['owner'] = anyListening ? (pids.length > 0 ? 'tool' : 'foreign') : 'none';
   let hint: string | undefined;
   if (!up && pids.length > 0) hint = '隧道进程在，但转发端口不通——通常是合盖休眠后进程残留，先 down 再 up。';
+  else if (!up && owner === 'foreign') {
+    hint =
+      '转发端口在监听，但匹配不到本工具的隧道进程：这条隧道**不是 dw 起的**（手工 ssh 或别的工具），' +
+      'dw tunnel down 关不掉它；要关请手工 kill。dw 会直接复用它，不影响查询。';
+  }
   else if (!up) hint = '隧道未建立：执行 dw tunnel up。';
   else if (pids.length > 1) hint = `匹配到 ${pids.length} 个隧道进程，建议 down 后重建，避免重复副本。`;
   else if (owner === 'foreign') {
@@ -358,13 +381,27 @@ export async function tunnelUp(
     // 而"哪个本地端口被占"要自己探才知道。
     const after = await tunnelStatus(spec, runtime);
     const listeningLocals = after.forwards.filter((f) => f.listening).map((f) => f.forward.local);
-    const d = diagnoseTunnelFailure(r.stderr || r.stdout, spec, { listeningLocals, exitCode: r.code });
+    // stderr 与 stdout **都要看**：sshpass 把 ssh 的输出重定向到 stdout，
+    // 真实原因（Address already in use）常在 stdout，而 stderr 只有噪声横幅。
+    // 用 `stderr || stdout` 会把 stdout 整段丢掉 —— 归因就只剩噪声了。
+    const combined = [r.stderr, r.stdout].filter((s) => s && s.trim()).join('\n');
+    const d = diagnoseTunnelFailure(combined, spec, { listeningLocals, exitCode: r.code });
     const noise = d.droppedNoise > 0 ? `\n（已略过 ${d.droppedNoise} 行 OpenSSH 噪声告警）` : '';
-    throw new RcError('E_UPSTREAM', `建立隧道失败：${d.summary}\n${d.keyLines.join('\n')}${noise}\n${d.action}`, {
+    // 端口在监听但匹配不到本工具的进程 → 这条隧道不是 dw 起的（多半是手工 ssh）。
+    // 这种情况 `dw tunnel down` **关不掉它**，必须说清楚，否则下一步是错的。
+    const foreign = after.owner === 'foreign' && listeningLocals.length > 0;
+    const ownerNote = foreign
+      ? `\n注意：本地端口 ${listeningLocals.join('、')} 在监听，但匹配不到 dw 起的隧道进程——` +
+        '这条隧道是手工/别的工具起的，`dw tunnel down` 关不掉它，要用 lsof 拿到 pid 手工 kill。'
+      : '';
+    throw new RcError('E_UPSTREAM', `建立隧道失败：${d.summary}\n${d.keyLines.join('\n')}${noise}${ownerNote}\n${d.action}`, {
       // 隧道问题的下一步与 Doris 报错的下一步完全无关，别让 dwErrorHint 的
       // "先看 detailMessage / 元数据读不到跑 dw doctor" 盖掉这里的归因。
       hint: '',
-      detail: { reason: d.reason, keyLines: d.keyLines, droppedNoise: d.droppedNoise, exitCode: r.code },
+      detail: {
+        reason: d.reason, keyLines: d.keyLines, droppedNoise: d.droppedNoise,
+        exitCode: r.code, owner: after.owner, listeningLocals,
+      },
     });
   }
 

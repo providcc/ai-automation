@@ -346,3 +346,54 @@ test('effectiveEndpoint：没有对应转发时回落到原端口（不静默换
   assert.equal(e.mysqlPort, 19030);
   assert.equal(e.httpPort, 9999);
 });
+
+/**
+ * sshpass 会把 ssh 的输出重定向到 **stdout**，stderr 只剩 OpenSSH 的噪声横幅。
+ * 原实现用 `stderr || stdout`：stderr 非空就整段丢掉 stdout，
+ * 真实原因（Address already in use）消失，只剩一句噪声。
+ */
+test('tunnelUp：真实原因在 stdout、stderr 只有噪声时也不能丢（sshpass 常见形态）', async () => {
+  const noise = [
+    '** WARNING: connection is not using a post-quantum key exchange algorithm.',
+    '** This session may be vulnerable to "store now, decrypt later" attacks.',
+  ].join('\n');
+  const rt = stubTunnelRuntime({
+    listening: [19030],
+    execResult: () => ({ code: 255, stdout: 'bind [::1]:19030: Address already in use', stderr: noise }),
+  });
+  await assert.rejects(
+    () => tunnelUp(SPEC, rt.runtime, { waitMs: 10 }),
+    (e: Error) => {
+      assert.match(e.message, /Address already in use/);
+      assert.match(e.message, /本地端口 19030 已被占用/);
+      return true;
+    },
+  );
+});
+
+test('tunnelUp：端口被**非 dw 起的**进程占着，要说明 dw tunnel down 关不掉它', async () => {
+  // findPids 返回空 → owner=foreign（端口在监听但匹配不到 dw 的隧道进程）
+  const rt = stubTunnelRuntime({
+    listening: [19030],
+    execResult: () => ({ code: 255, stdout: '', stderr: 'bind [::1]:19030: Address already in use' }),
+  });
+  await assert.rejects(
+    () => tunnelUp(SPEC, rt.runtime, { waitMs: 10 }),
+    (e: Error) => {
+      assert.match(e.message, /不是 dw 起的|手工/);
+      assert.match(e.message, /关不掉/);
+      return true;
+    },
+  );
+});
+
+test('diagnoseTunnelFailure：forward-refused 且端口在监听 → 归到占用并给具体端口命令', () => {
+  // 只有 "Could not request local forwarding"、没有 bind 那行时，
+  // 端口确实在监听就是更强的证据 → 按占用归因，并给出具体端口的 lsof 命令。
+  const d = diagnoseTunnelFailure('Could not request local forwarding.', SPEC, {
+    listeningLocals: [19030],
+    exitCode: 255,
+  });
+  assert.equal(d.reason, 'port-in-use');
+  assert.match(d.action, /lsof -nP -iTCP:19030/);
+});
