@@ -19,6 +19,7 @@ export type { Issue, ValidateOptions } from './flow-validate.ts';
 export { buildNodeProps, buildSubProcessProps, assertNodeProps } from './flow-props.ts';
 export type { NodePropsInput, NodeProps } from './flow-props.ts';
 export * from './flow-lifecycle.ts';
+export * from './java-compile.ts';
 export * from './api.ts';
 export * from './etl.ts';
 export * from './datasource.ts';

@@ -31,6 +31,7 @@ import { validateFlow, hasBlockingError, type Issue } from '../../core/src/flow-
 import { formatFlowDiff } from '../../core/src/flow-diff.ts';
 import * as AUDITQ from '../../core/src/audit-query.ts';
 import * as PREVIEW from '../../core/src/flow-preview.ts';
+import * as JAVAC from '../../core/src/java-compile.ts';
 import * as PUBAPI from '../../core/src/flow-publish.ts';
 import * as APIPARAMS from '../../core/src/api-params.ts';
 import * as SQLQ from '../../core/src/sql-check.ts';
@@ -61,6 +62,7 @@ const OPTIONS = {
   app: { type: 'string' },
   'process-id': { type: 'string' },
   'allow-mock': { type: 'boolean', default: false },
+  compile: { type: 'boolean', default: false },
   keyword: { type: 'string' },
   enrich: { type: 'string' },
   category: { type: 'string' },
@@ -1416,6 +1418,45 @@ async function main(argv: string[]): Promise<number> {
       }
       return emit(await FLOW.publishFlow(c, action, { dryRun: !v.apply, kind }), json);
     }
+    case 'flow java compile': {
+      if (!v['process-id']) throw new RcError('E_VALIDATION', '需要 --process-id');
+      const kind: FLOW.FlowKind = v.kind === 'etl' ? 'etl' : 'esb';
+      const pid = String(v['process-id']);
+      // 取流程里的全部节点属性，挑出带 code 的 javaCodeNode
+      const all = await FLOW.listFlowProps(c, pid, { kind });
+      let nodes = all.props ?? {};
+      if (v['node-id']) {
+        const one = nodes[String(v['node-id'])];
+        if (!one) throw new RcError('E_VALIDATION', `流程 ${pid} 里没有节点 ${v['node-id']}`);
+        nodes = { [String(v['node-id'])]: one };
+      }
+      const nodeProps = Object.entries(nodes).map(([nodeId, props]) => ({
+        nodeId,
+        nodeType: String((props as any)?.pNodeType ?? ''),
+        props: props as Record<string, unknown>,
+      }));
+      const report = await JAVAC.compileJavaNodes(c, { nodeProps, dryRun: !v.apply });
+      if (json) {
+        console.log(JSON.stringify({ processId: pid, ...report }, null, 2));
+      } else {
+        if (!report.nodeIds.length) {
+          console.log('流程里没有带 code 的 Java 节点，无需编译。');
+        }
+        for (const r of report.results) {
+          if (r.ok) {
+            console.log(`✔ ${r.nodeId} 编译成功（${r.classPath}）`);
+          } else {
+            console.error(`✖ ${r.nodeId} 编译失败${r.classPath ? `（${r.classPath}）` : ''}`);
+            if (!r.written) console.error(`  源文件未写入：${r.msg ?? '-'}`);
+            if (r.compileError) console.error(r.compileError);
+          }
+        }
+        if (report.nodeIds.length) {
+          console.error('  多实例部署下各实例的编译产物可能不一致，需确认所有实例都已刷新；连跑 3 次看行为是否一致。');
+        }
+      }
+      return report.ok ? 0 : 4;
+    }
     case 'flow props get': {
       if (!v['process-id'] || !v['node-id']) throw new RcError('E_VALIDATION', '需要 --process-id 与 --node-id');
       const kind: FLOW.FlowKind = v.kind === 'etl' ? 'etl' : 'esb';
@@ -1457,6 +1498,29 @@ async function main(argv: string[]): Promise<number> {
       if (!v['process-id'] || !v.file) throw new RcError('E_VALIDATION', '需要 --process-id 与 --file（属性 JSON）');
       const kind: FLOW.FlowKind = v.kind === 'etl' ? 'etl' : 'esb';
       const nodes = FLOW.normalizeNodeProps(await readJson(v.file)) ?? [];
+
+      // --compile：先编译 Java 节点，编译不过就不保存（避免把坏代码写进属性）
+      if (v.compile && nodes.length) {
+        const javaNodes = nodes
+          .filter((n) => (n.nodeType ?? '') === 'javaCodeNode' && String((n.props ?? {}).code ?? '').trim())
+          .map((n) => ({ nodeId: n.nodeId, nodeType: n.nodeType, props: (n.props ?? {}) as Record<string, unknown> }));
+        if (javaNodes.length) {
+          const creport = await JAVAC.compileJavaNodes(c, { nodeProps: javaNodes, dryRun: !v.apply });
+          for (const r of creport.results) {
+            if (r.ok) console.error(`✔ Java 节点 ${r.nodeId} 编译成功（${r.classPath}）`);
+            else {
+              console.error(`✖ Java 节点 ${r.nodeId} 编译失败${r.classPath ? `（${r.classPath}）` : ''}`);
+              if (!r.written) console.error(`  源文件未写入：${r.msg ?? '-'}`);
+              if (r.compileError) console.error(r.compileError);
+            }
+          }
+          if (!creport.ok) {
+            console.error('  编译未通过，已中止保存：属性不落库，避免把编译不过的代码写进去。');
+            return 4;
+          }
+        }
+      }
+
       const rep = await FLOW.saveNodePropsComplete(c, {
         appId: kind === 'etl' ? 'etl' : 'esb', processId: v['process-id'], nodes, kind,
       }, { dryRun: !v.apply });

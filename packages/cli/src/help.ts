@@ -534,6 +534,26 @@ export const RC_HELP: HelpSpec = {
     },
     {
       group: G_FLOW,
+      name: 'flow java compile',
+      usage: 'rc flow java compile --process-id <pid> [--node-id <id>] [--kind esb|etl] [--apply]',
+      summary: '编译流程里的 Java 代码节点（写源文件 + javac）',
+      write: true,
+      options: [
+        TARGET,
+        { flag: '--process-id <pid>', desc: '流程 id' },
+        { flag: '--node-id <id>', desc: '只编译该节点；缺省编译全部 javaCodeNode' },
+        { flag: '--kind esb|etl', desc: '流程类型' },
+        { flag: '--apply', desc: '真正执行' },
+      ],
+      notes: [
+        '属性表里的 code 只是源码副本；运行时装载的是编译产物，必须真的编译才生效。',
+        '顺序固定为「写源文件 → 编译」：只编译会编译服务器上的旧源码。',
+        '编译失败会原样给出 javac 报错（含行号列号）。',
+        '多实例部署下各实例的编译产物可能不一致，需人工确认所有实例都已刷新。',
+      ],
+    },
+    {
+      group: G_FLOW,
       name: 'flow props get',
       usage: 'rc flow props get --process-id <pid> --node-id <id> [--kind esb|etl]',
       summary: '取单个节点的属性',
@@ -548,7 +568,7 @@ export const RC_HELP: HelpSpec = {
     {
       group: G_FLOW,
       name: 'flow props save',
-      usage: 'rc flow props save --process-id <pid> --file props.json [--kind esb|etl] [--apply]',
+      usage: 'rc flow props save --process-id <pid> --file props.json [--kind esb|etl] [--compile] [--apply]',
       summary: '写入节点属性（合并语义）',
       write: true,
       options: [
@@ -556,9 +576,13 @@ export const RC_HELP: HelpSpec = {
         { flag: '--process-id <pid>', desc: '流程 id' },
         { flag: '--file <path>', desc: '属性 JSON' },
         { flag: '--kind esb|etl', desc: '流程类型' },
+        { flag: '--compile', desc: '先编译 Java 节点（写源文件+编译），失败则不保存' },
         { flag: '--apply', desc: '真正执行' },
       ],
-      notes: ['只覆盖文件里出现的字段；历史重复记录会被清理（清理失败会记入 failed）。'],
+      notes: [
+        '只覆盖文件里出现的字段；历史重复记录会被清理（清理失败会记入 failed）。',
+        'Java 节点只存源码不会自动编译；要让改动生效需加 --compile（或用 rc flow java compile）。',
+      ],
     },
     {
       group: G_FLOW,
