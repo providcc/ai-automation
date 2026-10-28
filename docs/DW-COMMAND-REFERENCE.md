@@ -141,6 +141,15 @@ dw tunnel status|up|down [--env <name>] [--force]
 dw doctor [--env <name>] [--fix] [--json]
 ```
 
+**隧道失败的归因**：`dw tunnel up` 失败时，工具会**去噪 OpenSSH 横幅**（post-quantum 告警、
+known_hosts 提示等），把真实原因置顶，并给出下一步（`lsof` 查占用者 / 换本地端口 / 核对跳板机策略）。
+两条容易踩的细节：
+
+- **stderr 与 stdout 都要看**：sshpass 会把 ssh 的输出重定向到 stdout，stderr 只剩噪声横幅；
+  只看 stderr 会把真实原因（`Address already in use`）整段丢掉。
+- **端口在监听但匹配不到 dw 的进程** → 这条隧道是**手工/别的工具起的**，`dw tunnel down` **关不掉它**
+  （down 只按特征串匹配自己起的进程），要手工 kill。工具会明确指出这一点。
+
 `dw doctor` 按链式顺序检查，**前一项没过后面全部 skip**（不让用户在一堆噪音里找原因）：
 
 1. **配置** — 环境名/传输/catalog/库；缺密码时警告。

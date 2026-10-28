@@ -18,6 +18,7 @@
  */
 import type { RestCloudClient } from './client.ts';
 import { RcError } from './errors.ts';
+import { maskRows } from './mask.ts';
 import { isReadOnlyStatement, type ReadOnlyVerdict } from './sql-text.ts';
 
 export interface SqlCheckOptions {
@@ -182,6 +183,19 @@ export async function checkSql(c: RestCloudClient, opts: SqlCheckOptions): Promi
   return { ok: false, columns: [], error: raw, reason, hint, traceId: r.traceId, placeholdersReplaced: normalized.replaced };
 }
 
+/**
+ * 脱敏选项：从 `RC_MASK_COLS` 读额外要打码的列（逗号分隔）。
+ *
+ * 与 dw 侧的 `DW_MASK_COLS` 同一套规则（`packages/core/src/mask.ts`），
+ * 只是环境变量名不同——两个 CLI 各自的配置分开，避免互相影响。
+ */
+function maskOptionsFromEnv(): { extraColumns?: string[] } {
+  const raw = String(process.env.RC_MASK_COLS ?? '').trim();
+  if (!raw) return {};
+  const cols = raw.split(',').map((s) => s.trim()).filter(Boolean);
+  return cols.length ? { extraColumns: cols } : {};
+}
+
 /** 按顶层逗号切分 SQL 片段（忽略括号/反引号内的逗号）。 */
 function splitTopLevel(text: string): string[] {
   const out: string[] = [];
@@ -262,6 +276,8 @@ export interface SqlQueryResult {
   hint?: string;
   /** 第一步解析时替换掉的占位符个数 */
   placeholdersReplaced?: number;
+  /** 被脱敏（打码）的列名——空数组表示没打码 */
+  maskedColumns?: string[];
 }
 
 /**
@@ -276,7 +292,7 @@ export interface SqlQueryResult {
  */
 export async function querySql(
   c: RestCloudClient,
-  opts: { conn: string; sql: string; maxRows?: number; tableColumns?: string },
+  opts: { conn: string; sql: string; maxRows?: number; tableColumns?: string; /** false = 不脱敏（--raw） */ mask?: boolean },
 ): Promise<SqlQueryResult> {
   const sql = String(opts.sql ?? '').trim();
   const conn = String(opts.conn ?? '').trim();
@@ -313,7 +329,15 @@ export async function querySql(
           colType: c2?.colType === undefined ? undefined : String(c2.colType),
         }))
         : columns;
-      return { ok: true, columns: cols, rows: rows.slice(0, maxRows), total, placeholdersReplaced: normalized.replaced };
+      const kept = rows.slice(0, maxRows);
+      const masked = opts.mask === false
+        ? { rows: kept, maskedColumns: [] as string[] }
+        : maskRows(kept, maskOptionsFromEnv());
+      return {
+        ok: true, columns: cols, rows: masked.rows, total,
+        maskedColumns: masked.maskedColumns,
+        placeholdersReplaced: normalized.replaced,
+      };
     }
     const raw = extractDbError(String(p2.msg ?? '取数失败'));
     const cls = classifySqlError(raw);

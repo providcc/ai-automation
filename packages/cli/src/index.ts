@@ -5,7 +5,7 @@
  * 零外部依赖（node:util parseArgs），可直接以 --experimental-strip-types 运行
  */
 import { parseArgs } from 'node:util';
-import { findCommand, renderCommandHelp, renderTopHelp } from '../../core/src/cli-help.ts';
+import { findCommand, renderCommandHelp, renderTopHelp, renderGroupHelp, findGroupCommands } from '../../core/src/cli-help.ts';
 import { RC_HELP } from './help.ts';
 import { spawnSync } from 'node:child_process';
 import { readFile, readdir, writeFile } from 'node:fs/promises';
@@ -31,6 +31,7 @@ import { validateFlow, hasBlockingError, type Issue } from '../../core/src/flow-
 import { formatFlowDiff } from '../../core/src/flow-diff.ts';
 import * as AUDITQ from '../../core/src/audit-query.ts';
 import * as PREVIEW from '../../core/src/flow-preview.ts';
+import * as JAVAC from '../../core/src/java-compile.ts';
 import * as PUBAPI from '../../core/src/flow-publish.ts';
 import * as APIPARAMS from '../../core/src/api-params.ts';
 import * as SQLQ from '../../core/src/sql-check.ts';
@@ -61,6 +62,7 @@ const OPTIONS = {
   app: { type: 'string' },
   'process-id': { type: 'string' },
   'allow-mock': { type: 'boolean', default: false },
+  compile: { type: 'boolean', default: false },
   keyword: { type: 'string' },
   enrich: { type: 'string' },
   category: { type: 'string' },
@@ -122,6 +124,7 @@ const OPTIONS = {
   'check-registry': { type: 'boolean', default: false },
   'max-rows': { type: 'string' },
   'table-columns': { type: 'string' },
+  raw: { type: 'boolean', default: false },
   params: { type: 'string' },
   'process-ids': { type: 'string' },
   'time-number': { type: 'string' },
@@ -246,7 +249,11 @@ function credentials(): ReturnType<typeof resolveCredentials> {
 }
 
 function makeClient(v: Record<string, any>): RestCloudClient {
-  const target = resolveTarget(v.target);
+  // target 的取值顺序：命令行 --target > 环境变量 RC_TARGET > 配置文件里的 default。
+  // 之前只有 `doctor` 读 RC_TARGET，其他命令只看 --target —— 同一套配置在两条命令上
+  // 表现不一致（`RC_TARGET=prod rc flow list` 会连到 default 的 test 环境），
+  // 而这类"以为连了 A 其实连了 B"的错最难查。
+  const target = resolveTarget(v.target ?? process.env.RC_TARGET);
   const creds = credentials();
   for (const w of creds.warnings) console.error(`⚠ 凭据：${w}`);
   const c = new RestCloudClient({
@@ -453,12 +460,17 @@ async function main(argv: string[]): Promise<number> {
   // 数值参数**在任何命令之前**统一校验（顺序反了的话，缺配置之类的报错会盖住真正的问题）
   for (const [name, range] of Object.entries(NUM_RANGES)) checkNum(v[name], `--${name}`, range);
   if (v.version) { console.log(VERSION); return 0; }
-  // `--help` 分两级：`rc flow save --help` 给该命令的用法/选项/坑；
+  // `--help` 分三级：`rc flow save --help` 给该命令的用法/选项/坑；
+  // `rc flow --help` 给该前缀下的子命令清单；
   // 只写 `rc --help`（或什么都不写）才给顶层清单。
   if (v.help) {
     const c = findCommand(RC_HELP, positionals);
-    console.log(c ? renderCommandHelp(RC_HELP, c) : renderTopHelp(RC_HELP));
-    return 0;
+    if (c) { console.log(renderCommandHelp(RC_HELP, c)); return 0; }
+    // 组级：前缀本身不是命令，但有子命令
+    const group = findGroupCommands(RC_HELP, positionals);
+    if (group.length) { console.log(renderGroupHelp(RC_HELP, positionals)); return 0; }
+    // 什么都不匹配 → **不短路**，继续走 dispatch，让 default 分支报"未知命令"。
+    // 之前这里直接返回顶层清单 + 退出码 0，导致 `rc 乱写的命令 --help` 静默成功。
   }
   if (positionals.length === 0) { console.log(renderTopHelp(RC_HELP)); return 0; }
 
@@ -508,10 +520,10 @@ async function main(argv: string[]): Promise<number> {
       const r = token
         ? await loginByToken(c, token)
         : await loginByPassword(c, v.user ?? creds.user ?? '', v.pass ?? creds.pass ?? '');
-      const t = resolveTarget(v.target);
+      const t = resolveTarget(v.target ?? process.env.RC_TARGET);
       saveSessionSync(c, sessionFile(t.name));
       if (v.save) await saveSession(c, v.save);
-      const out = { ok: true, userId: r.userId, userName: r.userName, expiresSecond: r.expiresSecond, target: resolveTarget(v.target).name };
+      const out = { ok: true, userId: r.userId, userName: r.userName, expiresSecond: r.expiresSecond, target: resolveTarget(v.target ?? process.env.RC_TARGET).name };
       if (json) console.log(JSON.stringify(out, null, 2));
       else console.log(`✔ 登录成功：${r.userName ?? r.userId ?? ''}（target=${out.target}，有效期 ${r.expiresSecond ?? '?'}s）`);
       return 0;
@@ -535,7 +547,7 @@ async function main(argv: string[]): Promise<number> {
     }
     case 'auth cookie': {
       // 给脚本用：打印可直接用的 Cookie 头（会话里的 token 是 URL 编码的）
-      const t = resolveTarget(v.target);
+      const t = resolveTarget(v.target ?? process.env.RC_TARGET);
       const file = sessionFile(t.name);
       let raw = '';
       try { raw = readFileSync(file, 'utf8'); } catch { /* 没有会话 */ }
@@ -1037,12 +1049,17 @@ async function main(argv: string[]): Promise<number> {
         sql: String(query),
         maxRows: v['max-rows'] ? Number(v['max-rows']) : undefined,
         tableColumns: v['table-columns'] ? String(v['table-columns']) : undefined,
+        // 脱敏默认开；--raw 才给原值（跟 dw 的 --raw 一个口径）
+        mask: v.raw ? false : undefined,
       });
       if (json) console.log(JSON.stringify({ conn, ...res }, null, 2));
       else {
         console.log(SQLQ.formatSqlQuery(res));
         if (res.ok && res.rows.length) {
           console.log(`（${res.rows.length}/${res.total} 行；输出含真实业务数据，别贴进工单或仓库）`);
+          if (res.maskedColumns?.length) {
+            console.log(`已脱敏列：${res.maskedColumns.join(', ')}（用 RC_MASK_COLS 可追加，用 --raw 看原值）`);
+          }
         }
       }
       return res.ok ? 0 : 4;
@@ -1416,6 +1433,45 @@ async function main(argv: string[]): Promise<number> {
       }
       return emit(await FLOW.publishFlow(c, action, { dryRun: !v.apply, kind }), json);
     }
+    case 'flow java compile': {
+      if (!v['process-id']) throw new RcError('E_VALIDATION', '需要 --process-id');
+      const kind: FLOW.FlowKind = v.kind === 'etl' ? 'etl' : 'esb';
+      const pid = String(v['process-id']);
+      // 取流程里的全部节点属性，挑出带 code 的 javaCodeNode
+      const all = await FLOW.listFlowProps(c, pid, { kind });
+      let nodes = all.props ?? {};
+      if (v['node-id']) {
+        const one = nodes[String(v['node-id'])];
+        if (!one) throw new RcError('E_VALIDATION', `流程 ${pid} 里没有节点 ${v['node-id']}`);
+        nodes = { [String(v['node-id'])]: one };
+      }
+      const nodeProps = Object.entries(nodes).map(([nodeId, props]) => ({
+        nodeId,
+        nodeType: String((props as any)?.pNodeType ?? ''),
+        props: props as Record<string, unknown>,
+      }));
+      const report = await JAVAC.compileJavaNodes(c, { nodeProps, dryRun: !v.apply });
+      if (json) {
+        console.log(JSON.stringify({ processId: pid, ...report }, null, 2));
+      } else {
+        if (!report.nodeIds.length) {
+          console.log('流程里没有带 code 的 Java 节点，无需编译。');
+        }
+        for (const r of report.results) {
+          if (r.ok) {
+            console.log(`✔ ${r.nodeId} 编译成功（${r.classPath}）`);
+          } else {
+            console.error(`✖ ${r.nodeId} 编译失败${r.classPath ? `（${r.classPath}）` : ''}`);
+            if (!r.written) console.error(`  源文件未写入：${r.msg ?? '-'}`);
+            if (r.compileError) console.error(r.compileError);
+          }
+        }
+        if (report.nodeIds.length) {
+          console.error('  多实例部署下各实例的编译产物可能不一致，需确认所有实例都已刷新；连跑 3 次看行为是否一致。');
+        }
+      }
+      return report.ok ? 0 : 4;
+    }
     case 'flow props get': {
       if (!v['process-id'] || !v['node-id']) throw new RcError('E_VALIDATION', '需要 --process-id 与 --node-id');
       const kind: FLOW.FlowKind = v.kind === 'etl' ? 'etl' : 'esb';
@@ -1457,6 +1513,29 @@ async function main(argv: string[]): Promise<number> {
       if (!v['process-id'] || !v.file) throw new RcError('E_VALIDATION', '需要 --process-id 与 --file（属性 JSON）');
       const kind: FLOW.FlowKind = v.kind === 'etl' ? 'etl' : 'esb';
       const nodes = FLOW.normalizeNodeProps(await readJson(v.file)) ?? [];
+
+      // --compile：先编译 Java 节点，编译不过就不保存（避免把坏代码写进属性）
+      if (v.compile && nodes.length) {
+        const javaNodes = nodes
+          .filter((n) => (n.nodeType ?? '') === 'javaCodeNode' && String((n.props ?? {}).code ?? '').trim())
+          .map((n) => ({ nodeId: n.nodeId, nodeType: n.nodeType, props: (n.props ?? {}) as Record<string, unknown> }));
+        if (javaNodes.length) {
+          const creport = await JAVAC.compileJavaNodes(c, { nodeProps: javaNodes, dryRun: !v.apply });
+          for (const r of creport.results) {
+            if (r.ok) console.error(`✔ Java 节点 ${r.nodeId} 编译成功（${r.classPath}）`);
+            else {
+              console.error(`✖ Java 节点 ${r.nodeId} 编译失败${r.classPath ? `（${r.classPath}）` : ''}`);
+              if (!r.written) console.error(`  源文件未写入：${r.msg ?? '-'}`);
+              if (r.compileError) console.error(r.compileError);
+            }
+          }
+          if (!creport.ok) {
+            console.error('  编译未通过，已中止保存：属性不落库，避免把编译不过的代码写进去。');
+            return 4;
+          }
+        }
+      }
+
       const rep = await FLOW.saveNodePropsComplete(c, {
         appId: kind === 'etl' ? 'etl' : 'esb', processId: v['process-id'], nodes, kind,
       }, { dryRun: !v.apply });

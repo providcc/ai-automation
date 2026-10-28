@@ -31,7 +31,7 @@ npm run cli -- doctor
 | `RC_USER` / `RC_PASS` | 服务账号；仅从环境/密钥管理注入，不写入仓库 |
 | `RC_TOKEN` | 已有 token，优先于账号密码 |
 | `RC_PROFILE` | `dev` / `uat` / `prod`；`prod` 默认只读 |
-| `RC_TARGET` | 多目标配置中的目标名 |
+| `RC_TARGET` | 多目标配置中的目标名。**对所有命令生效**（与 `--target` 同级，`--target` 优先）；此前只有 `doctor` 认它 |
 | `RC_ALLOW_PROD_WRITE=1` | 显式允许 prod 写操作 |
 | `RC_ENABLE_ETL_WRITE=1` | 显式允许 ETL 写操作（试跑/补偿/发布）；**默认封禁** |
 | `RC_ALLOW_WRITE_HOSTS` | 可选：允许执行写测试的目标主机白名单（验收脚本用，逗号分隔） |
@@ -45,6 +45,7 @@ npm run cli -- doctor
 | `RC_KEYCHAIN_ACCOUNT` | 密码 account，默认 `RC_USER` 或 `user` |
 | `RC_KEYCHAIN_TOKEN_ACCOUNT` | token account，默认 `token` |
 | `RC_LLM_URL` | 可选：NL→流程使用的外部 LLM 兼容端点；失败自动回退离线规则 |
+| `RC_MASK_COLS` | 可选：追加要打码的列（逗号分隔），用于 `rc sql query` 的脱敏 |
 
 开源版本**不内置任何平台地址或凭据**。未配置 `RC_BASE_URL` 时 CLI 启动不崩，调用平台命令会返回明确错误。
 
@@ -202,7 +203,8 @@ rc flow check --file flow.json --process-id <pid> [--kind esb|etl] --json
 rc flow props get --process-id <pid> --node-id <nodeKey> [--kind esb|etl]
 rc flow props list --process-id <pid> [--kind esb|etl] [--only sql] [--fields a,b]
 rc flow preview --process-id <pid> --node-id <nodeId> [--kind esb|etl] [--limit 20]
-rc flow props save --process-id <pid> --file props.json [--kind esb|etl] --apply
+rc flow props save --process-id <pid> --file props.json [--kind esb|etl] [--compile] --apply
+rc flow java compile --process-id <pid> [--node-id <id>] [--kind esb|etl] --apply
 ```
 
 `flow search --node-type <type>` 按节点类型扫描真实流程，列出命中节点的**业务属性**（去掉平台元数据），
@@ -339,9 +341,22 @@ rc flow delete <pid> [--kind esb|etl] [--apply]
 （CLI 之前没有这个入口，只能靠平台界面或用 `rc call` 手拼 body）。
 
 **Java 节点（javaCodeNode）保存 ≠ 生效**：`flow save` / `flow props save` 会把 `code` 写进库里，
-但平台**不会**随之重新编译——必须在节点编辑器点『编译』。多实例部署下各实例的编译类还可能不一致
-（实测同一流程连续运行会交替命中旧类/新类）。CLI 保存后会打印提醒；验证方法：连跑 3 次，
-行为/返回应一致。
+但属性表里的 `code` 只是**源码副本**——平台运行时装载的是**编译产物**，落在服务器本地磁盘，
+不在这张表里。所以"库里对、运行还是旧逻辑"是真实存在的。
+
+`rc flow java compile`（或 `flow props save --compile`）把这件事做掉，顺序固定为
+**写源文件 → 编译**（只编译会编译服务器上的旧源码）：
+
+1. `POST /rest/core/coderepository/srcfile/overcode/classpath` —— 源码写到服务器磁盘
+   `<tomcat>/WEB-INF/src/main/java/<包路径>/<Class>.java`
+2. `POST /rest/esb/coderepository/compile/check` —— 真实 javac 编译
+
+`classPath` 不是平台生成的，而是从源码文本解析出来的（`package a.b;` + `public class C` → `a.b.C`）。
+编译失败时平台返回的 `msg` 是 **URL 编码的 javac 报错**，工具会解码并去掉 HTML 标签后原样给出（含行号列号）。
+`flow props save --compile` 在编译不过时**中止保存**（属性不落库），避免把编译不过的代码写进去。
+
+多实例部署下各实例的编译产物可能不一致（写到了实例 A、请求却落到实例 B 时会命中旧类）。
+工具只能保证"写 + 编译"都发出去了，跨实例一致性要人工确认：连跑 3 次，行为/返回应一致。
 
 **手工运行流程**：`rc flow run <pid> --apply` 先走 `POST {base}/run`（设计器/流程列表的"运行"，
 同步执行并返回 `transactionId`），端点不存在（404）/网络失败/5xx 时回退 `monitor/instance/run`；
@@ -498,6 +513,9 @@ rc sql query --conn <dbConnId> --query "SELECT ..."   # 真取数并渲染表格
 - 流程里的 `${condition}` / `${offset}` / `${ids}` 是平台占位符，解析前会先归一（否则必然报语法错）。
 - 取数端点的返回体是 `{rowsData, columns, total}`，`tableColumns` 必须是 **JSON 字符串**（传数组报 MalformedJ array）。
 - `sql query` 的输出含**真实业务数据**，别贴进工单或仓库。
+- **`sql query` 默认脱敏**：列名命中 password/token/secret/手机/邮箱/身份证 等会被打码成 `***`，
+  并在结尾列出打码了哪些列；`RC_MASK_COLS=列1,列2` 可追加要打码的列，`--raw` 才输出原值。
+  （与 `dw` 侧的 `DW_MASK_COLS` / `--raw` 同一套规则，实现在 `packages/core/src/mask.ts`。）
 
 ### 9.2 Docker 镜像
 

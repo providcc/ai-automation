@@ -138,3 +138,45 @@ test('预览：ETL 的 Mongo / ES 节点走各自端点', async () => {
     assert.equal(seen[seen.length - 1], endpoint);
   }
 });
+
+/**
+ * sqlExecuterNode 完全可以配成 methodType=update（INSERT/UPDATE/DELETE）——
+ * 平台的预览端点是"取前 N 行"，但万一平台按"执行"处理，预览一次就等于写库。
+ * 所以写类 SQL 必须直接拒绝，连请求都不发。
+ */
+test('预览：写类 SQL 一律拒绝，且不发任何预览请求', async () => {
+  const { client, calls } = stub((path) => {
+    if (path.includes('/node/props')) {
+      return ok({
+        id: 'r1', pNodeId: 'T1', pNodeType: 'sqlExecuterNode',
+        methodType: 'update',
+        sqlCode: "INSERT INTO t (a) VALUES ('x')",
+        dbConnId: 'ds1',
+      });
+    }
+    return ok({});
+  });
+  const res = await previewFlowNode(client, { processId: 'p1', nodeId: 'T1' });
+  assert.equal(res.ok, false);
+  assert.match(res.msg ?? '', /不是只读语句/);
+  assert.match(res.hint ?? '', /写库节点/);
+  assert.equal(calls.filter((c) => c.path.includes('previewdata')).length, 0, '拒绝时不该发预览请求');
+});
+
+test('预览：只读 SQL 仍然放行（别把正常的读节点也拦了）', async () => {
+  const { client, calls } = stub((path) => {
+    if (path.includes('/node/props')) {
+      return ok({
+        id: 'r1', pNodeId: 'T1', pNodeType: 'sqlExecuterNode',
+        methodType: 'select',
+        sqlCode: 'SELECT a FROM t',
+        dbConnId: 'ds1',
+      });
+    }
+    if (path.includes('previewdata')) return ok({ columns: ['a'], rows: [{ a: 1 }] });
+    return ok({});
+  });
+  const res = await previewFlowNode(client, { processId: 'p1', nodeId: 'T1' });
+  assert.equal(res.ok, true);
+  assert.equal(calls.filter((c) => c.path.includes('previewdata')).length, 1);
+});

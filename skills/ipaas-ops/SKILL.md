@@ -100,8 +100,11 @@ rc datasource test <id>
 4. 保存：`rc flow save ...`（先 dry-run）。
 5. 平台校验：`rc flow check --file model.json --process-id <pid>`。
 6. 回读：节点数、连线数、属性齐全，缺一即失败。
-7. **Java 节点改代码后必须编译**：`flow save` / `flow props save` 只落库，不重新编译；
-   要在节点编辑器点『编译』，多实例环境还要确认各实例一致（连跑 3 次验证）。
+7. **Java 节点改代码后必须编译**：`flow save` / `flow props save` 只落库，不重新编译——
+   属性表里的 `code` 只是源码副本，运行时装载的是编译产物（落在服务器磁盘上）。
+   用 `rc flow java compile --process-id <pid> --apply` 编译（内部按"写源文件 → javac"两步走），
+   或在 `flow props save` 上加 `--compile`（编译不过会**中止保存**，不把坏代码写进库）。
+   多实例环境还要确认各实例一致（连跑 3 次验证）。
 8. 运行与调度：
    - 手工运行：`rc flow run <pid> --apply`（返回 `transactionId`，可用 `rc flow run-log <tid>` 看节点级记录）。
      平台两个运行端点版本差异大，CLI 会先走 `/process/run`、失败再回退 `/monitor/instance/run`；

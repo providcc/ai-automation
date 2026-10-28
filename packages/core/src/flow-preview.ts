@@ -16,6 +16,7 @@
 import type { RestCloudClient, ApiResult } from './client.ts';
 import { getNodeProps, listFlowProps, type NodePropsRecord, type FlowKind } from './flow-lifecycle.ts';
 import { deriveSqlColumns } from './sql-check.ts';
+import { isReadOnlyStatement } from './sql-text.ts';
 
 interface PreviewTarget {
   /** 平台预览端点 */
@@ -152,6 +153,22 @@ export async function previewFlowNode(
     limit,
   };
   const sql = props.sqlCode;
+  // 写类 SQL 一律拒绝预览：平台的预览端点是"取前 N 行"，
+  // 但 sqlExecuterNode 完全可以配成 methodType=update（INSERT/UPDATE/DELETE），
+  // 万一平台按"执行"处理，预览一次就等于写库。宁可拒绝，也不能有副作用。
+  if (sql && nodeType === 'sqlExecuterNode') {
+    const verdict = isReadOnlyStatement(String(sql));
+    if (!verdict.ok) {
+      const methodType = String(props.methodType ?? '');
+      return {
+        ok: false, nodeType, columns: [], rows: [], totalRows: 0, truncated: false,
+        msg: `该节点的 SQL 不是只读语句（${verdict.kind}），已拒绝预览`,
+        hint: methodType === 'update'
+          ? '这是写库节点（methodType=update），预览它可能真的写库。要看数据请在只读节点上预览，或直接跑流程。'
+          : '预览只支持只读语句（SELECT/SHOW/DESC）。要看数据请改用只读节点，或用 rc sql query 取数。',
+      };
+    }
+  }
   if (sql) body.sql = sql;
   const tableName = props.tableName;
   if (tableName) body.tableName = tableName;

@@ -534,6 +534,26 @@ export const RC_HELP: HelpSpec = {
     },
     {
       group: G_FLOW,
+      name: 'flow java compile',
+      usage: 'rc flow java compile --process-id <pid> [--node-id <id>] [--kind esb|etl] [--apply]',
+      summary: '编译流程里的 Java 代码节点（写源文件 + javac）',
+      write: true,
+      options: [
+        TARGET,
+        { flag: '--process-id <pid>', desc: '流程 id' },
+        { flag: '--node-id <id>', desc: '只编译该节点；缺省编译全部 javaCodeNode' },
+        { flag: '--kind esb|etl', desc: '流程类型' },
+        { flag: '--apply', desc: '真正执行' },
+      ],
+      notes: [
+        '属性表里的 code 只是源码副本；运行时装载的是编译产物，必须真的编译才生效。',
+        '顺序固定为「写源文件 → 编译」：只编译会编译服务器上的旧源码。',
+        '编译失败会原样给出 javac 报错（含行号列号）。',
+        '多实例部署下各实例的编译产物可能不一致，需人工确认所有实例都已刷新。',
+      ],
+    },
+    {
+      group: G_FLOW,
       name: 'flow props get',
       usage: 'rc flow props get --process-id <pid> --node-id <id> [--kind esb|etl]',
       summary: '取单个节点的属性',
@@ -548,7 +568,7 @@ export const RC_HELP: HelpSpec = {
     {
       group: G_FLOW,
       name: 'flow props save',
-      usage: 'rc flow props save --process-id <pid> --file props.json [--kind esb|etl] [--apply]',
+      usage: 'rc flow props save --process-id <pid> --file props.json [--kind esb|etl] [--compile] [--apply]',
       summary: '写入节点属性（合并语义）',
       write: true,
       options: [
@@ -556,9 +576,13 @@ export const RC_HELP: HelpSpec = {
         { flag: '--process-id <pid>', desc: '流程 id' },
         { flag: '--file <path>', desc: '属性 JSON' },
         { flag: '--kind esb|etl', desc: '流程类型' },
+        { flag: '--compile', desc: '先编译 Java 节点（写源文件+编译），失败则不保存' },
         { flag: '--apply', desc: '真正执行' },
       ],
-      notes: ['只覆盖文件里出现的字段；历史重复记录会被清理（清理失败会记入 failed）。'],
+      notes: [
+        '只覆盖文件里出现的字段；历史重复记录会被清理（清理失败会记入 failed）。',
+        'Java 节点只存源码不会自动编译；要让改动生效需加 --compile（或用 rc flow java compile）。',
+      ],
     },
     {
       group: G_FLOW,
@@ -571,7 +595,10 @@ export const RC_HELP: HelpSpec = {
         { flag: '--node-id <nodeId>', desc: '节点 id' },
         { flag: '--limit N', desc: '预览行数上限' },
       ],
-      notes: ['只读：不会改动流程，也不会触发下游节点。'],
+      notes: [
+        '只读：不会改动流程，也不会触发下游节点。',
+        '**写类 SQL 一律拒绝预览**：sqlExecuterNode 可能是 methodType=update 的写库节点，预览它有真的写库的风险。',
+      ],
     },
     {
       group: G_FLOW,
@@ -1028,18 +1055,20 @@ export const RC_HELP: HelpSpec = {
     {
       group: G_TOOL,
       name: 'sql query',
-      usage: 'rc sql query --conn <dbConnId> --query "SELECT ..."',
+      usage: 'rc sql query --conn <dbConnId> --query "SELECT ..." [--raw]',
       summary: '只读 SQL 真取数并渲染表格（两步）',
       options: [
         TARGET,
         { flag: '--conn <dbConnId>', desc: '数据源连接 id' },
         { flag: '--query "<sql>"', desc: '要执行的 SQL' },
         { flag: '--max-rows N', desc: '返回行数上限（默认 50，最多 500）' },
+        { flag: '--raw', desc: '不脱敏，输出原值（默认按列名打码敏感列）' },
         { flag: '--json', desc: '机器可读输出' },
       ],
       notes: [
         '与平台前端一致的两步：parsesql/columns → previewdata；tableColumns 必须是 JSON **字符串**。',
         '先调解析端点会污染会话态的"字段配置"，所以这里先取数、失败才回退解析。',
+        '**默认脱敏**：列名含 password/token/手机/邮箱等会被打码；追加 RC_MASK_COLS 可加列，--raw 看原值。',
       ],
     },
     {
