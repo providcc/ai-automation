@@ -1052,18 +1052,20 @@ export const RC_HELP: HelpSpec = {
     {
       group: G_TOOL,
       name: 'sql query',
-      usage: 'rc sql query --conn <dbConnId> --query "SELECT ..."',
+      usage: 'rc sql query --conn <dbConnId> --query "SELECT ..." [--raw]',
       summary: '只读 SQL 真取数并渲染表格（两步）',
       options: [
         TARGET,
         { flag: '--conn <dbConnId>', desc: '数据源连接 id' },
         { flag: '--query "<sql>"', desc: '要执行的 SQL' },
         { flag: '--max-rows N', desc: '返回行数上限（默认 50，最多 500）' },
+        { flag: '--raw', desc: '不脱敏，输出原值（默认按列名打码敏感列）' },
         { flag: '--json', desc: '机器可读输出' },
       ],
       notes: [
         '与平台前端一致的两步：parsesql/columns → previewdata；tableColumns 必须是 JSON **字符串**。',
         '先调解析端点会污染会话态的"字段配置"，所以这里先取数、失败才回退解析。',
+        '**默认脱敏**：列名含 password/token/手机/邮箱等会被打码；追加 RC_MASK_COLS 可加列，--raw 看原值。',
       ],
     },
     {

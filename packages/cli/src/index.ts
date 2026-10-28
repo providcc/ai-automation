@@ -124,6 +124,7 @@ const OPTIONS = {
   'check-registry': { type: 'boolean', default: false },
   'max-rows': { type: 'string' },
   'table-columns': { type: 'string' },
+  raw: { type: 'boolean', default: false },
   params: { type: 'string' },
   'process-ids': { type: 'string' },
   'time-number': { type: 'string' },
@@ -1048,12 +1049,17 @@ async function main(argv: string[]): Promise<number> {
         sql: String(query),
         maxRows: v['max-rows'] ? Number(v['max-rows']) : undefined,
         tableColumns: v['table-columns'] ? String(v['table-columns']) : undefined,
+        // 脱敏默认开；--raw 才给原值（跟 dw 的 --raw 一个口径）
+        mask: v.raw ? false : undefined,
       });
       if (json) console.log(JSON.stringify({ conn, ...res }, null, 2));
       else {
         console.log(SQLQ.formatSqlQuery(res));
         if (res.ok && res.rows.length) {
           console.log(`（${res.rows.length}/${res.total} 行；输出含真实业务数据，别贴进工单或仓库）`);
+          if (res.maskedColumns?.length) {
+            console.log(`已脱敏列：${res.maskedColumns.join(', ')}（用 RC_MASK_COLS 可追加，用 --raw 看原值）`);
+          }
         }
       }
       return res.ok ? 0 : 4;

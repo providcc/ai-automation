@@ -71,43 +71,11 @@ export function applyRowLimit(sql: string, max: number): { sql: string; injected
 
 // ─────────────────────────── 脱敏 ───────────────────────────
 
-/** 列名命中即打码：凭据类 + 常见个人信息列。 */
-const SENSITIVE_COLUMN =
-  /pass(word|wd)?|secret|token|authorization|cookie|credential|private_key|access_key|phone|mobile|email|id_card|idcard|身份证|手机|邮箱/i;
-
-export interface MaskOptions {
-  /** 额外要打码的列（不区分大小写），来自 DW_MASK_COLS */
-  extraColumns?: string[];
-  placeholder?: string;
-}
-
-export function isSensitiveColumn(name: string, opts: MaskOptions = {}): boolean {
-  const n = String(name);
-  if (SENSITIVE_COLUMN.test(n)) return true;
-  return (opts.extraColumns ?? []).some((c) => c.toLowerCase() === n.toLowerCase());
-}
-
-/** 行级脱敏：只改命中列的值，列顺序与行数不变（便于对拍）。 */
-export function maskRows(
-  rows: Record<string, unknown>[],
-  opts: MaskOptions = {},
-): { rows: Record<string, unknown>[]; maskedColumns: string[] } {
-  const ph = opts.placeholder ?? '***';
-  const masked = new Set<string>();
-  const out = rows.map((row) => {
-    const copy: Record<string, unknown> = {};
-    for (const [k, v] of Object.entries(row)) {
-      if (v !== null && v !== undefined && isSensitiveColumn(k, opts)) {
-        copy[k] = ph;
-        masked.add(k);
-      } else {
-        copy[k] = v;
-      }
-    }
-    return copy;
-  });
-  return { rows: out, maskedColumns: [...masked] };
-}
+// 脱敏规则已提到通用层（packages/core/src/mask.ts），rc 的 `sql query` 用同一份，
+// 避免两套规则漂移。这里只做转发，保持 dw 侧的既有导出不变。
+import { maskRows, isSensitiveColumn, SENSITIVE_COLUMN, type MaskOptions } from '../mask.ts';
+export { SENSITIVE_COLUMN, isSensitiveColumn, maskRows };
+export type { MaskOptions };
 
 /**
  * URL 形态的建连串：协议 + 可选凭据段 + 主机（形如 `jdbc:mysql://…@…`）。
